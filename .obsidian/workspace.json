@@ -185,6 +185,7 @@
   },
   "active": "ab5f9676eb5ca940",
   "lastOpenFiles": [
+    "README.md",
     "concepts/Agent Skills.md",
     "concepts/Skill Governance and Metrics.md",
     "concepts/Plugin-Based Agent Extensions.md",
@@ -210,7 +211,6 @@
     "concepts/Agent Frameworks and Orchestration.md",
     "raw/2026-04-26 Claude Agent SDK source.md",
     "raw/2026-04-26 OpenAI Codex SDK and App Server source.md",
-    "raw/2026-04-26 OpenAI Agents SDK official source.md",
     "skill_md/Untitled.canvas",
     "Clippings",
     "raw",
