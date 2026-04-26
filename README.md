@@ -8,6 +8,7 @@ The important idea is that the wiki is organized by concept, not by source or by
 
 I made this deliberately simple. There are ways to automate the whole workflow, but I did not want to spend unnecessary tokens on orchestration before the basic pattern was useful.
 
+![alt text](image.png)
 
 ## How I Created It
 
@@ -52,7 +53,7 @@ For cleanup, ask for a wiki lint pass. The LLM should look for missing index ent
 
 ## References
 
-These videos helped inspire the workflow, but they are not required steps:
+These videos helped inspire the workflow:
 
 - [LLM Wiki video](https://youtu.be/VRub1w-APTc?si=5sQW7fOBpwLjcnWp)
 - [Andrej Karpathy Just 10x'd Everyone's Claude Code](https://youtu.be/sboNwYmH3AY?si=n2gK0yfXPe8WbV4v)
