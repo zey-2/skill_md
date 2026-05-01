@@ -1,7 +1,7 @@
 ---
 type: log
 created: 2026-04-26
-updated: 2026-04-26
+updated: 2026-05-01
 status: active
 sources:
   - "raw/skill.md for AI Agents.md"
@@ -325,3 +325,211 @@ Follow-ups:
 - Compare Codex and Claude Code plugin manifests if cross-vendor plugin authoring becomes important.
 - Track Codex public plugin directory publishing and self-serve plugin management when they become available.
 - Add plugin-level evaluation guidance if the wiki later needs to test full extension bundles, not only `SKILL.md` behavior.
+
+## [2026-04-30] ingest | Claude Code Third-Party Provider Configuration
+
+Answered user question about using non-Anthropic LLM APIs with Claude Code in VS Code, then searched the web and created a raw source note and concept page.
+
+Raw source note created:
+
+- `raw/2026-04-30 Claude Code Third-Party LLM Provider Configuration.md` - Synthesis of OpenRouter integration, LiteLLM gateway setup, cloud provider deployments, environment variables, model configuration, and VS Code integration.
+
+Generated pages created:
+
+- `concepts/Claude Code Third-Party Provider Configuration.md`
+
+Generated pages updated:
+
+- `index.md`
+
+Important decisions:
+
+- Categorized third-party provider configuration as a separate concept from the broader LLM provider landscape because it covers Claude Code-specific environment variables, gateway requirements, and VS Code extension behavior.
+- Removed a broken frontmatter citation (`raw/2026-04-26 LLM gateway configuration - Claude Code Docs.md`) that referenced a non-existent raw file.
+
+Follow-ups:
+
+- Consider adding a raw source note from the official Claude Code LLM Gateway docs page for more complete provenance.
+
+## [2026-04-30] ingest | AI Coding Plans
+
+Searched the web for AI coding plan offerings across Chinese model-provider plans (Alibaba 百炼, BytePlus ModelArk, Kimi Code, Zhipu GLM, MiniMax, Infini) and international coding-tool subscriptions (Copilot, Cursor, Claude Code, Kilo Code, Qoder, Augment Code, Devin, Replit, Roo Code, Cline). Created raw comparison and concept synthesis pages.
+
+Raw source note created:
+
+- `raw/2026-04-30 AI Coding Plans Comparison 2026.md` - Comprehensive comparison of 6 Chinese coding plans and 10+ international coding-tool subscriptions with pricing, quotas, model access, selection guidance, and market trends.
+
+Generated pages created:
+
+- `concepts/AI Coding Plans.md`
+
+Generated pages updated:
+
+- `index.md`
+
+Important decisions:
+
+- Separated Chinese model-provider plans (fixed-quota API access) from international coding-tool subscriptions (bundled IDE/agent experience) as two complementary layers.
+- Documented Roo Code's May 15, 2026 sunsetting announcement as historical note rather than active recommendation.
+- Added five distinct pricing model categories (flat subscription, fixed-quota, credit-based, usage-based, free+BYOK) with strength/weakness analysis.
+
+Follow-ups:
+
+- Track usage-based billing migration for GitHub Copilot and Qoder (June 1, 2026) for accuracy.
+- Monitor if new coding plans emerge from other providers.
+
+## [2026-04-30] lint | Full wiki health check
+
+Ran a comprehensive lint pass across all 20 concept pages, raw sources, index.md, and log.md.
+
+Issues found and fixed:
+
+1. **Critical**: Removed broken frontmatter citation (`raw/2026-04-26 LLM gateway configuration - Claude Code Docs.md`) from `concepts/Claude Code Third-Party Provider Configuration.md` — the referenced raw file did not exist.
+2. **Medium**: Added two log entries for the 4 unlogged files created on 2026-04-30 (third-party provider config and coding plans).
+3. **Medium**: Added `## Key Points` sections to `concepts/Claude Code Third-Party Provider Configuration.md` and `concepts/AI Coding Plans.md`.
+4. **Low**: Deduplicated the `.agents/skills/` open question that appeared in both `Discovery Conventions.md` and `Tools Supporting Agent Skills.md` — kept it in the tool comparison page only.
+
+No broken wikilinks detected. All index entries verified against disk. All concept pages have frontmatter with type/created/updated fields. No duplicate pages requiring consolidation.
+
+## [2026-04-30] research | Microsoft Copilot SKILL.md support
+
+Answered user question about Microsoft Copilot SKILL.md support, searched web for Copilot Cowork, Copilot Studio, and VS Code 2026 skill details.
+
+Raw source note created:
+
+- `raw/2026-04-30 Microsoft Copilot SKILL.md support roadmap.md` - Microsoft Copilot family SKILL.md coverage: GitHub Copilot in VS Code/Visual Studio 2026, Copilot Cowork (M365 OneDrive/SharePoint), Copilot Studio, and timeline through April 2026.
+
+Generated pages updated:
+
+- `concepts/Tools Supporting Agent Skills.md` — Added Copilot Cowork (M365) and Copilot Studio rows to support matrix; updated patterns to note SKILL.md expansion beyond coding tools into productivity agents; added open questions on Cowork governance and cross-product skill portability.
+- `index.md` — Added new raw source to frontmatter and source list; updated Tools Supporting Agent Skills description to include Copilot Cowork and Copilot Studio.
+
+Important decisions:
+
+- Separated Copilot Cowork (productivity agent, M365) from GitHub Copilot (coding agent, dev tools) in the support matrix because they serve different user contexts and store skills in different locations.
+- Treated Copilot Studio as a distinct business-process agent platform rather than a coding tool.
+- Kept Microsoft Agent Framework in its existing row since it is a framework consumer, not a Copilot product.
+
+Follow-ups:
+
+- If Copilot Cowork gains developer-oriented features, revisit whether dev SKILL.md packages can port between GitHub Copilot and Cowork.
+- Monitor whether Copilot Cowork skill governance (versioning, conflict resolution) becomes documented.
+
+## [2026-05-01] ingest | Claude Agent SDK overview and Google ADK
+
+Processed two newly added raw articles covering the Claude Agent SDK official overview and Google's Agent Development Kit.
+
+Raw source notes processed:
+
+- `raw/Agent SDK overview.md` - Official Claude Agent SDK documentation covering built-in tools, filesystem configuration, Client SDK vs Agent SDK comparison, and branding guidelines.
+- `raw/Agent Development Kit (ADK).md` - Google ADK official site covering multi-language framework capabilities, progressive complexity, context management, evaluation, and deployment options.
+
+Generated pages created:
+
+- `concepts/Google Agent Development Kit (ADK).md` - Covers ADK's multi-language support (Python, TypeScript, Go, Java), progressive complexity model, open model support, structured context management, evaluation framework, and Google Cloud deployment.
+
+Generated pages updated:
+
+- `concepts/Agent SDKs and Codex Automation.md` — Added `raw/Agent SDK overview.md` to frontmatter sources.
+- `index.md` — Added two new raw sources to frontmatter; added Google ADK concept link and raw source descriptions.
+- `log.md`
+
+Important decisions:
+
+- Updated the existing Agent SDKs concept page rather than creating a new one for the Claude Agent SDK overview, since the SDK was already covered and the new raw source provides supplementary official documentation details.
+- Created a dedicated concept page for Google ADK as a distinct multi-agent framework, cross-linked to the existing orchestration and validation concept pages.
+
+## [2026-05-01] ingest | LangChain ecosystem and n8n workflow automation
+
+Processed three newly added raw articles covering LLM application frameworks and workflow automation platforms.
+
+Raw source notes processed:
+
+- `raw/LangChain vs LangGraph vs LangSmith vs LangFlow Key Differences Explained.md` - DataCamp article comparing the four LangChain ecosystem components with code examples for LCEL, structured outputs, tool calling, and memory.
+- `raw/n8n A Guide to Workflow Automation.md` - DigitalOcean guide covering n8n's node-based workflow architecture, deployment options, best practices, and comparison to Zapier.
+- `raw/Deploy n8n on Cloud Run  Google Cloud Blog.md` - Google Cloud blog on serverless n8n deployment with Cloud SQL persistence and Gemini AI integration.
+
+Generated pages created:
+
+- `concepts/LangChain Ecosystem Components.md` - Synthesizes LangChain (LCEL foundation), LangGraph (graph orchestration), LangSmith (tracing/evaluation), and LangFlow (visual builder) with a decision heuristic and historical timeline. Cross-linked to existing orchestration and validation concept pages.
+- `concepts/n8n Workflow Automation.md` - Covers n8n's core components (triggers, actions, logic, code nodes), deployment options (Cloud, self-hosted, Cloud Run, DigitalOcean), AI/LLM workflow capabilities, best practices, and positioning relative to Zapier and code-based frameworks.
+
+Generated pages updated:
+
+- `index.md` — Added three new raw sources to frontmatter; added two concept article links and raw source descriptions.
+- `log.md`
+
+Important decisions:
+
+- Created a single LangChain ecosystem page rather than separate pages for each component because the source article's core value is the comparative framework showing how the four pieces fit together.
+- Combined both n8n articles into one concept page because they cover complementary aspects (architecture/guide vs. cloud deployment) of the same tool.
+- Positioned n8n as a visual workflow automation layer distinct from code-based agent frameworks (LangGraph, Microsoft Agent Framework) while noting overlapping AI orchestration use cases.
+
+## [2026-05-01] ingest | OpenAI AGI Progression Framework
+
+Processed the remaining uningested raw article from the 2026-04-30 batch.
+
+Raw source note processed:
+
+- `raw/OpenAI's 5 Levels Of 'Super AI' (AGI To Outperform Human Capability).md` - Forbes article (Jodie Cook, 2024-07-16) describing OpenAI's five-level AGI framework.
+
+Generated pages created:
+
+- `concepts/OpenAI AGI Progression Framework.md` - Summarizes the 5 levels (conversational → reasoners → agents → innovators → organizations) with a capability table and wiki-relevant context for agent skill design.
+
+Generated pages updated:
+
+- `index.md` — Added new raw source to frontmatter and source list; added concept link.
+- `log.md`
+
+Important decisions:
+
+- Created a dedicated concept page rather than folding into an existing page because AGI progression is a distinct topic from the wiki's core Agent Skills focus.
+- Added a "Context for This Wiki" section connecting the framework to Agent Skills maturity and skill design implications, keeping it relevant to the wiki's scope.
+
+## [2026-05-01] ingest | Full wiki review, linkages, and new concept pages
+
+Comprehensive review of the entire wiki after a wave of new additions. Processed all remaining uningested raw sources, created new concept pages, and established cross-linkages throughout the wiki.
+
+Raw source notes processed (previously added to disk but not yet ingested):
+
+- `raw/Deep Dive into LLMs like ChatGPT.md` - Andrej Karpathy's video transcript covering the full LLM pipeline: data collection, tokenization (BPE), transformer training, RLHF, and autoregressive inference.
+- `raw/VILA-LabDive-into-Claude-Code A Systematic Analysis and Discussion of Claude Code for Designing Today's and Future AI Agent Systems.md` - arXiv 2604.14228: source-level analysis of Claude Code v2.1.88 (~512K lines, ~1,900 TypeScript files).
+- `raw/OpenAI API Responses vs. Chat Completions.md` - Simon Willison analysis of the Responses API introduction.
+- `raw/Why we built the Responses API.md` - OpenAI developer blog on Responses API design rationale for reasoning models.
+
+Generated pages created:
+
+- `concepts/Claude Code Architecture Deep Dive.md` (created in prior session, now logged) — Source-level architectural analysis: 98.4% infrastructure / 1.6% AI, 7 safety layers, 5 compaction stages, 4 extensibility mechanisms (Hooks → Skills → Plugins → MCP), 7 permission modes, 27 hook events, 13 design principles. Includes design guide for agent builders.
+- `concepts/OpenAI Responses API.md` — Covers the API evolution (Completions → Chat → Assistants → Responses), key differences (state management, reasoning preservation, hosted tools, polymorphic outputs), design rationale (encrypted reasoning, agentic loop), and implications for Agent Skills.
+- `concepts/LLM Fundamentals.md` — Mental models for how LLMs work: pretraining data pipeline, BPE tokenization, transformer architecture, RLHF fine-tuning, and autoregressive inference. Connects fundamentals to why skills need precise wording, progressive disclosure, and systematic evaluation.
+- `lesson-plan/AI Fundamentals to Agent Skills.md` (created in prior session, now logged) — 16-module curriculum (~40-60 hours) organized in 4 phases: AI Foundations → Building with LLMs → Agents and Skills → Advanced Topics. Includes three learning pathways (Skill Author ~25-35h, Agent Developer ~40-60h, Quick Start ~20-30h).
+
+Cross-linkages established:
+
+- `concepts/Agent Skills.md` — Added links to Claude Code Architecture Deep Dive, LLM Fundamentals, and OpenAI Responses API.
+- `concepts/Agent Frameworks and Orchestration.md` — Added links to Claude Code Architecture Deep Dive (concrete harness reference) and OpenAI Responses API (built-in agentic loop).
+- `concepts/Discovery Conventions.md` — Added link to Claude Code Architecture Deep Dive (4-level CLAUDE.md hierarchy at source level).
+- `concepts/Plugin-Based Agent Extensions.md` — Added link to Claude Code Architecture Deep Dive (plugin manifest accepts 10 component types, extensibility spectrum).
+- `concepts/Skill Distribution and Installation.md` — Added link to Claude Code Architecture Deep Dive (graduated extensibility spectrum).
+- `concepts/Agent SDKs and Codex Automation.md` — Already had link to Claude Code Architecture Deep Dive; verified.
+- `concepts/MCP and Tool-Integration Architecture.md` — Verified existing linkages; no addition needed (MCP page already references extensibility spectrum).
+- `concepts/LLM Fundamentals.md` — Added links to LLM Provider Selection, AI Coding Plans, Progressive Disclosure, Validation and Evaluation, MCP, OpenAI Responses API, and the lesson plan.
+
+Updated:
+
+- `index.md` — Added 3 new concept articles, 1 lesson plan section, 4 new raw sources to frontmatter, 5 new raw source descriptions.
+- `log.md`
+
+Important decisions:
+
+- Treated Claude Code Architecture Deep Dive as a reference-grade page rather than a core Agent Skills page — it provides implementation evidence that informs many other concepts but is not itself about skills.
+- Created LLM Fundamentals as a standalone concept page because Karpathy's video is the foundational mental-model resource for the entire wiki; all higher-level concepts (skills, tools, orchestration) assume an understanding of what LLMs are.
+- Created OpenAI Responses API as a separate concept page because it represents a shift in how OpenAI's API layer handles agentic work — this overlaps with but is distinct from orchestration frameworks.
+- Did not create a separate concept page for the Karpathy video's raw transcript; instead synthesized the key mental models into LLM Fundamentals with explicit connections to skill design.
+
+Follow-ups:
+
+- Consider adding a model-level benchmark page once target AI tools and evaluation tasks are known (was a follow-up from the 2026-04-26 LLM provider ingest).
+- If the Responses API gains a migration guide or best-practice document specifically for Agent Skills integration, add a dedicated section.
+- The lesson plan references several modules that could become standalone concept pages if learners need more depth (e.g., Prompt Engineering Fundamentals, Tool Use and Function Calling as a standalone from Module 6).

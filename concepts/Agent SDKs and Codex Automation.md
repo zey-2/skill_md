@@ -7,6 +7,7 @@ sources:
   - "raw/2026-04-26 OpenAI Agents SDK official source.md"
   - "raw/2026-04-26 OpenAI Codex SDK and App Server source.md"
   - "raw/2026-04-26 Claude Agent SDK source.md"
+  - "raw/Agent SDK overview.md"
 tags: [agent-skills, agent-sdks, codex, claude, openai]
 ---
 
@@ -23,7 +24,7 @@ The current important surfaces in this wiki are:
 - OpenAI Codex App Server for rich Codex client integrations.
 - Claude Agent SDK for custom Claude Code-powered agents.
 
-Sources: `raw/2026-04-26 OpenAI Agents SDK official source.md`, `raw/2026-04-26 OpenAI Codex SDK and App Server source.md`, and `raw/2026-04-26 Claude Agent SDK source.md`.
+Sources: `raw/2026-04-26 OpenAI Agents SDK official source.md`, `raw/2026-04-26 OpenAI Codex SDK and App Server source.md`, `raw/2026-04-26 Claude Agent SDK source.md`, and `raw/Agent SDK overview.md`.
 
 ## Comparison
 
@@ -70,6 +71,7 @@ The most important maintenance question is: where does each part of behavior liv
 - [[Agent Frameworks and Orchestration]] explains subagents, handoffs, workflows, state, and runtime ownership.
 - [[Tools Supporting Agent Skills]] compares client-level Agent Skills support.
 - [[Skill Governance and Metrics]] explains why SDK-triggered skills need review, provenance, and metrics.
+- [[concepts/Claude Code Architecture Deep Dive]] provides the source-level analysis of Claude Code's `queryLoop`, the agentic pipeline that the Claude Agent SDK wraps and exposes programmatically.
 
 ## Open Questions
 

@@ -77,6 +77,7 @@ There is also no sign yet of a single universal registry or signing system acros
 - [[Plugin-Based Agent Extensions]] explains why plugin packages matter when skills need connectors, MCP servers, metadata, and marketplace distribution.
 - [[Skill Governance and Metrics]] explains why public distribution raises trust and review concerns.
 - [[Agent Skills]] explains why installation differences do not erase the shared underlying concept.
+- [[concepts/Claude Code Architecture Deep Dive]] explains the 4-level CLAUDE.md hierarchy and how skills sit in the graduated extensibility spectrum (Hooks → Skills → Plugins → MCP).
 
 ## Open Questions
 

@@ -72,9 +72,9 @@ The likely reason is that local agent packages and public documentation sites so
 - [[Portable Skill Core]] explains the metadata an agent may use after discovery.
 - [[Skill Distribution and Installation]] explains how discovery paths connect to installation methods.
 - [[Skill Repository Tooling]] explains search and documentation layers.
+- [[concepts/Claude Code Architecture Deep Dive]] explains the 4-level CLAUDE.md hierarchy and skill/plugin discovery at the source level, showing how 9 ordered sources build the context window.
 
 ## Open Questions
 
 - Will lowercase `/skill.md` become common outside documentation platforms?
 - Will agents converge on a smaller set of local skill directories, or keep tool-specific paths?
-- Will `.agents/skills/` become a de facto shared compatibility path across most coding agents?

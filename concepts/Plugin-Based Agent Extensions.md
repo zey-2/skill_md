@@ -89,10 +89,13 @@ This does not mean plugins are unsafe by default. It means their value and risk 
 
 - [[Agent Skills]] explains the reusable instruction layer that plugins often package.
 - [[Skill Distribution and Installation]] explains the broader installation landscape.
+- [[concepts/Discovery Conventions]] explains how plugins fit into the discovery hierarchy alongside SKILL.md files and skill repositories.
+- [[concepts/Skill Repository Architecture]] provides the organizational patterns that plugin marketplaces and catalogs build on top of.
 - [[MCP and Tool-Integration Architecture]] explains the tool/context layer that plugins can bundle or configure.
 - [[Tools Supporting Agent Skills]] compares current client support.
 - [[Skill Governance and Metrics]] covers trust, review, and quality practices for shared agent artifacts.
 - [[Agent SDKs and Codex Automation]] explains why packaged capabilities matter more when agents are embedded in repeatable workflows.
+- [[concepts/Claude Code Architecture Deep Dive]] shows at source level how plugins fit into Claude Code's extensibility spectrum, accepting 10 component types in the plugin manifest and sitting between skills and MCP in context cost.
 
 ## Open Questions
 

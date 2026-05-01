@@ -14,6 +14,7 @@ sources:
   - "raw/2026-04-26 OpenClaw Skills docs.md"
   - "raw/2026-04-26 Windsurf Cascade Skills docs.md"
   - "raw/2026-04-26 Microsoft Agent Framework Agent Skills docs.md"
+  - "raw/2026-04-30 Microsoft Copilot SKILL.md support roadmap.md"
   - "raw/VoltAgentawesome-agent-skills A curated collection of 1000+ agent skills from official dev teams and the community, compatible with Claude Code, Codex, Gemini CLI, Cursor, and more.md"
   - "raw/2026-04-26 MCP architecture and Agent Skills integration source.md"
   - "raw/2026-04-26 OpenAI Agents SDK tools MCP and orchestration source.md"
@@ -46,6 +47,8 @@ The strongest primary-source support in this ingest covers OpenAI Codex, Claude 
 | OpenClaw | OpenClaw docs describe AgentSkills-compatible folders. | `<workspace>/skills`, `<workspace>/.agents/skills`, `~/.agents/skills`, `~/.openclaw/skills`, bundled skills, and configured extra dirs. | Loads and filters skills at startup based on environment/config/binary presence; watches folders for changes. | Precedence favors workspace skills over managed, bundled, and extra-dir skills. |
 | Windsurf Cascade | Windsurf docs describe Cascade Skills and point to agentskills.io. | `.windsurf/skills/`, `~/.codeium/windsurf/skills/`, enterprise system paths, `.agents/skills/`, `~/.agents/skills/`; optionally `.claude/skills/`. | Automatic invocation by matching `description`; manual invocation with `@skill-name`. | Claude-compatible paths are conditional on Claude Code config reading. |
 | Microsoft Agent Framework | Microsoft Learn documents an Agent Skills provider. | Configured skill directories; the provider searches for `SKILL.md` up to two levels deep. | Exposes tools such as `load_skill`, `read_skill_resource`, and optionally `run_skill_script`. | This is a framework integration rather than a standalone coding-agent client. |
+| Copilot Cowork (M365) | Microsoft 365 Copilot supports custom skills via SKILL.md in OneDrive/SharePoint. | OneDrive: `/Documents/Cowork/Skills/<skill-name>/SKILL.md`. SharePoint: `/Agent Assets/Skills/<skill-name>/SKILL.md`. | Auto-detected and loaded by Copilot Cowork; no manual configuration. Skills shareable across teams via SharePoint/OneDrive. | Productivity-oriented agent (meetings, documents, workflows), not a coding client. GA April 2026. |
+| Copilot Studio | Microsoft Learn documents skills for custom agents in Copilot Studio. | Managed within Copilot Studio agent definitions; Agent Builder UI. | Skills invoked as part of custom agent workflows (booking, email, task management). | Business-process oriented; integrates with Graph connectors and Power Platform. |
 
 ## Patterns
 
@@ -55,6 +58,7 @@ The strongest primary-source support in this ingest covers OpenAI Codex, Claude 
 - Some tools support direct local folders, while others emphasize plugins, extensions, or framework providers.
 - Plugins are becoming the richer distribution layer when a capability needs more than a `SKILL.md` folder. Codex plugins can bundle skills, app integrations, and MCP servers; Claude Code plugins can bundle skills, agents, hooks, MCP servers, LSP servers, monitors, themes, and related configuration.
 - Activation is usually description-driven, with optional manual invocation through slash commands, `$skill`, or `@skill-name` depending on the client.
+- SKILL.md has expanded beyond coding tools into Microsoft 365 productivity agents. Copilot Cowork stores skills as `SKILL.md` in OneDrive/SharePoint with auto-detection, and Copilot Studio uses them for custom business-process agents.
 - Tool support and framework support are adjacent but different. Coding clients discover skills for an assistant session; frameworks such as OpenAI Agents SDK, LangGraph, Microsoft Agent Framework, and CrewAI use skills, tools, agents, handoffs, memory, state, and workflows as runtime building blocks.
 - SDK support is another adjacent layer. Codex SDK, Codex App Server, and Claude Agent SDK do not merely discover skills for an interactive UI; they let applications automate or embed skill-guided agents.
 
@@ -81,3 +85,5 @@ Cursor is the main uncertainty in this ingest. The official changelog confirms s
 - Will Cursor's official docs expose a complete discovery table comparable to the other clients?
 - Will framework-level consumers such as Microsoft Agent Framework converge on the same metadata and validation rules as coding-agent clients?
 - Will Agent Skills gain a common way to declare required MCP servers, tool permissions, and orchestration dependencies?
+- Will Copilot Cowork skills remain productivity-only or expand into developer workflows, and can dev-focused `SKILL.md` packages port between GitHub Copilot and Cowork?
+- Copilot Cowork skill governance (versioning, conflict resolution when multiple users edit) is not yet documented.

@@ -84,6 +84,7 @@ For Agent Skills, that means tool-using skills should say not only "call this to
 - [[Validation and Evaluation]] explains how to test tool-call behavior and outcomes.
 - [[Agent Frameworks and Orchestration]] explains the runtime layer that coordinates tools, agents, and skills.
 - [[Agent SDKs and Codex Automation]] explains how SDKs and app protocols embed skill-guided agents into products and workflows.
+- [[concepts/Claude Code Architecture Deep Dive]] shows at source level how MCP fits into Claude Code's 5-step tool pool assembly, the execute() injection point, and the pre-trust execution window where MCP servers run before the trust dialog.
 
 ## Open Questions
 

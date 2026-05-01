@@ -75,6 +75,8 @@ There is also a portability tension. Agent Skills aim to travel across clients, 
 - [[Validation and Evaluation]] explains why orchestration should be evaluated through traces, tool calls, outcomes, and repeated trials.
 - [[Skill Governance and Metrics]] explains why ownership and runtime risk matter.
 - [[Agent SDKs and Codex Automation]] compares OpenAI Agents SDK, Codex SDK, Codex App Server, and Claude Agent SDK as skill-adjacent runtime surfaces.
+- [[concepts/Claude Code Architecture Deep Dive]] provides a concrete harness implementation reference — the 9-step queryLoop, subagent isolation, and extensibility injection points that frameworks abstract away.
+- [[concepts/OpenAI Responses API]] explains how OpenAI's API itself now provides a built-in agentic loop, overlapping with what orchestration frameworks offer.
 
 ## Open Questions
 
