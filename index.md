@@ -1,7 +1,7 @@
 ---
 type: index
 created: 2026-04-26
-updated: 2026-05-01
+updated: 2026-05-02
 status: active
 sources:
   - "raw/skill.md for AI Agents.md"
@@ -58,6 +58,7 @@ sources:
   - "raw/OpenAI API Responses vs. Chat Completions.md"
   - "raw/Why we built the Responses API.md"
   - "raw/VILA-LabDive-into-Claude-Code A Systematic Analysis and Discussion of Claude Code for Designing Today's and Future AI Agent Systems.md"
+  - "raw/Andrej Karpathy From Vibe Coding to Agentic Engineering.md"
 tags: [index, agent-skills, llm-providers]
 ---
 
@@ -93,6 +94,10 @@ tags: [index, agent-skills, llm-providers]
 - [[concepts/Claude Code Architecture Deep Dive|Claude Code Architecture Deep Dive]] - Source-level analysis of Claude Code v2.1.88 (~512K lines): 98.4% infrastructure, 1.6% AI; 7 safety layers, 5 compaction stages, 4 extensibility mechanisms, 7 permission modes.
 - [[concepts/OpenAI Responses API|OpenAI Responses API]] - OpenAI's stateful agentic API with preserved reasoning state, hosted tools (web search, file search, MCP), and server-side conversation management.
 - [[concepts/LLM Fundamentals|LLM Fundamentals]] - How LLMs work: tokenization, transformer pretraining, RLHF fine-tuning, and autoregressive inference. Foundational mental models for understanding why skills are structured the way they are.
+- [[concepts/Software 3.0|Software 3.0]] — Karpathy's paradigm: context window as the new programming surface, with examples from the OpenClaw installer to MenuGen. Prompting becomes a form of programming.
+- [[concepts/Agentic Engineering vs Vibe Coding|Agentic Engineering vs Vibe Coding]] — Vibe coding raises the floor; agentic engineering preserves the ceiling. The intern analogy, spec quality, and the Stripe/email failure.
+- [[concepts/The AI-Native Engineer and the Rising Ceiling|The AI-Native Engineer and the Rising Ceiling]] — The 10x engineer is outdated. Shallow vs deep AI use, setup investment, and why hiring should change.
+- [[concepts/Understanding as the Human Bottleneck|Understanding as the Human Bottleneck]] — "You can outsource your thinking, but you can't outsource your understanding." Syntax can be forgotten; concepts must remain sharp.
 
 ## Lesson Plans
 
@@ -156,3 +161,4 @@ tags: [index, agent-skills, llm-providers]
 - `raw/OpenAI API Responses vs. Chat Completions.md` - Simon Willison's analysis of the new Responses API: server-side state management, hosted tools, reasoning preservation, and the Chat Completions vs. Responses tradeoff.
 - `raw/Why we built the Responses API.md` - OpenAI developer blog: design rationale for the Responses API as a stateful, multimodal agentic loop optimized for reasoning models like GPT-5, with 40–80% better cache utilization.
 - `raw/VILA-LabDive-into-Claude-Code A Systematic Analysis and Discussion of Claude Code for Designing Today's and Future AI Agent Systems.md` - arXiv paper 2604.14228: source-level architectural analysis of Claude Code v2.1.88 (~512K lines), finding 98.4% deterministic infrastructure, 7 safety layers, 5 compaction stages, 27 hook events, and 13 design principles.
+- `raw/Andrej Karpathy From Vibe Coding to Agentic Engineering.md` - Sequoia Capital AI Ascent 2026 interview transcript: Karpathy on Software 3.0, vibe coding vs agentic engineering, verifiability and jagged intelligence, the rising ceiling for AI-native engineers, and why understanding cannot be outsourced.

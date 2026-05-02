@@ -1,7 +1,7 @@
 ---
 type: log
 created: 2026-04-26
-updated: 2026-05-01
+updated: 2026-05-02
 status: active
 sources:
   - "raw/skill.md for AI Agents.md"
@@ -11,7 +11,7 @@ sources:
   - "raw/obrasuperpowers An agentic skills framework & software development methodology that works.md"
   - "raw/VoltAgentawesome-agent-skills A curated collection of 1000+ agent skills from official dev teams and the community, compatible with Claude Code, Codex, Gemini CLI, Cursor, and more.md"
   - "raw/forrestchangandrej-karpathy-skills A single CLAUDE.md file to improve Claude Code behavior, derived from Andrej Karpathy's observations on LLM coding pitfalls.md"
-tags: [log, agent-skills]
+tags: [log, agent-skills, agentic-engineering]
 ---
 
 # Log
@@ -533,3 +533,35 @@ Follow-ups:
 - Consider adding a model-level benchmark page once target AI tools and evaluation tasks are known (was a follow-up from the 2026-04-26 LLM provider ingest).
 - If the Responses API gains a migration guide or best-practice document specifically for Agent Skills integration, add a dedicated section.
 - The lesson plan references several modules that could become standalone concept pages if learners need more depth (e.g., Prompt Engineering Fundamentals, Tool Use and Function Calling as a standalone from Module 6).
+
+## [2026-05-02] ingest | Karpathy: From Vibe Coding to Agentic Engineering
+
+Processed the Sequoia Capital AI Ascent 2026 interview transcript with user's personal reflections and blog post draft as the primary synthesis material.
+
+Raw source note processed:
+
+- `raw/Andrej Karpathy From Vibe Coding to Agentic Engineering.md` - Karpathy on Software 3.0 (prompting as programming), vibe coding vs agentic engineering, verifiability and jagged intelligence, the rising ceiling for AI-native engineers, and why understanding cannot be outsourced.
+
+Generated pages created:
+
+- `concepts/Software 3.0.md` — Karpathy's paradigm: Software 1.0 → 2.0 → 3.0, context window as programming surface, OpenClaw installer and MenuGen examples, and the "new things not just faster things" argument.
+- `concepts/Agentic Engineering vs Vibe Coding.md` — Vibe coding (exploration, raises the floor) vs agentic engineering (production, preserves the ceiling), intern analogy, spec > plan mode, and the Stripe/email failure.
+- `concepts/The AI-Native Engineer and the Rising Ceiling.md` — The 10x engineer is outdated, shallow vs deep AI use, setup investment in the agentic era, and why hiring should change from puzzles to real projects with agents.
+- `concepts/Understanding as the Human Bottleneck.md` — "You can outsource your thinking, but you can't outsource your understanding." Syntax vs concepts, the hidden risk of obedient agents, and LLM knowledge bases as comprehension tools.
+
+Generated pages updated:
+
+- `index.md` — Added new raw source to frontmatter and source list; added concept article entry.
+- `log.md`
+
+Important decisions:
+
+- Split the user's blog post into four separate concept pages rather than keeping it as one combined page. Each concept page focuses on a single idea with its own cross-links, keeping the wiki organized by concept rather than by source.
+- Did not create separate concept pages for jagged intelligence, verifiability, or the "ghosts vs animals" framing because those are adjacent to this wiki's core Agent Skills focus. They are captured in the raw transcript and can be extracted if a future concept requires them.
+- Positioned the concept page as a personal reflection layer rather than a purely technical summary, matching the wiki's existing pattern (e.g., README.md notes this is an "LLM-maintained wiki" built from personal raw sources).
+
+Follow-ups:
+
+- If the user's blog post is published externally, consider adding the publication URL to the concept page source section.
+- The "what is my MenuGen?" question could become a recurring journal entry if the user wants to track obsolete projects over time.
+- Consider adding a jagged intelligence concept page if future raw sources expand on the verifiability + RL training data argument.
