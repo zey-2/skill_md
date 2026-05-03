@@ -56,6 +56,7 @@ This concept is the foundational justification for the entire wiki's approach. [
 - [[concepts/Agentic Engineering vs Vibe Coding]] — Understanding is what enables good specs, which is what separates agentic engineering from vibe coding.
 - [[lesson-plan/AI Fundamentals to Agent Skills]] — The lesson plan is structured around building understanding before building automation.
 - [[concepts/Validation and Evaluation]] — Understanding enables the human to define what "correct" means; evaluation tests whether the agent met that definition.
+- [[concepts/Replacing Code with Skills]] — Prompt-based isolation lacks the guarantees of hard-coded guardrails; understanding the failure modes is what prevents trusting the wrong model for the job.
 
 ## Source
 

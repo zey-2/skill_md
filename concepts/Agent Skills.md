@@ -66,6 +66,7 @@ The likely reason is that each platform has a different runtime, UI, and install
 - [[Plugin-Based Agent Extensions]] explains why plugins matter as a packaging, distribution, and integration layer around skills.
 - [[MCP and Tool-Integration Architecture]] explains how skills relate to tools, resources, prompts, and MCP servers.
 - [[Agent Frameworks and Orchestration]] explains when skills should be combined with subagents, handoffs, or graph workflows.
+- [[concepts/Replacing Code with Skills]] — Cursor replaced ~15K lines of application code with skills, demonstrating skills as a substitute for hardcoded features.
 - [[Agent SDKs and Codex Automation]] explains how skills relate to OpenAI Agents SDK, Codex SDK/App Server, and Claude Agent SDK.
 - [[concepts/Claude Code Architecture Deep Dive]] provides the source-level analysis of where skills sit in Claude Code's extensibility spectrum (Hooks → Skills → Plugins → MCP) and how SkillTool vs AgentTool differ in context cost.
 - [[concepts/LLM Fundamentals]] explains how LLMs work under the hood — why skills need precise wording, why context matters, and why evaluation is necessary.

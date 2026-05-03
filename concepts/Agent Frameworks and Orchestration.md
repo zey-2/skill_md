@@ -77,6 +77,8 @@ There is also a portability tension. Agent Skills aim to travel across clients, 
 - [[Agent SDKs and Codex Automation]] compares OpenAI Agents SDK, Codex SDK, Codex App Server, and Claude Agent SDK as skill-adjacent runtime surfaces.
 - [[concepts/Claude Code Architecture Deep Dive]] provides a concrete harness implementation reference — the 9-step queryLoop, subagent isolation, and extensibility injection points that frameworks abstract away.
 - [[concepts/OpenAI Responses API]] explains how OpenAI's API itself now provides a built-in agentic loop, overlapping with what orchestration frameworks offer.
+- [[concepts/Replacing Code with Skills]] — The best-of command uses subagents with worktree isolation and parent-level coordination as a lightweight orchestration pattern without a framework.
+- [[concepts/Symphony Orchestration]] is a concrete issue-tracker-based orchestration pattern that extends beyond framework-level control to continuous always-on agent dispatch.
 
 ## Open Questions
 

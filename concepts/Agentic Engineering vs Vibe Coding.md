@@ -69,6 +69,9 @@ The distinction between vibe coding and agentic engineering directly informs [[c
 - [[concepts/Software 3.0]] — Agentic engineering operates on the Software 3.0 paradigm; the spec is the program, and the agent is the interpreter.
 - [[concepts/Validation and Evaluation]] — Production-quality output requires stricter evaluation than exploration-quality output.
 - [[concepts/Skill Governance and Metrics]] — Skills for agentic engineering must encode quality and security guardrails.
+- [[concepts/Harness Engineering Principles]] — Harness engineering operationalizes these principles at the team and repository level.
+- [[concepts/Collaborative AI Engineering]] — At team scale, agentic engineering requires alignment infrastructure to prevent coordination debt and wasted work.
+- [[concepts/Replacing Code with Skills]] — The journey from "vibes-based" prompt trust to evals and RL training is the agentic engineering maturity curve applied to a single feature.
 - [[concepts/Agent Skills]] — Skills package the reusable operating knowledge that separates agentic engineering from ad-hoc prompting.
 
 ## Source

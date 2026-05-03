@@ -78,6 +78,7 @@ There is also no sign yet of a single universal registry or signing system acros
 - [[Skill Governance and Metrics]] explains why public distribution raises trust and review concerns.
 - [[Agent Skills]] explains why installation differences do not erase the shared underlying concept.
 - [[concepts/Claude Code Architecture Deep Dive]] explains the 4-level CLAUDE.md hierarchy and how skills sit in the graduated extensibility spectrum (Hooks → Skills → Plugins → MCP).
+- [[concepts/Replacing Code with Skills]] — Server-controlled prompts iterate without client updates: an alternative distribution model that trades user control for team-level prompt versioning.
 
 ## Open Questions
 

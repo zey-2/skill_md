@@ -122,6 +122,7 @@ There is also a tension between path grading and outcome grading. Some sources s
 - [[Skill Authoring Workflow]] explains when validation fits in the lifecycle.
 - [[Skill Governance and Metrics]] explains operational KPIs.
 - [[Progressive Disclosure]] explains why description quality matters for triggering.
+- [[concepts/Replacing Code with Skills]] — Cursor's evals (headless CLI with dual scorers checking worktree compliance vs. primary checkout leakage) show how evals directly drive prompt improvement and RL training for skills.
 
 ## Open Questions
 

@@ -4,7 +4,7 @@ created: 2026-05-01
 updated: 2026-05-01
 status: active
 sources:
-  - "raw/OpenAI's 5 Levels Of 'Super AI' (AGI To Outperform Human Capability).md"
+  - "raw/OpenAI’s 5 Levels Of ‘Super AI’ (AGI To Outperform Human Capability).md"
 tags: [agi, openai, ai-capability-levels, ai-trends]
 ---
 
@@ -36,4 +36,4 @@ Skills designed for each AGI level have different requirements. [[concepts/Agent
 ## Source
 
 - Forbes article by Jodie Cook, 2024-07-16, citing Bloomberg reporting on OpenAI's internal tracking
-- [[raw/OpenAI's 5 Levels Of 'Super AI' (AGI To Outperform Human Capability)]]
+- [[raw/OpenAI’s 5 Levels Of ‘Super AI’ (AGI To Outperform Human Capability)]]

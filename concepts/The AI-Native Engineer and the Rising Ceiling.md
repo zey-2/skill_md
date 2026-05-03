@@ -58,6 +58,7 @@ The rising ceiling has implications for [[concepts/Skill Authoring Workflow]] �
 - [[concepts/Tools Supporting Agent Skills]] — The tools where deep engineers invest their setup.
 - [[concepts/Skill Authoring Workflow]] — Skills encode the workflows that deep users compose to amplify their output.
 - [[concepts/OpenAI AGI Progression Framework]] — As agents progress from Level 2 (reasoners) to Level 3 (agents), the multiplier effect on skilled engineers increases.
+- [[concepts/Replacing Code with Skills]] — The worktree skill exemplifies this: deep engineers invest setup time in a ~200-line skill that replaces 15K lines of app code, compounding leverage across all users.
 
 ## Source
 

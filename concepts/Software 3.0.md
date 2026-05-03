@@ -47,6 +47,9 @@ Software 3.0 explains why [[concepts/Agent Skills]] are structured the way they 
 - [[concepts/LLM Fundamentals]] — Understanding how LLMs work (tokenization, transformer architecture, RLHF) explains why the context window behaves as it does and why skills need precise wording and progressive disclosure.
 - [[concepts/OpenAI Responses API]] — The Responses API represents OpenAI's API-layer shift toward the Software 3.0 model, with preserved reasoning state and server-side agentic loops.
 - [[concepts/Agent Skills]] — Skills are the structured knowledge packages that populate the context window in Software 3.0.
+- [[concepts/Harness Engineering Principles]] — At team scale, the context window becomes the shared programming surface, with repository structure and guardrails acting as the build system.
+- [[concepts/Spec-Driven Development]] — Specs are the source code in Software 3.0; code is the compiled output.
+- [[concepts/Replacing Code with Skills]] — Cursor replaced ~15K lines of TypeScript with a ~200-line markdown skill. The skill IS the program; the agent IS the interpreter.
 
 ## Source
 

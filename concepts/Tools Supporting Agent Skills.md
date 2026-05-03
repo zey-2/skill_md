@@ -78,6 +78,7 @@ Cursor is the main uncertainty in this ingest. The official changelog confirms s
 - [[MCP and Tool-Integration Architecture]] explains how tool surfaces relate to skill packages.
 - [[Agent Frameworks and Orchestration]] explains how frameworks coordinate skills with subagents, handoffs, workflows, and state.
 - [[Agent SDKs and Codex Automation]] explains SDK and app-server surfaces around skill-guided agents.
+- [[concepts/Replacing Code with Skills]] — Cursor's command-vs-skill distinction shows how platform-specific choices (server-controlled prompts vs. local SKILL.md) affect iteration speed, discoverability, and user trust.
 
 ## Open Questions
 

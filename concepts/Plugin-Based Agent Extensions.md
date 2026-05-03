@@ -95,6 +95,7 @@ This does not mean plugins are unsafe by default. It means their value and risk 
 - [[Tools Supporting Agent Skills]] compares current client support.
 - [[Skill Governance and Metrics]] covers trust, review, and quality practices for shared agent artifacts.
 - [[Agent SDKs and Codex Automation]] explains why packaged capabilities matter more when agents are embedded in repeatable workflows.
+- [[concepts/Replacing Code with Skills]] — Cursor's worktree feature shows that some "plugin-like" functionality can be replaced entirely by skills/commands, reducing the boundary between plugins and prompt packages.
 - [[concepts/Claude Code Architecture Deep Dive]] shows at source level how plugins fit into Claude Code's extensibility spectrum, accepting 10 component types in the plugin manifest and sitting between skills and MCP in context cost.
 
 ## Open Questions

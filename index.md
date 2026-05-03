@@ -1,7 +1,7 @@
 ---
 type: index
 created: 2026-04-26
-updated: 2026-05-02
+updated: 2026-05-03
 status: active
 sources:
   - "raw/skill.md for AI Agents.md"
@@ -48,7 +48,7 @@ sources:
   - "raw/2026-04-26 Claude Agent SDK source.md"
   - "raw/2026-04-26 OpenAI Codex Plugins docs.md"
   - "raw/2026-04-26 Claude Code Plugins docs.md"
-  - "raw/OpenAI's 5 Levels Of 'Super AI' (AGI To Outperform Human Capability).md"
+  - "raw/OpenAI’s 5 Levels Of ‘Super AI’ (AGI To Outperform Human Capability).md"
   - "raw/LangChain vs LangGraph vs LangSmith vs LangFlow Key Differences Explained.md"
   - "raw/n8n A Guide to Workflow Automation.md"
   - "raw/Agent SDK overview.md"
@@ -59,6 +59,11 @@ sources:
   - "raw/Why we built the Responses API.md"
   - "raw/VILA-LabDive-into-Claude-Code A Systematic Analysis and Discussion of Claude Code for Designing Today's and Future AI Agent Systems.md"
   - "raw/Andrej Karpathy From Vibe Coding to Agentic Engineering.md"
+  - "raw/Harness engineering leveraging Codex in an agent-first world.md"
+  - "raw/Harness Engineering How to Build Software When Humans Steer, Agents Execute — Ryan Lopopolo, OpenAI.md"
+  - "raw/An open-source spec for Codex orchestration Symphony.md"
+  - "raw/Collaborative AI Engineering One Dev, Two Dozen Agents, Zero Alignment — Maggie Appleton, GitHub.md"
+  - "raw/Replacing 12K LoC with a 200 LoC Skill — David Gomes, Cursor.md"
 tags: [index, agent-skills, llm-providers]
 ---
 
@@ -98,6 +103,13 @@ tags: [index, agent-skills, llm-providers]
 - [[concepts/Agentic Engineering vs Vibe Coding|Agentic Engineering vs Vibe Coding]] — Vibe coding raises the floor; agentic engineering preserves the ceiling. The intern analogy, spec quality, and the Stripe/email failure.
 - [[concepts/The AI-Native Engineer and the Rising Ceiling|The AI-Native Engineer and the Rising Ceiling]] — The 10x engineer is outdated. Shallow vs deep AI use, setup investment, and why hiring should change.
 - [[concepts/Understanding as the Human Bottleneck|Understanding as the Human Bottleneck]] — "You can outsource your thinking, but you can't outsource your understanding." Syntax can be forgotten; concepts must remain sharp.
+- [[concepts/Harness Engineering Principles|Harness Engineering Principles]] — When code is free, the scarce resources shift to human time and context windows. Engineers become staff-level architects designing environments, guardrails, and feedback loops for agents.
+- [[concepts/Agent Legibility|Agent Legibility]] — Making the repository, application, and observability stack directly accessible and reasoning-friendly for agents. AGENTS.md as table of contents, not encyclopedia.
+- [[concepts/AI Slop and Garbage Collection|AI Slop and Garbage Collection]] — Full agent autonomy causes pattern drift and slop accumulation. Golden principles and continuous background refactoring function as garbage collection.
+- [[concepts/Symphony Orchestration|Symphony Orchestration]] — Open-source spec that turns issue trackers into always-on agent control planes. Every open task gets a dedicated agent, achieving 500% PR increases.
+- [[concepts/Spec-Driven Development|Spec-Driven Development]] — Specifications become the primary programming surface. Code is a disposable build artifact compiled from specs by LLMs as "fuzzy compilers."
+- [[concepts/Collaborative AI Engineering|Collaborative AI Engineering]] — Alignment must happen before agents start working, not after. Individual productivity without team coordination creates wasted work and coordination debt. Quality, not speed, is the new differentiator.
+- [[concepts/Replacing Code with Skills|Replacing Code with Skills]] — Cursor replaced ~15K lines of application code with a ~200-line skill, trading hard-coded guardrails for prompt-based instructions backed by evals and RL training.
 
 ## Lesson Plans
 
@@ -151,7 +163,7 @@ tags: [index, agent-skills, llm-providers]
 - `raw/2026-04-30 AI Coding Plans Comparison 2026.md` - Comprehensive comparison of six Chinese coding plans and four international coding-tool subscriptions with pricing, quotas, model access, and selection guidance.
 - `raw/2026-04-30 Claude Code Third-Party LLM Provider Configuration.md` - Raw synthesis of Claude Code third-party provider setup including OpenRouter, LiteLLM, Bedrock, Vertex AI, Foundry, environment variables, and VS Code integration.
 - `raw/2026-04-26 Claude Code Plugins docs.md` - Claude Code plugin evidence for plugin components, marketplaces, scopes, MCP servers, caching, and distribution behavior.
-- `raw/OpenAI's 5 Levels Of 'Super AI' (AGI To Outperform Human Capability).md` - Forbes article on OpenAI's five-level AGI framework: conversational, reasoners, agents, innovators, and organizations, with timeline estimates.
+- `raw/OpenAI’s 5 Levels Of ‘Super AI’ (AGI To Outperform Human Capability).md` - Forbes article on OpenAI's five-level AGI framework: conversational, reasoners, agents, innovators, and organizations, with timeline estimates.
 - `raw/LangChain vs LangGraph vs LangSmith vs LangFlow Key Differences Explained.md` - DataCamp comparison of the LangChain ecosystem: LCEL chains, tool calling, structured outputs, memory, LangGraph state graphs, LangSmith tracing, and LangFlow visual builder.
 - `raw/n8n A Guide to Workflow Automation.md` - DigitalOcean guide to n8n: trigger/action/logic/code nodes, pre-built templates, self-hosting vs cloud, best practices, and comparison to Zapier.
 - `raw/Deploy n8n on Cloud Run  Google Cloud Blog.md` - Google Cloud blog on deploying n8n to Cloud Run with Cloud SQL persistence, Gemini AI integration, and Google Workspace OAuth connectivity.
@@ -162,3 +174,8 @@ tags: [index, agent-skills, llm-providers]
 - `raw/Why we built the Responses API.md` - OpenAI developer blog: design rationale for the Responses API as a stateful, multimodal agentic loop optimized for reasoning models like GPT-5, with 40–80% better cache utilization.
 - `raw/VILA-LabDive-into-Claude-Code A Systematic Analysis and Discussion of Claude Code for Designing Today's and Future AI Agent Systems.md` - arXiv paper 2604.14228: source-level architectural analysis of Claude Code v2.1.88 (~512K lines), finding 98.4% deterministic infrastructure, 7 safety layers, 5 compaction stages, 27 hook events, and 13 design principles.
 - `raw/Andrej Karpathy From Vibe Coding to Agentic Engineering.md` - Sequoia Capital AI Ascent 2026 interview transcript: Karpathy on Software 3.0, vibe coding vs agentic engineering, verifiability and jagged intelligence, the rising ceiling for AI-native engineers, and why understanding cannot be outsourced.
+- `raw/Harness engineering leveraging Codex in an agent-first world.md` - Ryan Lopopolo (OpenAI) blog post on building an internal product with 0 lines of manually-written code. Covers agent legibility, repository knowledge as system of record, AI slop garbage collection, and high-throughput merge philosophy.
+- `raw/Harness Engineering How to Build Software When Humans Steer, Agents Execute — Ryan Lopopolo, OpenAI.md` - Ryan Lopopolo's AI Engineer World's Fair talk and Q&A: "code is free," every human interaction as a harness failure, persona-based review, token management, and getting started with agents.
+- `raw/An open-source spec for Codex orchestration Symphony.md` - OpenAI team: Symphony orchestrator turns Linear into an always-on agent control plane. Covers spec-driven development, multi-agent orchestration, DAG task decomposition, and building Symphony with Symphony.
+- `raw/Collaborative AI Engineering One Dev, Two Dozen Agents, Zero Alignment — Maggie Appleton, GitHub.md` - Maggie Appleton (GitHub Next) talk on ACE: the alignment gap when individual agent productivity outpaces team coordination. Solo agents create wasted work, coordination debt, and post-implementation rework. Multiplayer sessions, collaborative planning, and proactive agents as solutions.
+- `raw/Replacing 12K LoC with a 200 LoC Skill — David Gomes, Cursor.md` - David Gomes (Cursor) talk on replacing ~15K lines of git worktrees application code with a ~200-line skill. Covers prompt-as-code, subagent coordination, evals for isolation reliability, RL training, and the tradeoff between hard-coded guardrails and prompt-based trust.

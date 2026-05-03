@@ -45,6 +45,8 @@ Those numeric limits are best read as practical heuristics, not as a universal s
 - [[Skill Authoring Workflow]] explains how to split a draft into core instructions and resources.
 - [[Validation and Evaluation]] explains how to catch broken references.
 - [[Skill Governance and Metrics]] includes token footprint and reference hit rate as quality metrics.
+- [[concepts/Agent Legibility]] extends progressive disclosure to the repository level, with AGENTS.md as the table of contents.
+- [[concepts/Replacing Code with Skills]] — Commands load prompts only when invoked, a just-in-time disclosure pattern that avoids context bloat while keeping instructions available when needed.
 
 ## Open Questions
 

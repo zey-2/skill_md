@@ -73,6 +73,7 @@ The likely reason is that local agent packages and public documentation sites so
 - [[Skill Distribution and Installation]] explains how discovery paths connect to installation methods.
 - [[Skill Repository Tooling]] explains search and documentation layers.
 - [[concepts/Claude Code Architecture Deep Dive]] explains the 4-level CLAUDE.md hierarchy and skill/plugin discovery at the source level, showing how 9 ordered sources build the context window.
+- [[concepts/Replacing Code with Skills]] — Cursor's commands (server-controlled prompts) vs. SKILL.md packages: different discovery paths with different governance and iteration implications.
 
 ## Open Questions
 
