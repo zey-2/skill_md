@@ -956,7 +956,7 @@ code { font-family: var(--font-mono); font-size: 0.9em; }
           <div style="width:16px;height:16px;border:2px solid var(--black);border-radius:0;"></div>
         </div>
         <h3 style="font-size:clamp(0.9rem,1.5vw,1.15rem);margin-bottom:0.3em;">MCP</h3>
-        <p style="font-size:clamp(0.9rem,1.3vw,1.05rem);line-height:1.5;">Standard protocol for exposing tools to agents. Connects any server as a unified tool source.</p>
+        <p style="font-size:clamp(0.9rem,1.3vw,1.05rem);line-height:1.5;">Standard protocol for exposing tools. Gives agents new <em>hands</em> — read files, call APIs, run queries.</p>
       </div>
       <div class="nb-card" style="background:var(--accent-lavender-bg);">
         <div style="width:40px;height:40px;border:2px solid var(--black);background:var(--accent-lavender);box-shadow:3px 3px 0 0 var(--black);margin-bottom:0.5em;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:2px;">
@@ -967,6 +967,7 @@ code { font-family: var(--font-mono); font-size: 0.9em; }
         <p style="font-size:clamp(0.9rem,1.3vw,1.05rem);line-height:1.5;">Packages reusable knowledge about <em>how</em> to do a task. "When reviewing PRs, check X, Y, Z"</p>
       </div>
     </div>
+    <p class="reveal" style="margin-top:clamp(1rem,2vw,2rem);text-align:center;font-size:clamp(0.95rem,1.4vw,1.2rem);color:var(--text-secondary);"><strong>MCP gives agents new hands. Skills give them a brain for a specific job.</strong></p>
   </div>
 </section>
 
@@ -1053,7 +1054,7 @@ code { font-family: var(--font-mono); font-size: 0.9em; }
   <div class="slide-content" style="display:flex;flex-direction:column;justify-content:center;height:100%;max-width:700px;">
     <p class="reveal label">03 — PROGRESSIVE DISCLOSURE</p>
     <h2 class="reveal" style="white-space:nowrap;">Layered Loading</h2>
-    <p class="reveal">Agent context is limited. Skills give information in layers, only loading what's needed.</p>
+    <p class="reveal">An agent might have 50 skills loaded. If every skill dumps 2,000 tokens into context, you've burned your entire budget before the first turn. Skills load in layers — only what's needed.</p>
     <div class="reveal nb-card" style="background:var(--accent-peach-bg);margin-top:clamp(1rem,2vw,2rem);">
       <p style="font-weight:700;margin-bottom:0.3em;">Layer 1 — Metadata</p>
       <p style="font-size:clamp(0.85rem,1.3vw,1.05rem);">~100 tokens. <code>name</code> + <code>description</code>. Agent decides: does this apply?</p>
@@ -1173,43 +1174,50 @@ code { font-family: var(--font-mono); font-size: 0.9em; }
         <p style="font-size:clamp(0.85rem,1.2vw,1rem);color:var(--text-secondary);">Concrete task, specific output, clear trigger keywords. The agent can match on this.</p>
       </div>
     </div>
-    <div class="reveal" style="margin-top:clamp(1rem,2vw,2rem);">
-      <h3 style="margin-bottom:0.5em;">Common Mistakes</h3>
-      <div class="grid-2">
-        <div class="nb-card" style="background:var(--accent-peach-bg);">
-          <p style="font-size:clamp(1.05rem,1.5vw,1.3rem);"><strong>Vague triggers</strong> — "use this sometimes"</p>
-        </div>
-        <div class="nb-card" style="background:var(--accent-sky-bg);">
-          <p style="font-size:clamp(1.05rem,1.5vw,1.3rem);"><strong>Oversized instructions</strong> — 2000+ lines in SKILL.md</p>
-        </div>
-        <div class="nb-card" style="background:var(--accent-lemon-bg);">
-          <p style="font-size:clamp(1.05rem,1.5vw,1.3rem);"><strong>Missing examples</strong> — no "here's what good looks like"</p>
-        </div>
-        <div class="nb-card" style="background:var(--accent-mint-bg);">
-          <p style="font-size:clamp(1.05rem,1.5vw,1.3rem);"><strong>No scope boundary</strong> — when should the skill NOT apply?</p>
-        </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     SLIDE 17 — Common Mistakes
+     ============================================================ -->
+<section class="slide content-slide">
+  <div class="slide-content" style="display:flex;flex-direction:column;justify-content:center;height:100%;">
+    <p class="reveal label">04 — AUTHORING WORKFLOW</p>
+    <h2 class="reveal" style="margin-bottom:clamp(1rem,2vw,2rem);">Common Mistakes</h2>
+    <div class="grid-2 reveal">
+      <div class="nb-card" style="background:var(--accent-peach-bg);">
+        <p style="font-size:clamp(1.05rem,1.5vw,1.3rem);"><strong>Vague triggers</strong> — "use this sometimes"</p>
+      </div>
+      <div class="nb-card" style="background:var(--accent-sky-bg);">
+        <p style="font-size:clamp(1.05rem,1.5vw,1.3rem);"><strong>Oversized instructions</strong> — 2000+ lines in SKILL.md</p>
+      </div>
+      <div class="nb-card" style="background:var(--accent-lemon-bg);">
+        <p style="font-size:clamp(1.05rem,1.5vw,1.3rem);"><strong>Missing examples</strong> — no "here's what good looks like"</p>
+      </div>
+      <div class="nb-card" style="background:var(--accent-mint-bg);">
+        <p style="font-size:clamp(1.05rem,1.5vw,1.3rem);"><strong>No scope boundary</strong> — when should the skill NOT apply?</p>
       </div>
     </div>
   </div>
 </section>
 
 <!-- ============================================================
-     SLIDE 17 — Section: Wrap-Up
+     SLIDE 18 — Section: Wrap-Up
      ============================================================ -->
 <section class="slide section-slide" style="background:var(--bg-white);">
   <div class="slide-content">
-    <p class="section-number reveal">06</p>
+    <p class="section-number reveal">05</p>
     <p class="section-name reveal">Wrap-Up</p>
   </div>
 </section>
 
 <!-- ============================================================
-     SLIDE 20 — Recap
+     SLIDE 19 — Recap
      ============================================================ -->
 <section class="slide content-slide">
   <div class="bg-grid"></div>
   <div class="slide-content" style="display:flex;flex-direction:column;justify-content:center;height:100%;">
-    <p class="reveal label">06 — WRAP-UP</p>
+    <p class="reveal label">05 — WRAP-UP</p>
     <h2 class="reveal" style="margin-bottom:clamp(1rem,2vw,2rem);">What You Covered Today</h2>
     <div class="grid-2 reveal">
       <div class="nb-card" style="background:var(--accent-lavender-bg);">
@@ -1245,14 +1253,14 @@ code { font-family: var(--font-mono); font-size: 0.9em; }
 </section>
 
 <!-- ============================================================
-     SLIDE 19 — Closing
+     SLIDE 20 — Closing
      ============================================================ -->
 <section class="slide closing-slide">
   <div class="slide-content">
-    <p class="reveal label" style="color:#888;">TAKEAWAY</p>
-    <h1 class="reveal reveal-word" style="max-width:800px;">Skills Emerge From Use</h1>
+    <p class="reveal label" style="color:#888;">YOUR NEXT STEP</p>
+    <h1 class="reveal reveal-word" style="max-width:800px;">Pick One Task. Write the SKILL.md.</h1>
     <div class="reveal closing-rule"></div>
-    <p class="reveal closing-sub">The best skills come from real usage, not first drafts.<br/>Test your skill with an agent and refine it based on the output.</p>
+    <p class="reveal closing-sub">Choose a recurring task from this week. Draft the SKILL.md today — then test it with an agent and refine based on the output. The best skills come from real usage, not first drafts.</p>
   </div>
 </section>
 
