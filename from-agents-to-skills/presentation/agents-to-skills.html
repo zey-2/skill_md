@@ -218,7 +218,7 @@ code { font-family: var(--font-mono); font-size: 0.9em; }
   box-shadow: var(--shadow-sm);
   padding: clamp(0.75rem, 1.5vw, 1.25rem);
   font-family: var(--font-mono);
-  font-size: clamp(0.75rem, 1.2vw, 0.95rem);
+  font-size: clamp(0.85rem, 1.3vw, 1.05rem);
   line-height: 1.6;
   white-space: pre;
   overflow-x: auto;
@@ -349,6 +349,11 @@ code { font-family: var(--font-mono); font-size: 0.9em; }
 /* ============================================================
    Grid layouts
    ============================================================ */
+.grid-4 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(0.5rem, 1.5vw, 1rem);
+}
 .grid-3 {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -413,7 +418,7 @@ code { font-family: var(--font-mono); font-size: 0.9em; }
   text-align: center;
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: clamp(0.625rem, 1vw, 0.8rem);
+  font-size: clamp(0.8rem, 1.2vw, 1rem);
   line-height: 1.2;
   padding: 0.5em;
 }
@@ -461,11 +466,11 @@ code { font-family: var(--font-mono); font-size: 0.9em; }
 .comparison-visual .row .name {
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: clamp(0.75rem, 1.2vw, 0.95rem);
+  font-size: clamp(0.85rem, 1.3vw, 1.05rem);
 }
 .comparison-visual .row .desc {
   font-family: var(--font-body);
-  font-size: clamp(0.7rem, 1vw, 0.85rem);
+  font-size: clamp(0.85rem, 1.2vw, 1rem);
   line-height: 1.4;
 }
 
@@ -506,7 +511,7 @@ code { font-family: var(--font-mono); font-size: 0.9em; }
   border: 1.5px solid var(--black);
   background: var(--bg-white);
   font-family: var(--font-mono);
-  font-size: clamp(0.6rem, 0.9vw, 0.75rem);
+  font-size: clamp(0.8rem, 1.1vw, 0.95rem);
   line-height: 1.3;
 }
 .package-illustration .file .file-icon {
@@ -524,7 +529,7 @@ code { font-family: var(--font-mono); font-size: 0.9em; }
   display: flex; align-items: center; gap: 0.4em;
   padding: 0.3em 0.5em;
   font-family: var(--font-mono);
-  font-size: clamp(0.6rem, 0.9vw, 0.75rem);
+  font-size: clamp(0.8rem, 1.1vw, 0.95rem);
   font-weight: 700;
   margin-bottom: 0.25em;
 }
@@ -553,7 +558,7 @@ code { font-family: var(--font-mono); font-size: 0.9em; }
   text-align: center;
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: clamp(0.6rem, 1vw, 0.8rem);
+  font-size: clamp(0.8rem, 1.2vw, 1rem);
   line-height: 1.2;
   padding: 0.5em;
 }
@@ -608,12 +613,12 @@ code { font-family: var(--font-mono); font-size: 0.9em; }
   display: flex; align-items: center; justify-content: center;
   font-family: var(--font-display);
   font-weight: 800;
-  font-size: clamp(0.75rem, 1vw, 0.9rem);
+  font-size: clamp(0.85rem, 1.2vw, 1.05rem);
   flex-shrink: 0;
 }
 .workflow-step .text {
   font-family: var(--font-body);
-  font-size: clamp(0.7rem, 1vw, 0.85rem);
+  font-size: clamp(0.85rem, 1.2vw, 1rem);
   line-height: 1.4;
   padding-top: 0.2em;
 }
@@ -631,7 +636,7 @@ code { font-family: var(--font-mono); font-size: 0.9em; }
   background: #fff5f5;
   padding: 1em;
   font-family: var(--font-mono);
-  font-size: clamp(0.7rem, 1vw, 0.85rem);
+  font-size: clamp(0.85rem, 1.2vw, 1rem);
   position: relative;
 }
 .bad-example::before {
@@ -639,7 +644,7 @@ code { font-family: var(--font-mono); font-size: 0.9em; }
   position: absolute; top: -0.6em; left: 0.5em;
   background: #cc3333; color: white;
   font-family: var(--font-display);
-  font-size: 0.65em;
+  font-size: 0.85em;
   padding: 0.1em 0.5em;
   font-weight: 700;
 }
@@ -648,7 +653,7 @@ code { font-family: var(--font-mono); font-size: 0.9em; }
   background: #f0fff0;
   padding: 1em;
   font-family: var(--font-mono);
-  font-size: clamp(0.7rem, 1vw, 0.85rem);
+  font-size: clamp(0.85rem, 1.2vw, 1rem);
   position: relative;
 }
 .good-example::before {
@@ -656,7 +661,7 @@ code { font-family: var(--font-mono); font-size: 0.9em; }
   position: absolute; top: -0.6em; left: 0.5em;
   background: #33aa33; color: white;
   font-family: var(--font-display);
-  font-size: 0.65em;
+  font-size: 0.85em;
   padding: 0.1em 0.5em;
   font-weight: 700;
 }
@@ -668,13 +673,14 @@ code { font-family: var(--font-mono); font-size: 0.9em; }
   background: var(--bg-white);
   border: 2px solid var(--black);
   box-shadow: var(--shadow-sm);
-  padding: clamp(0.75rem, 1.5vw, 1.25rem);
+  padding: clamp(0.5rem, 1vw, 0.75rem) clamp(0.75rem, 1.5vw, 1.25rem);
   font-family: var(--font-mono);
-  font-size: clamp(0.65rem, 1vw, 0.82rem);
-  line-height: 1.7;
+  font-size: clamp(0.85rem, 1.2vw, 1rem);
+  line-height: 1.35;
   white-space: pre;
   overflow-x: auto;
-  max-height: 65vh;
+  max-height: 75vh;
+  max-height: 75dvh;
   color: #333;
 }
 .template-block .yaml-front { color: #8866cc; }
@@ -689,7 +695,7 @@ code { font-family: var(--font-mono); font-size: 0.9em; }
   padding: 0.6em 0;
   border-bottom: 1.5px solid #e5e5e5;
   display: flex; align-items: flex-start; gap: 0.75em;
-  font-size: clamp(0.75rem, 1.2vw, 0.95rem);
+  font-size: clamp(0.85rem, 1.3vw, 1.05rem);
   line-height: 1.4;
 }
 .checklist li:last-child { border-bottom: none; }
@@ -744,8 +750,7 @@ code { font-family: var(--font-mono); font-size: 0.9em; }
    Responsive
    ============================================================ */
 @media (max-width: 768px) {
-  .split { grid-template-columns: 1fr; }
-  .split-visual { order: -1; }
+  .grid-4 { grid-template-columns: 1fr 1fr; }
   .grid-3 { grid-template-columns: 1fr; }
   .grid-2 { grid-template-columns: 1fr; }
   .illustration-box { max-width: 250px; }
@@ -848,33 +853,17 @@ code { font-family: var(--font-mono); font-size: 0.9em; }
      ============================================================ -->
 <section class="slide content-slide">
   <div class="bg-grid"></div>
-  <div class="slide-content split">
-    <div class="split-text">
-      <p class="reveal label">01 — AGENT RECAP</p>
-      <h2 class="reveal">The ReAct Loop</h2>
-      <p class="reveal">Unlike a single API call, an agent runs multiple turns in a cycle:</p>
-      <ul class="reveal nb-list">
-        <li><strong>Reveal</strong> — What does the agent know right now?</li>
-        <li><strong>Think</strong> — What should I do next?</li>
-        <li><strong>Act</strong> — Call a tool (read file, search, run code)</li>
-        <li><strong>Observe</strong> — What did the tool return?</li>
-      </ul>
-      <p class="reveal" style="font-size:clamp(0.8rem,1.2vw,0.95rem);color:var(--text-secondary);">The loop repeats until the goal is met or the agent decides it needs to stop.</p>
-    </div>
-    <div class="split-visual">
-      <div class="illustration-box reveal-scale">
-        <div class="agent-loop">
-          <div class="step">Reveal</div>
-          <div class="step">Think</div>
-          <div class="step">Act</div>
-          <div class="step">Observe</div>
-          <span class="arrow">&#8600;</span>
-          <span class="arrow">&#8601;</span>
-          <span class="arrow">&#8598;</span>
-          <span class="arrow">&#8599;</span>
-        </div>
-      </div>
-    </div>
+  <div class="slide-content" style="display:flex;flex-direction:column;justify-content:center;height:100%;max-width:700px;">
+    <p class="reveal label">01 — AGENT RECAP</p>
+    <h2 class="reveal">The ReAct Loop</h2>
+    <p class="reveal">Unlike a single API call, an agent runs multiple turns in a cycle:</p>
+    <ul class="reveal nb-list">
+      <li><strong>Reveal</strong> — What does the agent know right now?</li>
+      <li><strong>Think</strong> — What should I do next?</li>
+      <li><strong>Act</strong> — Call a tool (read file, search, run code)</li>
+      <li><strong>Observe</strong> — What did the tool return?</li>
+    </ul>
+    <p class="reveal" style="font-size:clamp(0.85rem,1.2vw,1rem);color:var(--text-secondary);">The loop repeats until the goal is met or the agent decides it needs to stop.</p>
   </div>
 </section>
 
@@ -943,23 +932,8 @@ code { font-family: var(--font-mono); font-size: 0.9em; }
   <div class="bg-dots"></div>
   <div class="slide-content" style="display:flex;flex-direction:column;justify-content:center;height:100%;">
     <p class="reveal label">02 — WHAT ARE SKILLS</p>
-    <h2 class="reveal" style="margin-bottom:clamp(0.75rem,1.5vw,1.5rem);">Skills, Tools &amp; Frameworks</h2>
-    <div class="grid-3 reveal-scale" style="gap:clamp(0.75rem,1.5vw,1.25rem);">
-      <div class="nb-card" style="background:var(--accent-mint-bg);">
-        <div style="width:40px;height:40px;border:2px solid var(--black);background:var(--accent-mint);box-shadow:3px 3px 0 0 var(--black);margin-bottom:0.5em;display:flex;align-items:center;justify-content:center;">
-          <div style="width:14px;height:14px;border:2px solid var(--black);"></div>
-        </div>
-        <h3 style="font-size:clamp(0.9rem,1.5vw,1.15rem);margin-bottom:0.3em;">Tool</h3>
-        <p style="font-size:clamp(0.7rem,1vw,0.85rem);line-height:1.5;">Exposes an action the agent can call. <code style="font-size:0.85em;">read_file</code>, <code style="font-size:0.85em;">search_codebase</code></p>
-      </div>
-      <div class="nb-card" style="background:var(--accent-lavender-bg);">
-        <div style="width:40px;height:40px;border:2px solid var(--black);background:var(--accent-lavender);box-shadow:3px 3px 0 0 var(--black);margin-bottom:0.5em;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:2px;">
-          <div style="width:20px;height:4px;background:var(--black);"></div>
-          <div style="width:14px;height:4px;background:var(--black);"></div>
-        </div>
-        <h3 style="font-size:clamp(0.9rem,1.5vw,1.15rem);margin-bottom:0.3em;">Skill</h3>
-        <p style="font-size:clamp(0.7rem,1vw,0.85rem);line-height:1.5;">Packages reusable knowledge about <em>how</em> to do a task. "When reviewing PRs, check X, Y, Z"</p>
-      </div>
+    <h2 class="reveal" style="margin-bottom:clamp(0.75rem,1.5vw,1.5rem);">Framework, Tool, MCP &amp; Skill</h2>
+    <div class="grid-4 reveal-scale" style="gap:clamp(0.5rem,1.5vw,1rem);">
       <div class="nb-card" style="background:var(--accent-sky-bg);">
         <div style="width:40px;height:40px;border:2px solid var(--black);background:var(--accent-sky);box-shadow:3px 3px 0 0 var(--black);margin-bottom:0.5em;display:grid;grid-template-columns:1fr 1fr;gap:3px;padding:6px;">
           <div style="border:1.5px solid var(--black);"></div>
@@ -968,18 +942,30 @@ code { font-family: var(--font-mono); font-size: 0.9em; }
           <div style="border:1.5px solid var(--black);"></div>
         </div>
         <h3 style="font-size:clamp(0.9rem,1.5vw,1.15rem);margin-bottom:0.3em;">Framework</h3>
-        <p style="font-size:clamp(0.7rem,1vw,0.85rem);line-height:1.5;">Coordinates multiple agents, state, and control flow. LangGraph, OpenAI Agents SDK</p>
+        <p style="font-size:clamp(0.9rem,1.3vw,1.05rem);line-height:1.5;">Coordinates multiple agents, state, and control flow. LangGraph, OpenAI Agents SDK</p>
       </div>
-    </div>
-    <div style="margin-top:clamp(1rem,2vw,2rem);" class="reveal">
-      <h3 style="margin-bottom:0.5em;">Real-World Skill Examples</h3>
-      <ul class="nb-list" style="max-width:600px;">
-        <li>PR description generation</li>
-        <li>Code review checklists</li>
-        <li>TDD workflow enforcement</li>
-        <li>Debugging playbooks</li>
-        <li>Safety guardrails</li>
-      </ul>
+      <div class="nb-card" style="background:var(--accent-mint-bg);">
+        <div style="width:40px;height:40px;border:2px solid var(--black);background:var(--accent-mint);box-shadow:3px 3px 0 0 var(--black);margin-bottom:0.5em;display:flex;align-items:center;justify-content:center;">
+          <div style="width:14px;height:14px;border:2px solid var(--black);"></div>
+        </div>
+        <h3 style="font-size:clamp(0.9rem,1.5vw,1.15rem);margin-bottom:0.3em;">Tool</h3>
+        <p style="font-size:clamp(0.9rem,1.3vw,1.05rem);line-height:1.5;">Exposes an action the agent can call. <code style="font-size:0.85em;">read_file</code>, <code style="font-size:0.85em;">search_codebase</code></p>
+      </div>
+      <div class="nb-card" style="background:var(--accent-peach-bg);">
+        <div style="width:40px;height:40px;border:2px solid var(--black);background:var(--accent-peach);box-shadow:3px 3px 0 0 var(--black);margin-bottom:0.5em;display:flex;align-items:center;justify-content:center;">
+          <div style="width:16px;height:16px;border:2px solid var(--black);border-radius:0;"></div>
+        </div>
+        <h3 style="font-size:clamp(0.9rem,1.5vw,1.15rem);margin-bottom:0.3em;">MCP</h3>
+        <p style="font-size:clamp(0.9rem,1.3vw,1.05rem);line-height:1.5;">Standard protocol for exposing tools to agents. Connects any server as a unified tool source.</p>
+      </div>
+      <div class="nb-card" style="background:var(--accent-lavender-bg);">
+        <div style="width:40px;height:40px;border:2px solid var(--black);background:var(--accent-lavender);box-shadow:3px 3px 0 0 var(--black);margin-bottom:0.5em;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:2px;">
+          <div style="width:20px;height:4px;background:var(--black);"></div>
+          <div style="width:14px;height:4px;background:var(--black);"></div>
+        </div>
+        <h3 style="font-size:clamp(0.9rem,1.5vw,1.15rem);margin-bottom:0.3em;">Skill</h3>
+        <p style="font-size:clamp(0.9rem,1.3vw,1.05rem);line-height:1.5;">Packages reusable knowledge about <em>how</em> to do a task. "When reviewing PRs, check X, Y, Z"</p>
+      </div>
     </div>
   </div>
 </section>
@@ -1000,8 +986,8 @@ code { font-family: var(--font-mono); font-size: 0.9em; }
           </div>
           <h3 style="font-size:clamp(1rem,1.5vw,1.25rem);margin:0;">Domain Skills</h3>
         </div>
-        <p style="font-size:clamp(0.75rem,1vw,0.9rem);line-height:1.6;margin-bottom:0.75em;"><strong>What the agent needs to know</strong></p>
-        <ul class="nb-list" style="font-size:clamp(0.7rem,1vw,0.85rem);">
+        <p style="font-size:clamp(0.85rem,1.2vw,1.05rem);line-height:1.6;margin-bottom:0.75em;"><strong>What the agent needs to know</strong></p>
+        <ul class="nb-list" style="font-size:clamp(0.9rem,1.3vw,1.05rem);">
           <li>How to use a specific API correctly</li>
           <li>Framework conventions &amp; patterns</li>
           <li>Document editing standards</li>
@@ -1015,8 +1001,8 @@ code { font-family: var(--font-mono); font-size: 0.9em; }
           </div>
           <h3 style="font-size:clamp(1rem,1.5vw,1.25rem);margin:0;">Workflow Skills</h3>
         </div>
-        <p style="font-size:clamp(0.75rem,1vw,0.9rem);line-height:1.6;margin-bottom:0.75em;"><strong>How the agent should operate</strong></p>
-        <ul class="nb-list" style="font-size:clamp(0.7rem,1vw,0.85rem);">
+        <p style="font-size:clamp(0.85rem,1.2vw,1.05rem);line-height:1.6;margin-bottom:0.75em;"><strong>How the agent should operate</strong></p>
+        <ul class="nb-list" style="font-size:clamp(0.9rem,1.3vw,1.05rem);">
           <li>Planning before coding</li>
           <li>TDD workflow enforcement</li>
           <li>Code review checklists</li>
@@ -1024,7 +1010,7 @@ code { font-family: var(--font-mono); font-size: 0.9em; }
         </ul>
       </div>
     </div>
-    <p class="reveal" style="margin-top:clamp(1rem,2vw,2rem);font-size:clamp(0.8rem,1.2vw,0.95rem);text-align:center;color:var(--text-secondary);">Skills encode <strong>what</strong> to know <em>or</em> <strong>how</strong> to work. Often you need both.</p>
+    <p class="reveal" style="margin-top:clamp(1rem,2vw,2rem);font-size:clamp(0.85rem,1.2vw,1rem);text-align:center;color:var(--text-secondary);">Skills encode <strong>what</strong> to know <em>or</em> <strong>how</strong> to work. Often you need both.</p>
   </div>
 </section>
 
@@ -1048,7 +1034,7 @@ code { font-family: var(--font-mono); font-size: 0.9em; }
     <p class="reveal label">03 — PACKAGE ANATOMY</p>
     <h2 class="reveal">The Skill Package</h2>
     <p class="reveal">A skill is a directory with a required main file and optional supporting folders.</p>
-    <div class="reveal nb-card" style="font-family:var(--font-mono);font-size:clamp(0.75rem,1.1vw,0.9rem);line-height:1.8;margin-top:clamp(1rem,2vw,2rem);">
+    <div class="reveal nb-card" style="font-family:var(--font-mono);font-size:clamp(0.85rem,1.3vw,1.05rem);line-height:1.8;margin-top:clamp(1rem,2vw,2rem);">
       <div style="font-weight:700;margin-bottom:0.3em;">my-skill/</div>
       <div>&#9500;&#9472;&#9472; <strong>SKILL.md</strong> <span style="color:#888;"># Main instruction (required)</span></div>
       <div>&#9500;&#9472;&#9472; references/ <span style="color:#888;"># Background docs, schemas</span></div>
@@ -1066,19 +1052,19 @@ code { font-family: var(--font-mono); font-size: 0.9em; }
 <section class="slide content-slide">
   <div class="slide-content" style="display:flex;flex-direction:column;justify-content:center;height:100%;max-width:700px;">
     <p class="reveal label">03 — PROGRESSIVE DISCLOSURE</p>
-    <h2 class="reveal">Layered Loading</h2>
+    <h2 class="reveal" style="white-space:nowrap;">Layered Loading</h2>
     <p class="reveal">Agent context is limited. Skills give information in layers, only loading what's needed.</p>
     <div class="reveal nb-card" style="background:var(--accent-peach-bg);margin-top:clamp(1rem,2vw,2rem);">
       <p style="font-weight:700;margin-bottom:0.3em;">Layer 1 — Metadata</p>
-      <p style="font-size:clamp(0.75rem,1.1vw,0.9rem);">~100 tokens. <code>name</code> + <code>description</code>. Agent decides: does this apply?</p>
+      <p style="font-size:clamp(0.85rem,1.3vw,1.05rem);">~100 tokens. <code>name</code> + <code>description</code>. Agent decides: does this apply?</p>
     </div>
     <div class="reveal nb-card" style="background:var(--accent-sky-bg);">
       <p style="font-weight:700;margin-bottom:0.3em;">Layer 2 — SKILL.md Body</p>
-      <p style="font-size:clamp(0.75rem,1.1vw,0.9rem);">~500 lines max. Full instructions, steps, constraints, examples.</p>
+      <p style="font-size:clamp(0.85rem,1.3vw,1.05rem);">~500 lines max. Full instructions, steps, constraints, examples.</p>
     </div>
     <div class="reveal nb-card" style="background:var(--accent-mint-bg);">
       <p style="font-weight:700;margin-bottom:0.3em;">Layer 3 — References / Scripts</p>
-      <p style="font-size:clamp(0.75rem,1.1vw,0.9rem);">Loaded on-demand only. Long schemas, API docs, helper scripts.</p>
+      <p style="font-size:clamp(0.85rem,1.3vw,1.05rem);">Loaded on-demand only. Long schemas, API docs, helper scripts.</p>
     </div>
     <p class="reveal" style="font-weight:700;margin-top:clamp(0.5rem,1.5vw,1rem);">Key rule: If it's too long for the main file, put it in <code>references/</code> and link to it.</p>
   </div>
@@ -1138,28 +1124,28 @@ code { font-family: var(--font-mono); font-size: 0.9em; }
     <p class="reveal label">04 — AUTHORING WORKFLOW</p>
     <h2 class="reveal">6 Steps to a Skill</h2>
     <ol class="reveal" style="list-style:none;counter-reset:step;margin:0;padding:0;">
-      <li style="counter-increment:step;padding:0.6em 0;border-bottom:1.5px solid #e5e5e5;display:flex;align-items:baseline;gap:0.75em;font-size:clamp(0.8rem,1.2vw,0.95rem);line-height:1.5;">
-        <span style="width:28px;height:28px;border:2px solid var(--black);background:var(--accent-lavender);box-shadow:2px 2px 0 0 var(--black);display:inline-flex;align-items:center;justify-content:center;font-family:var(--font-display);font-weight:800;font-size:0.85rem;flex-shrink:0;">1</span>
+      <li style="counter-increment:step;padding:0.6em 0;border-bottom:1.5px solid #e5e5e5;display:flex;align-items:baseline;gap:0.75em;font-size:clamp(1rem,1.5vw,1.25rem)">
+        <span style="width:32px;height:32px;border:2px solid var(--black);background:var(--accent-lavender);box-shadow:2px 2px 0 0 var(--black);display:inline-flex;align-items:center;justify-content:center;font-family:var(--font-display);font-weight:800;font-size:0.85rem;flex-shrink:0;">1</span>
         <span><strong>Collect</strong> a concrete use case — what task repeats? What fragile steps go wrong?</span>
       </li>
-      <li style="counter-increment:step;padding:0.6em 0;border-bottom:1.5px solid #e5e5e5;display:flex;align-items:baseline;gap:0.75em;font-size:clamp(0.8rem,1.2vw,0.95rem);line-height:1.5;">
-        <span style="width:28px;height:28px;border:2px solid var(--black);background:var(--accent-mint);box-shadow:2px 2px 0 0 var(--black);display:inline-flex;align-items:center;justify-content:center;font-family:var(--font-display);font-weight:800;font-size:0.85rem;flex-shrink:0;">2</span>
+      <li style="counter-increment:step;padding:0.6em 0;border-bottom:1.5px solid #e5e5e5;display:flex;align-items:baseline;gap:0.75em;font-size:clamp(1rem,1.5vw,1.25rem)">
+        <span style="width:32px;height:32px;border:2px solid var(--black);background:var(--accent-mint);box-shadow:2px 2px 0 0 var(--black);display:inline-flex;align-items:center;justify-content:center;font-family:var(--font-display);font-weight:800;font-size:0.85rem;flex-shrink:0;">2</span>
         <span><strong>Draft</strong> the SKILL.md core — name, description, essential instructions. Under 500 lines.</span>
       </li>
-      <li style="counter-increment:step;padding:0.6em 0;border-bottom:1.5px solid #e5e5e5;display:flex;align-items:baseline;gap:0.75em;font-size:clamp(0.8rem,1.2vw,0.95rem);line-height:1.5;">
-        <span style="width:28px;height:28px;border:2px solid var(--black);background:var(--accent-peach);box-shadow:2px 2px 0 0 var(--black);display:inline-flex;align-items:center;justify-content:center;font-family:var(--font-display);font-weight:800;font-size:0.85rem;flex-shrink:0;">3</span>
+      <li style="counter-increment:step;padding:0.6em 0;border-bottom:1.5px solid #e5e5e5;display:flex;align-items:baseline;gap:0.75em;font-size:clamp(1rem,1.5vw,1.25rem)">
+        <span style="width:32px;height:32px;border:2px solid var(--black);background:var(--accent-peach);box-shadow:2px 2px 0 0 var(--black);display:inline-flex;align-items:center;justify-content:center;font-family:var(--font-display);font-weight:800;font-size:0.85rem;flex-shrink:0;">3</span>
         <span><strong>Move bulk</strong> to references — split long sections into <code>references/</code>.</span>
       </li>
-      <li style="counter-increment:step;padding:0.6em 0;border-bottom:1.5px solid #e5e5e5;display:flex;align-items:baseline;gap:0.75em;font-size:clamp(0.8rem,1.2vw,0.95rem);line-height:1.5;">
-        <span style="width:28px;height:28px;border:2px solid var(--black);background:var(--accent-sky);box-shadow:2px 2px 0 0 var(--black);display:inline-flex;align-items:center;justify-content:center;font-family:var(--font-display);font-weight:800;font-size:0.85rem;flex-shrink:0;">4</span>
+      <li style="counter-increment:step;padding:0.6em 0;border-bottom:1.5px solid #e5e5e5;display:flex;align-items:baseline;gap:0.75em;font-size:clamp(1rem,1.5vw,1.25rem)">
+        <span style="width:32px;height:32px;border:2px solid var(--black);background:var(--accent-sky);box-shadow:2px 2px 0 0 var(--black);display:inline-flex;align-items:center;justify-content:center;font-family:var(--font-display);font-weight:800;font-size:0.85rem;flex-shrink:0;">4</span>
         <span><strong>Add scripts</strong> where determinism matters — exact logic, not LLM judgment.</span>
       </li>
-      <li style="counter-increment:step;padding:0.6em 0;border-bottom:1.5px solid #e5e5e5;display:flex;align-items:baseline;gap:0.75em;font-size:clamp(0.8rem,1.2vw,0.95rem);line-height:1.5;">
-        <span style="width:28px;height:28px;border:2px solid var(--black);background:var(--accent-lemon);box-shadow:2px 2px 0 0 var(--black);display:inline-flex;align-items:center;justify-content:center;font-family:var(--font-display);font-weight:800;font-size:0.85rem;flex-shrink:0;">5</span>
+      <li style="counter-increment:step;padding:0.6em 0;border-bottom:1.5px solid #e5e5e5;display:flex;align-items:baseline;gap:0.75em;font-size:clamp(1rem,1.5vw,1.25rem)">
+        <span style="width:32px;height:32px;border:2px solid var(--black);background:var(--accent-lemon);box-shadow:2px 2px 0 0 var(--black);display:inline-flex;align-items:center;justify-content:center;font-family:var(--font-display);font-weight:800;font-size:0.85rem;flex-shrink:0;">5</span>
         <span><strong>Test</strong> — triggers on right inputs? Silent on wrong ones? Correct output?</span>
       </li>
-      <li style="counter-increment:step;padding:0.6em 0;display:flex;align-items:baseline;gap:0.75em;font-size:clamp(0.8rem,1.2vw,0.95rem);line-height:1.5;">
-        <span style="width:28px;height:28px;border:2px solid var(--black);background:var(--accent-lavender);box-shadow:2px 2px 0 0 var(--black);display:inline-flex;align-items:center;justify-content:center;font-family:var(--font-display);font-weight:800;font-size:0.85rem;flex-shrink:0;">6</span>
+      <li style="counter-increment:step;padding:0.6em 0;display:flex;align-items:baseline;gap:0.75em;font-size:clamp(1rem,1.5vw,1.25rem)">
+        <span style="width:32px;height:32px;border:2px solid var(--black);background:var(--accent-lavender);box-shadow:2px 2px 0 0 var(--black);display:inline-flex;align-items:center;justify-content:center;font-family:var(--font-display);font-weight:800;font-size:0.85rem;flex-shrink:0;">6</span>
         <span><strong>Iterate</strong> — fix vague triggers, tighten constraints, add missing examples.</span>
       </li>
     </ol>
@@ -1178,29 +1164,29 @@ code { font-family: var(--font-mono); font-size: 0.9em; }
         <div class="bad-example" style="margin-bottom:1em;">
           "Helps with code stuff"
         </div>
-        <p style="font-size:clamp(0.75rem,1vw,0.85rem);color:var(--text-secondary);">Vague. No trigger. No concrete task. The agent won't know when to use this.</p>
+        <p style="font-size:clamp(0.85rem,1.2vw,1rem);color:var(--text-secondary);">Vague. No trigger. No concrete task. The agent won't know when to use this.</p>
       </div>
       <div>
         <div class="good-example" style="margin-bottom:1em;">
           "Generate a structured PR description from git diff, including change summary, risk assessment, and test plan. Trigger when the user asks to write or generate a PR/commit description."
         </div>
-        <p style="font-size:clamp(0.75rem,1vw,0.85rem);color:var(--text-secondary);">Concrete task, specific output, clear trigger keywords. The agent can match on this.</p>
+        <p style="font-size:clamp(0.85rem,1.2vw,1rem);color:var(--text-secondary);">Concrete task, specific output, clear trigger keywords. The agent can match on this.</p>
       </div>
     </div>
     <div class="reveal" style="margin-top:clamp(1rem,2vw,2rem);">
       <h3 style="margin-bottom:0.5em;">Common Mistakes</h3>
       <div class="grid-2">
         <div class="nb-card" style="background:var(--accent-peach-bg);">
-          <p style="font-size:clamp(0.75rem,1vw,0.9rem);"><strong>Vague triggers</strong> — "use this sometimes"</p>
+          <p style="font-size:clamp(1.05rem,1.5vw,1.3rem);"><strong>Vague triggers</strong> — "use this sometimes"</p>
         </div>
         <div class="nb-card" style="background:var(--accent-sky-bg);">
-          <p style="font-size:clamp(0.75rem,1vw,0.9rem);"><strong>Oversized instructions</strong> — 2000+ lines in SKILL.md</p>
+          <p style="font-size:clamp(1.05rem,1.5vw,1.3rem);"><strong>Oversized instructions</strong> — 2000+ lines in SKILL.md</p>
         </div>
         <div class="nb-card" style="background:var(--accent-lemon-bg);">
-          <p style="font-size:clamp(0.75rem,1vw,0.9rem);"><strong>Missing examples</strong> — no "here's what good looks like"</p>
+          <p style="font-size:clamp(1.05rem,1.5vw,1.3rem);"><strong>Missing examples</strong> — no "here's what good looks like"</p>
         </div>
         <div class="nb-card" style="background:var(--accent-mint-bg);">
-          <p style="font-size:clamp(0.75rem,1vw,0.9rem);"><strong>No scope boundary</strong> — when should the skill NOT apply?</p>
+          <p style="font-size:clamp(1.05rem,1.5vw,1.3rem);"><strong>No scope boundary</strong> — when should the skill NOT apply?</p>
         </div>
       </div>
     </div>
@@ -1231,28 +1217,28 @@ code { font-family: var(--font-mono); font-size: 0.9em; }
           <div style="width:32px;height:32px;border:2px solid var(--black);background:var(--accent-lavender);box-shadow:3px 3px 0 0 var(--black);display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-weight:800;font-size:0.9rem;">1</div>
           <h3 style="font-size:clamp(0.85rem,1.3vw,1rem);margin:0;">Agents</h3>
         </div>
-        <p style="font-size:clamp(0.75rem,1vw,0.9rem);">LLMs that use tools in a loop to achieve goals</p>
+        <p style="font-size:clamp(1.05rem,1.5vw,1.3rem);">LLMs that use tools in a loop to achieve goals</p>
       </div>
       <div class="nb-card" style="background:var(--accent-mint-bg);">
         <div style="display:flex;align-items:center;gap:0.5em;margin-bottom:0.5em;">
           <div style="width:32px;height:32px;border:2px solid var(--black);background:var(--accent-mint);box-shadow:3px 3px 0 0 var(--black);display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-weight:800;font-size:0.9rem;">2</div>
           <h3 style="font-size:clamp(0.85rem,1.3vw,1rem);margin:0;">Skills</h3>
         </div>
-        <p style="font-size:clamp(0.75rem,1vw,0.9rem);">Packaged operating procedures that make agent behavior consistent</p>
+        <p style="font-size:clamp(1.05rem,1.5vw,1.3rem);">Packaged operating procedures that make agent behavior consistent</p>
       </div>
       <div class="nb-card" style="background:var(--accent-peach-bg);">
         <div style="display:flex;align-items:center;gap:0.5em;margin-bottom:0.5em;">
           <div style="width:32px;height:32px;border:2px solid var(--black);background:var(--accent-peach);box-shadow:3px 3px 0 0 var(--black);display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-weight:800;font-size:0.9rem;">3</div>
           <h3 style="font-size:clamp(0.85rem,1.3vw,1rem);margin:0;">SKILL.md</h3>
         </div>
-        <p style="font-size:clamp(0.75rem,1vw,0.9rem);">Main skill file, kept concise via progressive disclosure</p>
+        <p style="font-size:clamp(1.05rem,1.5vw,1.3rem);">Main skill file, kept concise via progressive disclosure</p>
       </div>
       <div class="nb-card" style="background:var(--accent-sky-bg);">
         <div style="display:flex;align-items:center;gap:0.5em;margin-bottom:0.5em;">
           <div style="width:32px;height:32px;border:2px solid var(--black);background:var(--accent-sky);box-shadow:3px 3px 0 0 var(--black);display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-weight:800;font-size:0.9rem;">4</div>
           <h3 style="font-size:clamp(0.85rem,1.3vw,1rem);margin:0;">Authoring</h3>
         </div>
-        <p style="font-size:clamp(0.75rem,1vw,0.9rem);">Identify a recurring task, draft instructions, test, iterate</p>
+        <p style="font-size:clamp(1.05rem,1.5vw,1.3rem);">Identify a recurring task, draft instructions, test, iterate</p>
       </div>
     </div>
   </div>
