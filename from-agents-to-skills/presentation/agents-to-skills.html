@@ -1,0 +1,1443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>From Agents to Skills — 1-Hour Crash Course</title>
+<link href="https://fonts.googleapis.com/css2?family=Bree+Serif&family=DM+Mono&family=Syne:wght@400;700;800&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   Brutalist Bold — CSS Variables
+   ============================================================ */
+:root {
+  --bg-primary: #f0eefc;
+  --bg-white: #ffffff;
+  --text-primary: #000000;
+  --text-secondary: #333333;
+  --black: #000000;
+  --accent-lavender: #B6ACE4;
+  --accent-lavender-bg: #e8e6f8;
+  --accent-mint: #97ee88;
+  --accent-mint-bg: #eefbec;
+  --accent-peach: #f5a8a8;
+  --accent-peach-bg: #fef0f0;
+  --accent-sky: #88c8ee;
+  --accent-sky-bg: #ecf5fb;
+  --accent-lemon: #f5e888;
+  --accent-lemon-bg: #fefaec;
+  --shadow: 6px 6px 0 0 var(--black);
+  --shadow-lg: 10px 10px 0 0 var(--black);
+  --shadow-sm: 3px 3px 0 0 var(--black);
+  --font-display: 'Syne', sans-serif;
+  --font-body: 'Bree Serif', serif;
+  --font-mono: 'DM Mono', monospace;
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --duration: 0.6s;
+  --title-size: clamp(2rem, 6vw, 4.5rem);
+  --subtitle-size: clamp(1rem, 2.5vw, 1.5rem);
+  --body-size: clamp(0.875rem, 1.5vw, 1.125rem);
+  --label-size: clamp(0.625rem, 1vw, 0.875rem);
+  --slide-padding: clamp(1.5rem, 5vw, 4rem);
+  --content-gap: clamp(1rem, 2.5vw, 2rem);
+}
+
+/* ============================================================
+   Reset & Base
+   ============================================================ */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+html {
+  scroll-snap-type: y mandatory;
+  overflow-y: scroll;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  font-size: var(--body-size);
+  color: var(--text-primary);
+  line-height: 1.6;
+  background: var(--black);
+}
+
+/* ============================================================
+   Slide Base
+   ============================================================ */
+.slide {
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
+  overflow: hidden;
+  scroll-snap-align: start;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.slide-content {
+  padding: var(--slide-padding);
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* ============================================================
+   Typography
+   ============================================================ */
+h1, h2, h3 { font-family: var(--font-display); font-weight: 800; line-height: 1.1; }
+h1 { font-size: var(--title-size); }
+h2 { font-size: clamp(1.75rem, 4vw, 3rem); }
+h3 { font-size: clamp(1.25rem, 2.5vw, 1.75rem); }
+
+p, li { font-size: var(--body-size); line-height: 1.6; }
+code { font-family: var(--font-mono); font-size: 0.9em; }
+
+.label {
+  font-family: var(--font-mono);
+  font-size: var(--label-size);
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--text-secondary);
+  margin-bottom: var(--content-gap);
+  font-weight: 400;
+}
+
+/* ============================================================
+   Reveals
+   ============================================================ */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity var(--duration) var(--ease-out-expo),
+              transform var(--duration) var(--ease-out-expo);
+}
+.slide.visible .reveal { opacity: 1; transform: translateY(0); }
+.reveal:nth-child(1) { transition-delay: 0.1s; }
+.reveal:nth-child(2) { transition-delay: 0.2s; }
+.reveal:nth-child(3) { transition-delay: 0.3s; }
+.reveal:nth-child(4) { transition-delay: 0.4s; }
+.reveal:nth-child(5) { transition-delay: 0.5s; }
+.reveal:nth-child(6) { transition-delay: 0.6s; }
+.reveal:nth-child(7) { transition-delay: 0.7s; }
+.reveal:nth-child(8) { transition-delay: 0.8s; }
+
+.reveal-left {
+  opacity: 0; transform: translateX(-50px);
+  transition: opacity var(--duration), transform var(--duration) var(--ease-out-expo);
+}
+.slide.visible .reveal-left { opacity: 1; transform: translateX(0); }
+
+.reveal-scale {
+  opacity: 0; transform: scale(0.9);
+  transition: opacity var(--duration), transform var(--duration) var(--ease-spring);
+}
+.slide.visible .reveal-scale { opacity: 1; transform: scale(1); }
+
+.reveal-word span {
+  display: inline-block;
+  opacity: 0; transform: translateY(20px);
+  transition: opacity 0.4s var(--ease-out-expo), transform 0.4s var(--ease-out-expo);
+}
+.slide.visible .reveal-word span { opacity: 1; transform: translateY(0); }
+
+/* ============================================================
+   Progress Bar & Nav Dots
+   ============================================================ */
+.progress-bar-track {
+  position: fixed; top: 0; left: 0; width: 100%; height: 4px;
+  background: #e5e5e5; z-index: 1000;
+  border-bottom: 2px solid var(--black);
+}
+.progress-bar {
+  height: 100%;
+  background: var(--black);
+  width: 0%; transition: width 0.3s ease;
+}
+
+.nav-dots {
+  position: fixed; right: clamp(0.75rem, 2vw, 2rem); top: 50%;
+  transform: translateY(-50%);
+  display: flex; flex-direction: column; gap: 8px; z-index: 1000;
+}
+.nav-dot {
+  width: 10px; height: 10px; border-radius: 0;
+  border: 2px solid var(--black);
+  background: transparent; opacity: 0.3;
+  cursor: pointer; transition: all 0.3s; padding: 0;
+}
+.nav-dot.active { opacity: 1; transform: scale(1.3); background: var(--black); }
+
+/* ============================================================
+   Neobrutal Components
+   ============================================================ */
+.nb-card {
+  background: var(--bg-white);
+  border: 2px solid var(--black);
+  box-shadow: var(--shadow);
+  padding: clamp(1rem, 2vw, 1.5rem);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.nb-card:hover {
+  transform: translate(2px, 2px);
+  box-shadow: 4px 4px 0 0 var(--black);
+}
+
+.nb-badge {
+  display: inline-block;
+  border: 2px solid var(--black);
+  padding: 0.25em 0.75em;
+  font-family: var(--font-mono);
+  font-size: var(--label-size);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.nb-btn {
+  display: inline-block;
+  background: var(--black);
+  color: var(--bg-white);
+  border: 2px solid var(--black);
+  padding: 0.6em 1.5em;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--body-size);
+  cursor: pointer;
+  transition: all 0.15s;
+  text-decoration: none;
+}
+.nb-btn:hover {
+  transform: translate(2px, 2px);
+  box-shadow: none;
+}
+
+.nb-code-block {
+  background: var(--bg-white);
+  border: 2px solid var(--black);
+  box-shadow: var(--shadow-sm);
+  padding: clamp(0.75rem, 1.5vw, 1.25rem);
+  font-family: var(--font-mono);
+  font-size: clamp(0.75rem, 1.2vw, 0.95rem);
+  line-height: 1.6;
+  white-space: pre;
+  overflow-x: auto;
+  max-height: 60vh;
+}
+
+.nb-list { list-style: none; }
+.nb-list li {
+  padding: 0.5em 0;
+  border-bottom: 1px solid #e5e5e5;
+  display: flex;
+  align-items: baseline;
+  gap: 0.75em;
+}
+.nb-list li:last-child { border-bottom: none; }
+.nb-list li::before {
+  content: '';
+  display: inline-block;
+  width: 10px; height: 10px;
+  background: var(--black);
+  flex-shrink: 0;
+}
+
+/* ============================================================
+   Section divider slides
+   ============================================================ */
+.section-slide {
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  text-align: center;
+  position: relative;
+}
+.section-number {
+  position: absolute;
+  font-family: var(--font-display);
+  font-size: clamp(5rem, 12vw, 10rem);
+  font-weight: 800;
+  line-height: 1;
+  opacity: 0.08;
+  top: 50%;
+  right: clamp(3rem, 8vw, 8rem);
+  transform: translateY(-50%);
+  pointer-events: none;
+  z-index: 0;
+}
+.section-name {
+  position: relative;
+  z-index: 1;
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 4vw, 3.5rem);
+  font-weight: 800;
+}
+.section-time {
+  position: relative;
+  z-index: 1;
+  font-family: var(--font-mono);
+  font-size: var(--label-size);
+  margin-top: 1em;
+  opacity: 0.6;
+}
+
+/* ============================================================
+   Title Slide
+   ============================================================ */
+.title-slide {
+  background: var(--bg-white);
+}
+.title-inner {
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  text-align: center;
+  padding: var(--slide-padding);
+  position: relative;
+}
+.title-inner h1 {
+  max-width: 900px;
+  margin-bottom: 0.5em;
+}
+.title-inner .subtitle {
+  font-family: var(--font-body);
+  font-size: var(--subtitle-size);
+  color: var(--text-secondary);
+  margin-bottom: 1.5em;
+}
+.title-inner .meta {
+  font-family: var(--font-mono);
+  font-size: var(--label-size);
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  padding-top: 1.5em;
+  border-top: 3px solid var(--black);
+}
+
+/* ============================================================
+   Content slide base
+   ============================================================ */
+.content-slide { background: var(--bg-white); }
+.content-slide .slide-content {
+  display: flex; flex-direction: column; justify-content: center;
+  height: 100%;
+}
+.content-slide h2 {
+  margin-bottom: var(--content-gap);
+  position: relative;
+}
+.content-slide h2::after {
+  content: '';
+  display: block;
+  width: 60px; height: 4px;
+  background: var(--black);
+  margin-top: 0.5em;
+}
+
+/* ============================================================
+   Split layout (text + visual)
+   ============================================================ */
+.split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(1.5rem, 3vw, 3rem);
+  align-items: center;
+  align-content: center;
+  min-height: 0;
+}
+.split-text { display: flex; flex-direction: column; gap: var(--content-gap); }
+.split-visual { display: flex; align-items: center; justify-content: center; }
+
+/* ============================================================
+   Grid layouts
+   ============================================================ */
+.grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(0.75rem, 2vw, 1.5rem);
+}
+.grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(0.75rem, 2vw, 1.5rem);
+}
+
+/* ============================================================
+   CSS-only Illustrations — Agent Diagram
+   ============================================================ */
+.illustration-box {
+  width: 100%;
+  aspect-ratio: 1;
+  max-width: 400px;
+  position: relative;
+  margin: 0 auto;
+}
+
+/* Agent formula boxes */
+.agent-formula {
+  display: flex; flex-wrap: nowrap;
+  gap: 0.5rem; align-items: center;
+  justify-content: center;
+}
+.agent-formula .box {
+  border: 2px solid var(--black);
+  background: var(--bg-white);
+  padding: 0.75em 1em;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(0.875rem, 1.5vw, 1.1rem);
+  box-shadow: 4px 4px 0 0 var(--black);
+  text-align: center;
+  line-height: 1.2;
+}
+.agent-formula .plus {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 1.5em;
+  line-height: 1;
+}
+
+/* Agent loop diagram */
+.agent-loop {
+  position: relative;
+  width: clamp(200px, 20vw, 280px);
+  height: clamp(200px, 20vw, 280px);
+  margin: 0 auto;
+}
+.agent-loop .step {
+  position: absolute;
+  width: clamp(70px, 8vw, 100px);
+  height: clamp(70px, 8vw, 100px);
+  border: 2px solid var(--black);
+  background: var(--bg-white);
+  box-shadow: 4px 4px 0 0 var(--black);
+  display: flex; align-items: center; justify-content: center;
+  text-align: center;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(0.625rem, 1vw, 0.8rem);
+  line-height: 1.2;
+  padding: 0.5em;
+}
+.agent-loop .step:nth-child(1) { top: 0; left: 50%; transform: translateX(-50%); }
+.agent-loop .step:nth-child(2) { right: 0; top: 50%; transform: translateY(-50%); }
+.agent-loop .step:nth-child(3) { bottom: 0; left: 50%; transform: translateX(-50%); }
+.agent-loop .step:nth-child(4) { left: 0; top: 50%; transform: translateY(-50%); }
+
+.agent-loop .arrow {
+  position: absolute;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(1rem, 2vw, 1.5rem);
+  color: var(--black);
+}
+.agent-loop .arrow:nth-child(5) { top: 18%; right: 18%; }
+.agent-loop .arrow:nth-child(6) { bottom: 18%; right: 18%; }
+.agent-loop .arrow:nth-child(7) { bottom: 18%; left: 18%; }
+.agent-loop .arrow:nth-child(8) { top: 18%; left: 18%; }
+
+/* ============================================================
+   CSS-only Illustration — Skills comparison
+   ============================================================ */
+.comparison-visual {
+  display: flex; flex-direction: column;
+  gap: clamp(0.5rem, 1.5vw, 1rem);
+  width: 100%;
+}
+.comparison-visual .row {
+  display: grid;
+  grid-template-columns: auto 1fr 1fr;
+  gap: 0.75rem;
+  align-items: center;
+}
+.comparison-visual .row .icon {
+  width: clamp(40px, 4vw, 56px);
+  height: clamp(40px, 4vw, 56px);
+  border: 2px solid var(--black);
+  box-shadow: 3px 3px 0 0 var(--black);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 1.2em;
+}
+.comparison-visual .row .name {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(0.75rem, 1.2vw, 0.95rem);
+}
+.comparison-visual .row .desc {
+  font-family: var(--font-body);
+  font-size: clamp(0.7rem, 1vw, 0.85rem);
+  line-height: 1.4;
+}
+
+/* ============================================================
+   CSS-only Illustration — Package Anatomy
+   ============================================================ */
+.package-illustration {
+  position: relative;
+  width: clamp(200px, 18vw, 280px);
+  margin: 0 auto;
+}
+.package-illustration .folder {
+  width: 100%;
+  border: 2px solid var(--black);
+  background: #ffd866;
+  box-shadow: var(--shadow);
+  padding: 0;
+  position: relative;
+}
+.package-illustration .folder-tab {
+  position: absolute;
+  top: -12px; left: 0;
+  width: 60%;
+  height: 14px;
+  background: #ffd866;
+  border: 2px solid var(--black);
+  border-bottom: none;
+  border-radius: 0;
+}
+.package-illustration .folder-body {
+  padding: clamp(0.75rem, 1.5vw, 1.25rem);
+  padding-top: 1em;
+}
+.package-illustration .file {
+  display: flex; align-items: center; gap: 0.5em;
+  padding: 0.35em 0.5em;
+  margin-bottom: 0.35em;
+  border: 1.5px solid var(--black);
+  background: var(--bg-white);
+  font-family: var(--font-mono);
+  font-size: clamp(0.6rem, 0.9vw, 0.75rem);
+  line-height: 1.3;
+}
+.package-illustration .file .file-icon {
+  width: 12px; height: 14px;
+  border: 1.5px solid var(--black);
+  flex-shrink: 0;
+  position: relative;
+}
+.package-illustration .file.main {
+  background: var(--accent-lavender);
+  font-weight: 700;
+  box-shadow: 2px 2px 0 0 var(--black);
+}
+.package-illustration .folder-name {
+  display: flex; align-items: center; gap: 0.4em;
+  padding: 0.3em 0.5em;
+  font-family: var(--font-mono);
+  font-size: clamp(0.6rem, 0.9vw, 0.75rem);
+  font-weight: 700;
+  margin-bottom: 0.25em;
+}
+.package-illustration .folder-name .folder-icon {
+  width: 14px; height: 12px;
+  border: 1.5px solid var(--black);
+  background: #ffd866;
+  position: relative;
+  flex-shrink: 0;
+}
+
+/* ============================================================
+   CSS-only Illustration — Progressive Disclosure Layers
+   ============================================================ */
+.layers-illustration {
+  position: relative;
+  width: clamp(220px, 20vw, 320px);
+  height: clamp(200px, 18vw, 280px);
+  margin: 0 auto;
+}
+.layers-illustration .layer {
+  position: absolute;
+  border: 2px solid var(--black);
+  box-shadow: 5px 5px 0 0 var(--black);
+  display: flex; align-items: center; justify-content: center;
+  text-align: center;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(0.6rem, 1vw, 0.8rem);
+  line-height: 1.2;
+  padding: 0.5em;
+}
+.layers-illustration .layer-1 {
+  width: 35%; height: 22%;
+  top: 5%; left: 50%; transform: translateX(-50%);
+  background: var(--accent-peach);
+  z-index: 3;
+}
+.layers-illustration .layer-2 {
+  width: 55%; height: 30%;
+  top: 28%; left: 50%; transform: translateX(-50%);
+  background: var(--accent-sky);
+  z-index: 2;
+}
+.layers-illustration .layer-3 {
+  width: 75%; height: 35%;
+  top: 58%; left: 50%; transform: translateX(-50%);
+  background: var(--accent-mint);
+  z-index: 1;
+}
+.layers-illustration .arrow-down {
+  position: absolute;
+  left: 50%; transform: translateX(-50%);
+  font-size: 1.2em;
+  z-index: 4;
+  font-family: var(--font-display);
+  font-weight: 800;
+}
+.layers-illustration .arrow-down:nth-child(4) { top: 24%; }
+.layers-illustration .arrow-down:nth-child(5) { top: 53%; }
+
+/* ============================================================
+   CSS-only Illustration — Workflow Steps
+   ============================================================ */
+.workflow-visual {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  width: 100%;
+  max-width: 350px;
+  margin: 0 auto;
+}
+.workflow-step {
+  display: flex; align-items: flex-start; gap: 0.75em;
+}
+.workflow-step .num {
+  width: clamp(28px, 3vw, 36px);
+  height: clamp(28px, 3vw, 36px);
+  border: 2px solid var(--black);
+  box-shadow: 2px 2px 0 0 var(--black);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(0.75rem, 1vw, 0.9rem);
+  flex-shrink: 0;
+}
+.workflow-step .text {
+  font-family: var(--font-body);
+  font-size: clamp(0.7rem, 1vw, 0.85rem);
+  line-height: 1.4;
+  padding-top: 0.2em;
+}
+.workflow-connector {
+  width: 2px; height: 0.75em;
+  background: var(--black);
+  margin-left: calc(clamp(14px, 1.5vw, 18px));
+}
+
+/* ============================================================
+   Good / Bad comparison
+   ============================================================ */
+.bad-example {
+  border: 2px solid #cc3333;
+  background: #fff5f5;
+  padding: 1em;
+  font-family: var(--font-mono);
+  font-size: clamp(0.7rem, 1vw, 0.85rem);
+  position: relative;
+}
+.bad-example::before {
+  content: 'BAD';
+  position: absolute; top: -0.6em; left: 0.5em;
+  background: #cc3333; color: white;
+  font-family: var(--font-display);
+  font-size: 0.65em;
+  padding: 0.1em 0.5em;
+  font-weight: 700;
+}
+.good-example {
+  border: 2px solid #33aa33;
+  background: #f0fff0;
+  padding: 1em;
+  font-family: var(--font-mono);
+  font-size: clamp(0.7rem, 1vw, 0.85rem);
+  position: relative;
+}
+.good-example::before {
+  content: 'GOOD';
+  position: absolute; top: -0.6em; left: 0.5em;
+  background: #33aa33; color: white;
+  font-family: var(--font-display);
+  font-size: 0.65em;
+  padding: 0.1em 0.5em;
+  font-weight: 700;
+}
+
+/* ============================================================
+   Template code block
+   ============================================================ */
+.template-block {
+  background: var(--bg-white);
+  border: 2px solid var(--black);
+  box-shadow: var(--shadow-sm);
+  padding: clamp(0.75rem, 1.5vw, 1.25rem);
+  font-family: var(--font-mono);
+  font-size: clamp(0.65rem, 1vw, 0.82rem);
+  line-height: 1.7;
+  white-space: pre;
+  overflow-x: auto;
+  max-height: 65vh;
+  color: #333;
+}
+.template-block .yaml-front { color: #8866cc; }
+.template-block .section-head { color: #cc6633; font-weight: 700; }
+.template-block .placeholder { color: #6699cc; font-style: italic; }
+
+/* ============================================================
+   Checklist
+   ============================================================ */
+.checklist { list-style: none; }
+.checklist li {
+  padding: 0.6em 0;
+  border-bottom: 1.5px solid #e5e5e5;
+  display: flex; align-items: flex-start; gap: 0.75em;
+  font-size: clamp(0.75rem, 1.2vw, 0.95rem);
+  line-height: 1.4;
+}
+.checklist li:last-child { border-bottom: none; }
+.checklist .checkbox {
+  width: 18px; height: 18px;
+  border: 2px solid var(--black);
+  flex-shrink: 0;
+  margin-top: 2px;
+  background: var(--bg-white);
+}
+
+/* ============================================================
+   Closing slide
+   ============================================================ */
+.closing-slide { background: var(--black); color: var(--bg-white); }
+.closing-slide .slide-content {
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  text-align: center;
+}
+.closing-slide h1 { color: var(--bg-white); }
+.closing-slide .closing-sub {
+  font-family: var(--font-body);
+  font-size: var(--subtitle-size);
+  color: #aaa;
+  margin-top: 1em;
+  max-width: 600px;
+}
+.closing-slide .closing-rule {
+  width: 80px; height: 4px;
+  background: var(--accent-lemon);
+  margin: 2em 0;
+}
+
+/* ============================================================
+   Background textures
+   ============================================================ */
+.bg-dots {
+  position: absolute; inset: 0; pointer-events: none; opacity: 0.06;
+  background-image: radial-gradient(circle, var(--black) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+.bg-grid {
+  position: absolute; inset: 0; pointer-events: none; opacity: 0.05;
+  background-image:
+    linear-gradient(var(--black) 1px, transparent 1px),
+    linear-gradient(90deg, var(--black) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+/* ============================================================
+   Responsive
+   ============================================================ */
+@media (max-width: 768px) {
+  .split { grid-template-columns: 1fr; }
+  .split-visual { order: -1; }
+  .grid-3 { grid-template-columns: 1fr; }
+  .grid-2 { grid-template-columns: 1fr; }
+  .illustration-box { max-width: 250px; }
+  .agent-loop { max-width: 220px; max-height: 220px; }
+  .agent-formula { flex-wrap: wrap; }
+  .layers-illustration { max-width: 220px; max-height: 200px; }
+  .package-illustration { max-width: 220px; }
+  .nav-dots { display: none; }
+}
+
+@media (max-height: 600px) {
+  .slide-footer, .nav-dots { display: none; }
+  h1 { font-size: clamp(1.5rem, 4vw, 2.5rem); }
+  h2 { font-size: clamp(1.25rem, 3vw, 2rem); }
+}
+
+@media (max-height: 500px) {
+  .slide-subtitle { display: none; }
+}
+
+/* ============================================================
+   Accessibility
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ============================================================
+   Print
+   ============================================================ */
+@media print {
+  html { scroll-snap-type: none; }
+  .slide {
+    height: auto; min-height: 100vh;
+    page-break-after: always; page-break-inside: avoid;
+    -webkit-print-color-adjust: exact; print-color-adjust: exact;
+  }
+  .progress-bar-track, .nav-dots { display: none; }
+  .reveal, .reveal-scale, .reveal-left { opacity: 1 !important; transform: none !important; }
+  .reveal-word span { opacity: 1 !important; transform: none !important; }
+}
+</style>
+</head>
+<body>
+
+<div class="progress-bar-track"><div class="progress-bar"></div></div>
+<nav class="nav-dots" aria-label="Slide navigation"></nav>
+
+<!-- ============================================================
+     SLIDE 1 — Title
+     ============================================================ -->
+<section class="slide title-slide">
+  <div class="bg-dots"></div>
+  <div class="slide-content title-inner">
+    <h1 class="reveal reveal-word">From Agents to Skills</h1>
+    <p class="reveal subtitle">A Crash Course in Authoring Reusable Agent Capabilities</p>
+    <div class="reveal meta">
+      <span>AI Fundamentals &rarr; Agent Skills</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     SLIDE 2 — Section: Agents
+     ============================================================ -->
+<section class="slide section-slide" style="background: var(--accent-lavender-bg);">
+  <div class="slide-content">
+    <p class="section-number reveal">01</p>
+    <p class="section-name reveal">What Is an AI Agent?</p>
+  </div>
+</section>
+
+<!-- ============================================================
+     SLIDE 3 — Agent Formula
+     ============================================================ -->
+<section class="slide content-slide">
+  <div class="bg-dots"></div>
+  <div class="slide-content" style="display:flex;flex-direction:column;justify-content:center;height:100%;">
+    <div style="max-width:800px;margin:0 auto;">
+      <p class="reveal label">01 — AGENT RECAP</p>
+      <h2 class="reveal">The Agent Formula</h2>
+      <p class="reveal">An AI agent is <strong>not</strong> just a chatbot. It is an LLM that can <strong>use tools in a loop</strong> to achieve a goal. It can act on the world.</p>
+      <p class="reveal">The minimum components:</p>
+      <ul class="reveal nb-list">
+        <li><strong>LLM</strong> — language model for reasoning</li>
+        <li><strong>Tools</strong> — file ops, web search, code execution, APIs</li>
+        <li><strong>Loop</strong> — multiple turns, not a single API call</li>
+        <li><strong>Goals</strong> — what the agent is trying to achieve</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     SLIDE 4 — The Agent Loop
+     ============================================================ -->
+<section class="slide content-slide">
+  <div class="bg-grid"></div>
+  <div class="slide-content split">
+    <div class="split-text">
+      <p class="reveal label">01 — AGENT RECAP</p>
+      <h2 class="reveal">The ReAct Loop</h2>
+      <p class="reveal">Unlike a single API call, an agent runs multiple turns in a cycle:</p>
+      <ul class="reveal nb-list">
+        <li><strong>Reveal</strong> — What does the agent know right now?</li>
+        <li><strong>Think</strong> — What should I do next?</li>
+        <li><strong>Act</strong> — Call a tool (read file, search, run code)</li>
+        <li><strong>Observe</strong> — What did the tool return?</li>
+      </ul>
+      <p class="reveal" style="font-size:clamp(0.8rem,1.2vw,0.95rem);color:var(--text-secondary);">The loop repeats until the goal is met or the agent decides it needs to stop.</p>
+    </div>
+    <div class="split-visual">
+      <div class="illustration-box reveal-scale">
+        <div class="agent-loop">
+          <div class="step">Reveal</div>
+          <div class="step">Think</div>
+          <div class="step">Act</div>
+          <div class="step">Observe</div>
+          <span class="arrow">&#8600;</span>
+          <span class="arrow">&#8601;</span>
+          <span class="arrow">&#8598;</span>
+          <span class="arrow">&#8599;</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     SLIDE 5 — Quick Check
+     ============================================================ -->
+<section class="slide content-slide" style="background: var(--accent-lavender-bg);">
+  <div class="slide-content" style="display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;height:100%;">
+    <div style="max-width:700px;">
+      <div class="reveal" style="margin-bottom:0.5em;">
+        <span class="nb-badge" style="background:var(--accent-lavender);font-size:clamp(1.5rem,3vw,2.5rem);padding:0.4em 0.8em;">?</span>
+      </div>
+      <h2 class="reveal" style="margin-bottom:1em;">Quick Check</h2>
+      <p class="reveal" style="font-size:clamp(1.1rem,2vw,1.5rem);line-height:1.5;margin-bottom:2em;">What's the minimum difference between asking ChatGPT a question and running an agent?</p>
+      <div class="reveal nb-card" style="display:inline-block;max-width:500px;text-align:left;">
+        <p><strong>Answer:</strong> The agent can <strong>take actions</strong>, not just produce text. It reads files, runs code, searches the web — and decides <em>when</em> to do each one.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     SLIDE 6 — Section: Skills
+     ============================================================ -->
+<section class="slide section-slide" style="background: var(--accent-mint-bg);">
+  <div class="slide-content">
+    <p class="section-number reveal">02</p>
+    <p class="section-name reveal">What Is an Agent Skill?</p>
+  </div>
+</section>
+
+<!-- ============================================================
+     SLIDE 7 — Problem & Solution
+     ============================================================ -->
+<section class="slide content-slide">
+  <div class="slide-content" style="display:flex;flex-direction:column;justify-content:center;height:100%;gap:clamp(1.5rem,3vw,3rem);">
+    <div class="split">
+      <div>
+        <div class="reveal" style="margin-bottom:0.75em;">
+          <span class="nb-badge" style="background:#cc3333;color:white;border-color:#cc3333;">Problem</span>
+        </div>
+        <h3 class="reveal" style="margin-bottom:0.5em;">Agents Are Inconsistent</h3>
+        <p class="reveal">The same agent will do a recurring task <em>differently</em> each time, because it has no packaged knowledge of <strong>how your team</strong> wants it done.</p>
+      </div>
+      <div>
+        <div class="reveal" style="margin-bottom:0.75em;">
+          <span class="nb-badge" style="background:#33aa33;color:white;border-color:#33aa33;">Solution</span>
+        </div>
+        <h3 class="reveal" style="margin-bottom:0.5em;">A Skill = Reusable Operating Procedure</h3>
+        <p class="reveal">A skill tells the agent:</p>
+        <ul class="reveal nb-list" style="margin-top:0.5em;">
+          <li><strong>When</strong> to use it</li>
+          <li><strong>What</strong> steps to follow</li>
+          <li><strong>What</strong> resources are available</li>
+          <li><strong>What</strong> constraints matter</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     SLIDE 8 — Skills vs Tools vs Frameworks
+     ============================================================ -->
+<section class="slide content-slide">
+  <div class="bg-dots"></div>
+  <div class="slide-content" style="display:flex;flex-direction:column;justify-content:center;height:100%;">
+    <p class="reveal label">02 — WHAT ARE SKILLS</p>
+    <h2 class="reveal" style="margin-bottom:clamp(0.75rem,1.5vw,1.5rem);">Skills, Tools &amp; Frameworks</h2>
+    <div class="grid-3 reveal-scale" style="gap:clamp(0.75rem,1.5vw,1.25rem);">
+      <div class="nb-card" style="background:var(--accent-mint-bg);">
+        <div style="width:40px;height:40px;border:2px solid var(--black);background:var(--accent-mint);box-shadow:3px 3px 0 0 var(--black);margin-bottom:0.5em;display:flex;align-items:center;justify-content:center;">
+          <div style="width:14px;height:14px;border:2px solid var(--black);"></div>
+        </div>
+        <h3 style="font-size:clamp(0.9rem,1.5vw,1.15rem);margin-bottom:0.3em;">Tool</h3>
+        <p style="font-size:clamp(0.7rem,1vw,0.85rem);line-height:1.5;">Exposes an action the agent can call. <code style="font-size:0.85em;">read_file</code>, <code style="font-size:0.85em;">search_codebase</code></p>
+      </div>
+      <div class="nb-card" style="background:var(--accent-lavender-bg);">
+        <div style="width:40px;height:40px;border:2px solid var(--black);background:var(--accent-lavender);box-shadow:3px 3px 0 0 var(--black);margin-bottom:0.5em;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:2px;">
+          <div style="width:20px;height:4px;background:var(--black);"></div>
+          <div style="width:14px;height:4px;background:var(--black);"></div>
+        </div>
+        <h3 style="font-size:clamp(0.9rem,1.5vw,1.15rem);margin-bottom:0.3em;">Skill</h3>
+        <p style="font-size:clamp(0.7rem,1vw,0.85rem);line-height:1.5;">Packages reusable knowledge about <em>how</em> to do a task. "When reviewing PRs, check X, Y, Z"</p>
+      </div>
+      <div class="nb-card" style="background:var(--accent-sky-bg);">
+        <div style="width:40px;height:40px;border:2px solid var(--black);background:var(--accent-sky);box-shadow:3px 3px 0 0 var(--black);margin-bottom:0.5em;display:grid;grid-template-columns:1fr 1fr;gap:3px;padding:6px;">
+          <div style="border:1.5px solid var(--black);"></div>
+          <div style="border:1.5px solid var(--black);"></div>
+          <div style="border:1.5px solid var(--black);"></div>
+          <div style="border:1.5px solid var(--black);"></div>
+        </div>
+        <h3 style="font-size:clamp(0.9rem,1.5vw,1.15rem);margin-bottom:0.3em;">Framework</h3>
+        <p style="font-size:clamp(0.7rem,1vw,0.85rem);line-height:1.5;">Coordinates multiple agents, state, and control flow. LangGraph, OpenAI Agents SDK</p>
+      </div>
+    </div>
+    <div style="margin-top:clamp(1rem,2vw,2rem);" class="reveal">
+      <h3 style="margin-bottom:0.5em;">Real-World Skill Examples</h3>
+      <ul class="nb-list" style="max-width:600px;">
+        <li>PR description generation</li>
+        <li>Code review checklists</li>
+        <li>TDD workflow enforcement</li>
+        <li>Debugging playbooks</li>
+        <li>Safety guardrails</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     SLIDE 8 — Domain vs Workflow Skills
+     ============================================================ -->
+<section class="slide content-slide">
+  <div class="bg-grid"></div>
+  <div class="slide-content" style="display:flex;flex-direction:column;justify-content:center;height:100%;">
+    <p class="reveal label">02 — WHAT ARE SKILLS</p>
+    <h2 class="reveal" style="margin-bottom:clamp(0.75rem,1.5vw,1.5rem);">Two Kinds of Skills</h2>
+    <div class="grid-2 reveal-scale" style="gap:clamp(1rem,2vw,2rem);">
+      <div class="nb-card" style="background:var(--accent-mint-bg);">
+        <div style="display:flex;align-items:center;gap:0.5em;margin-bottom:0.75em;">
+          <div style="width:36px;height:36px;border:2px solid var(--black);background:var(--accent-mint);box-shadow:3px 3px 0 0 var(--black);display:flex;align-items:center;justify-content:center;">
+            <span style="font-size:1.1rem;font-weight:800;font-family:var(--font-display);">&#9733;</span>
+          </div>
+          <h3 style="font-size:clamp(1rem,1.5vw,1.25rem);margin:0;">Domain Skills</h3>
+        </div>
+        <p style="font-size:clamp(0.75rem,1vw,0.9rem);line-height:1.6;margin-bottom:0.75em;"><strong>What the agent needs to know</strong></p>
+        <ul class="nb-list" style="font-size:clamp(0.7rem,1vw,0.85rem);">
+          <li>How to use a specific API correctly</li>
+          <li>Framework conventions &amp; patterns</li>
+          <li>Document editing standards</li>
+          <li>Technical reference material</li>
+        </ul>
+      </div>
+      <div class="nb-card" style="background:var(--accent-lavender-bg);">
+        <div style="display:flex;align-items:center;gap:0.5em;margin-bottom:0.75em;">
+          <div style="width:36px;height:36px;border:2px solid var(--black);background:var(--accent-lavender);box-shadow:3px 3px 0 0 var(--black);display:flex;align-items:center;justify-content:center;">
+            <span style="font-size:1.1rem;font-weight:800;font-family:var(--font-display);">&#9654;</span>
+          </div>
+          <h3 style="font-size:clamp(1rem,1.5vw,1.25rem);margin:0;">Workflow Skills</h3>
+        </div>
+        <p style="font-size:clamp(0.75rem,1vw,0.9rem);line-height:1.6;margin-bottom:0.75em;"><strong>How the agent should operate</strong></p>
+        <ul class="nb-list" style="font-size:clamp(0.7rem,1vw,0.85rem);">
+          <li>Planning before coding</li>
+          <li>TDD workflow enforcement</li>
+          <li>Code review checklists</li>
+          <li>Debugging playbooks</li>
+        </ul>
+      </div>
+    </div>
+    <p class="reveal" style="margin-top:clamp(1rem,2vw,2rem);font-size:clamp(0.8rem,1.2vw,0.95rem);text-align:center;color:var(--text-secondary);">Skills encode <strong>what</strong> to know <em>or</em> <strong>how</strong> to work. Often you need both.</p>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     SLIDE 10 — Section: Anatomy
+     ============================================================ -->
+<section class="slide section-slide" style="background: var(--accent-peach-bg);">
+  <div class="slide-content">
+    <p class="section-number reveal">03</p>
+    <p class="section-name reveal">SKILL.md &amp; Progressive Disclosure</p>
+  </div>
+</section>
+
+<!-- ============================================================
+     SLIDE 10 — Package Anatomy
+     ============================================================ -->
+<section class="slide content-slide">
+  <div class="bg-grid"></div>
+  <div class="slide-content" style="display:flex;flex-direction:column;justify-content:center;height:100%;max-width:700px;">
+    <p class="reveal label">03 — PACKAGE ANATOMY</p>
+    <h2 class="reveal">The Skill Package</h2>
+    <p class="reveal">A skill is a directory with a required main file and optional supporting folders.</p>
+    <div class="reveal nb-card" style="font-family:var(--font-mono);font-size:clamp(0.75rem,1.1vw,0.9rem);line-height:1.8;margin-top:clamp(1rem,2vw,2rem);">
+      <div style="font-weight:700;margin-bottom:0.3em;">my-skill/</div>
+      <div>&#9500;&#9472;&#9472; <strong>SKILL.md</strong> <span style="color:#888;"># Main instruction (required)</span></div>
+      <div>&#9500;&#9472;&#9472; references/ <span style="color:#888;"># Background docs, schemas</span></div>
+      <div>&#9500;&#9472;&#9472; scripts/ <span style="color:#888;"># Deterministic helper code</span></div>
+      <div>&#9492;&#9472;&#9472; assets/ <span style="color:#888;"># Templates, images, static</span></div>
+    </div>
+    <p class="reveal" style="margin-top:clamp(0.75rem,1.5vw,1.5rem);"><strong>Front matter</strong> (YAML): <code>name</code> + <code>description</code> — these determine routing.</p>
+    <p class="reveal"><strong>Body</strong> (Markdown): when to use it, steps, constraints, examples.</p>
+  </div>
+</section>
+
+<!-- ============================================================
+     SLIDE 13 — Progressive Disclosure
+     ============================================================ -->
+<section class="slide content-slide">
+  <div class="slide-content" style="display:flex;flex-direction:column;justify-content:center;height:100%;max-width:700px;">
+    <p class="reveal label">03 — PROGRESSIVE DISCLOSURE</p>
+    <h2 class="reveal">Layered Loading</h2>
+    <p class="reveal">Agent context is limited. Skills give information in layers, only loading what's needed.</p>
+    <div class="reveal nb-card" style="background:var(--accent-peach-bg);margin-top:clamp(1rem,2vw,2rem);">
+      <p style="font-weight:700;margin-bottom:0.3em;">Layer 1 — Metadata</p>
+      <p style="font-size:clamp(0.75rem,1.1vw,0.9rem);">~100 tokens. <code>name</code> + <code>description</code>. Agent decides: does this apply?</p>
+    </div>
+    <div class="reveal nb-card" style="background:var(--accent-sky-bg);">
+      <p style="font-weight:700;margin-bottom:0.3em;">Layer 2 — SKILL.md Body</p>
+      <p style="font-size:clamp(0.75rem,1.1vw,0.9rem);">~500 lines max. Full instructions, steps, constraints, examples.</p>
+    </div>
+    <div class="reveal nb-card" style="background:var(--accent-mint-bg);">
+      <p style="font-weight:700;margin-bottom:0.3em;">Layer 3 — References / Scripts</p>
+      <p style="font-size:clamp(0.75rem,1.1vw,0.9rem);">Loaded on-demand only. Long schemas, API docs, helper scripts.</p>
+    </div>
+    <p class="reveal" style="font-weight:700;margin-top:clamp(0.5rem,1.5vw,1rem);">Key rule: If it's too long for the main file, put it in <code>references/</code> and link to it.</p>
+  </div>
+</section>
+
+<!-- ============================================================
+     SLIDE 12 — SKILL.md Template
+     ============================================================ -->
+<section class="slide content-slide">
+  <div class="slide-content" style="display:flex;flex-direction:column;justify-content:center;height:100%;">
+    <p class="reveal label">03 — SKILL.MD TEMPLATE</p>
+    <h2 class="reveal" style="margin-bottom:clamp(0.75rem,1.5vw,1.5rem);">SKILL.md Template</h2>
+    <div class="template-block reveal">
+<span class="yaml-front">---</span>
+<span class="yaml-front">name: </span><span class="placeholder">your-skill-name</span>
+<span class="yaml-front">description: </span><span class="placeholder">One sentence: what it does and when to use it</span>
+<span class="yaml-front">---</span>
+
+<span class="section-head">## When to use this skill</span>
+
+<span class="placeholder">[2-3 bullet points with concrete trigger conditions]</span>
+
+<span class="section-head">## Steps</span>
+
+<span class="placeholder">1. [First step the agent should take]</span>
+<span class="placeholder">2. [Second step]</span>
+<span class="placeholder">3. [And so on...]</span>
+
+<span class="section-head">## Constraints</span>
+
+<span class="placeholder">- [What the agent should NOT do]</span>
+<span class="placeholder">- [Style or quality requirements]</span>
+
+<span class="section-head">## Examples</span>
+
+<span class="placeholder">**Input:** [What the user might ask]</span>
+<span class="placeholder">**Output:** [What good output looks like]</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     SLIDE 13 — Section: Authoring
+     ============================================================ -->
+<section class="slide section-slide" style="background: var(--accent-sky-bg);">
+  <div class="slide-content">
+    <p class="section-number reveal">04</p>
+    <p class="section-name reveal">Authoring Workflow</p>
+  </div>
+</section>
+
+<!-- ============================================================
+     SLIDE 13 — 6-Step Workflow
+     ============================================================ -->
+<section class="slide content-slide">
+  <div class="slide-content" style="display:flex;flex-direction:column;justify-content:center;height:100%;max-width:800px;">
+    <p class="reveal label">04 — AUTHORING WORKFLOW</p>
+    <h2 class="reveal">6 Steps to a Skill</h2>
+    <ol class="reveal" style="list-style:none;counter-reset:step;margin:0;padding:0;">
+      <li style="counter-increment:step;padding:0.6em 0;border-bottom:1.5px solid #e5e5e5;display:flex;align-items:baseline;gap:0.75em;font-size:clamp(0.8rem,1.2vw,0.95rem);line-height:1.5;">
+        <span style="width:28px;height:28px;border:2px solid var(--black);background:var(--accent-lavender);box-shadow:2px 2px 0 0 var(--black);display:inline-flex;align-items:center;justify-content:center;font-family:var(--font-display);font-weight:800;font-size:0.85rem;flex-shrink:0;">1</span>
+        <span><strong>Collect</strong> a concrete use case — what task repeats? What fragile steps go wrong?</span>
+      </li>
+      <li style="counter-increment:step;padding:0.6em 0;border-bottom:1.5px solid #e5e5e5;display:flex;align-items:baseline;gap:0.75em;font-size:clamp(0.8rem,1.2vw,0.95rem);line-height:1.5;">
+        <span style="width:28px;height:28px;border:2px solid var(--black);background:var(--accent-mint);box-shadow:2px 2px 0 0 var(--black);display:inline-flex;align-items:center;justify-content:center;font-family:var(--font-display);font-weight:800;font-size:0.85rem;flex-shrink:0;">2</span>
+        <span><strong>Draft</strong> the SKILL.md core — name, description, essential instructions. Under 500 lines.</span>
+      </li>
+      <li style="counter-increment:step;padding:0.6em 0;border-bottom:1.5px solid #e5e5e5;display:flex;align-items:baseline;gap:0.75em;font-size:clamp(0.8rem,1.2vw,0.95rem);line-height:1.5;">
+        <span style="width:28px;height:28px;border:2px solid var(--black);background:var(--accent-peach);box-shadow:2px 2px 0 0 var(--black);display:inline-flex;align-items:center;justify-content:center;font-family:var(--font-display);font-weight:800;font-size:0.85rem;flex-shrink:0;">3</span>
+        <span><strong>Move bulk</strong> to references — split long sections into <code>references/</code>.</span>
+      </li>
+      <li style="counter-increment:step;padding:0.6em 0;border-bottom:1.5px solid #e5e5e5;display:flex;align-items:baseline;gap:0.75em;font-size:clamp(0.8rem,1.2vw,0.95rem);line-height:1.5;">
+        <span style="width:28px;height:28px;border:2px solid var(--black);background:var(--accent-sky);box-shadow:2px 2px 0 0 var(--black);display:inline-flex;align-items:center;justify-content:center;font-family:var(--font-display);font-weight:800;font-size:0.85rem;flex-shrink:0;">4</span>
+        <span><strong>Add scripts</strong> where determinism matters — exact logic, not LLM judgment.</span>
+      </li>
+      <li style="counter-increment:step;padding:0.6em 0;border-bottom:1.5px solid #e5e5e5;display:flex;align-items:baseline;gap:0.75em;font-size:clamp(0.8rem,1.2vw,0.95rem);line-height:1.5;">
+        <span style="width:28px;height:28px;border:2px solid var(--black);background:var(--accent-lemon);box-shadow:2px 2px 0 0 var(--black);display:inline-flex;align-items:center;justify-content:center;font-family:var(--font-display);font-weight:800;font-size:0.85rem;flex-shrink:0;">5</span>
+        <span><strong>Test</strong> — triggers on right inputs? Silent on wrong ones? Correct output?</span>
+      </li>
+      <li style="counter-increment:step;padding:0.6em 0;display:flex;align-items:baseline;gap:0.75em;font-size:clamp(0.8rem,1.2vw,0.95rem);line-height:1.5;">
+        <span style="width:28px;height:28px;border:2px solid var(--black);background:var(--accent-lavender);box-shadow:2px 2px 0 0 var(--black);display:inline-flex;align-items:center;justify-content:center;font-family:var(--font-display);font-weight:800;font-size:0.85rem;flex-shrink:0;">6</span>
+        <span><strong>Iterate</strong> — fix vague triggers, tighten constraints, add missing examples.</span>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- ============================================================
+     SLIDE 16 — Good vs Bad Descriptions
+     ============================================================ -->
+<section class="slide content-slide">
+  <div class="slide-content" style="display:flex;flex-direction:column;justify-content:center;height:100%;">
+    <p class="reveal label">04 — AUTHORING WORKFLOW</p>
+    <h2 class="reveal" style="margin-bottom:clamp(1rem,2vw,2rem);">Writing Good Descriptions</h2>
+    <div class="grid-2 reveal">
+      <div>
+        <div class="bad-example" style="margin-bottom:1em;">
+          "Helps with code stuff"
+        </div>
+        <p style="font-size:clamp(0.75rem,1vw,0.85rem);color:var(--text-secondary);">Vague. No trigger. No concrete task. The agent won't know when to use this.</p>
+      </div>
+      <div>
+        <div class="good-example" style="margin-bottom:1em;">
+          "Generate a structured PR description from git diff, including change summary, risk assessment, and test plan. Trigger when the user asks to write or generate a PR/commit description."
+        </div>
+        <p style="font-size:clamp(0.75rem,1vw,0.85rem);color:var(--text-secondary);">Concrete task, specific output, clear trigger keywords. The agent can match on this.</p>
+      </div>
+    </div>
+    <div class="reveal" style="margin-top:clamp(1rem,2vw,2rem);">
+      <h3 style="margin-bottom:0.5em;">Common Mistakes</h3>
+      <div class="grid-2">
+        <div class="nb-card" style="background:var(--accent-peach-bg);">
+          <p style="font-size:clamp(0.75rem,1vw,0.9rem);"><strong>Vague triggers</strong> — "use this sometimes"</p>
+        </div>
+        <div class="nb-card" style="background:var(--accent-sky-bg);">
+          <p style="font-size:clamp(0.75rem,1vw,0.9rem);"><strong>Oversized instructions</strong> — 2000+ lines in SKILL.md</p>
+        </div>
+        <div class="nb-card" style="background:var(--accent-lemon-bg);">
+          <p style="font-size:clamp(0.75rem,1vw,0.9rem);"><strong>Missing examples</strong> — no "here's what good looks like"</p>
+        </div>
+        <div class="nb-card" style="background:var(--accent-mint-bg);">
+          <p style="font-size:clamp(0.75rem,1vw,0.9rem);"><strong>No scope boundary</strong> — when should the skill NOT apply?</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     SLIDE 17 — Section: Wrap-Up
+     ============================================================ -->
+<section class="slide section-slide" style="background:var(--bg-white);">
+  <div class="slide-content">
+    <p class="section-number reveal">06</p>
+    <p class="section-name reveal">Wrap-Up</p>
+  </div>
+</section>
+
+<!-- ============================================================
+     SLIDE 20 — Recap
+     ============================================================ -->
+<section class="slide content-slide">
+  <div class="bg-grid"></div>
+  <div class="slide-content" style="display:flex;flex-direction:column;justify-content:center;height:100%;">
+    <p class="reveal label">06 — WRAP-UP</p>
+    <h2 class="reveal" style="margin-bottom:clamp(1rem,2vw,2rem);">What You Covered Today</h2>
+    <div class="grid-2 reveal">
+      <div class="nb-card" style="background:var(--accent-lavender-bg);">
+        <div style="display:flex;align-items:center;gap:0.5em;margin-bottom:0.5em;">
+          <div style="width:32px;height:32px;border:2px solid var(--black);background:var(--accent-lavender);box-shadow:3px 3px 0 0 var(--black);display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-weight:800;font-size:0.9rem;">1</div>
+          <h3 style="font-size:clamp(0.85rem,1.3vw,1rem);margin:0;">Agents</h3>
+        </div>
+        <p style="font-size:clamp(0.75rem,1vw,0.9rem);">LLMs that use tools in a loop to achieve goals</p>
+      </div>
+      <div class="nb-card" style="background:var(--accent-mint-bg);">
+        <div style="display:flex;align-items:center;gap:0.5em;margin-bottom:0.5em;">
+          <div style="width:32px;height:32px;border:2px solid var(--black);background:var(--accent-mint);box-shadow:3px 3px 0 0 var(--black);display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-weight:800;font-size:0.9rem;">2</div>
+          <h3 style="font-size:clamp(0.85rem,1.3vw,1rem);margin:0;">Skills</h3>
+        </div>
+        <p style="font-size:clamp(0.75rem,1vw,0.9rem);">Packaged operating procedures that make agent behavior consistent</p>
+      </div>
+      <div class="nb-card" style="background:var(--accent-peach-bg);">
+        <div style="display:flex;align-items:center;gap:0.5em;margin-bottom:0.5em;">
+          <div style="width:32px;height:32px;border:2px solid var(--black);background:var(--accent-peach);box-shadow:3px 3px 0 0 var(--black);display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-weight:800;font-size:0.9rem;">3</div>
+          <h3 style="font-size:clamp(0.85rem,1.3vw,1rem);margin:0;">SKILL.md</h3>
+        </div>
+        <p style="font-size:clamp(0.75rem,1vw,0.9rem);">Main skill file, kept concise via progressive disclosure</p>
+      </div>
+      <div class="nb-card" style="background:var(--accent-sky-bg);">
+        <div style="display:flex;align-items:center;gap:0.5em;margin-bottom:0.5em;">
+          <div style="width:32px;height:32px;border:2px solid var(--black);background:var(--accent-sky);box-shadow:3px 3px 0 0 var(--black);display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-weight:800;font-size:0.9rem;">4</div>
+          <h3 style="font-size:clamp(0.85rem,1.3vw,1rem);margin:0;">Authoring</h3>
+        </div>
+        <p style="font-size:clamp(0.75rem,1vw,0.9rem);">Identify a recurring task, draft instructions, test, iterate</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     SLIDE 19 — Closing
+     ============================================================ -->
+<section class="slide closing-slide">
+  <div class="slide-content">
+    <p class="reveal label" style="color:#888;">TAKEAWAY</p>
+    <h1 class="reveal reveal-word" style="max-width:800px;">Skills Emerge From Use</h1>
+    <div class="reveal closing-rule"></div>
+    <p class="reveal closing-sub">The best skills come from real usage, not first drafts.<br/>Test your skill with an agent and refine it based on the output.</p>
+  </div>
+</section>
+
+<script>
+class SlidePresentation {
+  constructor() {
+    // Preview-only mode
+    const previewMatch = /[?&]preview=(\d+)/.exec(location.search || '');
+    if (previewMatch) {
+      const previewIdx = parseInt(previewMatch[1], 10) - 1;
+      this.slides = document.querySelectorAll('.slide');
+      this.slides.forEach((s, i) => {
+        const active = (i === previewIdx);
+        s.classList.toggle('is-active', active);
+        s.style.display = active ? '' : 'none';
+        if (active) { s.style.opacity = '1'; s.style.transform = 'none'; s.style.pointerEvents = 'auto'; }
+      });
+      document.querySelectorAll('.progress-bar-track, .nav-dots, .slide-number').forEach(el => { el.style.display = 'none'; });
+      window.addEventListener('message', (e) => {
+        if (!e.data) return;
+        if (e.data.type === 'preview-goto') {
+          const n = parseInt(e.data.idx, 10);
+          if (n >= 0 && n < this.slides.length) {
+            this.slides.forEach((s, i) => {
+              s.classList.toggle('is-active', i === n);
+              s.style.display = i === n ? '' : 'none';
+            });
+          }
+        }
+      });
+      try { window.parent.postMessage({ type: 'preview-ready' }, '*'); } catch(e) {}
+      return;
+    }
+
+    this.slides = document.querySelectorAll('.slide');
+    this.currentSlide = 0;
+    this.isTransitioning = false;
+
+    this.setupIntersectionObserver();
+    this.setupKeyboardNav();
+    this.setupTouchNav();
+    this.setupWheelNav();
+    this.setupProgressBar();
+    this.setupNavDots();
+    this.setupFullscreen();
+    this.setupPresenterMode();
+
+    // Split words for reveal-word headings
+    this.splitWords();
+  }
+
+  setupIntersectionObserver() {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          this.currentSlide = [...this.slides].indexOf(entry.target);
+          this.updateProgressBar();
+          this.updateNavDots();
+        }
+      });
+    }, { threshold: 0.5 });
+    this.slides.forEach(slide => observer.observe(slide));
+  }
+
+  setupKeyboardNav() {
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowDown' || e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') {
+        e.preventDefault();
+        this.goToSlide(this.currentSlide + 1);
+      } else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft' || e.key === 'PageUp') {
+        e.preventDefault();
+        this.goToSlide(this.currentSlide - 1);
+      } else if (e.key === 'Home') {
+        e.preventDefault();
+        this.goToSlide(0);
+      } else if (e.key === 'End') {
+        e.preventDefault();
+        this.goToSlide(this.slides.length - 1);
+      } else if (e.key === 'f' || e.key === 'F') {
+        this.toggleFullscreen();
+      } else if (e.key === 's' || e.key === 'S') {
+        e.preventDefault();
+        this.openPresenterWindow();
+      }
+    });
+  }
+
+  setupTouchNav() {
+    let startY = 0;
+    document.addEventListener('touchstart', (e) => { startY = e.touches[0].clientY; });
+    document.addEventListener('touchend', (e) => {
+      const diff = startY - e.changedTouches[0].clientY;
+      if (Math.abs(diff) > 50) {
+        this.goToSlide(this.currentSlide + (diff > 0 ? 1 : -1));
+      }
+    });
+  }
+
+  setupWheelNav() {
+    let lastWheel = 0;
+    document.addEventListener('wheel', (e) => {
+      const now = Date.now();
+      if (now - lastWheel < 800) return;
+      lastWheel = now;
+      if (e.deltaY > 0) this.goToSlide(this.currentSlide + 1);
+      else if (e.deltaY < 0) this.goToSlide(this.currentSlide - 1);
+    }, { passive: true });
+  }
+
+  setupProgressBar() {
+    this.progressBar = document.querySelector('.progress-bar');
+  }
+
+  updateProgressBar() {
+    if (this.progressBar) {
+      const pct = ((this.currentSlide + 1) / this.slides.length) * 100;
+      this.progressBar.style.width = pct + '%';
+    }
+  }
+
+  setupNavDots() {
+    const nav = document.querySelector('.nav-dots');
+    if (!nav) return;
+    this.slides.forEach((_, i) => {
+      const dot = document.createElement('button');
+      dot.className = 'nav-dot' + (i === 0 ? ' active' : '');
+      dot.setAttribute('aria-label', `Go to slide ${i + 1}`);
+      dot.addEventListener('click', () => this.goToSlide(i));
+      nav.appendChild(dot);
+    });
+    this.navDots = nav.querySelectorAll('.nav-dot');
+  }
+
+  updateNavDots() {
+    if (!this.navDots) return;
+    this.navDots.forEach((dot, i) => {
+      dot.classList.toggle('active', i === this.currentSlide);
+    });
+  }
+
+  setupFullscreen() {}
+
+  toggleFullscreen() {
+    if (!document.fullscreenElement) document.documentElement.requestFullscreen();
+    else document.exitFullscreen();
+  }
+
+  setupPresenterMode() {}
+
+  openPresenterWindow() {
+    alert('Presenter mode is available — press S to open a separate presenter window.');
+  }
+
+  goToSlide(index) {
+    if (index < 0 || index >= this.slides.length) return;
+    this.slides[index].scrollIntoView({ behavior: 'smooth' });
+  }
+
+  splitWords() {
+    document.querySelectorAll('.reveal-word').forEach(el => {
+      const words = el.textContent.trim().split(/\s+/);
+      el.innerHTML = words.map((word, i) =>
+        `<span style="transition-delay: ${i * 80}ms">${word}</span>`
+      ).join(' ');
+    });
+  }
+}
+
+document.addEventListener('DOMContentLoaded', () => new SlidePresentation());
+</script>
+
+</body>
+</html>
