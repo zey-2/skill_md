@@ -1,7 +1,7 @@
 ---
 type: concept
 created: 2026-04-26
-updated: 2026-04-26
+updated: 2026-05-04
 status: active
 sources:
   - "raw/openaiskills Skills Catalog for Codex.md"
@@ -20,7 +20,8 @@ sources:
   - "raw/2026-04-26 Microsoft Agent Framework Agent Skills docs.md"
   - "raw/2026-04-26 OpenAI Codex Plugins docs.md"
   - "raw/2026-04-26 Claude Code Plugins docs.md"
-tags: [agent-skills, distribution, installation]
+  - "raw/Context Is the New Code — Patrick Debois, Tessl.md"
+tags: [agent-skills, distribution, installation, context]
 ---
 
 # Skill Distribution and Installation
@@ -56,6 +57,23 @@ The raw sources show several distinct installation models:
 
 Together, these sources show that "portable skill" does not yet mean "portable installation."
 
+## Dependency Management and Context Security
+
+Debois extends the distribution picture with two emerging concerns:
+
+### Dependency Hell
+
+Skills declare dependencies on other skills, library versions, and ecosystem configurations. When multiple context packages are installed, conflicts arise — for example, a frontend package and a React package may specify contradictory rules. Context dependency management mirrors library dependency management: version pinning, conflict resolution, and compatibility matrices will become necessary as context packages proliferate.
+
+### AI SBOM and Security Scanning
+
+The "Open Claw" incident made the community aware that downloaded skills execute immediately — their context files are loaded by the agent without sandbox restrictions. This creates two security needs:
+
+- **Context scanning** — tools like Snyk are beginning to scan context packages for credential exposure, third-party risk, and prompt injection patterns.
+- **AI SBOM** — tracking who built a skill, with what model, and under what conditions. This mirrors software SBOMs and enables security teams to assess trust before installation.
+
+Debois also proposes **context filters** as a separate security layer — a web-application-firewall-like mechanism that filters malicious patterns from incoming context before the agent processes it. This is distinct from sandboxing because sandboxes cannot prevent the initial loading of `agent.md` and `skill.md` files. See [[Context Observability and Feedback]] for details.
+
 ## Where Sources Agree
 
 The sources agree that installation is a separate concern from authoring. A well-structured `SKILL.md` package still needs a delivery path.
@@ -79,6 +97,8 @@ There is also no sign yet of a single universal registry or signing system acros
 - [[Agent Skills]] explains why installation differences do not erase the shared underlying concept.
 - [[concepts/Claude Code Architecture Deep Dive]] explains the 4-level CLAUDE.md hierarchy and how skills sit in the graduated extensibility spectrum (Hooks → Skills → Plugins → MCP).
 - [[concepts/Replacing Code with Skills]] — Server-controlled prompts iterate without client updates: an alternative distribution model that trades user control for team-level prompt versioning.
+- [[Context Development Lifecycle]] frames distribution as the Distribute stage within the broader Generate → Evaluate → Distribute → Observe loop, including dependency management and AI SBOM.
+- [[Context Observability and Feedback]] covers the security scanning and context filter layers needed after distribution.
 
 ## Open Questions
 

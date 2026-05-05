@@ -1,7 +1,7 @@
 ---
 type: concept
 created: 2026-04-26
-updated: 2026-04-26
+updated: 2026-05-04
 status: active
 sources:
   - "raw/skill.md for AI Agents.md"
@@ -72,6 +72,8 @@ There is also a tension between curation and audit. A curated list can improve d
 - [[Vendor Adapters]] explains how governance can preserve portability.
 - [[Progressive Disclosure]] explains token footprint and reference hit rate.
 - [[Skill Distribution and Installation]] explains why public distribution increases trust requirements.
+- [[Context Development Lifecycle]] frames governance as the organizational loop that scales individual skill authoring to team-level context management.
+- [[Context Observability and Feedback]] covers the security scanning, AI SBOM, and context filter patterns that governance must enforce for third-party skills.
 
 ## Open Questions
 

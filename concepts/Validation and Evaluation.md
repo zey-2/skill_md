@@ -1,7 +1,7 @@
 ---
 type: concept
 created: 2026-04-26
-updated: 2026-04-26
+updated: 2026-05-04
 status: active
 sources:
   - "raw/skill.md for AI Agents.md"
@@ -10,7 +10,8 @@ sources:
   - "raw/2026-04-26 Anthropic evals for AI agents.md"
   - "raw/2026-04-26 LangSmith AgentEvals trajectory evaluation docs.md"
   - "raw/2026-04-26 tau-bench tool-agent reliability benchmark.md"
-tags: [agent-skills, validation, evaluation]
+  - "raw/Context Is the New Code — Patrick Debois, Tessl.md"
+tags: [agent-skills, validation, evaluation, context]
 ---
 
 # Validation and Evaluation
@@ -87,6 +88,20 @@ Agent skills should be evaluated across repeated trials, not only one lucky run.
 
 For creative or exploratory skills, `pass@k` may be acceptable because one good candidate can be enough. For procedural, compliance, customer-support, finance, legal, deployment, or safety-sensitive skills, `pass^k` is often the stricter and more relevant metric because users need consistent behavior.
 
+## Non-Determinism and Error Budgets
+
+Debois highlights a practical challenge with running context evals in CI/CD: LLMs are non-deterministic. Running an eval twice may produce different results. This means:
+
+- A single pass/fail result is unreliable. Instead, run each test multiple times and track the success rate.
+- **Error budgets** are a useful model: give a set of tests an allowed failure rate. Critical tests have tight budgets; convenience tests can tolerate more variance.
+- Context changes influence which tests pass or fail, so tracking which specific tests become flaky after a context edit helps isolate the problem.
+
+## End-to-End Testing with Judge Agents
+
+Beyond checking generated code against rules, Debois describes giving the judge LLM tool access so it becomes an agent that can execute the code in a sandbox. This creates true end-to-end tests: the judge runs the endpoint, performs a curl, checks the response, and judges whether the behavior matches expectations. This is significantly stronger than regex or static checks because it validates runtime behavior.
+
+Given a specific commit and context, this approach can answer: "did this context change make a difference, yes or no?" And the judge agent can use the feedback to automatically suggest context improvements.
+
 ## Practical Minimum for a Skill Repository
 
 For each reusable skill, keep at least:
@@ -123,6 +138,7 @@ There is also a tension between path grading and outcome grading. Some sources s
 - [[Skill Governance and Metrics]] explains operational KPIs.
 - [[Progressive Disclosure]] explains why description quality matters for triggering.
 - [[concepts/Replacing Code with Skills]] — Cursor's evals (headless CLI with dual scorers checking worktree compliance vs. primary checkout leakage) show how evals directly drive prompt improvement and RL training for skills.
+- [[Context Development Lifecycle]] frames evaluation as the Evaluate stage within the broader Generate → Evaluate → Distribute → Observe loop, including error budgets and CI/CD for context.
 
 ## Open Questions
 

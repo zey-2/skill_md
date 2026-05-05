@@ -1,7 +1,7 @@
 ---
 type: index
 created: 2026-04-26
-updated: 2026-05-03
+updated: 2026-05-04
 status: active
 sources:
   - "raw/skill.md for AI Agents.md"
@@ -64,6 +64,7 @@ sources:
   - "raw/An open-source spec for Codex orchestration Symphony.md"
   - "raw/Collaborative AI Engineering One Dev, Two Dozen Agents, Zero Alignment — Maggie Appleton, GitHub.md"
   - "raw/Replacing 12K LoC with a 200 LoC Skill — David Gomes, Cursor.md"
+  - "raw/Context Is the New Code — Patrick Debois, Tessl.md"
 tags: [index, agent-skills, llm-providers]
 ---
 
@@ -110,6 +111,8 @@ tags: [index, agent-skills, llm-providers]
 - [[concepts/Spec-Driven Development|Spec-Driven Development]] — Specifications become the primary programming surface. Code is a disposable build artifact compiled from specs by LLMs as "fuzzy compilers."
 - [[concepts/Collaborative AI Engineering|Collaborative AI Engineering]] — Alignment must happen before agents start working, not after. Individual productivity without team coordination creates wasted work and coordination debt. Quality, not speed, is the new differentiator.
 - [[concepts/Replacing Code with Skills|Replacing Code with Skills]] — Cursor replaced ~15K lines of application code with a ~200-line skill, trading hard-coded guardrails for prompt-based instructions backed by evals and RL training.
+- [[concepts/Context Development Lifecycle|Context Development Lifecycle]] — Debois's DevOps-inspired framework: Generate → Evaluate → Distribute → Observe as the lifecycle for context, with library authoring and organizational loops, and the context flywheel.
+- [[concepts/Context Observability and Feedback|Context Observability and Feedback]] — Monitoring context effectiveness through agent logs, PR feedback, production failures, sandbox testing, context filters, and AI SBOM.
 
 ## Lesson Plans
 
@@ -179,3 +182,4 @@ tags: [index, agent-skills, llm-providers]
 - `raw/An open-source spec for Codex orchestration Symphony.md` - OpenAI team: Symphony orchestrator turns Linear into an always-on agent control plane. Covers spec-driven development, multi-agent orchestration, DAG task decomposition, and building Symphony with Symphony.
 - `raw/Collaborative AI Engineering One Dev, Two Dozen Agents, Zero Alignment — Maggie Appleton, GitHub.md` - Maggie Appleton (GitHub Next) talk on ACE: the alignment gap when individual agent productivity outpaces team coordination. Solo agents create wasted work, coordination debt, and post-implementation rework. Multiplayer sessions, collaborative planning, and proactive agents as solutions.
 - `raw/Replacing 12K LoC with a 200 LoC Skill — David Gomes, Cursor.md` - David Gomes (Cursor) talk on replacing ~15K lines of git worktrees application code with a ~200-line skill. Covers prompt-as-code, subagent coordination, evals for isolation reliability, RL training, and the tradeoff between hard-coded guardrails and prompt-based trust.
+- `raw/Context Is the New Code — Patrick Debois, Tessl.md` - AI Engineer World's Fair talk: context development lifecycle (Generate → Evaluate → Distribute → Observe) as DevOps for prompts, skills, and memory. Covers context flywheel, eval non-determinism, error budgets, context dependency hell, AI SBOM, context filters, and harness engineering observability.

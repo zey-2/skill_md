@@ -1,14 +1,15 @@
 ---
 type: concept
 created: 2026-04-26
-updated: 2026-04-26
+updated: 2026-05-04
 status: active
 sources:
   - "raw/skill.md for AI Agents.md"
   - "raw/mattpocockskills My personal directory of skills, straight from my .claude directory.md"
   - "raw/obrasuperpowers An agentic skills framework & software development methodology that works.md"
   - "raw/forrestchangandrej-karpathy-skills A single CLAUDE.md file to improve Claude Code behavior, derived from Andrej Karpathy's observations on LLM coding pitfalls.md"
-tags: [agent-skills, authoring, workflow]
+  - "raw/Context Is the New Code — Patrick Debois, Tessl.md"
+tags: [agent-skills, authoring, workflow, context]
 ---
 
 # Skill Authoring Workflow
@@ -51,6 +52,19 @@ They also agree that skills should improve through validation and iteration rath
 The sources disagree mainly in packaging and granularity. Some publish many small skills for narrow jobs. Others publish one broader methodology that coordinates multiple stages of work. The `CLAUDE.md` source is adjacent again: it is clearly reusable guidance, but it is merged into project instructions instead of being packaged as a portable skill directory.
 
 These differences reflect different maintenance contexts. A solo author may favor simple project overlays. A skill marketplace may favor installable units. A framework author may favor an integrated workflow system.
+
+## Context Generation Methods
+
+Debois identifies several context creation patterns beyond manual prompting:
+
+- **Reusable instructions** — `CLAUDE.md`, `agent.md`, `SKILL.md` files that persist across sessions.
+- **Documentation pull** — downloading library documentation so the agent has the correct version rather than hallucinating.
+- **External context pull** — pulling context from GitLab, GitHub, Slack, tickets. Even a ticket creates context when the agent reads it.
+- **Spec-driven development** — writing a specification that the agent breaks down into planning mode and step-by-step prompts.
+- **Code-to-skills transformation** — converting large helper code blocks into skills that describe procedures rather than implementing them literally. Debois found this solved more problems than coding the helpers could, because the skill could adapt to the user's ecosystem.
+- **Voice coding** — voice input produces more elaborate and higher-quality context than typing. Debois attributes this to speaking in full sentences rather than terse typed fragments.
+
+These methods form the **Generate** stage of the [[Context Development Lifecycle]].
 
 ## Connections
 

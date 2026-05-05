@@ -1,7 +1,7 @@
 ---
 type: concept
 created: 2026-05-03
-updated: 2026-05-03
+updated: 2026-05-04
 status: active
 sources:
   - "raw/Harness engineering leveraging Codex in an agent-first world.md"
@@ -83,6 +83,8 @@ If a human must type "continue" to an agent, the harness failed to provide enoug
 - [[concepts/Symphony Orchestration]] — Symphony extends harness principles from single-agent to multi-agent orchestration.
 - [[concepts/Collaborative AI Engineering]] — Harness engineering optimizes single-agent environments; collaborative engineering extends to team-level alignment.
 - [[concepts/Replacing Code with Skills]] — The cursor worktree skill shows a harness boundary shift: hard-coded filesystem isolation replaced by prompt-based instructions backed by evals.
+- [[concepts/Context Development Lifecycle]] — Debois frames harness engineering observability as the Observe stage of the context lifecycle, where logs, traces, and feedback close the improvement loop.
+- [[concepts/Context Observability and Feedback]] — Covers the specific observability patterns (agent logs, production monitoring, context filters) that complement harness guardrails.
 
 ## Source
 

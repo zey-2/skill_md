@@ -1,7 +1,7 @@
 ---
 type: log
 created: 2026-04-26
-updated: 2026-05-02
+updated: 2026-05-04
 status: active
 sources:
   - "raw/skill.md for AI Agents.md"
@@ -565,3 +565,38 @@ Follow-ups:
 - If the user's blog post is published externally, consider adding the publication URL to the concept page source section.
 - The "what is my MenuGen?" question could become a recurring journal entry if the user wants to track obsolete projects over time.
 - Consider adding a jagged intelligence concept page if future raw sources expand on the verifiability + RL training data argument.
+
+## [2026-05-04] ingest | Debois: Context Is the New Code
+
+Processed Patrick Debois's AI Engineer World's Fair talk on the Context Development Lifecycle.
+
+Raw source note processed:
+
+- `raw/Context Is the New Code — Patrick Debois, Tessl.md` - DevOps-inspired lifecycle for context: Generate → Evaluate → Distribute → Observe. Covers context flywheel, eval non-determinism and error budgets, context dependency hell, AI SBOM, context filters, sandbox security, and harness engineering observability.
+
+Generated pages created:
+
+- `concepts/Context Development Lifecycle.md` — Four-stage lifecycle modelled on SDLC/DevOps infinity loop. Two nested loops (library authoring and organizational). Context flywheel. "Context is fuel, LLMs are engine."
+- `concepts/Context Observability and Feedback.md` — Observe stage in detail: agent logs, PR feedback as context feedback, production failure capture, sandbox security testing, context filters as WAF for prompt injections, AI SBOM, and harness engineering observability.
+
+Generated pages updated:
+
+- `concepts/Skill Authoring Workflow.md` — Added Debois source and "Context Generation Methods" section covering voice coding, documentation pull, external context pull, spec-driven development, code-to-skills transformation.
+- `concepts/Validation and Evaluation.md` — Added Debois source and sections on non-determinism/error budgets for CI/CD evals, and end-to-end testing with judge agents that execute code in sandboxes.
+- `concepts/Skill Distribution and Installation.md` — Added Debois source and "Dependency Management and Context Security" section covering context dependency hell, AI SBOM, credential scanning, and context filters.
+- `index.md` — Added new raw source and two concept articles.
+- `log.md`
+
+Important decisions:
+
+- Created two new concept pages rather than one combined page. The Context Development Lifecycle is the overarching framework; Context Observability and Feedback is the deep-dive into the Observe stage, which has enough distinct content (security, logs, production monitoring, sandboxing, filters) to warrant its own page.
+- Folded Debois Generate material into Skill Authoring Workflow rather than creating a separate page, since it extends the existing authoring patterns.
+- Folded Debois Evaluate material into Validation and Evaluation, since the existing page already covers the evaluation ladder and Debois adds practical concerns (non-determinism, error budgets, judge-as-agent).
+- Folded Debois Distribute material into Skill Distribution and Installation, since it adds security and dependency concerns to the existing distribution picture.
+- Positioned the "context as fuel, LLMs as engine" framing as the conceptual anchor: most engineers cannot change the model, but they can optimize context systematically.
+
+Follow-ups:
+
+- If the wiki later tracks concrete CI/CD tools for context evals, create a dedicated "Context CI/CD" section or page.
+- The AI SBOM concept could become its own page if the wiki accumulates more sources on skill provenance, signing, and supply-chain trust.
+- Context filters (WAF for prompts) is an emerging pattern — revisit if tooling matures around this.
