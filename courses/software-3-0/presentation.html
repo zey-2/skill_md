@@ -1,0 +1,1411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Software 3.0 — From Hand-Coded Rules to Orchestrated Intent</title>
+<link rel="preconnect" href="https://api.fontshare.com">
+<link href="https://api.fontshare.com/v2/css?f[]=clash-display@700&f[]=satoshi@400;500;700&display=swap" rel="stylesheet">
+<style>
+/* ========== Reset & Tokens ========== */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --bg-primary: #0a0f1c;
+  --bg-secondary: #111827;
+  --text-primary: #f0f0f0;
+  --text-secondary: #9ca3af;
+  --accent: #00ffcc;
+  --accent-glow: rgba(0, 255, 204, 0.15);
+  --accent-secondary: #ff6b9d;
+  --surface: rgba(255, 255, 255, 0.04);
+  --surface-hover: rgba(255, 255, 255, 0.08);
+  --rule: rgba(255, 255, 255, 0.08);
+  --font-display: 'Clash Display', sans-serif;
+  --font-body: 'Satoshi', sans-serif;
+  --title-size: clamp(2rem, 6vw, 5rem);
+  --section-size: clamp(1.5rem, 4vw, 3rem);
+  --subtitle-size: clamp(1rem, 2.5vw, 1.5rem);
+  --body-size: clamp(0.875rem, 1.5vw, 1.25rem);
+  --label-size: clamp(0.625rem, 1vw, 0.875rem);
+  --card-size: clamp(0.8rem, 1.2vw, 1rem);
+  --slide-padding: clamp(1.5rem, 5vw, 5rem);
+  --content-gap: clamp(1rem, 2.5vw, 2.5rem);
+  --code-size: clamp(0.7rem, 1.1vw, 0.9rem);
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --duration-normal: 0.6s;
+  --duration-slow: 1s;
+}
+
+html {
+  scroll-snap-type: y mandatory;
+  overflow-y: scroll;
+  scroll-behavior: smooth;
+  background: var(--bg-primary);
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--text-primary);
+  line-height: 1.6;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ========== Slide Base ========== */
+.slide {
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
+  overflow: hidden;
+  scroll-snap-align: start;
+  position: relative;
+  padding: var(--slide-padding);
+}
+
+.slide-content {
+  position: relative;
+  z-index: 2;
+  max-width: 1200px;
+  margin: 0 auto;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* ========== Progress Bar ========== */
+.progress-bar-track {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%;
+  height: 3px;
+  background: var(--rule);
+  z-index: 1000;
+}
+.progress-bar {
+  height: 100%;
+  background: var(--accent);
+  width: 0%;
+  transition: width 0.3s ease;
+  box-shadow: 0 0 12px var(--accent-glow);
+}
+
+/* ========== Nav Dots ========== */
+.nav-dots {
+  position: fixed;
+  right: clamp(0.75rem, 2vw, 2rem);
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  z-index: 1000;
+}
+.nav-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  border: none;
+  background: var(--text-secondary);
+  opacity: 0.3;
+  cursor: pointer;
+  transition: opacity 0.3s, transform 0.3s;
+  padding: 0;
+}
+.nav-dot.active {
+  opacity: 1;
+  transform: scale(1.4);
+  background: var(--accent);
+  box-shadow: 0 0 8px var(--accent-glow);
+}
+
+/* ========== Slide Footer ========== */
+.slide-footer {
+  position: absolute;
+  bottom: clamp(0.75rem, 2vw, 2rem);
+  left: var(--slide-padding);
+  right: var(--slide-padding);
+  display: flex;
+  justify-content: space-between;
+  font-size: var(--label-size);
+  color: var(--text-secondary);
+  opacity: 0.5;
+  z-index: 2;
+}
+.slide-number {
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+
+@media (max-height: 600px) { .slide-footer, .nav-dots { display: none; } }
+@media (max-height: 500px) { .slide-subtitle { display: none; } }
+
+/* ========== Reveal Animations ========== */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity var(--duration-normal) var(--ease-out-expo),
+              transform var(--duration-normal) var(--ease-out-expo);
+}
+.slide.visible .reveal { opacity: 1; transform: translateY(0); }
+.reveal:nth-child(1) { transition-delay: 0.1s; }
+.reveal:nth-child(2) { transition-delay: 0.2s; }
+.reveal:nth-child(3) { transition-delay: 0.3s; }
+.reveal:nth-child(4) { transition-delay: 0.4s; }
+.reveal:nth-child(5) { transition-delay: 0.5s; }
+.reveal:nth-child(6) { transition-delay: 0.6s; }
+
+.reveal-scale {
+  opacity: 0;
+  transform: scale(0.9);
+  transition: opacity var(--duration-normal), transform var(--duration-normal) var(--ease-spring);
+}
+.slide.visible .reveal-scale { opacity: 1; transform: scale(1); }
+
+.reveal-left {
+  opacity: 0;
+  transform: translateX(-50px);
+  transition: opacity var(--duration-normal), transform var(--duration-normal) var(--ease-out-expo);
+}
+.slide.visible .reveal-left { opacity: 1; transform: translateX(0); }
+
+.reveal-right {
+  opacity: 0;
+  transform: translateX(50px);
+  transition: opacity var(--duration-normal), transform var(--duration-normal) var(--ease-out-expo);
+}
+.slide.visible .reveal-right { opacity: 1; transform: translateX(0); }
+
+.reveal-blur {
+  opacity: 0;
+  filter: blur(10px);
+  transition: opacity var(--duration-slow), filter var(--duration-slow) var(--ease-out-expo);
+}
+.slide.visible .reveal-blur { opacity: 1; filter: blur(0); }
+
+.reveal-word span {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.4s var(--ease-out-expo), transform 0.4s var(--ease-out-expo);
+}
+.slide.visible .reveal-word span { opacity: 1; transform: translateY(0); }
+
+/* ========== Background Effects ========== */
+.slide-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+}
+
+/* Grid pattern */
+.bg-grid {
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+
+/* Floating gradient blobs */
+.bg-blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  animation: float 8s ease-in-out infinite alternate;
+}
+.bg-blob-1 {
+  width: 400px; height: 400px;
+  background: radial-gradient(circle, rgba(0, 255, 204, 0.12), transparent 70%);
+  top: 10%; left: 5%;
+  animation-delay: 0s;
+}
+.bg-blob-2 {
+  width: 350px; height: 350px;
+  background: radial-gradient(circle, rgba(255, 107, 157, 0.08), transparent 70%);
+  bottom: 15%; right: 10%;
+  animation-delay: 2s;
+}
+.bg-blob-3 {
+  width: 300px; height: 300px;
+  background: radial-gradient(circle, rgba(0, 255, 204, 0.06), transparent 70%);
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  animation-delay: 4s;
+}
+@keyframes float {
+  0% { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(30px, -20px) scale(1.1); }
+}
+
+/* Dynamic spotlight */
+.spotlight {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(600px circle at var(--spotlight-x, 50%) var(--spotlight-y, 50%),
+    rgba(0, 255, 204, 0.06), transparent 40%);
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* ========== Typography ========== */
+.label {
+  font-size: var(--label-size);
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--accent);
+  font-weight: 700;
+  margin-bottom: var(--content-gap);
+}
+
+h1 {
+  font-family: var(--font-display);
+  font-size: var(--title-size);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+h2 {
+  font-family: var(--font-display);
+  font-size: var(--section-size);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+
+.subtitle {
+  font-size: var(--subtitle-size);
+  color: var(--text-secondary);
+  margin-top: var(--content-gap);
+  max-width: 600px;
+}
+
+/* ========== Glassmorphism Cards ========== */
+.glass-card {
+  background: var(--surface);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--rule);
+  border-radius: 12px;
+  padding: clamp(1rem, 2vw, 2rem);
+  transition: background 0.3s, border-color 0.3s;
+}
+.glass-card:hover {
+  background: var(--surface-hover);
+  border-color: rgba(0, 255, 204, 0.15);
+}
+
+/* ========== Grids ========== */
+.card-grid {
+  display: grid;
+  gap: var(--content-gap);
+  margin-top: var(--content-gap);
+}
+.card-grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.card-grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.card-grid-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+
+@media (max-width: 768px) {
+  .card-grid-3, .card-grid-4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 480px) {
+  .card-grid-2, .card-grid-3, .card-grid-4 { grid-template-columns: 1fr; }
+}
+
+/* ========== Card Content ========== */
+.card-icon {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 3vw, 2.5rem);
+  font-weight: 700;
+  color: var(--accent);
+  margin-bottom: 0.5rem;
+  display: block;
+  line-height: 1;
+}
+.card-title {
+  font-family: var(--font-display);
+  font-size: clamp(1rem, 1.8vw, 1.3rem);
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+.card-body {
+  font-size: var(--card-size);
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+/* ========== Bullet List ========== */
+.bullet-list {
+  list-style: none;
+  margin-top: var(--content-gap);
+  display: flex;
+  flex-direction: column;
+  gap: clamp(0.6rem, 1.5vw, 1rem);
+}
+.bullet-list li {
+  font-size: var(--body-size);
+  padding-left: 1.5em;
+  position: relative;
+  color: var(--text-secondary);
+}
+.bullet-list li::before {
+  content: '>';
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+  font-weight: 700;
+  font-family: var(--font-display);
+}
+.bullet-list li strong {
+  color: var(--text-primary);
+}
+
+/* ========== Comparison Layout ========== */
+.comparison {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--content-gap);
+  margin-top: var(--content-gap);
+}
+@media (max-width: 768px) { .comparison { grid-template-columns: 1fr; } }
+
+.comparison-col h3 {
+  font-family: var(--font-display);
+  font-size: clamp(1rem, 2vw, 1.5rem);
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--rule);
+}
+.comparison-col.v1 h3 { color: var(--text-secondary); }
+.comparison-col.v2 h3 { color: var(--accent-secondary); }
+.comparison-col.v3 h3 { color: var(--accent); }
+
+.comparison-col ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.comparison-col li {
+  font-size: var(--card-size);
+  color: var(--text-secondary);
+}
+
+/* ========== Stats ========== */
+.stat-number {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 6vw, 5rem);
+  font-weight: 700;
+  color: var(--accent);
+  line-height: 1;
+}
+.stat-unit {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 3vw, 2.5rem);
+  font-weight: 700;
+  color: var(--accent-secondary);
+}
+.stat-label {
+  font-size: var(--card-size);
+  color: var(--text-secondary);
+  margin-top: 0.5rem;
+  display: block;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--content-gap);
+  margin-top: var(--content-gap);
+}
+.stat {
+  text-align: left;
+  padding: clamp(1rem, 2vw, 2rem);
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-radius: 12px;
+}
+
+/* ========== Code Block ========== */
+.code-block {
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: clamp(1rem, 2vw, 1.5rem);
+  font-family: 'SF Mono', 'JetBrains Mono', 'Fira Code', monospace;
+  font-size: var(--code-size);
+  line-height: 1.7;
+  overflow-x: auto;
+  color: #e0e0e0;
+  white-space: pre;
+  margin-top: var(--content-gap);
+}
+.code-block .comment { color: #6a9955; }
+.code-block .keyword { color: var(--accent); }
+.code-block .string { color: var(--accent-secondary); }
+.code-block .func { color: #56b6c2; }
+
+/* ========== Section Divider ========== */
+.section-divider-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+  padding: var(--slide-padding);
+  gap: var(--content-gap);
+}
+.section-number-row {
+  display: flex;
+  align-items: center;
+  gap: clamp(0.75rem, 2vw, 1.5rem);
+}
+.section-number {
+  font-family: var(--font-display);
+  font-size: clamp(4rem, 12vw, 10rem);
+  font-weight: 900;
+  line-height: 1;
+  color: var(--accent);
+}
+.section-rule {
+  flex: 1;
+  max-width: clamp(3rem, 10vw, 8rem);
+  height: 2px;
+  background: var(--rule);
+}
+.section-divider .section-title {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 5vw, 4rem);
+  font-weight: 700;
+  margin: 0;
+  line-height: 1.1;
+}
+.section-divider .section-subtitle {
+  font-size: var(--subtitle-size);
+  color: var(--text-secondary);
+  margin: 0;
+  max-width: 30ch;
+}
+
+/* ========== Quote ========== */
+blockquote {
+  font-size: clamp(1.2rem, 2.5vw, 2rem);
+  font-style: italic;
+  color: var(--text-secondary);
+  border-left: 2px solid var(--accent);
+  padding-left: clamp(1rem, 2vw, 2rem);
+  max-width: 800px;
+  line-height: 1.5;
+}
+blockquote cite {
+  display: block;
+  margin-top: 1rem;
+  font-size: var(--body-size);
+  font-style: normal;
+  color: var(--text-secondary);
+  opacity: 0.7;
+}
+
+/* ========== Split Layout ========== */
+.split-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--content-gap);
+  align-items: center;
+  margin-top: var(--content-gap);
+}
+@media (max-width: 768px) { .split-layout { grid-template-columns: 1fr; } }
+
+/* ========== Closing CTA ========== */
+.cta-link {
+  display: inline-block;
+  margin-top: var(--content-gap);
+  padding: 0.8em 2em;
+  background: transparent;
+  border: 2px solid var(--accent);
+  color: var(--accent);
+  font-family: var(--font-display);
+  font-size: var(--body-size);
+  font-weight: 700;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: background 0.3s, box-shadow 0.3s;
+  cursor: pointer;
+}
+.cta-link:hover {
+  background: var(--accent-glow);
+  box-shadow: 0 0 30px var(--accent-glow);
+}
+
+/* ========== Speaker Notes (hidden in audience view) ========== */
+aside.notes { display: none !important; }
+
+/* ========== Print ========== */
+@media print {
+  html { scroll-snap-type: none; }
+  .slide {
+    height: auto;
+    min-height: 100vh;
+    page-break-after: always;
+    page-break-inside: avoid;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .progress-bar-track, .nav-dots { display: none; }
+  .reveal, .reveal-scale, .reveal-left, .reveal-right, .reveal-blur {
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+  }
+  .reveal-word span { opacity: 1 !important; transform: none !important; }
+}
+</style>
+</head>
+<body>
+
+<!-- Progress Bar -->
+<div class="progress-bar-track"><div class="progress-bar"></div></div>
+
+<!-- Navigation Dots -->
+<nav class="nav-dots" aria-label="Slide navigation"></nav>
+
+<!-- ===================== SLIDE 1: TITLE ===================== -->
+<section class="slide title-slide">
+  <div class="slide-bg bg-grid">
+    <div class="bg-blob bg-blob-1"></div>
+    <div class="bg-blob bg-blob-2"></div>
+    <div class="spotlight"></div>
+  </div>
+  <div class="slide-content" style="align-items: flex-start;">
+    <p class="reveal label">A Lesson on the Next Era of Software</p>
+    <h1 class="reveal reveal-word">Software 3.0</h1>
+    <p class="reveal subtitle">From hand-coded rules to orchestrated intent — how we went from writing logic to describing outcomes and letting AI agents figure out the rest.</p>
+    <div class="reveal" style="margin-top: 2rem; display: flex; gap: 2rem; align-items: center;">
+      <span style="font-size: var(--body-size); color: var(--text-secondary);">Workshop / Lecture</span>
+      <span style="width: 40px; height: 1px; background: var(--accent);"></span>
+      <span style="font-size: var(--body-size); color: var(--text-secondary);">2026</span>
+    </div>
+  </div>
+  <div class="slide-footer"><span class="slide-number">01 / 14</span></div>
+  <aside class="notes">
+    <p>Welcome everyone. Today I want to talk about <strong>something that is quietly reshaping how we build software</strong> — and it's not a new framework or language. It's a fundamental shift in the <em>paradigm</em> of what software even is.</p>
+    <p>Most of us grew up in the world of Software 1.0: we write code, the code does exactly what we tell it. Then came 2.0: we stopped writing logic and started training models on data. Now we're entering <strong>Software 3.0</strong> — where the "code" is natural language intent, and the runtime is a fleet of AI agents that plan, use tools, and self-correct.</p>
+    <p>This isn't theoretical. It's happening right now in production systems. By the end of this session, you'll understand <strong>what Software 3.0 is, why it matters, and how to think about engineering in this new world</strong>.</p>
+  </aside>
+</section>
+
+<!-- ===================== SLIDE 2: SECTION 01 ===================== -->
+<section class="slide section-divider">
+  <div class="slide-bg bg-grid"></div>
+  <div class="section-divider-content">
+    <div class="section-number-row">
+      <span class="reveal section-number">01</span>
+      <span class="reveal section-rule"></span>
+    </div>
+    <h2 class="reveal section-title">The Evolution</h2>
+    <p class="reveal section-subtitle">Three paradigms. Three ways of telling computers what to do.</p>
+  </div>
+  <div class="slide-footer"><span class="slide-number">02 / 14</span></div>
+  <aside class="notes">
+    <p>Let's start with some history. Understanding where we came from is <strong>essential to understanding where we're going</strong>.</p>
+    <p>Software has gone through <strong>three distinct paradigms</strong> — each one redefining the relationship between human intent and machine execution. This isn't about version numbers. It's about <em>who writes the logic</em>.</p>
+    <p>In 1.0, <strong>humans write every rule</strong>. In 2.0, <strong>humans curate data and machines learn the rules</strong>. In 3.0, <strong>humans describe intent and machines orchestrate the solution</strong>.</p>
+    <p>Each step moves more agency to the machine. Let's look at each one.</p>
+  </aside>
+</section>
+
+<!-- ===================== SLIDE 3: SOFTWARE 1.0 ===================== -->
+<section class="slide">
+  <div class="slide-bg bg-grid"></div>
+  <div class="slide-content">
+    <p class="reveal label">Software 1.0</p>
+    <h2 class="reveal">Hand-Coded Logic</h2>
+    <div class="split-layout">
+      <div>
+        <ul class="bullet-list">
+          <li class="reveal"><strong>Humans write explicit rules</strong> — if-this-then-that, algorithms, control flow</li>
+          <li class="reveal"><strong>Deterministic and debuggable</strong> — same input always produces same output</li>
+          <li class="reveal"><strong>Brittle on ambiguous problems</strong> — image recognition, natural language, edge cases</li>
+          <li class="reveal"><strong>Scaling requires more engineers</strong> — every new feature means more code to write and maintain</li>
+          <li class="reveal"><strong>The programmer is the bottleneck</strong> — complexity grows faster than our ability to manage it</li>
+        </ul>
+      </div>
+      <div class="reveal-right">
+        <pre class="code-block"><code><span class="comment">// Software 1.0: explicit rules</span>
+<span class="keyword">function</span> <span class="func">classifyEmail</span>(email) {
+  <span class="keyword">if</span> (email.subject.<span class="func">includes</span>(<span class="string">"free"</span>))
+    <span class="keyword">return</span> <span class="string">"spam"</span>;
+  <span class="keyword">if</span> (email.sender.<span class="func">isTrusted</span>())
+    <span class="keyword">return</span> <span class="string">"inbox"</span>;
+  <span class="comment">// ... hundreds more rules</span>
+}</code></pre>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer"><span class="slide-number">03 / 14</span></div>
+  <aside class="notes">
+    <p><strong>Software 1.0 is what most of us learned in school</strong>. You write functions, conditionals, loops. The computer follows your instructions exactly. This works brilliantly for well-defined problems: sorting, arithmetic, business rules with clear boundaries.</p>
+    <p>But it falls apart on <strong>ambiguous, fuzzy problems</strong>. How do you write an if-statement for "does this email look like spam?" or "is this image a cat?" You end up with hundreds of hand-crafted heuristics that never quite cover all the edge cases.</p>
+    <p>The fundamental constraint here is <strong>human bandwidth</strong>. Every new behavior requires a human to understand it, encode it, test it, and maintain it. As problems get more complex, the codebase grows faster than our ability to manage it. This is the <em>complexity wall</em>.</p>
+    <p>Look at the code example — a simple email classifier. In the real world, this function would have <strong>hundreds of conditions</strong>, and still miss things. That's the 1.0 ceiling.</p>
+  </aside>
+</section>
+
+<!-- ===================== SLIDE 4: SOFTWARE 2.0 ===================== -->
+<section class="slide">
+  <div class="slide-bg bg-grid"></div>
+  <div class="slide-content">
+    <p class="reveal label">Software 2.0</p>
+    <h2 class="reveal">Neural Networks & Weights</h2>
+    <div class="split-layout">
+      <div>
+        <ul class="bullet-list">
+          <li class="reveal"><strong>Humans curate data, machines learn patterns</strong> — the "code" becomes millions of floating-point weights</li>
+          <li class="reveal"><strong>Excels at perception tasks</strong> — vision, speech, pattern recognition at superhuman accuracy</li>
+          <li class="reveal"><strong>Opaque and hard to control</strong> — you can't debug a 175-billion-parameter matrix</li>
+          <li class="reveal"><strong>Requires massive datasets and compute</strong> — the new bottleneck is data quality and GPU hours</li>
+          <li class="reveal"><strong>Coined by Andrej Karpathy</strong> — "the best performing models are not coded, they are trained"</li>
+        </ul>
+      </div>
+      <div class="reveal-right">
+        <pre class="code-block"><code><span class="comment">// Software 2.0: learn from data</span>
+model = <span class="func">Transformer</span>(
+  layers=<span class="string">96</span>,
+  params=<span class="string">1.8T</span>,
+  data=<span class="func">load_dataset</span>(<span class="string">"the-internet"</span>)
+)
+model.<span class="func">train</span>()
+<span class="comment">// weights now encode "knowledge"</span>
+<span class="comment">// no one knows exactly how</span></code></pre>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer"><span class="slide-number">04 / 14</span></div>
+  <aside class="notes">
+    <p>Then came <strong>Software 2.0</strong>. Instead of writing rules, we started <strong>curating datasets and letting neural networks figure out the patterns themselves</strong>. Andrej Karpathy coined the term in 2017, and it was prophetic.</p>
+    <p>The "code" in 2.0 isn't Python or C++ — it's <strong>billions of floating-point numbers</strong> inside a neural network. You don't write this code. You train it. You feed it data, compute gradients, and hope it converges.</p>
+    <p>For perception tasks — <strong>image recognition, speech-to-text, translation</strong> — 2.0 absolutely crushed 1.0. Superhuman accuracy. But there's a catch: <strong>you can't control it precisely</strong>. You can't ask a 175-billion-parameter model "why did you output that?" It's a black box.</p>
+    <p>And the bottleneck shifted from human engineers to <strong>data quality, compute resources, and GPU clusters</strong>. Training a modern model costs millions. This paradigm is powerful but expensive and opaque.</p>
+    <p>2.0 is incredible at <em>recognizing patterns</em>. But it struggles at <em>following instructions precisely</em>. That gap is what 3.0 fills.</p>
+  </aside>
+</section>
+
+<!-- ===================== SLIDE 5: SOFTWARE 3.0 ===================== -->
+<section class="slide">
+  <div class="slide-bg bg-grid">
+    <div class="bg-blob bg-blob-1"></div>
+    <div class="bg-blob bg-blob-3"></div>
+  </div>
+  <div class="slide-content">
+    <p class="reveal label">Software 3.0</p>
+    <h2 class="reveal">Intent & Orchestration</h2>
+    <div class="split-layout">
+      <div>
+        <ul class="bullet-list">
+          <li class="reveal"><strong>Humans describe intent in natural language</strong> — the system figures out the implementation</li>
+          <li class="reveal"><strong>Agents plan, use tools, and self-correct</strong> — not just pattern-matching, but reasoning loops</li>
+          <li class="reveal"><strong>Skills replace functions</strong> — behavior defined by prompts, examples, and constraints</li>
+          <li class="reveal"><strong>Context shapes behavior at runtime</strong> — retrieved knowledge, conversation history, tool outputs</li>
+          <li class="reveal"><strong>The engineer becomes an orchestrator</strong> — designing systems, not writing every line</li>
+        </ul>
+      </div>
+      <div class="reveal-right">
+        <pre class="code-block"><code><span class="comment">// Software 3.0: describe intent</span>
+<span class="keyword">skill</span>: <span class="string">"classify incoming emails"</span>
+<span class="keyword">tools</span>: [email_api, calendar, crm]
+<span class="keyword">constraints</span>: [
+  <span class="string">"flag urgent for boss"</span>,
+  <span class="string">"batch newsletters to Friday"</span>,
+  <span class="string">"learn from my corrections"</span>
+]
+<span class="comment">// agent handles the rest</span></code></pre>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer"><span class="slide-number">05 / 14</span></div>
+  <aside class="notes">
+    <p><strong>Software 3.0 is where we are now</strong>. The shift is profound: instead of coding logic or training weights, we <strong>describe what we want in natural language</strong> and the system figures out how to do it.</p>
+    <p>The key innovation is <strong>agentic reasoning</strong>. These aren't just autocomplete models. They plan multi-step workflows, call APIs, read files, write code, test it, fix their own mistakes, and loop until the task is done. This is fundamentally different from both 1.0 and 2.0.</p>
+    <p>In 3.0, the basic unit isn't a function — it's a <strong>skill</strong>: a natural language description of behavior, plus examples, plus constraints. You compose skills together like LEGO bricks to build complex systems.</p>
+    <p>And critically, <strong>context is the new code</strong>. The behavior of a 3.0 system is dynamically shaped by what it knows at runtime — retrieved documents, conversation history, the output of tool calls. The "program" is assembled on the fly.</p>
+    <p>The engineer's role shifts from <em>writing code</em> to <em>designing systems</em> — choosing which agents to use, what tools to give them, how to evaluate their output, and when to step in.</p>
+  </aside>
+</section>
+
+<!-- ===================== SLIDE 6: COMPARISON ===================== -->
+<section class="slide">
+  <div class="slide-bg bg-grid"></div>
+  <div class="slide-content">
+    <p class="reveal label">Side by Side</p>
+    <h2 class="reveal">Three Paradigms, One Question</h2>
+    <p class="reveal" style="color: var(--text-secondary); margin-bottom: 1rem;">Who writes the logic?</p>
+    <div class="comparison reveal">
+      <div class="comparison-col v1">
+        <h3>1.0 — Coded</h3>
+        <ul>
+          <li>Developer writes every rule</li>
+          <li>Deterministic execution</li>
+          <li>Debug with a stack trace</li>
+          <li>Fails on ambiguity</li>
+          <li>Scales linearly with team size</li>
+        </ul>
+      </div>
+      <div class="comparison-col v2">
+        <h3>2.0 — Trained</h3>
+        <ul>
+          <li>Engineer curates datasets</li>
+          <li>Gradient descent finds patterns</li>
+          <li>Evaluate with accuracy metrics</li>
+          <li>Opaque reasoning</li>
+          <li>Scales with compute + data</li>
+        </ul>
+      </div>
+      <div class="comparison-col v3">
+        <h3>3.0 — Orchestrated</h3>
+        <ul>
+          <li>Human describes intent</li>
+          <li>Agent plans and executes</li>
+          <li>Evaluate with task completion</li>
+          <li>Observable reasoning traces</li>
+          <li>Scales with skill composition</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer"><span class="slide-number">06 / 14</span></div>
+  <aside class="notes">
+    <p>This slide is the <strong>core mental model</strong> for everything that follows. Read it left to right and notice the progression of <em>agency</em>.</p>
+    <p>In 1.0, the developer is the <strong>author</strong> — every conditional, every loop, every edge case handler. The machine is a faithful executor.</p>
+    <p>In 2.0, the engineer is a <strong>curator</strong> — you pick the right dataset, the right architecture, the right loss function. The machine discovers patterns you could never code by hand.</p>
+    <p>In 3.0, the human is an <strong>orchestrator</strong> — you define what needs to happen, what tools are available, what quality bar to meet, and when to escalate to a human. The machine plans, acts, and self-corrects.</p>
+    <p>Notice the debugging model changes too: <strong>stack trace -> accuracy metrics -> reasoning traces</strong>. And the scaling factor: <strong>team size -> compute -> skill composition</strong>. These aren't incremental improvements. They're different worlds.</p>
+  </aside>
+</section>
+
+<!-- ===================== SLIDE 7: SECTION 02 ===================== -->
+<section class="slide section-divider">
+  <div class="slide-bg bg-grid"></div>
+  <div class="section-divider-content">
+    <div class="section-number-row">
+      <span class="reveal section-number">02</span>
+      <span class="reveal section-rule"></span>
+    </div>
+    <h2 class="reveal section-title">Core Concepts</h2>
+    <p class="reveal section-subtitle">The building blocks of Software 3.0 systems.</p>
+  </div>
+  <div class="slide-footer"><span class="slide-number">07 / 14</span></div>
+  <aside class="notes">
+    <p>Now let's dive into the <strong>core concepts</strong> that make Software 3.0 work. These are the ideas you need to internalize to design systems in this new paradigm.</p>
+    <p>I'll cover four concepts: <strong>skills over code, agentic workflows, composable AI systems, and context as the new code</strong>. Each one is a shift in how we think about building software.</p>
+    <p>These aren't abstract — they're all being used in production systems today. By the end, you'll see how they fit together.</p>
+  </aside>
+</section>
+
+<!-- ===================== SLIDE 8: SKILLS OVER CODE ===================== -->
+<section class="slide">
+  <div class="slide-bg bg-grid"></div>
+  <div class="slide-content">
+    <p class="reveal label">Concept 01</p>
+    <h2 class="reveal">Skills Over Code</h2>
+    <div class="card-grid card-grid-3" style="margin-top: var(--content-gap);">
+      <div class="glass-card reveal">
+        <span class="card-icon">01</span>
+        <h3 class="card-title">Natural Language Specs</h3>
+        <p class="card-body">Behavior is defined by prompts, examples, and constraints — not source code. The LLM interprets intent and generates the execution plan.</p>
+      </div>
+      <div class="glass-card reveal">
+        <span class="card-icon">02</span>
+        <h3 class="card-title">Examples as Tests</h3>
+        <p class="card-body">Few-shot examples replace unit tests. Show the model what good output looks like, and it generalizes to new inputs.</p>
+      </div>
+      <div class="glass-card reveal">
+        <span class="card-icon">03</span>
+        <h3 class="card-title">Iterative Refinement</h3>
+        <p class="card-body">Skills improve through feedback loops: evaluate output, adjust the prompt, re-test. No recompilation needed.</p>
+      </div>
+    </div>
+    <div class="reveal" style="margin-top: 2rem;">
+      <pre class="code-block"><code><span class="comment">// A skill is a natural-language contract</span>
+<span class="keyword">name</span>: <span class="string">"summarize-meeting"</span>
+<span class="keyword">description</span>: <span class="string">"Take transcript and produce"</span>
+             <span class="string">"a 5-bullet summary with"</span>
+             <span class="string">"action items and owners"</span>
+<span class="keyword">examples</span>: [
+  { <span class="keyword">input</span>: <span class="string">"[transcript...]"</span>,
+    <span class="keyword">output</span>: <span class="string">"[summary...]"</span> }
+]</code></pre>
+    </div>
+  </div>
+  <div class="slide-footer"><span class="slide-number">08 / 14</span></div>
+  <aside class="notes">
+    <p>The first core concept: <strong>skills replace functions as the basic unit of behavior</strong>. A skill is a natural language description of what should happen, paired with examples of good output.</p>
+    <p>Think of it like a <strong>function signature, but in English</strong> instead of type annotations. The name tells you what it does, the description provides context, and the examples serve as test cases.</p>
+    <p>The biggest difference from traditional code: <strong>skills are iterative and non-deterministic</strong>. You don't "debug" a skill — you evaluate its output, tweak the prompt, add better examples, and try again. The development loop is more like training than compiling.</p>
+    <p>This is why <strong>evaluation-driven development</strong> becomes the new testing. Instead of asserting that a function returns a specific value, you score the output on quality dimensions: accuracy, completeness, tone, format compliance.</p>
+    <p>The skill in the code example — "summarize-meeting" — would be impossible to write deterministically in 1.0. You'd need NLP pipelines, entity extraction, template matching. In 3.0, you describe what you want and the model does it.</p>
+  </aside>
+</section>
+
+<!-- ===================== SLIDE 9: AGENTIC WORKFLOWS ===================== -->
+<section class="slide">
+  <div class="slide-bg bg-grid"></div>
+  <div class="slide-content">
+    <p class="reveal label">Concept 02</p>
+    <h2 class="reveal">Agentic Workflows</h2>
+    <div class="split-layout">
+      <div>
+        <ul class="bullet-list">
+          <li class="reveal"><strong>Plan</strong> — the agent breaks down a goal into steps before acting</li>
+          <li class="reveal"><strong>Act</strong> — executes steps using tools: APIs, code execution, file I/O, web search</li>
+          <li class="reveal"><strong>Observe</strong> — reads tool output, checks for errors, validates results</li>
+          <li class="reveal"><strong>Reflect</strong> — self-evaluates: "did this work? should I try a different approach?"</li>
+          <li class="reveal"><strong>Iterate</strong> — loops until the task is complete or escalates to a human</li>
+        </ul>
+      </div>
+      <div class="reveal-right">
+        <pre class="code-block"><code><span class="comment">// The ReAct loop</span>
+<span class="keyword">THOUGHT</span>: I need to find the
+  user's last order first
+<span class="keyword">ACTION</span>: <span class="func">query_db</span>(
+  <span class="string">"SELECT * FROM orders
+   WHERE user_id=42
+   ORDER BY date DESC LIMIT 1"</span>
+)
+<span class="keyword">OBSERVATION</span>: {order_id: 7891}
+<span class="keyword">THOUGHT</span>: Now I can get details
+<span class="keyword">ACTION</span>: <span class="func">fetch_order</span>(<span class="string">7891</span>)
+<span class="keyword">OBSERVATION</span>: {...}
+<span class="keyword">FINAL ANSWER</span>: The order is...</code></pre>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer"><span class="slide-number">09 / 14</span></div>
+  <aside class="notes">
+    <p>The second concept is <strong>agentic workflows</strong> — the loop that makes 3.0 systems powerful. This is the ReAct pattern: Reason and Act.</p>
+    <p>Unlike a 2.0 model that just generates text, an agent <strong>thinks before it acts</strong>. It writes out its reasoning as "THOUGHT" tokens, decides what tool to call, reads the result, and decides what to do next.</p>
+    <p>Look at the example on the right. This is a real interaction trace from an agent handling a customer query. Notice how it <strong>plans sequentially</strong>: first find the order, then fetch details, then compose the answer. Each step is informed by the previous observation.</p>
+    <p>The key insight: <strong>agents can self-correct</strong>. If the database query fails, the agent can try a different query. If the result doesn't make sense, it can backtrack. This is fundamentally different from 1.0 code, where an unhandled exception crashes the program.</p>
+    <p>This loop — plan, act, observe, reflect, iterate — is the <strong>core execution model of Software 3.0</strong>. Everything else builds on this.</p>
+  </aside>
+</section>
+
+<!-- ===================== SLIDE 10: COMPOSABLE AI ===================== -->
+<section class="slide">
+  <div class="slide-bg bg-grid">
+    <div class="bg-blob bg-blob-2"></div>
+  </div>
+  <div class="slide-content">
+    <p class="reveal label">Concept 03</p>
+    <h2 class="reveal">Composable AI Systems</h2>
+    <p class="reveal" style="color: var(--text-secondary); max-width: 700px;">Not one monolithic model. Multiple specialized agents and tools orchestrated together.</p>
+    <div class="card-grid card-grid-4" style="margin-top: var(--content-gap);">
+      <div class="glass-card reveal">
+        <span class="card-icon" style="color: var(--accent-secondary);">A</span>
+        <h3 class="card-title">Researcher</h3>
+        <p class="card-body">Searches, reads, and synthesizes information from multiple sources.</p>
+      </div>
+      <div class="glass-card reveal">
+        <span class="card-icon" style="color: var(--accent-secondary);">W</span>
+        <h3 class="card-title">Writer</h3>
+        <p class="card-body">Drafts content with specific tone, format, and audience constraints.</p>
+      </div>
+      <div class="glass-card reveal">
+        <span class="card-icon" style="color: var(--accent-secondary);">R</span>
+        <h3 class="card-title">Reviewer</h3>
+        <p class="card-body">Fact-checks, critiques, and scores output against quality criteria.</p>
+      </div>
+      <div class="glass-card reveal">
+        <span class="card-icon" style="color: var(--accent-secondary);">E</span>
+        <h3 class="card-title">Executor</h3>
+        <p class="card-body">Takes approved output and deploys, publishes, or integrates it.</p>
+      </div>
+    </div>
+    <div class="reveal" style="margin-top: 1.5rem;">
+      <p style="font-size: var(--body-size); color: var(--text-secondary); text-align: center;">
+        Researcher → Writer → Reviewer → (revise loop) → Executor
+      </p>
+    </div>
+  </div>
+  <div class="slide-footer"><span class="slide-number">10 / 14</span></div>
+  <aside class="notes">
+    <p>Third concept: <strong>don't use one model for everything</strong>. The best 3.0 systems compose multiple specialized agents, each optimized for a specific role.</p>
+    <p>Think of it like a <strong>newsroom</strong>. A researcher gathers facts. A writer drafts the article. An editor reviews and fact-checks. A publisher pushes it live. Each role has different skills, different tools, different quality criteria.</p>
+    <p>The flow at the bottom shows the pipeline: the researcher finds information, the writer drafts content, the reviewer scores it. If the score is below threshold, <strong>it goes back for revision</strong>. Only approved output reaches the executor.</p>
+    <p>This composition pattern is powerful because <strong>each agent can use a different model</strong>. The researcher might need a model with strong web search. The writer might need one with great prose. The reviewer might need one fine-tuned for fact-checking. You pick the best tool for each job.</p>
+    <p>And critically, <strong>failure is localized</strong>. If the reviewer catches a problem, it doesn't crash the system — it triggers a revision loop. The system degrades gracefully instead of catastrophically.</p>
+  </aside>
+</section>
+
+<!-- ===================== SLIDE 11: CONTEXT IS CODE ===================== -->
+<section class="slide">
+  <div class="slide-bg bg-grid"></div>
+  <div class="slide-content">
+    <p class="reveal label">Concept 04</p>
+    <h2 class="reveal">Context Is the New Code</h2>
+    <div class="split-layout">
+      <div>
+        <p class="reveal" style="font-size: var(--body-size); color: var(--text-secondary); margin-bottom: 1.5rem;">
+          In 1.0, behavior was hardcoded. In 2.0, it was baked into weights. In 3.0, <strong>behavior is assembled at runtime</strong> from whatever context the agent has access to.
+        </p>
+        <ul class="bullet-list">
+          <li class="reveal"><strong>Retrieved knowledge</strong> — RAG pulls relevant documents into the prompt</li>
+          <li class="reveal"><strong>Conversation history</strong> — prior turns shape what the agent knows and remembers</li>
+          <li class="reveal"><strong>Tool outputs</strong> — API responses, file contents, search results become part of the "program"</li>
+          <li class="reveal"><strong>System prompts</strong> — the standing instructions that define role, constraints, and style</li>
+        </ul>
+      </div>
+      <div class="reveal-right">
+        <pre class="code-block"><code><span class="comment">// The "program" at runtime:</span>
+<span class="string">[system prompt]</span>
+<span class="string">  "You are a technical writer...</span>
+<span class="string">   follow style guide v3..."</span>
+<span class="string">[retrieved docs]</span>
+<span class="string">  API spec for /users endpoint</span>
+<span class="string">  Brand voice guidelines</span>
+<span class="string">[conversation history]</span>
+<span class="string">  User: "explain OAuth simply"</span>
+<span class="string">[tool output]</span>
+<span class="string">  {user_schema: {id, email...}}</span>
+<span class="comment">// = the complete "source code"</span></code></pre>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer"><span class="slide-number">11 / 14</span></div>
+  <aside class="notes">
+    <p>This is perhaps the most important concept: <strong>context is the new code</strong>. In Software 3.0, the "program" doesn't exist as a static file on disk. It's <strong>assembled at runtime</strong> from whatever the agent has access to in that moment.</p>
+    <p>Look at the code example on the right. That entire prompt — system instructions, retrieved documents, conversation history, tool outputs — <strong>that's the source code</strong> for a 3.0 system. It's different every time the agent runs, because the context is different.</p>
+    <p>This means the engineering work shifts from <strong>writing logic to managing context</strong>. What documents does the agent have access to? What's in the system prompt? What tools can it call? How much conversation history is included?</p>
+    <p><strong>Retrieval-Augmented Generation (RAG)</strong> is the key technique here: instead of baking knowledge into model weights, you retrieve the relevant facts at runtime and inject them into the prompt. This means you can update the agent's "knowledge" by updating the documents, not retraining the model.</p>
+    <p>This is why <strong>context engineering</strong> — the art of designing what goes into the prompt and when — is becoming the most valuable skill in the 3.0 toolkit.</p>
+  </aside>
+</section>
+
+<!-- ===================== SLIDE 12: SECTION 03 ===================== -->
+<section class="slide section-divider">
+  <div class="slide-bg bg-grid"></div>
+  <div class="section-divider-content">
+    <div class="section-number-row">
+      <span class="reveal section-number">03</span>
+      <span class="reveal section-rule"></span>
+    </div>
+    <h2 class="reveal section-title">Engineering Shifts</h2>
+    <p class="reveal section-subtitle">How the practice of software engineering changes in the 3.0 era.</p>
+  </div>
+  <div class="slide-footer"><span class="slide-number">12 / 14</span></div>
+  <aside class="notes">
+    <p>So far we've covered the <strong>what</strong>. Now let's talk about the <strong>how</strong> — how engineering practice changes when you're building with agents instead of writing functions.</p>
+    <p>Two big shifts: <strong>evaluation-driven development</strong> replaces unit testing, and <strong>human-in-the-loop design</strong> replaces fully automated pipelines.</p>
+    <p>These aren't optional. If you try to apply 1.0 engineering practices to 3.0 systems, you will fail. The tools and mental models need to evolve.</p>
+  </aside>
+</section>
+
+<!-- ===================== SLIDE 13: EVAL-DRIVEN DEV ===================== -->
+<section class="slide">
+  <div class="slide-bg bg-grid"></div>
+  <div class="slide-content">
+    <p class="reveal label">Shift 01</p>
+    <h2 class="reveal">Evaluation-Driven Development</h2>
+    <div class="split-layout">
+      <div>
+        <ul class="bullet-list">
+          <li class="reveal"><strong>Non-deterministic output means unit tests don't work</strong> — you can't assert exact string matches</li>
+          <li class="reveal"><strong>Evaluate with scored rubrics</strong> — accuracy, completeness, format compliance, tone</li>
+          <li class="reveal"><strong>Golden datasets over assertions</strong> — run hundreds of inputs through the skill and score the outputs</li>
+          <li class="reveal"><strong>Regression detection via embedding similarity</strong> — catch when output quality drifts</li>
+          <li class="reveal"><strong>Continuous evaluation in CI/CD</strong> — every prompt change runs the eval suite before deploy</li>
+        </ul>
+      </div>
+      <div class="reveal-right">
+        <pre class="code-block"><code><span class="comment">// Eval-driven development</span>
+<span class="keyword">eval_suite</span>: [
+  { <span class="keyword">input</span>: <span class="string">"explain async"</span>,
+    <span class="keyword">criteria</span>: {
+      <span class="keyword">accuracy</span>:   <span class="string">>= 0.9</span>,
+      <span class="keyword">simplicity</span>: <span class="string">>= 0.8</span>,
+      <span class="keyword">format</span>:     <span class="string">"bullet list"</span>,
+      <span class="keyword">max_length</span>: <span class="string">200 words</span>
+    }
+  },
+  <span class="comment">// ... 200 more test cases</span>
+]
+<span class="comment">// Score: 94/100 -> deploy</span></code></pre>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer"><span class="slide-number">13 / 14</span></div>
+  <aside class="notes">
+    <p><strong>This is the biggest practical shift</strong> for engineers moving to 3.0. You can't write unit tests for non-deterministic output. Asserting that a function returns exactly "hello world" doesn't work when the model might say "hi there" or "greetings" — both equally correct.</p>
+    <p>Instead, you build <strong>evaluation suites with scored rubrics</strong>. Each test case has input, expected criteria, and a scoring threshold. You might use another LLM as a judge, or embedding similarity, or specific factual assertions that must be true in the output.</p>
+    <p>The eval suite becomes your <strong>quality gate</strong>. Before any prompt change goes to production, it runs through hundreds of test cases. If the aggregate score drops, the change is rejected. This is the 3.0 equivalent of a test suite blocking a bad merge.</p>
+    <p>And here's the twist: <strong>your eval suite IS your product quality bar</strong>. The better your evals, the better your system. Investing in eval quality — more cases, better rubrics, harder edge cases — is the highest-leverage work you can do in 3.0 engineering.</p>
+    <p>Companies building serious 3.0 systems spend more time on their eval infrastructure than on their prompts. That tells you everything about where the leverage is.</p>
+  </aside>
+</section>
+
+<!-- ===================== SLIDE 14: CLOSING ===================== -->
+<section class="slide closing-slide">
+  <div class="slide-bg">
+    <div class="bg-blob bg-blob-1"></div>
+    <div class="bg-blob bg-blob-2"></div>
+    <div class="bg-blob bg-blob-3"></div>
+  </div>
+  <div class="slide-content" style="align-items: flex-start;">
+    <p class="reveal label">Takeaway</p>
+    <h1 class="reveal reveal-word">The Code Is the Prompt</h1>
+    <p class="reveal subtitle">Software 3.0 isn't about replacing engineers. It's about elevating them — from writing every line to designing systems that write themselves. The skill is no longer syntax. It's specification.</p>
+    <div class="reveal" style="margin-top: 2rem;">
+      <div class="card-grid card-grid-3" style="margin-top: 1rem;">
+        <div class="glass-card">
+          <p class="card-body"><strong style="color: var(--accent);">Build skills, not functions.</strong> Describe intent, provide examples, iterate on output.</p>
+        </div>
+        <div class="glass-card">
+          <p class="card-body"><strong style="color: var(--accent);">Design evals, not tests.</strong> Score quality with rubrics, not exact matches. Your eval suite is your product.</p>
+        </div>
+        <div class="glass-card">
+          <p class="card-body"><strong style="color: var(--accent);">Orchestrate, don't code.</strong> Compose agents, manage context, and keep humans in the loop.</p>
+        </div>
+      </div>
+    </div>
+    <div class="reveal" style="margin-top: 2.5rem;">
+      <p style="font-size: var(--label-size); color: var(--text-secondary); letter-spacing: 0.1em;">LESSON COMPLETE — QUESTIONS?</p>
+    </div>
+  </div>
+  <div class="slide-footer"><span class="slide-number">14 / 14</span></div>
+  <aside class="notes">
+    <p><strong>Let me leave you with the core message</strong>: Software 3.0 is not about replacing engineers. It's about <em>elevating</em> them. The best engineers in the 3.0 era won't be the ones who write the most clever code. They'll be the ones who can <strong>articulate intent clearly, design robust evaluation systems, and orchestrate multiple agents into reliable workflows</strong>.</p>
+    <p>Three things to take away. <strong>First: build skills, not functions.</strong> Describe what you want, show examples, iterate. The development loop is faster than you think.</p>
+    <p><strong>Second: design evals, not tests.</strong> Your evaluation suite is your most important artifact. Invest in it more than you invest in your prompts.</p>
+    <p><strong>Third: orchestrate, don't code.</strong> The value is in how you compose agents, manage context, and decide when humans stay in the loop.</p>
+    <p><strong>The code is the prompt. The compiler is the agent. The runtime is context.</strong> Welcome to Software 3.0.</p>
+    <p>Now I'd love to take your questions. What part of this resonates? What seems impossible? That's usually where the most interesting work begins.</p>
+  </aside>
+</section>
+
+<script>
+class SlidePresentation {
+  constructor() {
+    // Preview-only mode
+    const previewMatch = /[?&]preview=(\d+)/.exec(location.search || '');
+    if (previewMatch) {
+      const previewIdx = parseInt(previewMatch[1], 10) - 1;
+      this.slides = document.querySelectorAll('.slide');
+      this.slides.forEach((s, i) => {
+        const active = (i === previewIdx);
+        s.classList.toggle('is-active', active);
+        s.style.display = active ? '' : 'none';
+        if (active) {
+          s.style.opacity = '1';
+          s.style.transform = 'none';
+          s.style.pointerEvents = 'auto';
+          s.classList.add('visible');
+        }
+      });
+      document.querySelectorAll('.progress-bar-track, .nav-dots, .slide-footer').forEach(el => { el.style.display = 'none'; });
+      window.addEventListener('message', (e) => {
+        if (!e.data) return;
+        if (e.data.type === 'preview-goto') {
+          const n = parseInt(e.data.idx, 10);
+          if (n >= 0 && n < this.slides.length) {
+            this.slides.forEach((s, i) => {
+              s.classList.toggle('is-active', i === n);
+              s.style.display = i === n ? '' : 'none';
+              if (i === n) { s.style.opacity = '1'; s.style.transform = 'none'; s.classList.add('visible'); }
+            });
+          }
+        }
+      });
+      try { window.parent.postMessage({ type: 'preview-ready' }, '*'); } catch(e) {}
+      return;
+    }
+
+    this.slides = document.querySelectorAll('.slide');
+    this.currentSlide = 0;
+    this.isTransitioning = false;
+    this.presenterWin = null;
+    this.channelName = 'html-ppt-presenter-' + location.pathname;
+
+    this.setupBroadcastChannel();
+    this.setupIntersectionObserver();
+    this.setupKeyboardNav();
+    this.setupTouchNav();
+    this.setupWheelNav();
+    this.setupProgressBar();
+    this.setupNavDots();
+    this.setupFullscreen();
+    this.setupSpotlight();
+    this.setupPresenterMode();
+    splitWords();
+    animateCounters();
+  }
+
+  setupBroadcastChannel() {
+    try {
+      this.bc = new BroadcastChannel(this.channelName);
+      this.bc.onmessage = (e) => {
+        if (!e.data) return;
+        if (e.data.type === 'go' && typeof e.data.idx === 'number') {
+          this.goToSlide(e.data.idx, true);
+        }
+      };
+    } catch(e) { this.bc = null; }
+  }
+
+  setupIntersectionObserver() {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          this.currentSlide = [...this.slides].indexOf(entry.target);
+          this.updateProgressBar();
+          this.updateNavDots();
+        }
+      });
+    }, { threshold: 0.5 });
+    this.slides.forEach(slide => observer.observe(slide));
+  }
+
+  setupKeyboardNav() {
+    document.addEventListener('keydown', (e) => {
+      if (e.metaKey || e.ctrlKey || e.altKey) return;
+      if (e.key === 'ArrowDown' || e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') {
+        e.preventDefault();
+        this.goToSlide(this.currentSlide + 1);
+      } else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft' || e.key === 'PageUp') {
+        e.preventDefault();
+        this.goToSlide(this.currentSlide - 1);
+      } else if (e.key === 'Home') {
+        e.preventDefault();
+        this.goToSlide(0);
+      } else if (e.key === 'End') {
+        e.preventDefault();
+        this.goToSlide(this.slides.length - 1);
+      } else if (e.key === 'f' || e.key === 'F') {
+        this.toggleFullscreen();
+      }
+    });
+  }
+
+  setupTouchNav() {
+    let startY = 0;
+    document.addEventListener('touchstart', (e) => { startY = e.touches[0].clientY; });
+    document.addEventListener('touchend', (e) => {
+      const diff = startY - e.changedTouches[0].clientY;
+      if (Math.abs(diff) > 50) {
+        this.goToSlide(this.currentSlide + (diff > 0 ? 1 : -1));
+      }
+    });
+  }
+
+  setupWheelNav() {
+    let lastWheel = 0;
+    document.addEventListener('wheel', (e) => {
+      const now = Date.now();
+      if (now - lastWheel < 800) return;
+      lastWheel = now;
+      if (e.deltaY > 0) this.goToSlide(this.currentSlide + 1);
+      else if (e.deltaY < 0) this.goToSlide(this.currentSlide - 1);
+    }, { passive: true });
+  }
+
+  setupProgressBar() {
+    const bar = document.querySelector('.progress-bar');
+    if (bar) this.progressBar = bar;
+  }
+
+  updateProgressBar() {
+    if (this.progressBar) {
+      const pct = ((this.currentSlide + 1) / this.slides.length) * 100;
+      this.progressBar.style.width = pct + '%';
+    }
+  }
+
+  setupNavDots() {
+    const nav = document.querySelector('.nav-dots');
+    if (!nav) return;
+    this.slides.forEach((_, i) => {
+      const dot = document.createElement('button');
+      dot.className = 'nav-dot' + (i === 0 ? ' active' : '');
+      dot.setAttribute('aria-label', `Go to slide ${i + 1}`);
+      dot.addEventListener('click', () => this.goToSlide(i));
+      nav.appendChild(dot);
+    });
+    this.navDots = nav.querySelectorAll('.nav-dot');
+  }
+
+  updateNavDots() {
+    if (!this.navDots) return;
+    this.navDots.forEach((dot, i) => {
+      dot.classList.toggle('active', i === this.currentSlide);
+    });
+  }
+
+  toggleFullscreen() {
+    if (!document.fullscreenElement) document.documentElement.requestFullscreen();
+    else document.exitFullscreen();
+  }
+
+  setupFullscreen() { /* bound in keydown */ }
+
+  setupSpotlight() {
+    const spotlight = document.querySelector('.spotlight');
+    if (!spotlight) return;
+    document.addEventListener('mousemove', (e) => {
+      const x = (e.clientX / window.innerWidth) * 100;
+      const y = (e.clientY / window.innerHeight) * 100;
+      spotlight.style.setProperty('--spotlight-x', x + '%');
+      spotlight.style.setProperty('--spotlight-y', y + '%');
+    });
+  }
+
+  setupPresenterMode() {
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 's' || e.key === 'S') {
+        e.preventDefault();
+        this.openPresenterWindow();
+      }
+    });
+  }
+
+  openPresenterWindow() {
+    if (this.presenterWin && !this.presenterWin.closed) {
+      this.presenterWin.focus();
+      return;
+    }
+    const deckUrl = location.protocol + '//' + location.host + location.pathname;
+    const slideMeta = Array.from(this.slides).map((s, i) => {
+      const note = s.querySelector('aside.notes');
+      return {
+        title: s.getAttribute('data-title') ||
+          (s.querySelector('h1,h2,h3') || {}).textContent || ('Slide ' + (i + 1)),
+        notes: note ? note.innerHTML : ''
+      };
+    });
+    const html = this.buildPresenterHTML(deckUrl, slideMeta, this.slides.length, this.currentSlide, this.channelName);
+    this.presenterWin = window.open('', 'html-ppt-presenter', 'width=1280,height=820,menubar=no,toolbar=no');
+    if (!this.presenterWin) { alert('Please allow popups to use presenter view'); return; }
+    this.presenterWin.document.open();
+    this.presenterWin.document.write(html);
+    this.presenterWin.document.close();
+  }
+
+  buildPresenterHTML(deckUrl, slideMeta, total, startIdx, channelName) {
+    const metaJSON = JSON.stringify(slideMeta);
+    return `<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><title>Presenter View</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}html,body{width:100%;height:100%;overflow:hidden;background:#1a1d24;color:#e6edf3;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+#stage{position:absolute;inset:0;overflow:hidden}
+.pcard{position:absolute;background:#0d1117;border:1px solid rgba(255,255,255,.1);border-radius:12px;box-shadow:0 8px 32px rgba(0,0,0,.45);display:flex;flex-direction:column;overflow:hidden;min-width:180px;min-height:100px}
+.pcard.dragging{box-shadow:0 16px 48px rgba(0,0,0,.6),0 0 0 2px rgba(88,166,255,.5);border-color:#58a6ff;transition:none;z-index:9999}
+.pcard.resizing{box-shadow:0 16px 48px rgba(0,0,0,.6),0 0 0 2px rgba(63,185,80,.5);border-color:#3fb950;transition:none;z-index:9999}
+.pcard-head{display:flex;align-items:center;gap:10px;padding:8px 12px;background:rgba(255,255,255,.04);border-bottom:1px solid rgba(255,255,255,.06);cursor:move;user-select:none;flex-shrink:0}
+.pcard-dot{width:8px;height:8px;border-radius:50%;background:var(--dot-color,#58a6ff);flex-shrink:0}
+.pcard-title{font-size:11px;letter-spacing:.15em;text-transform:uppercase;font-weight:700;color:#8b949e;flex:1}
+.pcard-meta{font-size:11px;color:#6e7681}
+.pcard-body{flex:1;position:relative;overflow:hidden;min-height:0}
+.pcard-preview .pcard-body{background:#000}
+.pcard-preview iframe{position:absolute;top:0;left:0;width:1920px;height:1080px;border:none;transform-origin:top left;pointer-events:none}
+.pcard-notes .pcard-body{padding:14px 18px;overflow-y:auto;font-size:18px;line-height:1.75;color:#d0d7de}
+.pcard-notes .pcard-body p{margin:0 0 .7em 0}
+.pcard-notes .pcard-body strong{color:#f0883e}
+.pcard-notes .pcard-body em{color:#58a6ff;font-style:normal}
+.pcard-notes .empty{color:#484f58;font-style:italic}
+.pcard-timer .pcard-body{display:flex;flex-direction:column;gap:14px;padding:18px 20px;justify-content:center}
+.timer-display{font-family:"SF Mono",monospace;font-size:42px;font-weight:700;color:#3fb950;letter-spacing:.04em;line-height:1}
+.timer-row{display:flex;align-items:center;gap:12px;font-size:14px;color:#8b949e}
+.timer-row .label{font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:#6e7681}
+.timer-row .val{color:#e6edf3;font-weight:600;font-family:"SF Mono",monospace}
+.timer-controls{display:flex;gap:8px;flex-wrap:wrap}
+.timer-btn{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:#e6edf3;padding:6px 12px;border-radius:6px;font-size:12px;cursor:pointer;font-family:inherit}
+.timer-btn:hover{background:rgba(88,166,255,.15);border-color:#58a6ff}
+.pcard-resize{position:absolute;right:0;bottom:0;width:18px;height:18px;cursor:nwse-resize;background:linear-gradient(135deg,transparent 50%,rgba(255,255,255,.25) 50%,rgba(255,255,255,.25) 60%,transparent 60%,transparent 70%,rgba(255,255,255,.25) 70%,rgba(255,255,255,.25) 80%,transparent 80%);z-index:5}
+.hint-bar{position:fixed;bottom:0;left:0;right:0;background:rgba(0,0,0,.6);backdrop-filter:blur(10px);border-top:1px solid rgba(255,255,255,.08);padding:6px 16px;font-size:11px;color:#8b949e;display:flex;gap:18px;align-items:center;z-index:1000}
+.hint-bar kbd{background:rgba(255,255,255,.08);padding:1px 6px;border-radius:3px;font-family:"SF Mono",monospace;font-size:10px;border:1px solid rgba(255,255,255,.1);color:#e6edf3}
+.hint-bar .reset-layout{margin-left:auto;background:transparent;border:1px solid rgba(255,255,255,.15);color:#8b949e;padding:3px 10px;border-radius:4px;font-size:11px;cursor:pointer}
+.hint-bar .reset-layout:hover{background:rgba(248,81,73,.15);border-color:#f85149;color:#f85149}
+body.is-dragging-card *{user-select:none!important}body.is-dragging-card iframe{pointer-events:none!important}
+</style></head><body>
+<div id="stage">
+<div class="pcard pcard-preview" id="card-cur" style="--dot-color:#58a6ff"><div class="pcard-head" data-drag><span class="pcard-dot"></span><span class="pcard-title">CURRENT</span><span class="pcard-meta" id="cur-meta">—</span></div><div class="pcard-body"><iframe id="iframe-cur"></iframe></div><div class="pcard-resize" data-resize></div></div>
+<div class="pcard pcard-preview" id="card-nxt" style="--dot-color:#bc8cff"><div class="pcard-head" data-drag><span class="pcard-dot"></span><span class="pcard-title">NEXT</span><span class="pcard-meta" id="nxt-meta">—</span></div><div class="pcard-body"><iframe id="iframe-nxt"></iframe></div><div class="pcard-resize" data-resize></div></div>
+<div class="pcard pcard-notes" id="card-notes" style="--dot-color:#f0883e"><div class="pcard-head" data-drag><span class="pcard-dot"></span><span class="pcard-title">SPEAKER SCRIPT</span></div><div class="pcard-body" id="notes-body"></div><div class="pcard-resize" data-resize></div></div>
+<div class="pcard pcard-timer" id="card-timer" style="--dot-color:#3fb950"><div class="pcard-head" data-drag><span class="pcard-dot"></span><span class="pcard-title">TIMER</span></div><div class="pcard-body"><div class="timer-display" id="timer-display">00:00</div><div class="timer-row"><span class="label">Slide</span><span class="val" id="timer-count">1 / ${total}</span></div><div class="timer-controls"><button class="timer-btn" id="btn-prev">← Prev</button><button class="timer-btn" id="btn-next">Next →</button><button class="timer-btn" id="btn-reset">Reset</button></div></div><div class="pcard-resize" data-resize></div></div>
+</div>
+<div class="hint-bar"><span><kbd>← →</kbd> Navigate</span><span><kbd>R</kbd> Reset timer</span><span><kbd>Esc</kbd> Close</span><span style="color:#6e7681">Drag header to move · Drag corner to resize</span><button class="reset-layout" id="reset-layout">Reset Layout</button></div>
+<script>
+(function(){var slideMeta=${metaJSON};var total=${total};var idx=${startIdx};var deckUrl=${JSON.stringify(deckUrl)};var bc;try{bc=new BroadcastChannel(${JSON.stringify(channelName)})}catch(e){}var iframeCur=document.getElementById('iframe-cur');var iframeNxt=document.getElementById('iframe-nxt');var notesBody=document.getElementById('notes-body');var curMeta=document.getElementById('cur-meta');var nxtMeta=document.getElementById('nxt-meta');var timerDisplay=document.getElementById('timer-display');var timerCount=document.getElementById('timer-count');var STORAGE_KEY='html-ppt-presenter:'+location.pathname;
+function defaultLayout(){var w=window.innerWidth,h=window.innerHeight-36;return{'card-cur':{x:16,y:16,w:Math.round(w*.55)-24,h:Math.round(h*.62)-16},'card-nxt':{x:Math.round(w*.55)+8,y:16,w:w-Math.round(w*.55)-24,h:Math.round(h*.42)-16},'card-notes':{x:Math.round(w*.55)+8,y:Math.round(h*.42)+8,w:w-Math.round(w*.55)-24,h:h-Math.round(h*.42)-16},'card-timer':{x:16,y:Math.round(h*.62)+8,w:Math.round(w*.55)-24,h:h-Math.round(h*.62)-16}}}
+function applyLayout(l){Object.keys(l).forEach(function(id){var el=document.getElementById(id),p=l[id];if(el&&p){el.style.left=p.x+'px';el.style.top=p.y+'px';el.style.width=p.w+'px';el.style.height=p.h+'px'}});rescaleAll()}
+function readLayout(){try{var s=localStorage.getItem(STORAGE_KEY);if(s)return JSON.parse(s)}catch(e){}return defaultLayout()}
+function saveLayout(){var l={};['card-cur','card-nxt','card-notes','card-timer'].forEach(function(id){var el=document.getElementById(id);if(el)l[id]={x:parseInt(el.style.left)||0,y:parseInt(el.style.top)||0,w:parseInt(el.style.width)||300,h:parseInt(el.style.height)||200}});try{localStorage.setItem(STORAGE_KEY,JSON.stringify(l))}catch(e){}}
+function rescaleIframe(iframe){if(!iframe||iframe.style.display==='none')return;var body=iframe.parentElement,cw=body.clientWidth,ch=body.clientHeight;if(!cw||!ch)return;var s=Math.min(cw/1920,ch/1080);iframe.style.transform='scale('+s+')';var sw=1920*s,sh=1080*s;iframe.style.left=Math.max(0,(cw-sw)/2)+'px';iframe.style.top=Math.max(0,(ch-sh)/2)+'px'}
+function rescaleAll(){rescaleIframe(iframeCur);rescaleIframe(iframeNxt)}
+window.addEventListener('resize',rescaleAll);
+document.querySelectorAll('[data-drag]').forEach(function(handle){handle.addEventListener('mousedown',function(e){if(e.button!==0)return;var card=handle.closest('.pcard');if(!card)return;e.preventDefault();card.classList.add('dragging');document.body.classList.add('is-dragging-card');var sx=e.clientX,sy=e.clientY,sl=parseInt(card.style.left)||0,st=parseInt(card.style.top)||0;function mv(ev){card.style.left=Math.max(0,Math.min(window.innerWidth-100,sl+ev.clientX-sx))+'px';card.style.top=Math.max(0,Math.min(window.innerHeight-50,st+ev.clientY-sy))+'px'}function up(){card.classList.remove('dragging');document.body.classList.remove('is-dragging-card');document.removeEventListener('mousemove',mv);document.removeEventListener('mouseup',up);saveLayout()}document.addEventListener('mousemove',mv);document.addEventListener('mouseup',up)})});
+document.querySelectorAll('[data-resize]').forEach(function(handle){handle.addEventListener('mousedown',function(e){if(e.button!==0)return;var card=handle.closest('.pcard');if(!card)return;e.preventDefault();e.stopPropagation();card.classList.add('resizing');document.body.classList.add('is-dragging-card');var sx=e.clientX,sy=e.clientY,sw=parseInt(card.style.width)||card.offsetWidth,sh=parseInt(card.style.height)||card.offsetHeight;function mv(ev){card.style.width=Math.max(180,sw+ev.clientX-sx)+'px';card.style.height=Math.max(100,sh+ev.clientY-sy)+'px';if(card.querySelector('iframe'))rescaleIframe(card.querySelector('iframe'))}function up(){card.classList.remove('resizing');document.body.classList.remove('is-dragging-card');document.removeEventListener('mousemove',mv);document.removeEventListener('mouseup',up);rescaleAll();saveLayout()}document.addEventListener('mousemove',mv);document.addEventListener('mouseup',up)})});
+var iframeReady={cur:false,nxt:false};window.addEventListener('message',function(e){if(!e.data||e.data.type!=='preview-ready')return;var iframe=null;if(e.source===iframeCur.contentWindow){iframeReady.cur=true;iframe=iframeCur;postGoto(iframeCur,idx)}else if(e.source===iframeNxt.contentWindow){iframeReady.nxt=true;iframe=iframeNxt;postGoto(iframeNxt,idx+1<total?idx+1:idx)}if(iframe)rescaleIframe(iframe)});
+function postGoto(iframe,n){try{iframe.contentWindow.postMessage({type:'preview-goto',idx:n},'*')}catch(e){}}
+function update(n){n=Math.max(0,Math.min(total-1,n));idx=n;if(iframeReady.cur)postGoto(iframeCur,n);curMeta.textContent=(n+1)+'/'+total;if(n+1<total){iframeNxt.style.display='';var end=document.querySelector('#card-nxt .preview-end');if(end)end.remove();if(iframeReady.nxt)postGoto(iframeNxt,n+1);nxtMeta.textContent=(n+2)+'/'+total}else{iframeNxt.style.display='none';var body=document.querySelector('#card-nxt .pcard-body');if(body&&!body.querySelector('.preview-end')){var e=document.createElement('div');e.className='preview-end';e.textContent='— END —';body.appendChild(e)}nxtMeta.textContent='END'}notesBody.innerHTML=slideMeta[n].notes||'<span class="empty">(No notes for this slide)</span>';timerCount.textContent=(n+1)+' / '+total}
+var tStart=Date.now();setInterval(function(){var s=Math.floor((Date.now()-tStart)/1000);timerDisplay.textContent=String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0')},1000);
+function resetTimer(){tStart=Date.now();timerDisplay.textContent='00:00'}
+if(bc){bc.onmessage=function(e){if(!e.data)return;if(e.data.type==='go')update(e.data.idx)}}
+function go(n){update(n);if(bc)bc.postMessage({type:'go',idx:idx})}
+document.getElementById('btn-prev').addEventListener('click',function(){go(idx-1)});
+document.getElementById('btn-next').addEventListener('click',function(){go(idx+1)});
+document.getElementById('btn-reset').addEventListener('click',resetTimer);
+document.getElementById('reset-layout').addEventListener('click',function(){if(confirm('Reset card layout?')){try{localStorage.removeItem(STORAGE_KEY)}catch(e){}applyLayout(defaultLayout())}});
+document.addEventListener('keydown',function(e){if(e.metaKey||e.ctrlKey||e.altKey)return;switch(e.key){case'ArrowRight':case' ':case'PageDown':go(idx+1);e.preventDefault();break;case'ArrowLeft':case'PageUp':go(idx-1);e.preventDefault();break;case'Home':go(0);break;case'End':go(total-1);break;case'r':case'R':resetTimer();break;case'Escape':window.close();break}});
+iframeCur.addEventListener('load',function(){rescaleIframe(iframeCur)});iframeNxt.addEventListener('load',function(){rescaleIframe(iframeNxt)});
+applyLayout(readLayout());iframeCur.src=deckUrl+'?preview='+(idx+1);if(idx+1<total)iframeNxt.src=deckUrl+'?preview='+(idx+2);notesBody.innerHTML=slideMeta[idx].notes||'<span class="empty">(No notes for this slide)</span>';curMeta.textContent=(idx+1)+'/'+total;nxtMeta.textContent=(idx+2)+'/'+total;timerCount.textContent=(idx+1)+' / '+total;
+})();
+<\/script></body></html>`;
+  }
+
+  goToSlide(index, fromPresenter) {
+    if (index < 0 || index >= this.slides.length) return;
+    this.slides[index].scrollIntoView({ behavior: 'smooth' });
+    if (!fromPresenter && this.bc) this.bc.postMessage({ type: 'go', idx: index });
+  }
+}
+
+function splitWords() {
+  document.querySelectorAll('.reveal-word').forEach(el => {
+    const words = el.textContent.trim().split(/\s+/);
+    el.innerHTML = words.map((word, i) =>
+      `<span style="transition-delay: ${i * 60}ms">${word}</span>`
+    ).join(' ');
+  });
+}
+
+function animateCounters() {
+  document.querySelectorAll('.stat-number[data-target]').forEach(el => {
+    const observer = new IntersectionObserver(entries => {
+      if (entries[0].isIntersecting) {
+        const target = parseInt(el.dataset.target);
+        const duration = 1500;
+        const start = performance.now();
+        function tick(now) {
+          const elapsed = now - start;
+          const progress = Math.min(elapsed / duration, 1);
+          const eased = 1 - Math.pow(1 - progress, 3);
+          el.textContent = Math.round(target * eased);
+          if (progress < 1) requestAnimationFrame(tick);
+        }
+        requestAnimationFrame(tick);
+        observer.disconnect();
+      }
+    }, { threshold: 0.5 });
+    observer.observe(el);
+  });
+}
+
+document.addEventListener('DOMContentLoaded', () => new SlidePresentation());
+</script>
+</body>
+</html>
