@@ -6,6 +6,7 @@ status: active
 sources:
   - "raw/skill.md for AI Agents.md"
   - "raw/mattpocockskills My personal directory of skills, straight from my .claude directory.md"
+  - "raw/mattpocockskills Skills for Real Engineers. Straight from my .claude directory.md"
   - "raw/obrasuperpowers An agentic skills framework & software development methodology that works.md"
   - "raw/forrestchangandrej-karpathy-skills A single CLAUDE.md file to improve Claude Code behavior, derived from Andrej Karpathy's observations on LLM coding pitfalls.md"
   - "raw/Context Is the New Code — Patrick Debois, Tessl.md"

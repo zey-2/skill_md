@@ -8,6 +8,7 @@ sources:
   - "raw/anthropicsskills Public repository for Agent Skills.md"
   - "raw/obrasuperpowers An agentic skills framework & software development methodology that works.md"
   - "raw/mattpocockskills My personal directory of skills, straight from my .claude directory.md"
+  - "raw/mattpocockskills Skills for Real Engineers. Straight from my .claude directory.md"
   - "raw/VoltAgentawesome-agent-skills A curated collection of 1000+ agent skills from official dev teams and the community, compatible with Claude Code, Codex, Gemini CLI, Cursor, and more.md"
   - "raw/forrestchangandrej-karpathy-skills A single CLAUDE.md file to improve Claude Code behavior, derived from Andrej Karpathy's observations on LLM coding pitfalls.md"
   - "raw/2026-04-26 OpenAI Codex Agent Skills docs.md"

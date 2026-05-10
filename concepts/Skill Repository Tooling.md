@@ -8,6 +8,7 @@ sources:
   - "raw/openaiskills Skills Catalog for Codex.md"
   - "raw/anthropicsskills Public repository for Agent Skills.md"
   - "raw/mattpocockskills My personal directory of skills, straight from my .claude directory.md"
+  - "raw/mattpocockskills Skills for Real Engineers. Straight from my .claude directory.md"
   - "raw/obrasuperpowers An agentic skills framework & software development methodology that works.md"
 tags: [agent-skills, tooling, repositories]
 ---

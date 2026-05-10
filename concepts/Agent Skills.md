@@ -8,6 +8,7 @@ sources:
   - "raw/openaiskills Skills Catalog for Codex.md"
   - "raw/anthropicsskills Public repository for Agent Skills.md"
   - "raw/mattpocockskills My personal directory of skills, straight from my .claude directory.md"
+  - "raw/mattpocockskills Skills for Real Engineers. Straight from my .claude directory.md"
   - "raw/obrasuperpowers An agentic skills framework & software development methodology that works.md"
   - "raw/forrestchangandrej-karpathy-skills A single CLAUDE.md file to improve Claude Code behavior, derived from Andrej Karpathy's observations on LLM coding pitfalls.md"
   - "raw/2026-04-26 MCP architecture and Agent Skills integration source.md"
