@@ -812,18 +812,18 @@ code { font-family: var(--font-mono); font-size: 0.9em; }
     <h1 class="reveal reveal-word">From Agents to Skills</h1>
     <p class="reveal subtitle">SKILL.md at the Center — Capturing Expertise, Making It Repeatable</p>
     <div class="reveal meta">
-      <span>Software 3.0 &rarr; Agent Skills</span>
+      <span>Agents & the Skills Unlock</span>
     </div>
   </div>
 </section>
 
 <!-- ============================================================
-     SLIDE 2 — Section: Software 3.0 & the Skills Unlock
+     SLIDE 2 — Section: Agents & the Skills Unlock
      ============================================================ -->
 <section class="slide section-slide" style="background: var(--accent-lavender-bg);">
   <div class="slide-content">
     <p class="section-number reveal">01</p>
-    <p class="section-name reveal">Software 3.0 &amp; the Skills Unlock</p>
+    <p class="section-name reveal">Agents &amp; the Skills Unlock</p>
   </div>
 </section>
 
@@ -1036,8 +1036,9 @@ code { font-family: var(--font-mono); font-size: 0.9em; }
       <p>Third person. Under 500 characters.</p>
     </div>
     <div class="reveal nb-card" style="background:#fff5f5;border-color:#cc3333;margin-top:clamp(0.5rem,1.5vw,1rem);">
-      <p style="font-weight:700;margin-bottom:0.3em;color:#cc3333;">What goes wrong</p>
-      <p style="font-size:clamp(0.85rem,1.2vw,1rem);">When descriptions say "code review between tasks," Claude does ONE review and thinks it's done. The actual two-stage review in the skill body? Never read.</p>
+      <p style="font-weight:700;margin-bottom:0.3em;color:#cc3333;">Example: bad vs good description</p>
+      <p style="font-size:clamp(0.85rem,1.2vw,1rem);margin-bottom:0.5em;"><strong style="color:#cc3333;">Bad:</strong> "Do a code review" — Claude does ONE pass and stops. The multi-stage review in the skill body is never triggered.</p>
+      <p style="font-size:clamp(0.85rem,1.2vw,1rem);"><strong style="color:#33aa33;">Good:</strong> "Run a two-stage code review after each task" — Agent knows to expect two passes before moving on.</p>
     </div>
   </div>
 </section>
@@ -1048,7 +1049,7 @@ code { font-family: var(--font-mono); font-size: 0.9em; }
 <section class="slide content-slide">
   <div class="slide-content" style="display:flex;flex-direction:column;justify-content:center;height:100%;max-width:700px;">
     <p class="reveal label">03 — PROGRESSIVE DISCLOSURE</p>
-    <h2 class="reveal">Layered Loading</h2>
+    <h2 class="reveal">Progressive Disclosure</h2>
     <div class="reveal layers-illustration" style="margin-top:clamp(1rem,2vw,2rem);">
       <div class="layer layer-1">Layer 1<br>Metadata</div>
       <div class="layer layer-2">Layer 2<br>SKILL.md Body</div>
@@ -1080,7 +1081,7 @@ code { font-family: var(--font-mono); font-size: 0.9em; }
         </div>
         <h3 style="font-size:clamp(0.9rem,1.4vw,1.1rem);margin-bottom:0.3em;">Simple and Practical</h3>
         <p style="font-size:clamp(0.85rem,1.2vw,1rem);margin-bottom:0.5em;">Grilling session for alignment. Short. Focused. Gets to the point.</p>
-        <p style="font-family:var(--font-mono);font-size:var(--label-size);color:var(--text-secondary);word-break:break-all;">github.com/mattpocock/skills/.../grill-me/SKILL.md</p>
+        <p><a href="https://github.com/mattpocock/skills/blob/main/skills/productivity/grill-me/SKILL.md" target="_blank" style="font-family:var(--font-mono);font-size:var(--label-size);color:var(--text-secondary);word-break:break-all;">github.com/mattpocock/skills/.../grill-me/SKILL.md</a></p>
       </div>
       <div class="nb-card" style="background:var(--accent-mint-bg);">
         <div style="width:40px;height:40px;border:2px solid var(--black);background:var(--accent-mint);box-shadow:3px 3px 0 0 var(--black);margin-bottom:0.5em;display:flex;align-items:center;justify-content:center;">
@@ -1088,7 +1089,7 @@ code { font-family: var(--font-mono); font-size: 0.9em; }
         </div>
         <h3 style="font-size:clamp(0.9rem,1.4vw,1.1rem);margin-bottom:0.3em;">Comprehensive and Disciplined</h3>
         <p style="font-size:clamp(0.85rem,1.2vw,1rem);margin-bottom:0.5em;">TDD for process docs. Pressure testing. Rationalization tables. Every loophole closed.</p>
-        <p style="font-family:var(--font-mono);font-size:var(--label-size);color:var(--text-secondary);word-break:break-all;">github.com/obra/superpowers/.../writing-skills/SKILL.md</p>
+        <p><a href="https://github.com/obra/superpowers/blob/main/skills/writing-skills/SKILL.md" target="_blank" style="font-family:var(--font-mono);font-size:var(--label-size);color:var(--text-secondary);word-break:break-all;">github.com/obra/superpowers/.../writing-skills/SKILL.md</a></p>
       </div>
     </div>
     <p class="reveal" style="margin-top:clamp(1.5rem,3vw,3rem);text-align:center;font-size:clamp(1.1rem,1.8vw,1.4rem);font-family:var(--font-display);font-weight:700;">Both follow the same principles. Different rigor, same DNA.</p>
@@ -1159,34 +1160,51 @@ code { font-family: var(--font-mono); font-size: 0.9em; }
 </section>
 
 <!-- ============================================================
-     SLIDE 15 — Superpowers Repo Structure
+     SLIDE 15 — Superpowers What's Inside
      ============================================================ -->
 <section class="slide content-slide">
   <div class="bg-dots"></div>
   <div class="slide-content" style="display:flex;flex-direction:column;justify-content:center;height:100%;">
-    <p class="reveal label">04 — REPO STRUCTURE</p>
-    <h2 class="reveal">How Superpowers Organizes Skills</h2>
-    <div class="reveal nb-card" style="margin-top:clamp(1rem,2vw,2rem);background:var(--bg-white);font-family:var(--font-mono);font-size:clamp(0.7rem,1.1vw,0.9rem);line-height:1.8;max-width:700px;overflow-x:auto;">
-      <div style="padding:clamp(0.75rem,1.5vw,1.5rem);">
-        <span style="color:var(--accent-lavender);">superpowers/</span><br>
-        &nbsp;&nbsp;<span style="color:var(--accent-mint);">skills/</span><br>
-        &nbsp;&nbsp;&nbsp;&nbsp;brainstorming/<span style="color:var(--text-secondary);"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SKILL.md</span><br>
-        &nbsp;&nbsp;&nbsp;&nbsp;executing-plans/<span style="color:var(--text-secondary);"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SKILL.md</span><br>
-        &nbsp;&nbsp;&nbsp;&nbsp;finishing-a-dev-branch/<span style="color:var(--text-secondary);"> SKILL.md</span><br>
-        &nbsp;&nbsp;&nbsp;&nbsp;subagent-driven-dev/<span style="color:var(--text-secondary);"> &nbsp; SKILL.md</span><br>
-        &nbsp;&nbsp;&nbsp;&nbsp;test-driven-development/<span style="color:var(--text-secondary);"> SKILL.md</span><br>
-        &nbsp;&nbsp;&nbsp;&nbsp;using-git-worktrees/<span style="color:var(--text-secondary);"> &nbsp;&nbsp; SKILL.md</span><br>
-        &nbsp;&nbsp;&nbsp;&nbsp;using-superpowers/<span style="color:var(--text-secondary);"> &nbsp;&nbsp;&nbsp;&nbsp; SKILL.md</span><br>
-        &nbsp;&nbsp;&nbsp;&nbsp;verification-before-completion/<span style="color:var(--text-secondary);"> SKILL.md</span><br>
-        &nbsp;&nbsp;&nbsp;&nbsp;writing-plans/<span style="color:var(--text-secondary);"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SKILL.md</span><br>
-        &nbsp;&nbsp;<span style="color:var(--accent-peach);">docs/</span><br>
-        &nbsp;&nbsp;&nbsp;&nbsp;agents/<span style="color:var(--text-secondary);"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; grader.md, analyzer.md</span><br>
-        &nbsp;&nbsp;&nbsp;&nbsp;persuasion-principles.md<br>
-        &nbsp;&nbsp;<span style="color:var(--accent-sky);">scripts/</span><br>
-        &nbsp;&nbsp;<span style="color:var(--accent-lemon);">references/</span>
+    <p class="reveal label">04 — WHAT'S INSIDE</p>
+    <h2 class="reveal">What's Inside <a href="https://github.com/obra/superpowers" target="_blank" style="color:var(--text-primary);text-decoration:none;">github.com/obra/superpowers</a></h2>
+    <div class="reveal" style="margin-top:clamp(0.75rem,1.5vw,1.5rem);display:grid;grid-template-columns:1fr 1fr;gap:clamp(0.5rem,1.5vw,1rem);">
+      <div class="nb-card" style="background:var(--accent-mint-bg);">
+        <p style="font-weight:700;margin-bottom:0.3em;">Testing</p>
+        <ul class="nb-list" style="font-size:clamp(0.75rem,1.1vw,0.9rem);">
+          <li>test-driven-development</li>
+        </ul>
+      </div>
+      <div class="nb-card" style="background:var(--accent-lavender-bg);">
+        <p style="font-weight:700;margin-bottom:0.3em;">Debugging</p>
+        <ul class="nb-list" style="font-size:clamp(0.75rem,1.1vw,0.9rem);">
+          <li>systematic-debugging</li>
+          <li>verification-before-completion</li>
+        </ul>
+      </div>
+      <div class="nb-card" style="background:var(--accent-sky-bg);">
+        <p style="font-weight:700;margin-bottom:0.3em;">Collaboration</p>
+        <ul class="nb-list" style="font-size:clamp(0.75rem,1.1vw,0.9rem);">
+          <li>brainstorming &middot; writing-plans &middot; executing-plans</li>
+          <li>dispatching-parallel-agents</li>
+          <li>requesting-code-review &middot; receiving-code-review</li>
+          <li>using-git-worktrees &middot; finishing-a-dev-branch</li>
+          <li>subagent-driven-development</li>
+        </ul>
+      </div>
+      <div class="nb-card" style="background:var(--accent-lemon-bg);">
+        <p style="font-weight:700;margin-bottom:0.3em;">Meta</p>
+        <ul class="nb-list" style="font-size:clamp(0.75rem,1.1vw,0.9rem);">
+          <li>writing-skills</li>
+          <li>using-superpowers</li>
+        </ul>
       </div>
     </div>
-    <p class="reveal" style="margin-top:clamp(1rem,2vw,2rem);font-size:clamp(1rem,1.5vw,1.2rem);font-family:var(--font-display);font-weight:700;">Every skill is independent. Every skill dispatches to the next. Flat namespace. No nested directories.</p>
+    <div class="reveal nb-card" style="margin-top:clamp(0.5rem,1.5vw,1rem);background:var(--accent-peach-bg);">
+      <p style="font-weight:700;margin-bottom:0.3em;">The Workflow</p>
+      <p style="font-size:clamp(0.8rem,1.1vw,0.95rem);color:var(--text-secondary);">
+        brainstorming &rarr; git worktrees &rarr; writing-plans &rarr; executing &rarr; TDD &rarr; code review &rarr; finishing
+      </p>
+    </div>
   </div>
 </section>
 
@@ -1228,117 +1246,22 @@ code { font-family: var(--font-mono); font-size: 0.9em; }
 </section>
 
 <!-- ============================================================
-     SLIDE 17 — Section: Creation Framework
-     ============================================================ -->
-<section class="slide section-slide" style="background: var(--bg-white);">
-  <div class="slide-content">
-    <p class="section-number reveal">05</p>
-    <p class="section-name reveal">Creation Framework</p>
-  </div>
-</section>
-
-<!-- ============================================================
-     SLIDE 18 — The Core Loop
-     ============================================================ -->
-<section class="slide content-slide">
-  <div class="bg-grid"></div>
-  <div class="slide-content" style="display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;height:100%;">
-    <p class="reveal label">05 — CORE LOOP</p>
-    <h2 class="reveal" style="margin-bottom:clamp(1.5rem,3vw,3rem);">5 Steps to a Working Skill</h2>
-    <div class="reveal-scale" style="position:relative;width:clamp(280px,30vw,400px);height:clamp(280px,30vw,400px);margin:0 auto;">
-      <div style="position:absolute;top:0;left:50%;transform:translateX(-50%);width:clamp(70px,8vw,90px);height:clamp(70px,8vw,90px);border:2px solid var(--black);background:var(--accent-lavender);box-shadow:var(--shadow-sm);display:flex;align-items:center;justify-content:center;flex-direction:column;text-align:center;">
-        <span style="font-family:var(--font-display);font-weight:800;font-size:clamp(1rem,1.5vw,1.3rem);">1</span>
-        <span style="font-size:clamp(0.7rem,1vw,0.85rem);">Discover</span>
-      </div>
-      <div style="position:absolute;top:28%;right:0;width:clamp(70px,8vw,90px);height:clamp(70px,8vw,90px);border:2px solid var(--black);background:var(--accent-mint);box-shadow:var(--shadow-sm);display:flex;align-items:center;justify-content:center;flex-direction:column;text-align:center;">
-        <span style="font-family:var(--font-display);font-weight:800;font-size:clamp(1rem,1.5vw,1.3rem);">2</span>
-        <span style="font-size:clamp(0.7rem,1vw,0.85rem);">Draft</span>
-      </div>
-      <div style="position:absolute;bottom:10%;right:15%;width:clamp(70px,8vw,90px);height:clamp(70px,8vw,90px);border:2px solid var(--black);background:var(--accent-sky);box-shadow:var(--shadow-sm);display:flex;align-items:center;justify-content:center;flex-direction:column;text-align:center;">
-        <span style="font-family:var(--font-display);font-weight:800;font-size:clamp(1rem,1.5vw,1.3rem);">3</span>
-        <span style="font-size:clamp(0.7rem,1vw,0.85rem);">Test</span>
-      </div>
-      <div style="position:absolute;bottom:10%;left:15%;width:clamp(70px,8vw,90px);height:clamp(70px,8vw,90px);border:2px solid var(--black);background:var(--accent-peach);box-shadow:var(--shadow-sm);display:flex;align-items:center;justify-content:center;flex-direction:column;text-align:center;">
-        <span style="font-family:var(--font-display);font-weight:800;font-size:clamp(1rem,1.5vw,1.3rem);">4</span>
-        <span style="font-size:clamp(0.7rem,1vw,0.85rem);">Refine</span>
-      </div>
-      <div style="position:absolute;top:28%;left:0;width:clamp(70px,8vw,90px);height:clamp(70px,8vw,90px);border:2px solid var(--black);background:var(--accent-lemon);box-shadow:var(--shadow-sm);display:flex;align-items:center;justify-content:center;flex-direction:column;text-align:center;">
-        <span style="font-family:var(--font-display);font-weight:800;font-size:clamp(1rem,1.5vw,1.3rem);">5</span>
-        <span style="font-size:clamp(0.7rem,1vw,0.85rem);">Deploy</span>
-      </div>
-      <div style="position:absolute;top:14%;right:22%;font-family:var(--font-display);font-weight:800;font-size:clamp(1.2rem,2vw,1.8rem);color:var(--text-secondary);">&rarr;</div>
-      <div style="position:absolute;bottom:30%;right:25%;font-family:var(--font-display);font-weight:800;font-size:clamp(1.2rem,2vw,1.8rem);color:var(--text-secondary);">&darr;</div>
-      <div style="position:absolute;bottom:30%;left:25%;font-family:var(--font-display);font-weight:800;font-size:clamp(1.2rem,2vw,1.8rem);color:var(--text-secondary);">&larr;</div>
-      <div style="position:absolute;top:14%;left:22%;font-family:var(--font-display);font-weight:800;font-size:clamp(1.2rem,2vw,1.8rem);color:var(--text-secondary);">&uarr;</div>
-    </div>
-    <div class="reveal" style="margin-top:clamp(1rem,2vw,2rem);display:flex;flex-wrap:wrap;gap:clamp(0.5rem,1.5vw,1.5rem);justify-content:center;font-family:var(--font-mono);font-size:clamp(0.8rem,1.1vw,0.95rem);color:var(--text-secondary);">
-      <span>Discover: Identify repeating task</span>
-      <span>&bull;</span>
-      <span>Draft: Write SKILL.md</span>
-      <span>&bull;</span>
-      <span>Test: Compare with/without</span>
-      <span>&bull;</span>
-      <span>Refine: Fix triggers</span>
-      <span>&bull;</span>
-      <span>Deploy: Share &amp; install</span>
-    </div>
-  </div>
-</section>
-
-<!-- ============================================================
-     SLIDE 19 — Choosing Your Rigor Level
-     ============================================================ -->
-<section class="slide content-slide">
-  <div class="bg-dots"></div>
-  <div class="slide-content" style="display:flex;flex-direction:column;justify-content:center;height:100%;">
-    <p class="reveal label">05 — CHOOSING YOUR APPROACH</p>
-    <h2 class="reveal" style="margin-bottom:clamp(1rem,2vw,2rem);">Match the Approach to the Use Case</h2>
-    <div class="grid-3 reveal-scale" style="gap:clamp(1rem,2vw,2rem);">
-      <div class="nb-card" style="background:var(--accent-mint-bg);">
-        <div style="width:40px;height:40px;border:2px solid var(--black);background:var(--accent-mint);box-shadow:3px 3px 0 0 var(--black);margin-bottom:0.5em;display:flex;align-items:center;justify-content:center;">
-          <span style="font-family:var(--font-display);font-weight:800;">&#9733;</span>
-        </div>
-        <h3 style="font-size:clamp(0.9rem,1.4vw,1.1rem);margin-bottom:0.3em;">Simple Personal Skills</h3>
-        <p style="font-size:clamp(0.85rem,1.2vw,1rem);margin-bottom:0.5em;"><strong>Use:</strong> matt pocock approach</p>
-        <p style="font-size:clamp(0.8rem,1.1vw,0.95rem);color:var(--text-secondary);">Grill, draft, iterate. Fast, no testing needed.</p>
-      </div>
-      <div class="nb-card" style="background:var(--accent-sky-bg);">
-        <div style="width:40px;height:40px;border:2px solid var(--black);background:var(--accent-sky);box-shadow:3px 3px 0 0 var(--black);margin-bottom:0.5em;display:flex;align-items:center;justify-content:center;">
-          <span style="font-family:var(--font-display);font-weight:800;">&#9670;</span>
-        </div>
-        <h3 style="font-size:clamp(0.9rem,1.4vw,1.1rem);margin-bottom:0.3em;">Team-Critical with Quality Metrics</h3>
-        <p style="font-size:clamp(0.85rem,1.2vw,1rem);margin-bottom:0.5em;"><strong>Use:</strong> anthropic skill-creator with evals</p>
-        <p style="font-size:clamp(0.8rem,1.1vw,0.95rem);color:var(--text-secondary);">Quantitative benchmarking, visual review, comparison</p>
-      </div>
-      <div class="nb-card" style="background:var(--accent-peach-bg);">
-        <div style="width:40px;height:40px;border:2px solid var(--black);background:var(--accent-peach);box-shadow:3px 3px 0 0 var(--black);margin-bottom:0.5em;display:flex;align-items:center;justify-content:center;">
-          <span style="font-family:var(--font-display);font-weight:800;">&#9888;</span>
-        </div>
-        <h3 style="font-size:clamp(0.9rem,1.4vw,1.1rem);margin-bottom:0.3em;">Discipline-Enforcing Skills</h3>
-        <p style="font-size:clamp(0.85rem,1.2vw,1rem);margin-bottom:0.5em;"><strong>Use:</strong> superpowers TDD methodology</p>
-        <p style="font-size:clamp(0.8rem,1.1vw,0.95rem);color:var(--text-secondary);">Catches real failure modes, bulletproof under pressure</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============================================================
-     SLIDE 20 — Section: AI Risks
+     SLIDE 16 — Section: AI Risks (renumbered from 06)
      ============================================================ -->
 <section class="slide section-slide" style="background: var(--accent-peach-bg);">
   <div class="slide-content">
-    <p class="section-number reveal">06</p>
+    <p class="section-number reveal">05</p>
     <p class="section-name reveal">AI Risks</p>
   </div>
 </section>
 
 <!-- ============================================================
-     SLIDE 21 — Risks and Defenses
+     SLIDE 17 — Risks and Defenses (renumbered from 06)
      ============================================================ -->
 <section class="slide content-slide">
   <div class="bg-dots"></div>
   <div class="slide-content" style="display:flex;flex-direction:column;justify-content:center;height:100%;">
-    <p class="reveal label">06 — RISKS</p>
+    <p class="reveal label">05 — RISKS</p>
     <h2 class="reveal" style="margin-bottom:clamp(1rem,2vw,2rem);">Skills Are Powerful. They Run on Your Machine.</h2>
     <div style="margin-bottom:clamp(1rem,2vw,2rem);">
       <p class="reveal" style="font-family:var(--font-mono);font-size:var(--label-size);text-transform:uppercase;letter-spacing:0.15em;color:#cc3333;margin-bottom:0.5em;">Risks</p>
@@ -1382,7 +1305,7 @@ code { font-family: var(--font-mono); font-size: 0.9em; }
 </section>
 
 <!-- ============================================================
-     SLIDE 22 — Demo Time
+     SLIDE 18 — Demo Time
      ============================================================ -->
 <section class="slide content-slide" style="background: var(--accent-lemon-bg);">
   <div class="slide-content" style="display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;height:100%;">
