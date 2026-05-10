@@ -1,0 +1,24 @@
+1
+00:00:00,100 --> 00:00:03,591
+Despite the different approaches, there are patterns that everyone agrees on.
+
+2
+00:00:03,541 --> 00:00:09,341
+Concrete examples are worth more than abstract rules — one good example in a skill teaches more than five paragraphs of explanation.
+
+3
+00:00:09,341 --> 00:00:13,791
+Always test before deploying — if you can't show that the skill changes the outcome, it's not ready.
+
+4
+00:00:13,791 --> 00:00:18,641
+Keep the main file under five hundred lines — if it's longer, you're probably mixing concerns.
+
+5
+00:00:18,641 --> 00:00:20,958
+And treat skills as living documents.
+
+6
+00:00:20,958 --> 00:00:25,833
+The best skills I've seen evolved from real usage, not from a first draft that was written once and forgotten.
+

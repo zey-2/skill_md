@@ -1,0 +1,24 @@
+1
+00:00:00,100 --> 00:00:02,291
+The structure of a skill is deliberate.
+
+2
+00:00:02,241 --> 00:00:06,275
+SKILL.md is the brain — the agent reads it every time the skill triggers.
+
+3
+00:00:06,275 --> 00:00:12,308
+The references folder is the library — things the agent can look up when it needs detail, like API schemas or architecture docs.
+
+4
+00:00:12,308 --> 00:00:16,391
+Scripts are the hands — deterministic code that runs when the workflow needs precision.
+
+5
+00:00:16,391 --> 00:00:20,375
+And assets are the templates — boilerplate files the agent can copy and customize.
+
+6
+00:00:20,375 --> 00:00:24,200
+This separation matters because it controls what goes into the context window and when.
+

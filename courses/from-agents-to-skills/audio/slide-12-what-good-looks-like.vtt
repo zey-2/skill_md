@@ -1,0 +1,36 @@
+1
+00:00:00,100 --> 00:00:02,466
+So what does a good skill actually look like?
+
+2
+00:00:02,416 --> 00:00:04,525
+Two examples that are worth studying.
+
+3
+00:00:04,525 --> 00:00:10,975
+Matt Pocock's approach is lightweight and conversational — the agent grills you with questions to understand what you want, then drafts the skill together with you.
+
+4
+00:00:10,975 --> 00:00:14,191
+It's fast, practical, and great for personal use.
+
+5
+00:00:14,191 --> 00:00:22,125
+The Superpowers approach is much more rigorous — it runs the task without the skill first, watches it fail, writes the skill to prevent those failures, then pressure-tests it again.
+
+6
+00:00:22,125 --> 00:00:24,016
+Very different levels of effort.
+
+7
+00:00:24,016 --> 00:00:29,150
+But both follow the same principles: clear frontmatter, progressive disclosure, and flat structure.
+
+8
+00:00:29,150 --> 00:00:31,700
+The quality bar isn't about how long the file is.
+
+9
+00:00:31,700 --> 00:00:34,533
+It's about whether the agent does the right thing when it matters.
+

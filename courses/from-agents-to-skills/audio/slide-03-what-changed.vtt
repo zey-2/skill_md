@@ -1,0 +1,32 @@
+1
+00:00:00,100 --> 00:00:04,416
+For the longest time, automation meant writing scripts — if this, then that.
+
+2
+00:00:04,366 --> 00:00:07,325
+You had to anticipate every branch, every edge case.
+
+3
+00:00:07,325 --> 00:00:09,516
+But LLM-based agents are different.
+
+4
+00:00:09,516 --> 00:00:11,208
+They don't follow rules.
+
+5
+00:00:11,208 --> 00:00:13,925
+They reason through situations they've never seen before.
+
+6
+00:00:13,925 --> 00:00:19,025
+They read your codebase, pull from multiple sources, string together a plan, and write working output.
+
+7
+00:00:19,025 --> 00:00:22,158
+The key thing to understand is: this is not a tool upgrade.
+
+8
+00:00:22,158 --> 00:00:24,058
+It's a new category of worker.
+

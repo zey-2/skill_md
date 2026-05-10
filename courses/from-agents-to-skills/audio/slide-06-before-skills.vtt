@@ -1,0 +1,28 @@
+1
+00:00:00,100 --> 00:00:04,400
+Think about what happens when you open Claude Code on a new task, without any skills configured.
+
+2
+00:00:04,350 --> 00:00:10,983
+The agent has no idea how your team writes PR descriptions, or what your code review checklist looks like, or which files to update when you add an endpoint.
+
+3
+00:00:10,983 --> 00:00:12,575
+So it guesses.
+
+4
+00:00:12,575 --> 00:00:14,583
+And then you spend time correcting it.
+
+5
+00:00:14,583 --> 00:00:16,116
+And the frustrating part?
+
+6
+00:00:16,116 --> 00:00:19,675
+You correct the same things, in the same ways, every single session.
+
+7
+00:00:19,675 --> 00:00:23,025
+It's like onboarding a new team member who never learns from past feedback.
+

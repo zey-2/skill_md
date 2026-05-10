@@ -1,0 +1,24 @@
+1
+00:00:00,100 --> 00:00:02,916
+A skill is how you give an agent institutional memory.
+
+2
+00:00:02,866 --> 00:00:04,575
+It's not a prompt template.
+
+3
+00:00:04,575 --> 00:00:11,891
+It's a structured package that tells the agent: when you encounter this type of task, here's exactly what to do, what to avoid, and where to find the reference material.
+
+4
+00:00:11,891 --> 00:00:16,125
+There are domain skills — things the agent needs to know, like your API conventions.
+
+5
+00:00:16,125 --> 00:00:20,358
+And workflow skills — how the agent should operate, like running tests before committing.
+
+6
+00:00:20,358 --> 00:00:23,808
+Together, they turn every session from a cold start into a warm one.
+

@@ -1,0 +1,24 @@
+1
+00:00:00,100 --> 00:00:03,916
+So if agents are this capable, why does the output still feel inconsistent?
+
+2
+00:00:03,866 --> 00:00:06,483
+You run the same prompt twice and get different results.
+
+3
+00:00:06,483 --> 00:00:09,891
+Sometimes it remembers your conventions, sometimes it doesn't.
+
+4
+00:00:09,891 --> 00:00:13,158
+Here's the insight: the model's intelligence isn't the bottleneck.
+
+5
+00:00:13,158 --> 00:00:16,583
+The problem is that the agent doesn't know your team's operating procedures.
+
+6
+00:00:16,583 --> 00:00:18,283
+It doesn't have a playbook.
+

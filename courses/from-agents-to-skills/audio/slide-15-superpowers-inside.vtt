@@ -1,0 +1,20 @@
+1
+00:00:00,100 --> 00:00:04,383
+The Superpowers repository on GitHub is probably the most comprehensive skill library out there.
+
+2
+00:00:04,333 --> 00:00:10,841
+It covers the entire development workflow — testing, debugging, collaboration, even meta-skills about how to write skills themselves.
+
+3
+00:00:10,841 --> 00:00:13,408
+What's interesting is how the skills chain together.
+
+4
+00:00:13,408 --> 00:00:21,941
+You start with brainstorming to figure out what you're building, use git worktrees for isolation, write a plan, execute with test-driven development, get a code review, and then finish the branch.
+
+5
+00:00:21,941 --> 00:00:25,783
+Each skill is focused on one job, but they flow together into a complete workflow.
+

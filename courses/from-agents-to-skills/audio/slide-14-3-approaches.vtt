@@ -1,0 +1,32 @@
+1
+00:00:00,100 --> 00:00:02,258
+There are essentially three schools of thought.
+
+2
+00:00:02,208 --> 00:00:08,125
+Matt Pocock's approach is the most conversational — you talk it through with the agent, it asks you questions, and you co-write the skill.
+
+3
+00:00:08,125 --> 00:00:11,391
+Great for personal skills or when your team just needs a quick convention.
+
+4
+00:00:11,391 --> 00:00:14,691
+The Superpowers approach treats skill writing like test-driven development.
+
+5
+00:00:14,691 --> 00:00:19,775
+You run the task without the skill, watch where it fails, then write the skill to fix those specific failures.
+
+6
+00:00:19,775 --> 00:00:23,783
+It's slower, but it catches edge cases that the conversational approach misses.
+
+7
+00:00:23,783 --> 00:00:30,483
+And Anthropic's skill-creator takes a benchmarking approach — you write test prompts, run them with and without the skill, and grade the outputs quantitatively.
+
+8
+00:00:30,483 --> 00:00:34,525
+This is the most rigorous, and it's best when you need to prove that a skill actually works.
+

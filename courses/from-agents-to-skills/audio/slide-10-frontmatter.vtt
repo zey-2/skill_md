@@ -1,0 +1,28 @@
+1
+00:00:00,100 --> 00:00:04,875
+If you take one thing away from this talk, make it this: the frontmatter is the most important part of the file.
+
+2
+00:00:04,825 --> 00:00:06,991
+The name and description are not metadata.
+
+3
+00:00:06,991 --> 00:00:08,791
+They are the routing mechanism.
+
+4
+00:00:08,791 --> 00:00:14,333
+Before the agent reads a single line of your instructions, it looks at those two fields to decide: should I use this skill right now?
+
+5
+00:00:14,333 --> 00:00:16,433
+Most skill mistakes happen right here.
+
+6
+00:00:16,433 --> 00:00:19,141
+A vague description means the agent never triggers.
+
+7
+00:00:19,141 --> 00:00:23,950
+Start with 'Use when', write it in third person, and describe the situation — not the solution.
+

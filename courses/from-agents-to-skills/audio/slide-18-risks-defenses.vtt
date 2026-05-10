@@ -1,0 +1,44 @@
+1
+00:00:00,100 --> 00:00:02,783
+Skills run on your machine with access to your files.
+
+2
+00:00:02,733 --> 00:00:06,025
+That means you need to treat them like you'd treat any third-party dependency.
+
+3
+00:00:06,025 --> 00:00:11,950
+The three risks that matter most: prompt injection — someone could hide instructions in a document that override your skill's behavior.
+
+4
+00:00:11,950 --> 00:00:16,641
+Supply chain — installing a skill from an author you don't know is like running a random npm package.
+
+5
+00:00:16,641 --> 00:00:21,933
+And data exfiltration — a malicious script could read your environment variables or config files and send them somewhere.
+
+6
+00:00:21,933 --> 00:00:23,866
+The defenses are straightforward.
+
+7
+00:00:23,866 --> 00:00:26,191
+Read the SKILL.md before installing.
+
+8
+00:00:26,191 --> 00:00:27,858
+Check the scripts folder.
+
+9
+00:00:27,858 --> 00:00:29,991
+Only install from authors you trust.
+
+10
+00:00:29,991 --> 00:00:33,150
+If a skill does something that surprises you, don't install it.
+
+11
+00:00:33,150 --> 00:00:34,191
+Period.
+

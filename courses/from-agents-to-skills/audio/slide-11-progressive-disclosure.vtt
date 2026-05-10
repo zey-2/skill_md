@@ -1,0 +1,36 @@
+1
+00:00:00,100 --> 00:00:04,091
+Here's a design principle that makes skills work at scale: progressive disclosure.
+
+2
+00:00:04,041 --> 00:00:06,008
+Think of it like layers of an onion.
+
+3
+00:00:06,008 --> 00:00:09,900
+The outermost layer is just the name and description — roughly a hundred tokens.
+
+4
+00:00:09,900 --> 00:00:12,733
+That's all the agent sees when deciding whether to trigger.
+
+5
+00:00:12,733 --> 00:00:18,141
+Once triggered, it reads the full SKILL.md body — the instructions, steps, constraints.
+
+6
+00:00:18,141 --> 00:00:22,133
+And only when it needs specific reference material does it reach into the references folder.
+
+7
+00:00:22,133 --> 00:00:25,658
+This keeps context windows lean and the agent focused on what matters right now.
+
+8
+00:00:25,658 --> 00:00:28,900
+If you're tempted to write a two-thousand-line SKILL.md, stop.
+
+9
+00:00:28,900 --> 00:00:31,400
+Move the bulk into references and link to it.
+
