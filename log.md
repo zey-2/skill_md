@@ -17,6 +17,7 @@ sources:
   - "raw/Introduction to Claude Skills.md"
   - "raw/Indirect Prompt Injection Attacks Hidden AI Risks.md"
   - "raw/Snyk Finds Prompt Injection in 36%, 1467 Malicious Payloads in a ToxicSkills Study of Agent Skills Supply Chain Compromise.md"
+  - "raw/Meta-Meta-Prompting The Secret to Making AI Agents Work.md"
 tags: [log, agent-skills, agentic-engineering]
 ---
 
@@ -675,3 +676,84 @@ Follow-ups:
 
 - The security considerations from the Anthropic article (malicious skills, data exfiltration, auditing) could warrant a dedicated "Skill Security and Trust" concept page if more sources accumulate on this topic (currently referenced in Skill Governance and MCP security pages).
 - The Anthropic article's mention of agent self-creation/evaluation of skills is a forward-looking claim worth tracking if the ecosystem develops tooling in that direction.
+
+## [2026-05-10] ingest | Meta-Meta-Prompting (Garry Tan) + Agent Skills Overview update
+
+Processed one new raw article and an updated wiki page.
+
+Raw sources processed:
+
+- `raw/Meta-Meta-Prompting The Secret to Making AI Agents Work.md` - Garry Tan's "fat skills, fat code, thin harness" architecture: Skillify meta-skill that creates skills from repeated work, book-mirror workflow, 100K-page structured brain, GBrain/OpenClaw/Hermes Agent stack, compounding personal AI system. Part of his Fat Skills series.
+- `raw/Introduction to Claude Skills.md` - Updated raw source (full Jupyter notebook export). Existing wiki summary already captures key points; no changes needed.
+
+Updated pages:
+
+- `Agent Skills Overview (agentskills.io).md` - Updated with Advantages section (core benefits, team/enterprise value, ecosystem), Problems Agent Skills Solve table, and Sources section with 10 external references.
+
+Generated pages created:
+
+- `Meta-Meta-Prompting The Secret to Making AI Agents Work.md` — Source summary of Garry Tan's article with architecture breakdown, Skillify workflow, brain schema, and getting-started guide.
+
+Updated files:
+
+- `index.md` — Added new raw source to frontmatter and source list; added Source Summaries entry.
+- `log.md`
+
+Important decisions:
+
+- Did not create new concept pages — the article reinforces existing concepts (Harness Engineering, Skill Authoring Workflow, Replacing Code with Skills, Context Development Lifecycle) rather than introducing new ones.
+- Positioned "Skillify" as a concrete example of the skill authoring workflow — the meta-skill that extracts patterns from repeated work into reusable skills.
+
+Follow-ups:
+
+- The GBrain project (github.com/garrytan/gbrain) ships 39 installable skills and claims 97.6% recall on LongMemEval — worth revisiting if this wiki later covers retrieval architectures or brain-style personal knowledge systems.
+- The "cross-modal eval" pattern (running output through multiple models for quality checking) could be a useful addition to the Validation and Evaluation concept page.
+
+## [2026-05-10] maintenance | Organize source summaries into sources/ folder
+
+Moved all 7 source-summary pages from root into `sources/` to keep root clean.
+
+Files moved:
+
+- `sources/Agent Skills (platform docs).md`
+- `sources/Agent Skills Overview (agentskills.io).md`
+- `sources/Equipping Agents for the Real World with Agent Skills.md`
+- `sources/Indirect Prompt Injection Attacks (CrowdStrike).md`
+- `sources/Introduction to Claude Skills (cookbook).md`
+- `sources/Meta-Meta-Prompting The Secret to Making AI Agents Work.md`
+- `sources/Snyk ToxicSkills Research.md`
+
+Also:
+
+- Deleted empty `.codex` stray file
+- Created `.gitignore` to exclude `.claude/settings.local.json`
+- Moved misplaced `courses/from-agents-to-skills/raw/2026-05-10 Skill Authoring Patterns Cross-Project Research.md` → `raw/`
+- Updated `AGENTS.md` to document `sources/` and `concepts/` folder roles
+
+Important decisions:
+
+- Obsidian wikilinks are filename-based, not path-based, so existing links continue to resolve without changes.
+- `README.md` and `image.png` remain in root as legitimate project-level files.
+
+## [2026-05-10] ingest | Matt Pocock Skills for Real Engineers (updated snapshot)
+
+Processed updated snapshot of mattpocock/skills repo — significantly different from the earlier snapshot already in `raw/`.
+
+Key differences from earlier snapshot (`mattpocockskills My personal directory of skills...`):
+
+- **Design philosophy now explicit**: four common agent failure modes (misalignment, verbosity, broken code, ball of mud) mapped to skill solutions
+- **Shared language / CONTEXT.md**: New emphasis on DDD-style ubiquitous language as a concision tool — agents spend fewer tokens, name consistently, navigate easier
+- **New skills**: diagnose (debugging loop), grill-with-docs (grilling + CONTEXT.md/ADR updates), triage (state machine), setup-matt-pocock-skills (per-repo config scaffold), zoom-out (contextual explanation), prototype (throwaway exploration), caveman (ultra-compressed comms)
+- **Removed/renamed skills**: design-an-interface, request-refactor-plan, triage-issue, edit-article, ubiquitous-language, obsidian-vault
+- **Installer**: `npx skills@latest add mattpocock/skills` with interactive `/setup-matt-pocock-skills` wizard
+
+No new concept page created — content reinforces existing pages (Agent Skills, Skill Authoring Workflow, Skill Distribution, Skill Repository Tooling).
+
+Updated:
+
+- `index.md` — Added new raw source to frontmatter and source list
+- `concepts/Agent Skills.md` — Added new source to frontmatter
+- `concepts/Skill Authoring Workflow.md` — Added new source to frontmatter
+- `concepts/Skill Distribution and Installation.md` — Added new source to frontmatter
+- `concepts/Skill Repository Tooling.md` — Added new source to frontmatter
+- `log.md`

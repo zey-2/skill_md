@@ -8,6 +8,7 @@ sources:
   - "raw/openaiskills Skills Catalog for Codex.md"
   - "raw/anthropicsskills Public repository for Agent Skills.md"
   - "raw/mattpocockskills My personal directory of skills, straight from my .claude directory.md"
+  - "raw/mattpocockskills Skills for Real Engineers. Straight from my .claude directory.md"
   - "raw/obrasuperpowers An agentic skills framework & software development methodology that works.md"
   - "raw/VoltAgentawesome-agent-skills A curated collection of 1000+ agent skills from official dev teams and the community, compatible with Claude Code, Codex, Gemini CLI, Cursor, and more.md"
   - "raw/forrestchangandrej-karpathy-skills A single CLAUDE.md file to improve Claude Code behavior, derived from Andrej Karpathy's observations on LLM coding pitfalls.md"
@@ -71,6 +72,8 @@ sources:
   - "raw/Introduction to Claude Skills.md"
   - "raw/Indirect Prompt Injection Attacks Hidden AI Risks.md"
   - "raw/Snyk Finds Prompt Injection in 36%, 1467 Malicious Payloads in a ToxicSkills Study of Agent Skills Supply Chain Compromise.md"
+  - "raw/Meta-Meta-Prompting The Secret to Making AI Agents Work.md"
+  - "raw/2026-05-10 Skill Authoring Patterns Cross-Project Research.md"
 tags: [index, agent-skills, llm-providers]
 ---
 
@@ -130,7 +133,8 @@ tags: [index, agent-skills, llm-providers]
 - `raw/skill.md for AI Agents.md` - Broad synthesis of `skill.md` conventions, portability, repository design, validation, and governance.
 - `raw/openaiskills Skills Catalog for Codex.md` - OpenAI catalog note on built-in, curated, and experimental Codex skills plus installer flow.
 - `raw/anthropicsskills Public repository for Agent Skills.md` - Anthropic repository overview with examples, template structure, and plugin-marketplace installation.
-- `raw/mattpocockskills My personal directory of skills, straight from my .claude directory.md` - Personal skill catalog showing workflow-oriented skills such as PRD writing, TDD, and git guardrails.
+- `raw/mattpocockskills My personal directory of skills, straight from my .claude directory.md` - Earlier snapshot of Matt Pocock's skills: PRD writing, grilling, TDD, issue triage, design-an-interface, ubiquitous language, Obsidian vault.
+- `raw/mattpocockskills Skills for Real Engineers. Straight from my .claude directory.md` - Updated snapshot with design philosophy (alignment via grilling, shared language via CONTEXT.md, feedback loops, avoiding ball of mud). Skills: diagnose, grill-with-docs, triage, improve-codebase-architecture, setup-matt-pocock-skills, tdd, to-issues, to-prd, zoom-out, prototype, caveman, grill-me, write-a-skill, git-guardrails-claude-code, migrate-to-shoehorn, scaffold-exercises, setup-pre-commit.
 - `raw/obrasuperpowers An agentic skills framework & software development methodology that works.md` - Multi-skill framework emphasizing planning, TDD, review, and subagent-driven development across tools.
 - `raw/VoltAgentawesome-agent-skills A curated collection of 1000+ agent skills from official dev teams and the community, compatible with Claude Code, Codex, Gemini CLI, Cursor, and more.md` - Large curated catalog with cross-tool paths, quality criteria, and security cautions.
 - `raw/forrestchangandrej-karpathy-skills A single CLAUDE.md file to improve Claude Code behavior, derived from Andrej Karpathy's observations on LLM coding pitfalls.md` - Project-level behavior guide that is adjacent to, but not identical with, a portable skill package.
@@ -196,6 +200,7 @@ tags: [index, agent-skills, llm-providers]
 - `raw/Introduction to Claude Skills.md` - Official Jupyter cookbook: Excel/PPT/PDF examples via beta API, token optimization (98% savings on initial context), versioning strategy, and troubleshooting guide.
 - `raw/Indirect Prompt Injection Attacks Hidden AI Risks.md` - CrowdStrike blog: indirect prompt injection as OWASP #1 GenAI risk, 300K+ adversarial prompts analyzed, shadow AI (45% BYO AI), real-world examples (AI hiring manipulation, LinkedIn bio injection), and 6-layer defense framework.
 - `raw/Snyk Finds Prompt Injection in 36%, 1467 Malicious Payloads in a ToxicSkills Study of Agent Skills Supply Chain Compromise.md` - Snyk security audit of 3,984 skills from ClawHub: 13.4% critical issues, 36.82% any flaw, 76 confirmed malicious payloads, 8-skill threat taxonomy, identified threat actors, and mcp-scan defense tool.
+- `raw/Meta-Meta-Prompting The Secret to Making AI Agents Work.md` - Garry Tan's "fat skills, fat code, thin harness" architecture: Skillify meta-skill, book-mirror workflow, 100K-page brain, GBrain/OpenClaw/Hermes Agent, compounding personal AI system.
 
 ## Source Summaries
 
@@ -205,3 +210,4 @@ tags: [index, agent-skills, llm-providers]
 - [[Introduction to Claude Skills (cookbook)]] — Official Jupyter cookbook: Excel/PPT/PDF examples, token optimization (98% savings), and versioning strategy.
 - [[Indirect Prompt Injection Attacks (CrowdStrike)]] — CrowdStrike on indirect prompt injection: OWASP #1 risk, shadow AI problem, real-world examples, and defense layers.
 - [[Snyk ToxicSkills Research]] — First comprehensive security audit: 36.82% of skills have flaws, 76 confirmed malicious payloads, threat taxonomy, and defense recommendations.
+- [[Meta-Meta-Prompting The Secret to Making AI Agents Work]] — Garry Tan's personal AI system: fat skills + fat data + thin harness, Skillify meta-skill, 100K-page brain, compounding workflows.
