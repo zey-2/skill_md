@@ -8,6 +8,8 @@ This repository is an LLM-maintained personal knowledge base. Treat the wiki lik
 - `skill_md/raw/` contains raw source material. Do not modify, rewrite, summarize in place, rename, or delete files in `raw/` unless the user explicitly asks.
 - `skill_md/raw/assets/` may contain downloaded images or attachments referenced by raw sources.
 - Generated wiki pages live under `skill_md/`, outside `raw/`.
+  - `skill_md/sources/` contains source-summary pages — one per raw source with key points, quotes, and cross-links.
+  - `skill_md/concepts/` contains concept pages synthesized across multiple sources.
 - `skill_md/index.md` is the content catalog. Create it if missing.
 - `skill_md/log.md` is the append-only activity log. Create it if missing.
 - `skill_md/.obsidian/` contains Obsidian settings. Do not edit it unless the user asks for vault configuration changes.
