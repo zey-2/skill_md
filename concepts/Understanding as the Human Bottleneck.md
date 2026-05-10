@@ -48,13 +48,13 @@ Different projections onto the same data create insight. The wiki itself is an e
 
 ## Context for This Wiki
 
-This concept is the foundational justification for the entire wiki's approach. [[concepts/LLM Fundamentals]] exists because understanding how models work is the layer that cannot be outsourced. [[concepts/Agentic Engineering vs Vibe Coding]] depends on this — the human writes the spec because the human understands the problem. The [[lesson-plan/AI Fundamentals to Agent Skills|AI Fundamentals to Agent Skills]] lesson plan is structured around this insight: fundamentals first, then tools, then automation.
+This concept is the foundational justification for the entire wiki's approach. [[concepts/LLM Fundamentals]] exists because understanding how models work is the layer that cannot be outsourced. [[concepts/Agentic Engineering vs Vibe Coding]] depends on this — the human writes the spec because the human understands the problem. The [[courses/ai-fundamentals-to-agent-skills/lesson-plan|AI Fundamentals to Agent Skills]] lesson plan is structured around this insight: fundamentals first, then tools, then automation.
 
 ## Connections
 
 - [[concepts/LLM Fundamentals]] — The foundational knowledge that cannot be outsourced.
 - [[concepts/Agentic Engineering vs Vibe Coding]] — Understanding is what enables good specs, which is what separates agentic engineering from vibe coding.
-- [[lesson-plan/AI Fundamentals to Agent Skills]] — The lesson plan is structured around building understanding before building automation.
+- [[courses/ai-fundamentals-to-agent-skills/lesson-plan]] — The lesson plan is structured around building understanding before building automation.
 - [[concepts/Validation and Evaluation]] — Understanding enables the human to define what "correct" means; evaluation tests whether the agent met that definition.
 - [[concepts/Replacing Code with Skills]] — Prompt-based isolation lacks the guarantees of hard-coded guardrails; understanding the failure modes is what prevents trusting the wrong model for the job.
 

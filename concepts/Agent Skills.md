@@ -1,7 +1,7 @@
 ---
 type: concept
 created: 2026-04-26
-updated: 2026-04-26
+updated: 2026-05-10
 status: active
 sources:
   - "raw/skill.md for AI Agents.md"
@@ -16,6 +16,10 @@ sources:
   - "raw/2026-04-26 Claude Agent SDK source.md"
   - "raw/2026-04-26 OpenAI Codex Plugins docs.md"
   - "raw/2026-04-26 Claude Code Plugins docs.md"
+  - "raw/Equipping agents for the real world with Agent Skills.md"
+  - "raw/Agent Skills Overview.md"
+  - "raw/Agent Skills.md"
+  - "raw/Introduction to Claude Skills.md"
 tags: [agent-skills, ai-agents]
 ---
 
@@ -56,6 +60,17 @@ They also differ in granularity. Some repositories publish many small skills for
 
 The likely reason is that each platform has a different runtime, UI, and installation model. A portable concept exists, but the operational boundaries are still settling.
 
+## Skill Development Guidelines
+
+Anthropic's engineering article outlines four practical guidelines for authoring and testing skills:
+
+- **Start with evaluation**: Run agents on representative tasks, observe where they struggle, and build skills incrementally to address specific gaps.
+- **Structure for scale**: Split unwieldy `SKILL.md` files into separate referenced files. Keep mutually exclusive contexts separate to reduce token usage. Make it clear whether code should be run or read as reference.
+- **Think from Claude's perspective**: Monitor real usage for unexpected trajectories. Pay special attention to `name` and `description` quality — these are the routing signals that determine when the skill triggers.
+- **Iterate with Claude**: Ask Claude to capture its own successful approaches and common mistakes into reusable skill content. If it goes off-track, ask it to self-reflect on what went wrong. This discovers what context Claude actually needs rather than guessing upfront.
+
+The article also frames building a skill as "putting together an onboarding guide for a new hire" — a useful mental model for skill authors.
+
 ## Connections
 
 - [[SKILL.md Package Anatomy]] explains the file and folder structure.
@@ -71,6 +86,11 @@ The likely reason is that each platform has a different runtime, UI, and install
 - [[concepts/Claude Code Architecture Deep Dive]] provides the source-level analysis of where skills sit in Claude Code's extensibility spectrum (Hooks → Skills → Plugins → MCP) and how SkillTool vs AgentTool differ in context cost.
 - [[concepts/LLM Fundamentals]] explains how LLMs work under the hood — why skills need precise wording, why context matters, and why evaluation is necessary.
 - [[concepts/OpenAI Responses API]] explains OpenAI's stateful API primitive for agentic tool use and reasoning models.
+- [[Equipping Agents for the Real World with Agent Skills]] Anthropic's engineering article: the official narrative introducing skills, with the PDF skill walk-through and development guidelines.
+- [[Agent Skills Overview (agentskills.io)]] The open standard homepage: concise definition, three-stage loading (Discovery, Activation, Execution), and cross-product reuse.
+- [[Agent Skills (platform docs)]] Official platform docs: VM architecture, beta API requirements, runtime constraints per surface, and ZDR notice.
+- [[Introduction to Claude Skills (cookbook)]] Official cookbook: Excel/PPT/PDF examples, token optimization (98% savings), and versioning strategy.
+- [[concepts/Skill Security and Supply Chain Risk]] Security landscape: 36% of skills have flaws, 76 confirmed malicious payloads, and the convergence of prompt injection with traditional malware.
 
 ## Open Questions
 

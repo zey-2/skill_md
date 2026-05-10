@@ -1,7 +1,7 @@
 ---
 type: index
 created: 2026-04-26
-updated: 2026-05-04
+updated: 2026-05-10
 status: active
 sources:
   - "raw/skill.md for AI Agents.md"
@@ -65,6 +65,12 @@ sources:
   - "raw/Collaborative AI Engineering One Dev, Two Dozen Agents, Zero Alignment — Maggie Appleton, GitHub.md"
   - "raw/Replacing 12K LoC with a 200 LoC Skill — David Gomes, Cursor.md"
   - "raw/Context Is the New Code — Patrick Debois, Tessl.md"
+  - "raw/Equipping agents for the real world with Agent Skills.md"
+  - "raw/Agent Skills Overview.md"
+  - "raw/Agent Skills.md"
+  - "raw/Introduction to Claude Skills.md"
+  - "raw/Indirect Prompt Injection Attacks Hidden AI Risks.md"
+  - "raw/Snyk Finds Prompt Injection in 36%, 1467 Malicious Payloads in a ToxicSkills Study of Agent Skills Supply Chain Compromise.md"
 tags: [index, agent-skills, llm-providers]
 ---
 
@@ -113,10 +119,11 @@ tags: [index, agent-skills, llm-providers]
 - [[concepts/Replacing Code with Skills|Replacing Code with Skills]] — Cursor replaced ~15K lines of application code with a ~200-line skill, trading hard-coded guardrails for prompt-based instructions backed by evals and RL training.
 - [[concepts/Context Development Lifecycle|Context Development Lifecycle]] — Debois's DevOps-inspired framework: Generate → Evaluate → Distribute → Observe as the lifecycle for context, with library authoring and organizational loops, and the context flywheel.
 - [[concepts/Context Observability and Feedback|Context Observability and Feedback]] — Monitoring context effectiveness through agent logs, PR feedback, production failures, sandbox testing, context filters, and AI SBOM.
+- [[concepts/Skill Security and Supply Chain Risk|Skill Security and Supply Chain Risk]] — Security landscape: 36% of skills have flaws, 76 confirmed malicious payloads, and the convergence of prompt injection with traditional malware.
 
 ## Lesson Plans
 
-- [[lesson-plan/AI Fundamentals to Agent Skills|AI Fundamentals to Agent Skills]] - 16-module curriculum (~40-60 hours) progressing from ML basics through authoring, testing, and publishing reusable Agent Skills. Includes three learning pathways (Skill Author, Agent Developer, Quick Start).
+- [[courses/ai-fundamentals-to-agent-skills/lesson-plan|AI Fundamentals to Agent Skills]] - 16-module curriculum (~40-60 hours) progressing from ML basics through authoring, testing, and publishing reusable Agent Skills. Includes three learning pathways (Skill Author, Agent Developer, Quick Start).
 
 ## Raw Sources
 
@@ -183,3 +190,18 @@ tags: [index, agent-skills, llm-providers]
 - `raw/Collaborative AI Engineering One Dev, Two Dozen Agents, Zero Alignment — Maggie Appleton, GitHub.md` - Maggie Appleton (GitHub Next) talk on ACE: the alignment gap when individual agent productivity outpaces team coordination. Solo agents create wasted work, coordination debt, and post-implementation rework. Multiplayer sessions, collaborative planning, and proactive agents as solutions.
 - `raw/Replacing 12K LoC with a 200 LoC Skill — David Gomes, Cursor.md` - David Gomes (Cursor) talk on replacing ~15K lines of git worktrees application code with a ~200-line skill. Covers prompt-as-code, subagent coordination, evals for isolation reliability, RL training, and the tradeoff between hard-coded guardrails and prompt-based trust.
 - `raw/Context Is the New Code — Patrick Debois, Tessl.md` - AI Engineer World's Fair talk: context development lifecycle (Generate → Evaluate → Distribute → Observe) as DevOps for prompts, skills, and memory. Covers context flywheel, eval non-determinism, error budgets, context dependency hell, AI SBOM, context filters, and harness engineering observability.
+- `raw/Equipping agents for the real world with Agent Skills.md` - Anthropic engineering blog: official Agent Skills introduction, PDF skill walk-through, progressive disclosure, code execution, skill development guidelines, and security considerations.
+- `raw/Agent Skills Overview.md` - agentskills.io official homepage: open standard definition, three-stage loading (Discovery, Activation, Execution), folder structure, and cross-product reuse.
+- `raw/Agent Skills.md` - Official platform docs: VM architecture, beta API requirements (3 headers), progressive disclosure token budgets (~100/<5k/unlimited), runtime constraints per surface, ZDR notice, and field requirements.
+- `raw/Introduction to Claude Skills.md` - Official Jupyter cookbook: Excel/PPT/PDF examples via beta API, token optimization (98% savings on initial context), versioning strategy, and troubleshooting guide.
+- `raw/Indirect Prompt Injection Attacks Hidden AI Risks.md` - CrowdStrike blog: indirect prompt injection as OWASP #1 GenAI risk, 300K+ adversarial prompts analyzed, shadow AI (45% BYO AI), real-world examples (AI hiring manipulation, LinkedIn bio injection), and 6-layer defense framework.
+- `raw/Snyk Finds Prompt Injection in 36%, 1467 Malicious Payloads in a ToxicSkills Study of Agent Skills Supply Chain Compromise.md` - Snyk security audit of 3,984 skills from ClawHub: 13.4% critical issues, 36.82% any flaw, 76 confirmed malicious payloads, 8-skill threat taxonomy, identified threat actors, and mcp-scan defense tool.
+
+## Source Summaries
+
+- [[Equipping Agents for the Real World with Agent Skills]] — Anthropic's engineering article summarized: skill anatomy, context window diagrams, development guidelines, security, and future roadmap.
+- [[Agent Skills Overview (agentskills.io)]] — The open standard homepage: folder format, three-stage progressive disclosure, and cross-product reuse as the core value proposition.
+- [[Agent Skills (platform docs)]] — Official platform docs: VM architecture, beta API, runtime constraints per surface, ZDR notice, and field requirements.
+- [[Introduction to Claude Skills (cookbook)]] — Official Jupyter cookbook: Excel/PPT/PDF examples, token optimization (98% savings), and versioning strategy.
+- [[Indirect Prompt Injection Attacks (CrowdStrike)]] — CrowdStrike on indirect prompt injection: OWASP #1 risk, shadow AI problem, real-world examples, and defense layers.
+- [[Snyk ToxicSkills Research]] — First comprehensive security audit: 36.82% of skills have flaws, 76 confirmed malicious payloads, threat taxonomy, and defense recommendations.

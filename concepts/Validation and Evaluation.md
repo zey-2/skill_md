@@ -1,7 +1,7 @@
 ---
 type: concept
 created: 2026-04-26
-updated: 2026-05-04
+updated: 2026-05-10
 status: active
 sources:
   - "raw/skill.md for AI Agents.md"

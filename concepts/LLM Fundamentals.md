@@ -71,4 +71,4 @@ Understanding these fundamentals clarifies why Agent Skills are structured the w
 - [[concepts/Validation and Evaluation]] — addresses the stochastic behavior that makes systematic evaluation necessary.
 - [[concepts/MCP and Tool-Integration Architecture]] — tools are the mechanism that extends LLMs beyond pure text generation.
 - [[concepts/OpenAI Responses API]] — shows how the Responses API manages the statelessness of LLM inference via server-side conversation state.
-- [[lesson-plan/AI Fundamentals to Agent Skills]] — Modules 1–4 cover these foundations as prerequisites for the full curriculum.
+- [[courses/ai-fundamentals-to-agent-skills/lesson-plan]] — Modules 1–4 cover these foundations as prerequisites for the full curriculum.

@@ -1,7 +1,7 @@
 ---
 type: log
 created: 2026-04-26
-updated: 2026-05-04
+updated: 2026-05-10
 status: active
 sources:
   - "raw/skill.md for AI Agents.md"
@@ -11,6 +11,12 @@ sources:
   - "raw/obrasuperpowers An agentic skills framework & software development methodology that works.md"
   - "raw/VoltAgentawesome-agent-skills A curated collection of 1000+ agent skills from official dev teams and the community, compatible with Claude Code, Codex, Gemini CLI, Cursor, and more.md"
   - "raw/forrestchangandrej-karpathy-skills A single CLAUDE.md file to improve Claude Code behavior, derived from Andrej Karpathy's observations on LLM coding pitfalls.md"
+  - "raw/Equipping agents for the real world with Agent Skills.md"
+  - "raw/Agent Skills Overview.md"
+  - "raw/Agent Skills.md"
+  - "raw/Introduction to Claude Skills.md"
+  - "raw/Indirect Prompt Injection Attacks Hidden AI Risks.md"
+  - "raw/Snyk Finds Prompt Injection in 36%, 1467 Malicious Payloads in a ToxicSkills Study of Agent Skills Supply Chain Compromise.md"
 tags: [log, agent-skills, agentic-engineering]
 ---
 
@@ -600,3 +606,72 @@ Follow-ups:
 - If the wiki later tracks concrete CI/CD tools for context evals, create a dedicated "Context CI/CD" section or page.
 - The AI SBOM concept could become its own page if the wiki accumulates more sources on skill provenance, signing, and supply-chain trust.
 - Context filters (WAF for prompts) is an emerging pattern — revisit if tooling matures around this.
+
+## [2026-05-10] ingest | Official Claude docs + Skill security research
+
+Processed 4 newly added raw articles: two official Claude Skills documentation/cookbook sources, and two security research articles covering indirect prompt injection and the Snyk ToxicSkills supply chain audit.
+
+Raw source notes processed:
+
+- `raw/Agent Skills.md` - Official platform.claude.com docs: VM architecture, beta API requirements (3 beta headers), progressive disclosure token budgets (~100/<5k/unlimited), runtime constraints per surface (API vs claude.ai vs Claude Code), ZDR ineligibility notice, name/description field requirements, and "treat like installing software" security guidance.
+- `raw/Introduction to Claude Skills.md` - Official Jupyter cookbook: Excel/PPT/PDF generation via beta API with code execution tool, token optimization (98% savings on initial context), versioning strategy (use "latest" for Anthropic skills), generation time expectations (40s-2min), and troubleshooting guide.
+- `raw/Indirect Prompt Injection Attacks Hidden AI Risks.md` - CrowdStrike blog: indirect prompt injection as OWASP #1 GenAI risk, 300K+ adversarial prompts analyzed, 150+ techniques tracked, shadow AI problem (45% BYO AI without IT knowledge), real-world examples (AI hiring platform manipulation, LinkedIn bio injection), and 6-layer defense framework.
+- `raw/Snyk Finds Prompt Injection in 36%, 1467 Malicious Payloads in a ToxicSkills Study of Agent Skills Supply Chain Compromise.md` - Snyk security audit of 3,984 skills from ClawHub/skills.sh (Feb 2026): 13.4% critical issues (534 skills), 36.82% any flaw (1,467 skills), 76 confirmed malicious payloads (credential theft, backdoors, exfiltration), 91% of malicious skills combine prompt injection + traditional malware, 8 threat actors identified, 3 attack techniques (external malware distribution, obfuscated exfiltration, security disablement), and mcp-scan open-source defense tool.
+
+Generated pages created:
+
+- `Agent Skills (platform docs).md` — Source summary of official platform docs with VM architecture, API requirements, runtime constraints, and security guidance.
+- `Introduction to Claude Skills (cookbook).md` — Source summary of official Jupyter cookbook with token optimization, versioning, and troubleshooting.
+- `Indirect Prompt Injection Attacks (CrowdStrike).md` — Source summary of CrowdStrike analysis on indirect prompt injection threat landscape.
+- `Snyk ToxicSkills Research.md` — Source summary of Snyk ToxicSkills security audit with threat taxonomy, attack techniques, and defense recommendations.
+- `concepts/Skill Security and Supply Chain Risk.md` — New concept page synthesizing security research from Snyk and CrowdStrike: landscape overview, why Agent Skills are worse than traditional package risks, attack techniques, indirect injection vectors, defense layers, and runtime constraint implications.
+
+Generated pages updated:
+
+- `concepts/Agent Skills.md` — Added 2 new sources to frontmatter; added platform docs and cookbook to Connections with brief descriptions; added Skill Security concept link.
+- `index.md` — Added 4 new raw sources to frontmatter and source list; added new concept article entry; added 4 new source summaries.
+- `log.md`
+
+Important decisions:
+
+- Created a dedicated "Skill Security and Supply Chain Risk" concept page rather than folding into Skill Governance and Metrics. The security research has enough distinct content (ThreatSkills taxonomy, indirect injection, attack techniques, defense layers, runtime constraint analysis) to warrant its own page. Skill Governance focuses on ownership, review, and quality metrics; Skill Security focuses on attack surfaces, malware, and supply chain compromise.
+- Did not create source summaries for the two security articles as separate entries — each security source got its own source summary page because they have different scopes (CrowdStrike = broader prompt injection threat landscape; Snyk = Agent Skills-specific supply chain audit).
+- Positioned the Snyk ToxicSkills data as the primary evidence for the new Skill Security concept page, with CrowdStrike providing the broader indirect injection context and Anthropic's own security guidance providing the platform-level baseline.
+
+Follow-ups:
+
+- The ToxicSkills research mentions `mcp-scan` as an open-source scanning tool — consider adding a practical "how to audit your installed skills" section to the Skill Security page if this becomes a recurring operational need.
+- The 8 identified threat actors and malicious skill URLs should be tracked if this wiki later maintains a "known bad" indicator list.
+- CrowdStrike's mention of OWASP 2025 Top 10 and the Pangea acquisition context could be worth tracking if OWASP publishes formal Agent Skills security guidance.
+
+## [2026-05-10] ingest | Agent Skills official sources (Anthropic blog + agentskills.io)
+
+Processed two newly added raw articles covering the official Anthropic engineering introduction to Agent Skills and the agentskills.io open standard homepage.
+
+Raw source notes processed:
+
+- `raw/Equipping agents for the real world with Agent Skills.md` - Anthropic engineering blog: official Agent Skills introduction using the PDF skill as a walk-through example. Covers skill anatomy, progressive disclosure with context window diagrams, code execution as tools, skill development guidelines (start with eval, structure for scale, think from Claude's perspective, iterate with Claude), security considerations, and future roadmap (agent self-creation, MCP complement).
+- `raw/Agent Skills Overview.md` - agentskills.io official homepage: open standard definition, canonical three-stage loading (Discovery, Activation, Execution), folder structure template, and cross-product reuse as the core value proposition.
+
+Generated pages created:
+
+- `Equipping Agents for the Real World with Agent Skills.md` — Source summary of the Anthropic engineering article with key points, quotes, and cross-links.
+- `Agent Skills Overview (agentskills.io).md` — Source summary of the agentskills.io open standard homepage.
+
+Generated pages updated:
+
+- `concepts/Agent Skills.md` — Added both new sources to frontmatter; added "Skill Development Guidelines" section with Anthropic's four guidelines; added source links to Connections.
+- `concepts/Progressive Disclosure.md` — Added both new sources to frontmatter; added agentskills.io canonical stage names (Discovery, Activation, Execution) and Anthropic's context window visualization reference.
+- `index.md` — Added two new raw sources to frontmatter and source list; added Source Summaries section with both new entries.
+- `log.md`
+
+Important decisions:
+
+- Created two dedicated source-summary pages rather than folding content only into concept pages, because both sources are foundational references for the wiki's core topic and deserve standalone summaries.
+- Did not create new concept pages since the content reinforced existing concepts (Agent Skills, Progressive Disclosure) rather than introducing new ones.
+- Positioned the agentskills.io "Discovery/Activation/Execution" terminology as the canonical three-stage naming, supplementing the existing descriptive progressive disclosure content.
+
+Follow-ups:
+
+- The security considerations from the Anthropic article (malicious skills, data exfiltration, auditing) could warrant a dedicated "Skill Security and Trust" concept page if more sources accumulate on this topic (currently referenced in Skill Governance and MCP security pages).
+- The Anthropic article's mention of agent self-creation/evaluation of skills is a forward-looking claim worth tracking if the ecosystem develops tooling in that direction.

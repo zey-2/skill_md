@@ -1,11 +1,13 @@
 ---
 type: concept
 created: 2026-04-26
-updated: 2026-04-26
+updated: 2026-05-10
 status: active
 sources:
   - "raw/skill.md for AI Agents.md"
   - "raw/VoltAgentawesome-agent-skills A curated collection of 1000+ agent skills from official dev teams and the community, compatible with Claude Code, Codex, Gemini CLI, Cursor, and more.md"
+  - "raw/Equipping agents for the real world with Agent Skills.md"
+  - "raw/Agent Skills Overview.md"
 tags: [agent-skills, progressive-disclosure, context-management]
 ---
 
@@ -17,7 +19,7 @@ Progressive disclosure means giving the agent only the information it needs at e
 
 This matters because agent context is limited. A skill that dumps everything into one file may be complete, but it can be harder to route, harder to read, and more expensive to load.
 
-Sources: `raw/skill.md for AI Agents.md` and `raw/VoltAgentawesome-agent-skills A curated collection of 1000+ agent skills from official dev teams and the community, compatible with Claude Code, Codex, Gemini CLI, Cursor, and more.md`.
+Sources: `raw/skill.md for AI Agents.md`, `raw/VoltAgentawesome-agent-skills`, `raw/Equipping agents for the real world with Agent Skills.md`, and `raw/Agent Skills Overview.md`.
 
 ## Key Ideas and Evidence
 
@@ -26,6 +28,8 @@ The original synthesis describes a three-level loading model: metadata first, th
 The newer curated source adds more concrete heuristics. It recommends keeping top-level metadata under about 100 tokens, keeping the skill body under about 500 lines, and loading large docs or schemas on demand instead of inlining them.
 
 The key design rule is simple: the main skill file should explain the task, trigger conditions, steps, and constraints. Long schemas, examples, background docs, and detailed references should live elsewhere.
+
+The agentskills.io open standard gives the three stages canonical names: **Discovery** (metadata at startup), **Activation** (reading `SKILL.md` when a task matches), and **Execution** (following instructions, loading referenced files or running scripts on demand). Anthropic's engineering article illustrates this with a context window diagram showing how the window grows as each level is loaded.
 
 ## Where Sources Agree
 
