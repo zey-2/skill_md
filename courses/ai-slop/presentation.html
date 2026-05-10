@@ -1,0 +1,1012 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>What is AI Slop?</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg-primary: #f0eefc;
+    --bg-white: #ffffff;
+    --text-primary: #000000;
+    --accent: #B6ACE4;
+    --accent-alt: #97ee88;
+    --accent-peach: #f5a8a8;
+    --accent-sky: #88c8ee;
+    --accent-lemon: #f5e888;
+    --black: #000000;
+    --shadow-brutal: 4px 4px 0px 0px var(--black);
+    --shadow-brutal-lg: 8px 8px 0px 0px var(--black);
+    --font-display: 'Syne', sans-serif;
+    --font-body: 'Space Grotesk', sans-serif;
+
+    --title-size: clamp(2rem, 6vw, 5rem);
+    --subtitle-size: clamp(1rem, 2.5vw, 1.5rem);
+    --body-size: clamp(0.875rem, 1.5vw, 1.25rem);
+    --label-size: clamp(0.625rem, 1vw, 0.875rem);
+    --slide-padding: clamp(1.5rem, 5vw, 5rem);
+    --content-gap: clamp(1rem, 2.5vw, 2.5rem);
+
+    --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+    --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+    --duration-normal: 0.6s;
+    --duration-slow: 1s;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html {
+    scroll-snap-type: y mandatory;
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+  }
+
+  .slide {
+    width: 100vw;
+    height: 100vh;
+    height: 100dvh;
+    overflow: hidden;
+    scroll-snap-align: start;
+    position: relative;
+    font-family: var(--font-body);
+    color: var(--text-primary);
+  }
+
+  .slide-content {
+    height: 100%;
+    padding: var(--slide-padding);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    z-index: 2;
+  }
+
+  /* === Reveals === */
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity var(--duration-normal) var(--ease-out-expo),
+                transform var(--duration-normal) var(--ease-out-expo);
+  }
+  .slide.visible .reveal { opacity: 1; transform: translateY(0); }
+  .reveal:nth-child(1) { transition-delay: 0.1s; }
+  .reveal:nth-child(2) { transition-delay: 0.2s; }
+  .reveal:nth-child(3) { transition-delay: 0.3s; }
+  .reveal:nth-child(4) { transition-delay: 0.4s; }
+  .reveal:nth-child(5) { transition-delay: 0.5s; }
+  .reveal:nth-child(6) { transition-delay: 0.6s; }
+
+  .reveal-scale {
+    opacity: 0;
+    transform: scale(0.9);
+    transition: opacity var(--duration-normal), transform var(--duration-normal) var(--ease-spring);
+  }
+  .slide.visible .reveal-scale { opacity: 1; transform: scale(1); }
+
+  .reveal-left {
+    opacity: 0;
+    transform: translateX(-50px);
+    transition: opacity var(--duration-normal), transform var(--duration-normal) var(--ease-out-expo);
+  }
+  .slide.visible .reveal-left { opacity: 1; transform: translateX(0); }
+
+  .reveal-word span {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.4s var(--ease-out-expo), transform 0.4s var(--ease-out-expo);
+  }
+  .slide.visible .reveal-word span { opacity: 1; transform: translateY(0); }
+
+  /* === Progress bar === */
+  .progress-bar-track {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: rgba(0,0,0,0.1);
+    z-index: 1000;
+  }
+  .progress-bar {
+    height: 100%;
+    background: var(--black);
+    width: 0%;
+    transition: width 0.3s ease;
+  }
+
+  /* === Nav dots === */
+  .nav-dots {
+    position: fixed;
+    right: clamp(0.75rem, 2vw, 2rem);
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    z-index: 1000;
+  }
+  .nav-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    border: 2px solid var(--black);
+    background: transparent;
+    cursor: pointer;
+    transition: opacity 0.3s, transform 0.3s, background 0.3s;
+    padding: 0;
+  }
+  .nav-dot.active {
+    background: var(--black);
+    transform: scale(1.4);
+  }
+
+  /* === Slide footer === */
+  .slide-footer {
+    position: absolute;
+    bottom: clamp(0.75rem, 2vw, 1.5rem);
+    right: clamp(1rem, 3vw, 2rem);
+    font-size: var(--label-size);
+    font-weight: 500;
+    opacity: 0.5;
+    z-index: 3;
+  }
+
+  /* === Labels === */
+  .label {
+    font-size: var(--label-size);
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 0.5em;
+  }
+
+  /* === Brutalist Card === */
+  .brutal-card {
+    background: var(--bg-white);
+    border: 2px solid var(--black);
+    box-shadow: var(--shadow-brutal);
+    padding: clamp(1rem, 3vw, 2rem);
+    border-radius: 0;
+  }
+
+  .brutal-card-lg {
+    background: var(--bg-white);
+    border: 3px solid var(--black);
+    box-shadow: var(--shadow-brutal-lg);
+    padding: clamp(1.5rem, 4vw, 3rem);
+    border-radius: 0;
+  }
+
+  /* === Badge === */
+  .brutal-badge {
+    display: inline-block;
+    background: var(--accent);
+    border: 2px solid var(--black);
+    padding: 0.2em 0.8em;
+    font-weight: 700;
+    font-size: var(--label-size);
+    letter-spacing: 0.05em;
+  }
+
+  /* === Title slide === */
+  .title-slide {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .title-card {
+    max-width: clamp(400px, 70vw, 800px);
+    text-align: center;
+  }
+  .title-card h1 {
+    font-family: var(--font-display);
+    font-size: var(--title-size);
+    line-height: 1.05;
+    font-weight: 800;
+    margin-bottom: var(--content-gap);
+  }
+  .title-card .subtitle {
+    font-size: var(--subtitle-size);
+    color: var(--text-secondary, #555);
+    max-width: 40ch;
+    margin: 0 auto;
+  }
+  .title-card .author {
+    margin-top: var(--content-gap);
+    font-size: var(--label-size);
+    opacity: 0.6;
+  }
+
+  /* === Section divider === */
+  .section-divider-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+    padding: var(--slide-padding);
+    gap: var(--content-gap);
+  }
+  .section-number-row {
+    display: flex;
+    align-items: center;
+    gap: clamp(0.75rem, 2vw, 1.5rem);
+  }
+  .section-number {
+    font-size: clamp(4rem, 12vw, 10rem);
+    font-weight: 900;
+    line-height: 1;
+    color: var(--accent);
+    font-family: var(--font-display);
+  }
+  .section-rule {
+    flex: 1;
+    max-width: clamp(3rem, 10vw, 8rem);
+    height: 3px;
+    background: var(--black);
+  }
+  .section-divider .section-title {
+    font-size: clamp(2rem, 5vw, 4rem);
+    font-weight: 700;
+    font-family: var(--font-display);
+    margin: 0;
+    line-height: 1.1;
+  }
+  .section-divider .section-subtitle {
+    font-size: var(--subtitle-size);
+    color: var(--text-secondary, #555);
+    margin: 0;
+    max-width: 30ch;
+  }
+
+  /* === Content slide === */
+  .content-slide h2 {
+    font-family: var(--font-display);
+    font-size: clamp(1.5rem, 4vw, 3rem);
+    font-weight: 700;
+    line-height: 1.15;
+    margin-bottom: var(--content-gap);
+  }
+  .content-slide p {
+    font-size: var(--body-size);
+    line-height: 1.7;
+    max-width: 60ch;
+  }
+
+  /* === Bullet list === */
+  .bullet-list {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: clamp(0.5rem, 1.5vw, 1rem);
+  }
+  .bullet-list li {
+    font-size: var(--body-size);
+    line-height: 1.5;
+    padding-left: 1.5em;
+    position: relative;
+  }
+  .bullet-list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.45em;
+    width: 0.6em;
+    height: 0.6em;
+    background: var(--black);
+  }
+
+  /* === Slop specimen === */
+  .slop-specimen {
+    border: 2px solid var(--black);
+    padding: clamp(0.75rem, 2vw, 1.5rem);
+    background: rgba(255,255,255,0.6);
+    position: relative;
+    margin-bottom: 0.5em;
+  }
+  .slop-specimen::before {
+    content: 'AI SLOP';
+    position: absolute;
+    top: -0.65em;
+    left: 0.5em;
+    background: var(--accent-peach);
+    border: 1px solid var(--black);
+    padding: 0 0.4em;
+    font-size: 0.6em;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+  }
+  .slop-specimen .slop-text {
+    font-size: var(--label-size);
+    opacity: 0.5;
+    font-style: italic;
+    line-height: 1.5;
+  }
+
+  /* === Stats grid === */
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(clamp(120px, 18vw, 200px), 1fr));
+    gap: clamp(0.75rem, 2vw, 1.5rem);
+  }
+  .stat {
+    background: var(--bg-white);
+    border: 2px solid var(--black);
+    box-shadow: var(--shadow-brutal);
+    padding: clamp(1rem, 2.5vw, 2rem);
+    text-align: center;
+  }
+  .stat-number {
+    font-family: var(--font-display);
+    font-size: clamp(1.8rem, 4vw, 3rem);
+    font-weight: 800;
+    line-height: 1;
+    display: block;
+    overflow-wrap: break-word;
+  }
+  .stat-unit {
+    font-size: clamp(1rem, 2.5vw, 1.5rem);
+    font-weight: 700;
+  }
+  .stat-label {
+    display: block;
+    margin-top: 0.5em;
+    font-size: var(--label-size);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  /* === Quote === */
+  .quote-slide blockquote {
+    font-family: var(--font-display);
+    font-size: clamp(1.5rem, 3.5vw, 2.5rem);
+    line-height: 1.4;
+    max-width: 50ch;
+    font-weight: 700;
+    border-left: 4px solid var(--black);
+    padding-left: clamp(1rem, 3vw, 2rem);
+  }
+  .quote-slide cite {
+    display: block;
+    margin-top: var(--content-gap);
+    font-family: var(--font-body);
+    font-size: var(--body-size);
+    font-style: normal;
+    font-weight: 500;
+    opacity: 0.7;
+  }
+
+  /* === Closing === */
+  .closing-slide {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .closing-card {
+    max-width: clamp(400px, 70vw, 800px);
+    text-align: center;
+  }
+  .closing-card h1 {
+    font-family: var(--font-display);
+    font-size: var(--title-size);
+    font-weight: 800;
+    margin-bottom: var(--content-gap);
+  }
+  .closing-card p {
+    font-size: var(--subtitle-size);
+    opacity: 0.7;
+  }
+
+  /* === Comparison === */
+  .comparison {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(1rem, 3vw, 2rem);
+  }
+  .comparison-col h3 {
+    font-family: var(--font-display);
+    font-size: clamp(1.2rem, 3vw, 1.8rem);
+    font-weight: 700;
+    margin-bottom: 0.5em;
+    padding-bottom: 0.3em;
+    border-bottom: 3px solid var(--black);
+  }
+  .comparison-col ul {
+    list-style: none;
+    padding: 0;
+  }
+  .comparison-col li {
+    font-size: var(--body-size);
+    line-height: 1.6;
+    padding: 0.3em 0;
+    padding-left: 1.2em;
+    position: relative;
+  }
+  .comparison-col.human li::before {
+    content: '+';
+    position: absolute;
+    left: 0;
+    font-weight: 700;
+    color: var(--accent-alt);
+    font-size: 1.2em;
+  }
+  .comparison-col.slop li::before {
+    content: '-';
+    position: absolute;
+    left: 0;
+    font-weight: 700;
+    color: var(--accent-peach);
+    font-size: 1.2em;
+  }
+
+  /* === Accent backgrounds === */
+  .bg-lavender { background: #f0eefc; }
+  .bg-mint { background: #eefbec; }
+  .bg-peach { background: #fef0f0; }
+  .bg-sky { background: #ecf5fb; }
+  .bg-lemon { background: #fefaec; }
+  .bg-white { background: var(--bg-white); }
+
+  /* === Responsive === */
+  @media (max-width: 600px) {
+    .comparison { grid-template-columns: 1fr; }
+    .stats-grid { grid-template-columns: 1fr 1fr; }
+  }
+
+  /* === Reduced motion === */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+
+  /* === Print === */
+  @media print {
+    html { scroll-snap-type: none; }
+    .slide {
+      height: auto;
+      min-height: 100vh;
+      page-break-after: always;
+      page-break-inside: avoid;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+    .progress-bar-track, .nav-dots { display: none; }
+    .reveal, .reveal-scale, .reveal-left, .reveal-blur, .reveal-word span {
+      opacity: 1 !important;
+      transform: none !important;
+      filter: none !important;
+    }
+  }
+
+  /* === Speaker notes hidden === */
+  aside.notes { display: none; }
+</style>
+</head>
+<body>
+
+<div class="progress-bar-track"><div class="progress-bar"></div></div>
+<nav class="nav-dots" aria-label="Slide navigation"></nav>
+
+<!-- SLIDE 1: Title -->
+<section class="slide title-slide bg-lavender" data-title="Title">
+  <div class="slide-content">
+    <div class="title-card brutal-card-lg reveal-scale">
+      <p class="label" style="margin-bottom: 1em;">A SHORT EXPLANATION</p>
+      <h1 class="reveal-word">What is AI Slop?</h1>
+      <p class="subtitle">When machines make things fast, cheap, and barely good enough — and we all pay the price.</p>
+      <p class="author">Based on research from the LLM Wiki</p>
+    </div>
+  </div>
+  <div class="slide-footer">1 / 8</div>
+  <aside class="notes">
+    <p><strong>Welcome — today I want to talk about something you've probably encountered without knowing its name.</strong></p>
+    <p>It's called "AI slop." You may have heard the term thrown around online. But what does it actually mean?</p>
+    <p><em>It's not just about bad images or weird articles. It's a fundamental problem with how we're building things with AI right now.</em></p>
+    <p>I'll walk you through what it is, why it matters, and what we can do about it — in plain language, no tech jargon.</p>
+  </aside>
+</section>
+
+<!-- SLIDE 2: Definition -->
+<section class="slide content-slide bg-white" data-title="Definition">
+  <div class="slide-content">
+    <p class="label reveal">THE CORE IDEA</p>
+    <h2 class="reveal">Slop is what happens when <span class="brutal-badge" style="background: var(--accent-peach);">fast</span> beats <span class="brutal-badge" style="background: var(--accent-alt);">good</span></h2>
+    <div class="reveal">
+      <p style="margin-bottom: 1em;">AI tools can produce enormous amounts of content very quickly. But speed comes with a hidden cost: <strong>the quality is uneven, and the bad stuff accumulates.</strong></p>
+      <ul class="bullet-list">
+        <li>AI copies existing patterns — including the <em>bad</em> ones</li>
+        <li>Each piece looks reasonable on its own</li>
+        <li>But together, they create a growing mess</li>
+        <li>Like technical debt, but on steroids</li>
+      </ul>
+    </div>
+    <div class="slop-specimen reveal" style="margin-top: 1.5em;">
+      <p class="slop-text">"In today's ever-evolving digital landscape, leveraging cutting-edge AI-powered solutions has become paramount for optimizing your workflow and maximizing synergistic outcomes across all verticals..."</p>
+    </div>
+    <p class="reveal" style="font-size: var(--label-size); opacity: 0.6; margin-top: 0.3em;">^ This means nothing. It was written to sound smart. It's slop.</p>
+  </div>
+  <div class="slide-footer">2 / 8</div>
+  <aside class="notes">
+    <p><strong>Let me define it clearly: AI slop is low-quality output that accumulates because AI tools prioritize speed over craftsmanship.</strong></p>
+    <p>Think of it like this: if you asked a hundred people to write a paragraph about "digital transformation" as fast as possible, you'd get a lot of words that sound impressive but say nothing. Now imagine a machine doing that a million times per day.</p>
+    <p><em>The key insight from the wiki is that AI doesn't just make bad things — it copies patterns that already exist, including the bad ones, and spreads them everywhere.</em></p>
+    <p>That specimen on screen? That's the kind of text AI generates by default. It's grammatically correct. It uses the right words. It communicates zero information.</p>
+  </aside>
+</section>
+
+<!-- SLIDE 3: Section Divider -->
+<section class="slide section-divider bg-mint" data-title="Where It Shows Up">
+  <div class="section-divider-content">
+    <div class="section-number-row">
+      <span class="reveal section-number" style="color: var(--accent-alt);">01</span>
+      <span class="reveal section-rule"></span>
+    </div>
+    <h2 class="reveal section-title">Where It Shows Up</h2>
+    <p class="reveal section-subtitle">Three places you encounter slop without realizing it.</p>
+  </div>
+  <div class="slide-footer">3 / 8</div>
+  <aside class="notes">
+    <p><strong>AI slop isn't just one thing. It shows up in different forms across different areas of your daily digital life.</strong></p>
+    <p><em>Let me walk you through the three most common places.</em></p>
+  </aside>
+</section>
+
+<!-- SLIDE 4: Slop Examples -->
+<section class="slide content-slide bg-mint" data-title="Three Faces of Slop">
+  <div class="slide-content">
+    <p class="label reveal">THE THREE FACES</p>
+    <h2 class="reveal">You've seen all three</h2>
+    <div style="display: flex; flex-direction: column; gap: clamp(0.75rem, 2vw, 1.25rem); margin-top: var(--content-gap);">
+      <div class="brutal-card reveal" style="border-left: 4px solid var(--accent);">
+        <p style="font-weight: 700; margin-bottom: 0.3em;">R — Reviews & Content</p>
+        <p style="font-size: var(--body-size);">Fake product reviews, AI-written blog posts, SEO articles designed for algorithms, not humans. You've read these — they feel hollow.</p>
+      </div>
+      <div class="brutal-card reveal" style="border-left: 4px solid var(--accent-alt);">
+        <p style="font-weight: 700; margin-bottom: 0.3em;">W — Websites & Code</p>
+        <p style="font-size: var(--body-size);">Hand-rolled helpers instead of shared tools, copy-pasted patterns including the broken ones. The OpenAI team spent 20% of every Friday just cleaning this up.</p>
+      </div>
+      <div class="brutal-card reveal" style="border-left: 4px solid var(--accent-peach);">
+        <p style="font-weight: 700; margin-bottom: 0.3em;">X — Design & Visuals</p>
+        <p style="font-size: var(--body-size);">Generic, cookie-cutter interfaces. Every AI-generated website looks the same — purple gradients, rounded cards, stock illustrations. Maggie Appleton calls this "vibe-coded slop."</p>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer">4 / 8</div>
+  <aside class="notes">
+    <p><strong>Three categories. You've encountered all of them, probably today.</strong></p>
+    <p><strong>Reviews and content</strong> — the fake Amazon reviews, the AI-written recipe blogs with three paragraphs of life story before the actual recipe. Content written for search engines, not people.</p>
+    <p><strong>Websites and code</strong> — this is from the wiki's research. The OpenAI team found that AI agents copy bad code patterns and spread them. They spent every Friday — 20% of their work week — just cleaning up the mess.</p>
+    <p><em>Think about that. One of the best AI teams in the world, spending one full day a week fixing AI mistakes.</em></p>
+    <p><strong>Design and visuals</strong> — you know that feeling when every startup website looks identical? That's visual slop. The "taste-skill" project exists specifically to combat this.</p>
+  </aside>
+</section>
+
+<!-- SLIDE 5: Stats -->
+<section class="slide stats-slide bg-peach" data-title="The Numbers">
+  <div class="slide-content">
+    <p class="label reveal" style="text-align: center;">THE SCALE</p>
+    <h2 class="reveal" style="text-align: center; font-family: var(--font-display); font-size: clamp(1.5rem, 4vw, 3rem); margin-bottom: 1.5em;">The numbers are staggering</h2>
+    <div class="stats-grid reveal">
+      <div class="stat">
+        <span class="stat-number" data-target="20">0</span>
+        <span class="stat-unit">%</span>
+        <span class="stat-label">of work week spent cleaning AI mess</span>
+      </div>
+      <div class="stat">
+        <span class="stat-number" data-target="1000000">0</span>
+        <span class="stat-unit"> lines</span>
+        <span class="stat-label">of AI-generated code in 5 months</span>
+      </div>
+      <div class="stat">
+        <span class="stat-number" data-target="3.5">0</span>
+        <span class="stat-unit"> PRs/day</span>
+        <span class="stat-label">per engineer — speed breeds slop</span>
+      </div>
+      <div class="stat">
+        <span class="stat-number" data-target="0">0</span>
+        <span class="stat-unit"> human</span>
+        <span class="stat-label">lines written in that experiment</span>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer">5 / 8</div>
+  <aside class="notes">
+    <p><strong>Let me show you the scale of this problem with real numbers from the OpenAI experiment.</strong></p>
+    <p><strong>20%</strong> — one full day every Friday, spent just cleaning up what AI produced wrong.</p>
+    <p><strong>One million lines of code</strong> produced by AI in five months. Not a single line was written by a human.</p>
+    <p><strong>3.5 pull requests per engineer per day.</strong> That's the throughput. When you're moving that fast, quality checks get skipped.</p>
+    <p><em>Zero human lines. That's the key number. Everything was machine-generated, and everything needed human cleanup.</em></p>
+    <p>The point isn't that AI is bad — it's that at this scale, even a 5% error rate creates thousands of problems.</p>
+  </aside>
+</section>
+
+<!-- SLIDE 6: Section Divider -->
+<section class="slide section-divider bg-sky" data-title="The Real Cost">
+  <div class="section-divider-content">
+    <div class="section-number-row">
+      <span class="reveal section-number" style="color: var(--accent-sky);">02</span>
+      <span class="reveal section-rule"></span>
+    </div>
+    <h2 class="reveal section-title">The Real Cost</h2>
+    <p class="reveal section-subtitle">It's not the bad output. It's what happens next.</p>
+  </div>
+  <div class="slide-footer">6 / 8</div>
+  <aside class="notes">
+    <p><strong>Here's the thing most people miss: the real cost isn't the bad content itself. It's the compounding effect.</strong></p>
+    <p><em>The wiki compares it to a high-interest loan. It's almost always better to pay it down continuously than to let it compound.</em></p>
+  </aside>
+</section>
+
+<!-- SLIDE 7: Comparison — Slop vs Craftsmanship -->
+<section class="slide content-slide bg-sky" data-title="Slop vs Craftsmanship">
+  <div class="slide-content">
+    <p class="label reveal">THE CHOICE</p>
+    <h2 class="reveal">Slop vs. Craftsmanship</h2>
+    <div class="comparison reveal" style="margin-top: var(--content-gap);">
+      <div class="comparison-col slop">
+        <h3>AI Slop</h3>
+        <ul>
+          <li>Fast, cheap, good-enough</li>
+          <li>Copies existing patterns blindly</li>
+          <li>Each piece looks OK alone</li>
+          <li>Accumulates into chaos</li>
+          <li>"In today's digital landscape..."</li>
+        </ul>
+      </div>
+      <div class="comparison-col human">
+        <h3>Craftsmanship</h3>
+        <ul>
+          <li>Slower, deliberate, opinionated</li>
+          <li>Questions whether patterns are good</li>
+          <li>Works as part of a whole</li>
+          <li>Improves over time</li>
+          <li>Clear, specific, human</li>
+        </ul>
+      </div>
+    </div>
+    <p class="reveal" style="margin-top: 1.5em; font-size: var(--body-size); font-weight: 600;">"Craftsmanship is what will set you apart from vibe-coded slop."</p>
+    <p class="reveal" style="font-size: var(--label-size); opacity: 0.6;">— Maggie Appleton, GitHub Next</p>
+  </div>
+  <div class="slide-footer">7 / 8</div>
+  <aside class="notes">
+    <p><strong>So what's the alternative? It's not "don't use AI." It's "use AI with taste."</strong></p>
+    <p>Look at the left column — that's slop. Fast, cheap, copies everything including the bad parts. Each piece seems fine on its own, but together they create a mess.</p>
+    <p><em>The right column is craftsmanship. It's slower. It has opinions. It asks "is this actually good?" before copying it.</em></p>
+    <p>That quote from Maggie Appleton at GitHub is the thesis of this entire talk: <strong>craftsmanship is the differentiator.</strong></p>
+    <p>In a world where anyone can generate content instantly, the people and products that care about quality will stand out. Not because they're using better AI — because they're applying human judgment <strong>to</strong> the AI.</p>
+  </aside>
+</section>
+
+<!-- SLIDE 8: Closing -->
+<section class="slide closing-slide bg-lemon" data-title="Stay Human">
+  <div class="slide-content">
+    <div class="closing-card brutal-card-lg reveal-scale">
+      <p class="label reveal" style="margin-bottom: 1em;">THE TAKEAWAY</p>
+      <h1 class="reveal-word">Stay Human</h1>
+      <p class="reveal">The best defense against AI slop is human taste. Ask: "Would I be proud to put my name on this?"</p>
+      <div class="reveal" style="margin-top: var(--content-gap);">
+        <span class="brutal-badge" style="font-size: var(--body-size); padding: 0.4em 1.2em;">Don't accept slop</span>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer">8 / 8</div>
+  <aside class="notes">
+    <p><strong>Here's my ask of you: next time you encounter something online and it feels off — hollow, generic, like it was written by nobody for nobody — you now have a name for it.</strong></p>
+    <p>It's AI slop.</p>
+    <p><em>And the best defense isn't better technology. It's human taste. It's asking yourself: "Would I be proud to put my name on this?"</em></p>
+    <p>Ryan Lopopolo from OpenAI put it simply: "You can just say — do not produce slop. Don't accept slop. You won't get slop." But it requires being willing to take the short-term hit to slow down and do it right.</p>
+    <p><strong>Stay human. Thanks.</strong></p>
+  </aside>
+</section>
+
+<script>
+function splitWords() {
+  document.querySelectorAll('.reveal-word').forEach(el => {
+    const words = el.textContent.trim().split(/\s+/);
+    el.innerHTML = words.map((word, i) =>
+      `<span style="transition-delay: ${i * 80}ms">${word}</span>`
+    ).join(' ');
+  });
+}
+
+class SlidePresentation {
+  constructor() {
+    // Preview-only mode
+    const previewMatch = /[?&]preview=(\d+)/.exec(location.search || '');
+    if (previewMatch) {
+      const previewIdx = parseInt(previewMatch[1], 10) - 1;
+      this.slides = document.querySelectorAll('.slide');
+      this.slides.forEach((s, i) => {
+        const active = (i === previewIdx);
+        s.classList.toggle('is-active', active);
+        s.style.display = active ? '' : 'none';
+        if (active) { s.style.opacity = '1'; s.style.transform = 'none'; s.style.pointerEvents = 'auto'; }
+      });
+      document.querySelectorAll('.progress-bar-track, .nav-dots, .slide-footer').forEach(el => { el.style.display = 'none'; });
+      window.addEventListener('message', (e) => {
+        if (!e.data) return;
+        if (e.data.type === 'preview-goto') {
+          const n = parseInt(e.data.idx, 10);
+          if (n >= 0 && n < this.slides.length) {
+            this.slides.forEach((s, i) => {
+              s.classList.toggle('is-active', i === n);
+              s.style.display = i === n ? '' : 'none';
+            });
+          }
+        }
+      });
+      try { window.parent.postMessage({ type: 'preview-ready' }, '*'); } catch(e) {}
+      return;
+    }
+
+    this.slides = document.querySelectorAll('.slide');
+    this.currentSlide = 0;
+
+    this.setupIntersectionObserver();
+    this.setupKeyboardNav();
+    this.setupTouchNav();
+    this.setupWheelNav();
+    this.setupProgressBar();
+    this.setupNavDots();
+    this.setupFullscreen();
+    this.setupPresenterMode();
+
+    splitWords();
+    animateCounters();
+  }
+
+  setupIntersectionObserver() {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          this.currentSlide = [...this.slides].indexOf(entry.target);
+          this.updateProgressBar();
+          this.updateNavDots();
+        }
+      });
+    }, { threshold: 0.5 });
+    this.slides.forEach(slide => observer.observe(slide));
+  }
+
+  setupKeyboardNav() {
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowDown' || e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') {
+        e.preventDefault();
+        this.goToSlide(this.currentSlide + 1);
+      } else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft' || e.key === 'PageUp') {
+        e.preventDefault();
+        this.goToSlide(this.currentSlide - 1);
+      } else if (e.key === 'Home') {
+        e.preventDefault();
+        this.goToSlide(0);
+      } else if (e.key === 'End') {
+        e.preventDefault();
+        this.goToSlide(this.slides.length - 1);
+      } else if (e.key === 'f' || e.key === 'F') {
+        this.toggleFullscreen();
+      } else if (e.key === 's' || e.key === 'S') {
+        e.preventDefault();
+        this.openPresenterWindow();
+      }
+    });
+  }
+
+  setupTouchNav() {
+    let startY = 0;
+    document.addEventListener('touchstart', (e) => { startY = e.touches[0].clientY; });
+    document.addEventListener('touchend', (e) => {
+      const diff = startY - e.changedTouches[0].clientY;
+      if (Math.abs(diff) > 50) {
+        this.goToSlide(this.currentSlide + (diff > 0 ? 1 : -1));
+      }
+    });
+  }
+
+  setupWheelNav() {
+    let lastWheel = 0;
+    document.addEventListener('wheel', (e) => {
+      const now = Date.now();
+      if (now - lastWheel < 800) return;
+      lastWheel = now;
+      if (e.deltaY > 0) this.goToSlide(this.currentSlide + 1);
+      else if (e.deltaY < 0) this.goToSlide(this.currentSlide - 1);
+    }, { passive: true });
+  }
+
+  setupProgressBar() {
+    this.progressBar = document.querySelector('.progress-bar');
+    this.updateProgressBar();
+  }
+
+  updateProgressBar() {
+    if (this.progressBar) {
+      const pct = ((this.currentSlide + 1) / this.slides.length) * 100;
+      this.progressBar.style.width = pct + '%';
+    }
+  }
+
+  setupNavDots() {
+    const nav = document.querySelector('.nav-dots');
+    if (!nav) return;
+    this.slides.forEach((_, i) => {
+      const dot = document.createElement('button');
+      dot.className = 'nav-dot' + (i === 0 ? ' active' : '');
+      dot.setAttribute('aria-label', `Go to slide ${i + 1}`);
+      dot.addEventListener('click', () => this.goToSlide(i));
+      nav.appendChild(dot);
+    });
+    this.navDots = nav.querySelectorAll('.nav-dot');
+  }
+
+  updateNavDots() {
+    if (!this.navDots) return;
+    this.navDots.forEach((dot, i) => {
+      dot.classList.toggle('active', i === this.currentSlide);
+    });
+  }
+
+  setupFullscreen() {}
+  toggleFullscreen() {
+    if (!document.fullscreenElement) document.documentElement.requestFullscreen();
+    else document.exitFullscreen();
+  }
+
+  goToSlide(index) {
+    if (index < 0 || index >= this.slides.length) return;
+    this.slides[index].scrollIntoView({ behavior: 'smooth' });
+  }
+
+  // BroadcastChannel for presenter sync
+  setupBroadcastChannel() {
+    try {
+      this.bc = new BroadcastChannel('html-ppt-presenter-' + location.pathname);
+      this.bc.onmessage = (e) => {
+        if (!e.data) return;
+        if (e.data.type === 'go' && typeof e.data.idx === 'number') {
+          this.goToSlide(e.data.idx, true);
+        }
+      };
+    } catch(e) { this.bc = null; }
+  }
+
+  setupPresenterMode() {
+    this.setupBroadcastChannel();
+  }
+
+  openPresenterWindow() {
+    const deckUrl = location.protocol + '//' + location.host + location.pathname;
+    const slideMeta = Array.from(this.slides).map((s, i) => {
+      const note = s.querySelector('aside.notes');
+      return {
+        title: s.getAttribute('data-title') || ('Slide ' + (i+1)),
+        notes: note ? note.innerHTML : ''
+      };
+    });
+    const html = this.buildPresenterHTML(deckUrl, slideMeta, this.slides.length, this.currentSlide);
+    const win = window.open('', 'html-ppt-presenter', 'width=1280,height=820,menubar=no,toolbar=no');
+    if (!win) { alert('Please allow popups to use presenter view'); return; }
+    win.document.open();
+    win.document.write(html);
+    win.document.close();
+  }
+
+  buildPresenterHTML(deckUrl, slideMeta, total, startIdx) {
+    const metaJSON = JSON.stringify(slideMeta);
+    return `<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><title>Presenter View</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:100%;height:100%;overflow:hidden;background:#1a1d24;color:#e6edf3;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+#stage{position:absolute;inset:0;overflow:hidden}
+.pc{position:absolute;background:#0d1117;border:1px solid rgba(255,255,255,.1);border-radius:12px;box-shadow:0 8px 32px rgba(0,0,0,.45);display:flex;flex-direction:column;overflow:hidden;min-width:180px;min-height:100px}
+.pc.dragging{box-shadow:0 16px 48px rgba(0,0,0,.6),0 0 0 2px rgba(88,166,255,.5);border-color:#58a6ff;transition:none;z-index:9999}
+.pc.resizing{box-shadow:0 16px 48px rgba(0,0,0,.6),0 0 0 2px rgba(63,185,80,.5);border-color:#3fb950;transition:none;z-index:9999}
+.pch{display:flex;align-items:center;gap:10px;padding:8px 12px;background:rgba(255,255,255,.04);border-bottom:1px solid rgba(255,255,255,.06);cursor:move;user-select:none;flex-shrink:0}
+.pcd{width:8px;height:8px;border-radius:50%;background:var(--dc,#58a6ff);flex-shrink:0}
+.pct{font-size:11px;letter-spacing:.15em;text-transform:uppercase;font-weight:700;color:#8b949e;flex:1}
+.pcm{font-size:11px;color:#6e7681}
+.pcb{flex:1;position:relative;overflow:hidden;min-height:0}
+.pcv .pcb{background:#000}
+.pcv iframe{position:absolute;top:0;left:0;width:1920px;height:1080px;border:none;transform-origin:top left;pointer-events:none;background:transparent}
+.pcn .pcb{padding:14px 18px;overflow-y:auto;font-size:18px;line-height:1.75;color:#d0d7de}
+.pcn .pcb p{margin:0 0 .7em 0}
+.pcn .pcb strong{color:#f0883e}
+.pcn .pcb em{color:#58a6ff;font-style:normal}
+.pcn .pcb code{font-family:"SF Mono",monospace;font-size:.9em;background:rgba(255,255,255,.08);padding:1px 6px;border-radius:4px}
+.pcn .empty{color:#484f58;font-style:italic}
+.pctimer .pcb{display:flex;flex-direction:column;gap:14px;padding:18px 20px;justify-content:center}
+.td{font-family:"SF Mono",monospace;font-size:42px;font-weight:700;color:#3fb950;letter-spacing:.04em;line-height:1}
+.tr{display:flex;align-items:center;gap:12px;font-size:14px;color:#8b949e}
+.tr .l{font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:#6e7681}
+.tr .v{color:#e6edf3;font-weight:600;font-family:"SF Mono",monospace}
+.tb{display:flex;gap:8px;flex-wrap:wrap}
+.tbtn{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:#e6edf3;padding:6px 12px;border-radius:6px;font-size:12px;cursor:pointer;font-family:inherit}
+.tbtn:hover{background:rgba(88,166,255,.15);border-color:#58a6ff}
+.pcr{position:absolute;right:0;bottom:0;width:18px;height:18px;cursor:nwse-resize;background:linear-gradient(135deg,transparent 50%,rgba(255,255,255,.25) 50%,rgba(255,255,255,.25) 60%,transparent 60%,transparent 70%,rgba(255,255,255,.25) 70%,rgba(255,255,255,.25) 80%,transparent 80%);z-index:5}
+.hb{position:fixed;bottom:0;left:0;right:0;background:rgba(0,0,0,.6);backdrop-filter:blur(10px);border-top:1px solid rgba(255,255,255,.08);padding:6px 16px;font-size:11px;color:#8b949e;display:flex;gap:18px;align-items:center;z-index:1000}
+.hb kbd{background:rgba(255,255,255,.08);padding:1px 6px;border-radius:3px;font-family:"SF Mono",monospace;font-size:10px;border:1px solid rgba(255,255,255,.1);color:#e6edf3}
+.rl{margin-left:auto;background:transparent;border:1px solid rgba(255,255,255,.15);color:#8b949e;padding:3px 10px;border-radius:4px;font-size:11px;cursor:pointer}
+.rl:hover{background:rgba(248,81,73,.15);border-color:#f85149;color:#f85149}
+</style></head><body>
+<div id="stage">
+<div class="pc pcv" id="card-cur" style="--dc:#58a6ff"><div class="pch" data-drag><span class="pcd"></span><span class="pct">CURRENT</span><span class="pcm" id="cur-meta">--</span></div><div class="pcb"><iframe id="iframe-cur"></iframe></div><div class="pcr" data-resize></div></div>
+<div class="pc pcv" id="card-nxt" style="--dc:#bc8cff"><div class="pch" data-drag><span class="pcd"></span><span class="pct">NEXT</span><span class="pcm" id="nxt-meta">--</span></div><div class="pcb"><iframe id="iframe-nxt"></iframe></div><div class="pcr" data-resize></div></div>
+<div class="pc pcn" id="card-notes" style="--dc:#f0883e"><div class="pch" data-drag><span class="pcd"></span><span class="pct">SPEAKER SCRIPT</span></div><div class="pcb" id="notes-body"></div><div class="pcr" data-resize></div></div>
+<div class="pc pctimer" id="card-timer" style="--dc:#3fb950"><div class="pch" data-drag><span class="pcd"></span><span class="pct">TIMER</span></div><div class="pcb"><div class="td" id="timer-display">00:00</div><div class="tr"><span class="l">Slide</span><span class="v" id="timer-count">1 / ${total}</span></div><div class="tb"><button class="tbtn" id="btn-prev">Prev</button><button class="tbtn" id="btn-next">Next</button><button class="tbtn" id="btn-reset">Reset</button></div></div><div class="pcr" data-resize></div></div>
+</div>
+<div class="hb"><span><kbd>Arrow Keys</kbd> Navigate</span><span><kbd>R</kbd> Reset timer</span><span><kbd>Esc</kbd> Close</span><button class="rl" id="reset-layout">Reset Layout</button></div>
+<script>
+(function(){
+var slideMeta=${metaJSON},total=${total},idx=${startIdx},deckUrl=${JSON.stringify(deckUrl)};
+var iframeCur=document.getElementById('iframe-cur'),iframeNxt=document.getElementById('iframe-nxt'),notesBody=document.getElementById('notes-body'),curMeta=document.getElementById('cur-meta'),nxtMeta=document.getElementById('nxt-meta'),timerDisplay=document.getElementById('timer-display'),timerCount=document.getElementById('timer-count');
+var SK='html-ppt-presenter:'+location.pathname;
+function dl(){var w=window.innerWidth,h=window.innerHeight-36;return{'card-cur':{x:16,y:16,w:Math.round(w*.55)-24,h:Math.round(h*.62)-16},'card-nxt':{x:Math.round(w*.55)+8,y:16,w:w-Math.round(w*.55)-24,h:Math.round(h*.42)-16},'card-notes':{x:Math.round(w*.55)+8,y:Math.round(h*.42)+8,w:w-Math.round(w*.55)-24,h:h-Math.round(h*.42)-16},'card-timer':{x:16,y:Math.round(h*.62)+8,w:Math.round(w*.55)-24,h:h-Math.round(h*.62)-16}}}
+function al(l){Object.keys(l).forEach(function(id){var el=document.getElementById(id),p=l[id];if(el&&p){el.style.left=p.x+'px';el.style.top=p.y+'px';el.style.width=p.w+'px';el.style.height=p.h+'px'}});rs()}
+function rl(){try{var s=localStorage.getItem(SK);if(s)return JSON.parse(s)}catch(e){}return dl()}
+function sl(){var l={};['card-cur','card-nxt','card-notes','card-timer'].forEach(function(id){var el=document.getElementById(id);if(el)l[id]={x:parseInt(el.style.left)||0,y:parseInt(el.style.top)||0,w:parseInt(el.style.width)||300,h:parseInt(el.style.height)||200}});try{localStorage.setItem(SK,JSON.stringify(l))}catch(e){}}
+function ri(iframe){if(!iframe||iframe.style.display==='none')return;var b=iframe.parentElement,cw=b.clientWidth,ch=b.clientHeight;if(!cw||!ch)return;var s=Math.min(cw/1920,ch/1080);iframe.style.transform='scale('+s+')';var sw=1920*s,sh=1080*s;iframe.style.left=Math.max(0,(cw-sw)/2)+'px';iframe.style.top=Math.max(0,(ch-sh)/2)+'px'}
+function rs(){ri(iframeCur);ri(iframeNxt)}
+window.addEventListener('resize',rs);
+document.querySelectorAll('[data-drag]').forEach(function(h){h.addEventListener('mousedown',function(e){if(e.button!==0)return;var c=h.closest('.pc');if(!c)return;e.preventDefault();c.classList.add('dragging');var sx=e.clientX,sy=e.clientY,sl2=parseInt(c.style.left)||0,st=parseInt(c.style.top)||0;function mv(ev){c.style.left=Math.max(0,Math.min(window.innerWidth-100,sl2+ev.clientX-sx))+'px';c.style.top=Math.max(0,Math.min(window.innerHeight-50,st+ev.clientY-sy))+'px'}function up(){c.classList.remove('dragging');document.removeEventListener('mousemove',mv);document.removeEventListener('mouseup',up);sl()}document.addEventListener('mousemove',mv);document.addEventListener('mouseup',up)})});
+document.querySelectorAll('[data-resize]').forEach(function(h){h.addEventListener('mousedown',function(e){if(e.button!==0)return;var c=h.closest('.pc');if(!c)return;e.preventDefault();e.stopPropagation();c.classList.add('resizing');var sx=e.clientX,sy=e.clientY,sw=parseInt(c.style.width)||c.offsetWidth,sh=parseInt(c.style.height)||c.offsetHeight;function mv(ev){c.style.width=Math.max(180,sw+ev.clientX-sx)+'px';c.style.height=Math.max(100,sh+ev.clientY-sy)+'px';if(c.querySelector('iframe'))ri(c.querySelector('iframe'))}function up(){c.classList.remove('resizing');document.removeEventListener('mousemove',mv);document.removeEventListener('mouseup',up);rs();sl()}document.addEventListener('mousemove',mv);document.addEventListener('mouseup',up)})});
+var ip={cur:false,nxt:false};
+window.addEventListener('message',function(e){if(!e.data||e.data.type!=='preview-ready')return;var iframe=null;if(e.source===iframeCur.contentWindow){ip.cur=true;iframe=iframeCur;pg(iframeCur,idx)}else if(e.source===iframeNxt.contentWindow){ip.nxt=true;iframe=iframeNxt;pg(iframeNxt,idx+1<total?idx+1:idx)}if(iframe)ri(iframe)});
+function pg(iframe,n){try{iframe.contentWindow.postMessage({type:'preview-goto',idx:n},'*')}catch(e){}}
+function update(n){n=Math.max(0,Math.min(total-1,n));idx=n;if(ip.cur)pg(iframeCur,n);curMeta.textContent=(n+1)+'/'+total;if(n+1<total){iframeNxt.style.display='';if(ip.nxt)pg(iframeNxt,n+1);nxtMeta.textContent=(n+2)+'/'+total}else{iframeNxt.style.display='none';var b2=document.querySelector('#card-nxt .pcb');if(b2&&!b2.querySelector('.pe')){var e2=document.createElement('div');e2.className='pe';e2.style.cssText='display:flex;align-items:center;justify-content:center;height:100%;color:#484f58;font-style:italic';e2.textContent='-- END --';b2.appendChild(e2)}nxtMeta.textContent='END'}notesBody.innerHTML=slideMeta[n].notes||'<span class="empty">(No notes)</span>';timerCount.textContent=(n+1)+' / '+total}
+var tStart=Date.now();setInterval(function(){var s=Math.floor((Date.now()-tStart)/1000);timerDisplay.textContent=String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0')},1000);
+function resetTimer(){tStart=Date.now();timerDisplay.textContent='00:00'}
+var bc;try{bc=new BroadcastChannel('html-ppt-presenter-'+location.pathname);bc.onmessage=function(e){if(!e.data)return;if(e.data.type==='go')update(e.data.idx)}}catch(e){}
+function go(n){update(n);if(bc)bc.postMessage({type:'go',idx:idx})}
+document.getElementById('btn-prev').addEventListener('click',function(){go(idx-1)});
+document.getElementById('btn-next').addEventListener('click',function(){go(idx+1)});
+document.getElementById('btn-reset').addEventListener('click',resetTimer);
+document.getElementById('reset-layout').addEventListener('click',function(){if(confirm('Reset layout?')){try{localStorage.removeItem(SK)}catch(e){}al(dl())}});
+document.addEventListener('keydown',function(e){if(e.metaKey||e.ctrlKey||e.altKey)return;switch(e.key){case'ArrowRight':case' ':case'PageDown':go(idx+1);e.preventDefault();break;case'ArrowLeft':case'PageUp':go(idx-1);e.preventDefault();break;case'Home':go(0);break;case'End':go(total-1);break;case'r':case'R':resetTimer();break;case'Escape':window.close();break}});
+al(rl());iframeCur.src=deckUrl+'?preview='+(idx+1);if(idx+1<total)iframeNxt.src=deckUrl+'?preview='+(idx+2);notesBody.innerHTML=slideMeta[idx].notes||'<span class="empty">(No notes)</span>';curMeta.textContent=(idx+1)+'/'+total;nxtMeta.textContent=(idx+2)+'/'+total;timerCount.textContent=(idx+1)+' / '+total;
+})();
+<\/script></body></html>`;
+  }
+}
+
+function animateCounters() {
+  document.querySelectorAll('.stat-number[data-target]').forEach(el => {
+    const observer = new IntersectionObserver(entries => {
+      if (entries[0].isIntersecting) {
+        const target = parseFloat(el.dataset.target);
+        const duration = 1500;
+        const start = performance.now();
+        function tick(now) {
+          const elapsed = now - start;
+          const progress = Math.min(elapsed / duration, 1);
+          const eased = 1 - Math.pow(1 - progress, 3);
+          if (target >= 1000) {
+            el.textContent = Math.round(target * eased).toLocaleString();
+          } else if (target % 1 !== 0) {
+            el.textContent = (target * eased).toFixed(1);
+          } else {
+            el.textContent = Math.round(target * eased);
+          }
+          if (progress < 1) requestAnimationFrame(tick);
+        }
+        requestAnimationFrame(tick);
+        observer.disconnect();
+      }
+    }, { threshold: 0.5 });
+    observer.observe(el);
+  });
+}
+
+document.addEventListener('DOMContentLoaded', () => new SlidePresentation());
+</script>
+
+</body>
+</html>
