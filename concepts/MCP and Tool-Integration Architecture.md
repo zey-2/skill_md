@@ -77,7 +77,7 @@ For Agent Skills, that means tool-using skills should say not only "call this to
 
 ## Connections
 
-- [[Agent Skills]] explains why procedural guidance belongs in skills.
+- [[concepts/Agent Skills|Agent Skills]] explains why procedural guidance belongs in skills.
 - [[Portable Skill Core]] explains why routing descriptions matter.
 - [[Progressive Disclosure]] explains why skills and tool surfaces should load only what is needed.
 - [[Plugin-Based Agent Extensions]] explains how plugins bundle skills with app integrations and MCP configuration.

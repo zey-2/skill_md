@@ -65,7 +65,7 @@ MCP and plugins solve different problems. MCP exposes tools, resources, and prom
 
 A useful boundary:
 
-- Put procedure and judgment in [[Agent Skills]].
+- Put procedure and judgment in [[concepts/Agent Skills|Agent Skills]].
 - Put executable external actions and shared context behind MCP servers or tools.
 - Use plugins when the skill and the tool surface need to be installed, versioned, and presented together.
 
@@ -87,7 +87,7 @@ This does not mean plugins are unsafe by default. It means their value and risk 
 
 ## Connections
 
-- [[Agent Skills]] explains the reusable instruction layer that plugins often package.
+- [[concepts/Agent Skills|Agent Skills]] explains the reusable instruction layer that plugins often package.
 - [[Skill Distribution and Installation]] explains the broader installation landscape.
 - [[concepts/Discovery Conventions]] explains how plugins fit into the discovery hierarchy alongside SKILL.md files and skill repositories.
 - [[concepts/Skill Repository Architecture]] provides the organizational patterns that plugin marketplaces and catalogs build on top of.

@@ -153,7 +153,7 @@ Gstack's explicit voice guidelines are notable:
 - [[Validation and Evaluation]] explains the testing stage.
 - [[Provenance and Versioning]] explains release and source tracking.
 - [[Vendor Adapters]] explains generated platform-specific outputs.
-- [[Agent Skills]] explains why workflow skills still count as skills.
+- [[concepts/Agent Skills|Agent Skills]] explains why workflow skills still count as skills.
 - [[MCP and Tool-Integration Architecture]] helps decide when a workflow needs tools, scripts, resources, or an MCP server.
 - [[Agent Frameworks and Orchestration]] helps decide when a repeated behavior should become a skill versus framework-level control flow.
 - [[Meta-Skills and Skillification]] — skillification as an authoring method; the skillify meta-skill.

@@ -67,7 +67,7 @@ The likely reason is that local agent packages and public documentation sites so
 
 ## Connections
 
-- [[Agent Skills]] explains the difference between package skills and general agent-readable guidance.
+- [[concepts/Agent Skills|Agent Skills]] explains the difference between package skills and general agent-readable guidance.
 - [[SKILL.md Package Anatomy]] explains the installable package file.
 - [[Portable Skill Core]] explains the metadata an agent may use after discovery.
 - [[Skill Distribution and Installation]] explains how discovery paths connect to installation methods.

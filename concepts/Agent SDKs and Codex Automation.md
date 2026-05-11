@@ -66,7 +66,7 @@ The most important maintenance question is: where does each part of behavior liv
 
 ## Connections
 
-- [[Agent Skills]] explains the reusable instruction-package layer.
+- [[concepts/Agent Skills|Agent Skills]] explains the reusable instruction-package layer.
 - [[MCP and Tool-Integration Architecture]] explains tools, resources, prompts, MCP, and approval boundaries.
 - [[Agent Frameworks and Orchestration]] explains subagents, handoffs, workflows, state, and runtime ownership.
 - [[Tools Supporting Agent Skills]] compares client-level Agent Skills support.

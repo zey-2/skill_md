@@ -76,6 +76,9 @@ sources:
   - "raw/2026-05-10 Skill Authoring Patterns Cross-Project Research.md"
   - "raw/Build Self-Improving Claude Code Skills. The Results Are Crazy.md"
   - "raw/karpathyautoresearch AI agents running research on single-GPU nanochat training automatically.md"
+  - "raw/Tokenmaxxing How Top Builders Use AI To Do The Work Of 400 Engineers.md"
+  - "raw/Running an AI-native engineering org.md"
+  - "raw/There will only be four jobs.md"
 tags: [index, agent-skills, llm-providers]
 ---
 
@@ -128,6 +131,9 @@ tags: [index, agent-skills, llm-providers]
 - [[concepts/Self-Improving Skills|Self-Improving Skills]] — Autonomous improvement loops using binary assertions, applying Karpathy's autoresearch pattern to skills for overnight self-refinement.
 - [[concepts/Autonomous Research Agents|Autonomous Research Agents]] — Karpathy's autoresearch: agents given a real experimental setup, fixed time budgets, and indefinite autonomy to iterate on their own code.
 - [[concepts/Meta-Skills and Skillification|Meta-Skills and Skillification]] — Skills that create skills (skillify), fat skills/thin harness architecture, skill composition, and Garry Tan's compounding personal AI infrastructure.
+- [[concepts/Tokenmaxxing|Tokenmaxxing]] — Spending more model time, context, agents, and verification to buy back scarce human attention when extra machine work improves quality.
+- [[concepts/AI-Native Engineering Organizations|AI-Native Engineering Organizations]] — Org-level operating model for teams where coding throughput is no longer the main bottleneck.
+- [[concepts/AI-Native Work Archetypes|AI-Native Work Archetypes]] — Working-style taxonomy for AI-native companies: acceleration, stabilization, governance, and interface.
 
 ## Lesson Plans
 
@@ -210,16 +216,22 @@ tags: [index, agent-skills, llm-providers]
 - `raw/Meta-Meta-Prompting The Secret to Making AI Agents Work.md` - Garry Tan's "fat skills, fat code, thin harness" architecture: Skillify meta-skill, book-mirror workflow, 100K-page brain, GBrain/OpenClaw/Hermes Agent, compounding personal AI system.
 - `raw/Build Self-Improving Claude Code Skills. The Results Are Crazy.md` - Simon Scrapes video transcript: applying Karpathy's autoresearch loop to Claude Code skills, binary assertions for automated scoring, two-layer self-improvement (description optimization + output quality).
 - `raw/karpathyautoresearch AI agents running research on single-GPU nanochat training automatically.md` - Karpathy's autoresearch README: AI agents running overnight experiments on single-GPU LLM training, fixed time budgets, autonomous iteration loop, program.md as lightweight skill.
+- `raw/Tokenmaxxing How Top Builders Use AI To Do The Work Of 400 Engineers.md` - Y Combinator / Garry Tan transcript on tokenmaxxing, GStack, model cross-review, Playwright QA automation, personal AI ownership, and using tokens to buy back scarce human time.
+- `raw/Running an AI-native engineering org.md` - Fiona Fung / Claude transcript on shifted bottlenecks, JIT planning, code review, ownership, hiring, flat orgs, dogfooding, and killing stale processes in AI-native engineering teams.
+- `raw/There will only be four jobs.md` - Yoni Rechtman essay arguing that AI-native companies will organize around working styles: product-minded builders, stabilizers, judgment-heavy adults, and interface people.
 
 ## Source Summaries
 
-- [[Equipping Agents for the Real World with Agent Skills]] — Anthropic's engineering article summarized: skill anatomy, context window diagrams, development guidelines, security, and future roadmap.
-- [[Agent Skills Overview (agentskills.io)]] — The open standard homepage: folder format, three-stage progressive disclosure, and cross-product reuse as the core value proposition.
-- [[Agent Skills (platform docs)]] — Official platform docs: VM architecture, beta API, runtime constraints per surface, ZDR notice, and field requirements.
-- [[Introduction to Claude Skills (cookbook)]] — Official Jupyter cookbook: Excel/PPT/PDF examples, token optimization (98% savings), and versioning strategy.
-- [[Indirect Prompt Injection Attacks (CrowdStrike)]] — CrowdStrike on indirect prompt injection: OWASP #1 risk, shadow AI problem, real-world examples, and defense layers.
-- [[Snyk ToxicSkills Research]] — First comprehensive security audit: 36.82% of skills have flaws, 76 confirmed malicious payloads, threat taxonomy, and defense recommendations.
-- [[Meta-Meta-Prompting The Secret to Making AI Agents Work]] — Garry Tan's personal AI system: fat skills + fat data + thin harness, Skillify meta-skill, 100K-page brain, compounding workflows.
+- [[sources/Equipping Agents for the Real World with Agent Skills|Equipping Agents for the Real World with Agent Skills]] — Anthropic's engineering article summarized: skill anatomy, context window diagrams, development guidelines, security, and future roadmap.
+- [[sources/Agent Skills Overview (agentskills.io)|Agent Skills Overview (agentskills.io)]] — The open standard homepage: folder format, three-stage progressive disclosure, and cross-product reuse as the core value proposition.
+- [[sources/Agent Skills (platform docs)|Agent Skills (platform docs)]] — Official platform docs: VM architecture, beta API, runtime constraints per surface, ZDR notice, and field requirements.
+- [[sources/Introduction to Claude Skills (cookbook)|Introduction to Claude Skills (cookbook)]] — Official Jupyter cookbook: Excel/PPT/PDF examples, token optimization (98% savings), and versioning strategy.
+- [[sources/Indirect Prompt Injection Attacks (CrowdStrike)|Indirect Prompt Injection Attacks (CrowdStrike)]] — CrowdStrike on indirect prompt injection: OWASP #1 risk, shadow AI problem, real-world examples, and defense layers.
+- [[sources/Snyk ToxicSkills Research|Snyk ToxicSkills Research]] — First comprehensive security audit: 36.82% of skills have flaws, 76 confirmed malicious payloads, threat taxonomy, and defense recommendations.
+- [[sources/Meta-Meta-Prompting The Secret to Making AI Agents Work|Meta-Meta-Prompting The Secret to Making AI Agents Work]] — Garry Tan's personal AI system: fat skills + fat data + thin harness, Skillify meta-skill, 100K-page brain, compounding workflows.
+- [[sources/Tokenmaxxing How Top Builders Use AI To Do The Work Of 400 Engineers|Tokenmaxxing How Top Builders Use AI To Do The Work Of 400 Engineers]] — Garry Tan on tokenmaxxing, GStack, high-throughput personal AI workflows, QA automation, and personal AI ownership.
+- [[sources/Running an AI-native engineering org|Running an AI-native engineering org]] — Fiona Fung on Claude Code team norms after coding stops being the bottleneck.
+- [[sources/There will only be four jobs|There will only be four jobs]] — Yoni Rechtman on AI-native work archetypes and the shift from output-based roles to production styles.
 
 ## Development Artifacts
 

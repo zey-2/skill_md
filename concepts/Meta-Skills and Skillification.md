@@ -103,6 +103,7 @@ The difference is "between keeping a journal and having a nervous system. The fi
 
 ## Connections
 
+- [[sources/Meta-Meta-Prompting The Secret to Making AI Agents Work|Meta-Meta-Prompting The Secret to Making AI Agents Work]] — source summary for Garry Tan's fat skills/fat data/thin harness article.
 - [[Skill Authoring Workflow]] — skillification is one method of authoring skills.
 - [[Self-Improving Skills]] — both approaches use eval-driven iteration, but skillification is human-directed while self-improvement is autonomous.
 - [[SKILL.md Package Anatomy]] — the 500-line constraint and reference file patterns.

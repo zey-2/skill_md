@@ -1,7 +1,7 @@
 ---
 type: concept
 created: 2026-04-26
-updated: 2026-05-10
+updated: 2026-05-11
 status: active
 sources:
   - "raw/skill.md for AI Agents.md"
@@ -11,6 +11,8 @@ sources:
   - "raw/2026-04-26 LangSmith AgentEvals trajectory evaluation docs.md"
   - "raw/2026-04-26 tau-bench tool-agent reliability benchmark.md"
   - "raw/Context Is the New Code — Patrick Debois, Tessl.md"
+  - "raw/Tokenmaxxing How Top Builders Use AI To Do The Work Of 400 Engineers.md"
+  - "raw/Running an AI-native engineering org.md"
 tags: [agent-skills, validation, evaluation, context]
 ---
 
@@ -104,6 +106,12 @@ Beyond checking generated code against rules, Debois describes giving the judge 
 
 Given a specific commit and context, this approach can answer: "did this context change make a difference, yes or no?" And the judge agent can use the feedback to automatically suggest context improvements.
 
+## Verification as the New Bottleneck
+
+The Tokenmaxxing and AI-native-org sources both reinforce that higher code throughput increases the importance of verification. Garry Tan's workflow pushed from unit and integration tests toward browser QA because manual verification became the queue. Fiona Fung's team-level account makes the same point organizationally: once coding is no longer the slow part, review, security, maintainability, and shift-left verification become the bottlenecks.
+
+The practical lesson is that evaluation capacity must scale with generation capacity. More agents, tokens, and PRs should be matched by more automated checks, model cross-review, browser tests, human review for judgment-heavy areas, and metrics that track product quality rather than raw output.
+
 ## Practical Minimum for a Skill Repository
 
 For each reusable skill, keep at least:
@@ -142,6 +150,8 @@ There is also a tension between path grading and outcome grading. Some sources s
 - [[concepts/Replacing Code with Skills]] — Cursor's evals (headless CLI with dual scorers checking worktree compliance vs. primary checkout leakage) show how evals directly drive prompt improvement and RL training for skills.
 - [[Context Development Lifecycle]] frames evaluation as the Evaluate stage within the broader Generate → Evaluate → Distribute → Observe loop, including error budgets and CI/CD for context.
 - [[Self-Improving Skills]] — applies binary assertions and eval-driven iteration to autonomously improve skills overnight.
+- [[Tokenmaxxing]] — Increased model work only pays off when verification scales with it.
+- [[AI-Native Engineering Organizations]] — Team-level verification, review, and quality norms after coding stops being the bottleneck.
 
 ## Open Questions
 

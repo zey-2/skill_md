@@ -1,11 +1,13 @@
 ---
 type: concept
 created: 2026-05-03
-updated: 2026-05-04
+updated: 2026-05-11
 status: active
 sources:
   - "raw/Harness engineering leveraging Codex in an agent-first world.md"
   - "raw/Harness Engineering How to Build Software When Humans Steer, Agents Execute — Ryan Lopopolo, OpenAI.md"
+  - "raw/Tokenmaxxing How Top Builders Use AI To Do The Work Of 400 Engineers.md"
+  - "raw/Running an AI-native engineering org.md"
 tags: [harness-engineering, agent-first, code-is-free, scarcity, openai]
 ---
 
@@ -74,8 +76,18 @@ Code in an agent-first repository is like compiled output from an LLM compiler. 
 
 If a human must type "continue" to an agent, the harness failed to provide enough context for the agent to reach completion on its own. The goal is to define work well enough that agents can run 24/7 without human babysitting.
 
+## Tokenmaxxing Needs Harnesses
+
+The Tokenmaxxing source reinforces that abundant model work is useful only when the workflow can absorb it. More tokens can buy deeper research, more role-specific reviews, more generated tests, and more automated QA. But without a harness that routes those passes into acceptance criteria, test suites, reviewer agents, and reusable skills, the extra output becomes a larger verification burden.
+
+## Org Processes as Harnesses
+
+Fiona Fung's "Running an AI-native engineering org" talk extends harness thinking from repo infrastructure to team process. Planning, review, ownership, hiring, onboarding, and org shape are all part of the harness. When coding is no longer the slow part, stale processes can become the new failure mode; teams need explicit permission to automate or remove them.
+
 ## Connections
 
+- [[concepts/Tokenmaxxing]] — Aggressive token spend needs tests, review, and reusable workflows to compound.
+- [[concepts/AI-Native Engineering Organizations]] — Org-level harness design for planning, review, hiring, and process cleanup.
 - [[concepts/Agentic Engineering vs Vibe Coding]] — Harness engineering operationalizes agentic engineering at scale.
 - [[concepts/Agent Legibility]] — Harnesses make applications and codebases legible to agents.
 - [[concepts/Progressive Disclosure]] — Good harnesses surface instructions just-in-time, not all at once.
@@ -90,3 +102,5 @@ If a human must type "continue" to an agent, the harness failed to provide enoug
 
 - [[raw/Harness engineering leveraging Codex in an agent-first world]]
 - [[raw/Harness Engineering How to Build Software When Humans Steer, Agents Execute — Ryan Lopopolo, OpenAI]]
+- [[raw/Tokenmaxxing How Top Builders Use AI To Do The Work Of 400 Engineers]]
+- [[raw/Running an AI-native engineering org]]

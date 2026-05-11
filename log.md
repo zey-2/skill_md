@@ -826,3 +826,112 @@ Findings:
 Follow-ups:
 
 - Decide whether `.claude/skills/presentation-slides/SKILL.md` should be documented as a wiki artifact or treated as local tooling only. I left it out of `index.md` for now because it is a large operational skill file rather than a generated knowledge page.
+
+## [2026-05-11] ingest | Tokenmaxxing and AI-native engineering orgs
+
+Processed two newly added raw YouTube transcript clippings:
+
+- `raw/Tokenmaxxing How Top Builders Use AI To Do The Work Of 400 Engineers.md` - Garry Tan / Y Combinator on tokenmaxxing, GStack, model cross-review, Playwright QA automation, personal AI ownership, and using tokens to buy back scarce human time.
+- `raw/Running an AI-native engineering org.md` - Fiona Fung / Claude on shifted bottlenecks, JIT planning, code review, ownership, hiring, flat orgs, dogfooding, and killing stale processes in AI-native engineering teams.
+
+Generated pages created:
+
+- `sources/Tokenmaxxing How Top Builders Use AI To Do The Work Of 400 Engineers.md`
+- `sources/Running an AI-native engineering org.md`
+- `concepts/Tokenmaxxing.md`
+- `concepts/AI-Native Engineering Organizations.md`
+
+Generated pages updated:
+
+- `concepts/The AI-Native Engineer and the Rising Ceiling.md` - Added tokenmaxxing as a mechanism for the rising ceiling and AI-native org implications for hiring/team design.
+- `concepts/Harness Engineering Principles.md` - Added tokenmaxxing and org-process sections.
+- `concepts/Collaborative AI Engineering.md` - Added org norms for faster teams.
+- `concepts/Validation and Evaluation.md` - Added verification-as-new-bottleneck section.
+- `index.md` - Added new raw sources, concept pages, and source summaries.
+- `log.md`
+
+Important decisions:
+
+- Created `Tokenmaxxing` as a standalone concept because it is broader than skillification: it covers a spend-machine-time-to-buy-context-and-human-time strategy across research, coding, QA, and personal AI.
+- Created `AI-Native Engineering Organizations` as a standalone concept because Fiona Fung's talk is about management and operating-model changes, not only individual agentic engineering or repository harnesses.
+- Did not update `raw/Build Self-Improving Claude Code Skills. The Results Are Crazy.md`; git showed only a line-ending warning and no substantive diff.
+
+## [2026-05-11] ingest | AI-native work archetypes
+
+Processed one newly added raw Substack clipping:
+
+- `raw/There will only be four jobs.md` - Yoni Rechtman on the claim that AI-native companies will organize around working styles rather than traditional product/design/engineering output categories.
+
+Generated pages created:
+
+- `sources/There will only be four jobs.md`
+- `concepts/AI-Native Work Archetypes.md`
+
+Generated pages updated:
+
+- `concepts/AI-Native Engineering Organizations.md` - Added work-archetypes section connecting acceleration, stabilization, governance, and interface roles to AI-native org design.
+- `concepts/The AI-Native Engineer and the Rising Ceiling.md` - Added beyond-the-engineer-title section for cross-functional AI-native builders.
+- `index.md` - Added new raw source, concept page, and source-summary entry.
+- `log.md`
+
+Important decisions:
+
+- Created `AI-Native Work Archetypes` as a standalone concept because the source is about cross-functional working styles, not only engineering teams.
+- Treated the source's labels as intentionally memetic and preserved the underlying durable functions: acceleration, stabilization, governance, and interface.
+
+## [2026-05-11] lint | Wiki health check after new ingests
+
+Checked 77 raw files, 48 concept pages, 10 source summaries, 3 course pages, and 4 docs pages.
+
+What changed:
+
+- Appended this lint entry to `log.md`.
+- Left `raw/` untouched.
+- Did not repair ambiguous links in this pass because the request was to lint, not repair.
+
+Findings:
+
+- No generated pages are missing from `index.md` by path or title check.
+- All `index.md` wikilinks resolve.
+- All raw markdown files are listed in `index.md`.
+- No broken wikilinks were found in generated pages (`concepts/`, `sources/`, `courses/`, `docs/`).
+- All concept and source pages have basic frontmatter fields (`type`, `created`, `updated`, `status`).
+- All concept and source pages include an obvious source reference.
+- Duplicate markdown basenames exist where raw files and generated source summaries share titles. This is expected for source summaries but can make unqualified Obsidian links ambiguous.
+- Medium navigation risk: `raw/Agent Skills.md` and `concepts/Agent Skills.md` share the same basename, and several generated pages link to `[[Agent Skills]]` without a path or alias. These should be rewritten to `[[concepts/Agent Skills|Agent Skills]]`.
+- Low navigation risk: source-summary entries in `index.md` link by basename for pages that also exist in `raw/`; path-qualified `[[sources/...|...]]` links would be less ambiguous.
+- Low orphan risk: the course article/lesson plans, superpowers docs, and `sources/Meta-Meta-Prompting The Secret to Making AI Agents Work.md` have low inbound link counts beyond the index. This appears acceptable for docs/source-summary artifacts, but adding backlinks from related concept pages would improve navigation.
+
+Recommended fixes:
+
+1. Path-qualify generated-page links to `Agent Skills` so they target `concepts/Agent Skills.md`.
+2. Path-qualify `index.md` source-summary links where raw/source basename duplicates exist.
+3. Optionally add a backlink from `concepts/Meta-Skills and Skillification.md` to the `Meta-Meta-Prompting` source summary.
+
+## [2026-05-11] maintenance | Repair ambiguous wiki links
+
+Repaired the navigation issues found in the previous lint pass.
+
+What changed:
+
+- Path-qualified ambiguous `[[Agent Skills]]` links in generated concept pages so they resolve to `[[concepts/Agent Skills|Agent Skills]]`.
+- Path-qualified the `Source Summaries` section in `index.md` so source-summary links resolve under `sources/` rather than competing with same-basename raw files.
+- Added a backlink from `concepts/Meta-Skills and Skillification.md` to `sources/Meta-Meta-Prompting The Secret to Making AI Agents Work.md`.
+
+Files updated:
+
+- `concepts/Skill Distribution and Installation.md`
+- `concepts/Discovery Conventions.md`
+- `concepts/Agent SDKs and Codex Automation.md`
+- `concepts/Agent Frameworks and Orchestration.md`
+- `concepts/Plugin-Based Agent Extensions.md`
+- `concepts/MCP and Tool-Integration Architecture.md`
+- `concepts/Skill Authoring Workflow.md`
+- `concepts/Meta-Skills and Skillification.md`
+- `index.md`
+- `log.md`
+
+Verification:
+
+- Follow-up link checks found no remaining unqualified `[[Agent Skills]]` links in generated pages.
+- `index.md` source-summary links now use path-qualified `sources/` targets.

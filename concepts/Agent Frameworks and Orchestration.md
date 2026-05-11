@@ -70,7 +70,7 @@ There is also a portability tension. Agent Skills aim to travel across clients, 
 
 ## Connections
 
-- [[Agent Skills]] explains the reusable instruction-package layer.
+- [[concepts/Agent Skills|Agent Skills]] explains the reusable instruction-package layer.
 - [[MCP and Tool-Integration Architecture]] explains the external action and context layer.
 - [[Skill Authoring Workflow]] explains how repeated behavior becomes a skill.
 - [[Validation and Evaluation]] explains why orchestration should be evaluated through traces, tool calls, outcomes, and repeated trials.

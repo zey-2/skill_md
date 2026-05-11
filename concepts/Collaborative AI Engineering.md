@@ -1,10 +1,11 @@
 ---
 type: concept
 created: 2026-05-03
-updated: 2026-05-03
+updated: 2026-05-11
 status: active
 sources:
   - "raw/Collaborative AI Engineering One Dev, Two Dozen Agents, Zero Alignment — Maggie Appleton, GitHub.md"
+  - "raw/Running an AI-native engineering org.md"
 tags: [collaboration, alignment, multiplayer, agent-collaboration, github-next, ace]
 ---
 
@@ -72,8 +73,15 @@ The bar is being set much higher. Craftsmanship separates exceptional software f
 
 Agentic tools should create environments where teams can *think rigorously together* about hard problems, get aligned faster, and build a few exceptional things rather than a thousand mediocre ones.
 
+## Org Norms for Faster Teams
+
+Fiona Fung's "Running an AI-native engineering org" adds concrete operating norms to this collaboration problem. When code generation is cheap, teams can use prototypes and PR variants as shared debate artifacts, but they must prevent "last person to check in wins" culture. Planning can become more just-in-time, while alignment, verification, product sense, and explicit process cleanup become more important.
+
+Source: `raw/Running an AI-native engineering org.md`.
+
 ## Connections
 
+- [[concepts/AI-Native Engineering Organizations]] — Concrete management and process patterns for AI-native teams.
 - [[concepts/Harness Engineering Principles]] — Harness engineering optimizes single-agent environments; collaborative engineering extends to team-level alignment.
 - [[concepts/Symphony Orchestration]] — Symphony coordinates agents via issue trackers; collaborative engineering coordinates humans *and* agents via shared workspaces.
 - [[concepts/Agent Legibility]] — Making codebases legible to agents is one side; making team context legible to both humans and agents is the other.
@@ -83,3 +91,4 @@ Agentic tools should create environments where teams can *think rigorously toget
 ## Source
 
 - [[raw/Collaborative AI Engineering One Dev, Two Dozen Agents, Zero Alignment — Maggie Appleton, GitHub]]
+- [[raw/Running an AI-native engineering org]]
