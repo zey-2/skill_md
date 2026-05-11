@@ -1,7 +1,7 @@
 ---
 type: log
 created: 2026-04-26
-updated: 2026-05-10
+updated: 2026-05-11
 status: active
 sources:
   - "raw/skill.md for AI Agents.md"
@@ -757,3 +757,72 @@ Updated:
 - `concepts/Skill Distribution and Installation.md` — Added new source to frontmatter
 - `concepts/Skill Repository Tooling.md` — Added new source to frontmatter
 - `log.md`
+
+## [2026-05-11] ingest | Self-improving skills, autonomous research, meta-skills
+
+Processed three newly added raw articles covering autonomous skill improvement, Karpathy's autoresearch, and Garry Tan's skillification architecture.
+
+Raw source notes processed:
+
+- `raw/Build Self-Improving Claude Code Skills. The Results Are Crazy.md` - Simon Scrapes video transcript: applying Karpathy's autoresearch loop to Claude Code skills, binary assertions for automated scoring, two-layer self-improvement.
+- `raw/karpathyautoresearch AI agents running research on single-GPU nanochat training automatically.md` - Karpathy's autoresearch README: fixed 5-min time budgets, single-file agent editing, autonomous iteration loop, ~100 experiments/night.
+
+Generated pages created:
+
+- `concepts/Self-Improving Skills.md` — Autonomous improvement loops using binary assertions, Karpathy pattern adapted to skills, two layers (description optimization + output quality), eval structure, limitations.
+- `concepts/Autonomous Research Agents.md` — Karpathy's autoresearch project: prepare.py/train.py/program.md triad, fixed time budget design, autonomy protocol, platform tuning for smaller GPUs.
+- `concepts/Meta-Skills and Skillification.md` — Skills that create skills (skillify), fat skills/thin harness architecture, skill composition, GBrain/GStack systems, compounding personal AI infrastructure.
+
+Generated pages updated:
+
+- `concepts/Skill Authoring Workflow.md` — Added cross-project research section: SKILL.md structure convergence, description design rules, constraint patterns, TDD-for-skills testing methodology, voice guidelines. Updated sources and tags.
+- `concepts/SKILL.md Package Anatomy.md` — Added Matt Pocock patterns: failure modes addressed, skill categories, CONTEXT.md as companion file. Updated sources.
+- `concepts/Validation and Evaluation.md` — Added binary assertions reference with cross-link to Self-Improving Skills.
+
+Updated:
+
+- `index.md` — Added 3 new concept articles, 2 new raw sources to frontmatter and source list.
+- `log.md`
+
+Important decisions:
+
+- Created a dedicated "Autonomous Research Agents" concept page rather than folding into Self-Improving Skills, because autoresearch is a distinct pattern that predates and inspired the skill self-improvement application.
+- Created "Meta-Skills and Skillification" as a standalone concept because the GBrain/GStack architecture (skillify, brain pages, compounding infrastructure) is architecturally distinct from both skill authoring and self-improvement.
+- Folded the 2026-05-10 Skill Authoring Patterns cross-project research into Skill Authoring Workflow and SKILL.md Package Anatomy rather than creating a standalone page, because it is a synthesis of existing projects that reinforces existing concepts.
+
+## [2026-05-11] lint | Full wiki health check
+
+Ran a comprehensive lint pass across all 45 concept pages, raw sources, index.md, and log.md.
+
+Issues found and fixed:
+
+1. **Medium**: `index.md` was missing entries for 3 new concept pages (Self-Improving Skills, Autonomous Research Agents, Meta-Skills and Skillification). Added with descriptions.
+2. **Low**: `index.md` frontmatter was missing 2 new raw sources. Added.
+3. **Low**: `index.md` and `log.md` updated dates were stale (2026-05-10). Bumped to 2026-05-11.
+4. **Low**: Added log entry for 2026-05-11 ingest.
+
+No broken wikilinks detected. All concept pages have valid frontmatter with type/created/updated fields. No duplicate pages requiring consolidation. All index entries verified against disk.
+
+## [2026-05-11] lint | Wiki navigation and link health
+
+Checked generated wiki pages, source summaries, concept pages, course docs, and local skill artifacts for link health and index coverage.
+
+What changed:
+
+- Added a `Development Artifacts` section to `index.md` for presentation design specs and implementation plans under `docs/superpowers/`.
+- Left `raw/` untouched.
+
+Files updated:
+
+- `index.md`
+- `log.md`
+
+Findings:
+
+- No real broken Obsidian wikilinks were found after accounting for filename-based resolution and raw-source references.
+- The only index coverage gap found was the four `docs/superpowers/` planning/spec files, now linked from the index.
+- Duplicate `lesson-plan.md` filenames exist under separate course folders; this is acceptable but can be confusing in Obsidian filename-only lookup, so future course pages should use path-qualified links or more specific page names when cross-linking lesson plans.
+
+Follow-ups:
+
+- Decide whether `.claude/skills/presentation-slides/SKILL.md` should be documented as a wiki artifact or treated as local tooling only. I left it out of `index.md` for now because it is a large operational skill file rather than a generated knowledge page.

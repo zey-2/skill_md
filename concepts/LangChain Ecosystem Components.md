@@ -71,6 +71,8 @@ Visual drag-and-drop builder for LLM applications:
 
 The LangChain ecosystem is directly relevant to **agent orchestration** (see [[concepts/Agent Frameworks and Orchestration]]) and **validation/evaluation** (see [[concepts/Validation and Evaluation]]). LangGraph competes with and complements frameworks like Microsoft Agent Framework and CrewAI, while LangSmith overlaps with Anthropic evals and OpenAI trace grading. LangChain's tool calling and LangGraph's node actions both serve as tool-call surfaces that can be exposed via [[concepts/MCP and Tool-Integration Architecture]], enabling skills to guide agents using these frameworks toward external tools.
 
+For visual, no-code workflow automation (distinct from code-based agent frameworks), see [[concepts/n8n Workflow Automation]].
+
 ## Source
 
 - DataCamp tutorial by Vaibhav Mehra, 2025-09-24

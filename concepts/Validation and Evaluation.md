@@ -69,6 +69,8 @@ The Agent Skills output-quality guide recommends writing skill-local test cases 
 
 Good assertions are concrete and observable: file exists, JSON is valid, chart has labeled axes, report includes at least three recommendations. Mechanical assertions should use scripts where possible. LLM graders and human reviewers are better suited for judgment-heavy qualities such as clarity, polish, completeness, and usefulness.
 
+**Binary assertions** are a specific subtype: true/false checks with no room for interpretation (e.g., "does not contain em dashes", "word count under 300", "first line is a standalone sentence"). These enable fully automated scoring and are the foundation of [[Self-Improving Skills]] where the agent iterates on `SKILL.md` until all assertions pass.
+
 Anthropic's agent-eval guidance adds a useful distinction: grade the outcome when the path can vary. For many skills, the exact sequence of tool calls is less important than whether the final artifact, environment state, or user-facing answer is correct. Path checks are still useful when the skill is specifically about a required procedure or tool boundary.
 
 ## Trace and Trajectory Evaluation
@@ -139,6 +141,7 @@ There is also a tension between path grading and outcome grading. Some sources s
 - [[Progressive Disclosure]] explains why description quality matters for triggering.
 - [[concepts/Replacing Code with Skills]] — Cursor's evals (headless CLI with dual scorers checking worktree compliance vs. primary checkout leakage) show how evals directly drive prompt improvement and RL training for skills.
 - [[Context Development Lifecycle]] frames evaluation as the Evaluate stage within the broader Generate → Evaluate → Distribute → Observe loop, including error budgets and CI/CD for context.
+- [[Self-Improving Skills]] — applies binary assertions and eval-driven iteration to autonomously improve skills overnight.
 
 ## Open Questions
 

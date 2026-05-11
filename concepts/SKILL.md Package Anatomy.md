@@ -1,10 +1,12 @@
 ---
 type: concept
 created: 2026-04-26
-updated: 2026-04-26
+updated: 2026-05-11
 status: active
 sources:
   - "raw/skill.md for AI Agents.md"
+  - "raw/mattpocockskills Skills for Real Engineers. Straight from my .claude directory.md"
+  - "raw/2026-05-10 Skill Authoring Patterns Cross-Project Research.md"
 tags: [agent-skills, skill-md, package-anatomy]
 ---
 
@@ -47,6 +49,38 @@ These disagreements are not necessarily contradictions. They reflect different g
 - [[Vendor Adapters]] explains how to keep platform-specific metadata separate.
 - [[Progressive Disclosure]] explains why package resources should be loaded in layers.
 - [[Skill Authoring Workflow]] explains how to draft a package from concrete use cases.
+- [[Meta-Skills and Skillification]] — the skillify meta-skill and SKILL.md quality bar (under 500 lines).
+- [[Self-Improving Skills]] — how SKILL.md becomes an editable target for autonomous improvement loops.
+
+## Matt Pocock's Skill Patterns
+
+Matt Pocock's skill collection (`github.com/mattpocock/skills`) demonstrates a practical engineering-oriented approach. His skills are designed to fix common failure modes with coding agents:
+
+### Failure Modes Addressed
+
+1. **The agent didn't do what I want** — solved with "grilling sessions" (`/grill-me`, `/grill-with-docs`) that force the agent to ask detailed questions before starting work.
+2. **The agent is way too verbose** — solved with `CONTEXT.md` (a shared language document) that establishes ubiquitous terminology, reducing token waste and improving code naming.
+3. **The code doesn't work** — solved with `/tdd` (red-green-refactor loop) and `/diagnose` (disciplined debugging loop).
+4. **We built a ball of mud** — solved with `/to-prd` (which quizzes about modules), `/zoom-out` (system-level perspective), and `/improve-codebase-architecture` (periodic architecture rescue).
+
+### SKILL.md Categories
+
+Pocock organizes skills into three tiers:
+
+| Category | Examples | Purpose |
+|---|---|---|
+| Engineering | diagnose, tdd, to-prd, to-issues, triage, zoom-out, improve-codebase-architecture | Code work, daily development |
+| Productivity | caveman, grill-me, write-a-skill | General workflow tools |
+| Misc | git-guardrails, migrate-to-shoehorn, scaffold-exercises, setup-pre-commit | Rarely used but available |
+
+### CONTEXT.md as a Companion File
+
+A notable pattern is using `CONTEXT.md` alongside skills — a project-level document that establishes:
+- Shared terminology (ubiquitous language from DDD).
+- Hard-to-explain decisions (ADRs).
+- Domain model glossary.
+
+This makes skills more concise because they can reference shared terms instead of re-explaining them each session.
 
 ## Open Questions
 

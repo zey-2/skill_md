@@ -1,7 +1,7 @@
 ---
 type: concept
 created: 2026-04-26
-updated: 2026-04-26
+updated: 2026-05-11
 status: active
 sources:
   - "raw/2026-04-26 OpenAI Agents SDK tools MCP and orchestration source.md"
@@ -10,6 +10,7 @@ sources:
   - "raw/2026-04-26 OpenAI Agents SDK official source.md"
   - "raw/2026-04-26 OpenAI Codex SDK and App Server source.md"
   - "raw/2026-04-26 Claude Agent SDK source.md"
+  - "raw/Agent Development Kit (ADK).md"
 tags: [agent-frameworks, orchestration, agent-skills]
 ---
 
@@ -79,6 +80,7 @@ There is also a portability tension. Agent Skills aim to travel across clients, 
 - [[concepts/OpenAI Responses API]] explains how OpenAI's API itself now provides a built-in agentic loop, overlapping with what orchestration frameworks offer.
 - [[concepts/Replacing Code with Skills]] — The best-of command uses subagents with worktree isolation and parent-level coordination as a lightweight orchestration pattern without a framework.
 - [[concepts/Symphony Orchestration]] is a concrete issue-tracker-based orchestration pattern that extends beyond framework-level control to continuous always-on agent dispatch.
+- [[concepts/Google Agent Development Kit (ADK)]] — Google's multi-language framework (Python, TypeScript, Go, Java) for production multi-agent systems with progressive complexity and structured context management.
 
 ## Open Questions
 

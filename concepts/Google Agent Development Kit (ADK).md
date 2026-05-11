@@ -1,7 +1,7 @@
 ---
 type: concept
 created: 2026-05-01
-updated: 2026-05-01
+updated: 2026-05-11
 status: active
 sources:
   - "raw/Agent Development Kit (ADK).md"

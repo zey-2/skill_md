@@ -1,7 +1,7 @@
 ---
 type: concept
 created: 2026-04-26
-updated: 2026-05-10
+updated: 2026-05-11
 status: active
 sources:
   - "raw/skill.md for AI Agents.md"
@@ -10,7 +10,8 @@ sources:
   - "raw/obrasuperpowers An agentic skills framework & software development methodology that works.md"
   - "raw/forrestchangandrej-karpathy-skills A single CLAUDE.md file to improve Claude Code behavior, derived from Andrej Karpathy's observations on LLM coding pitfalls.md"
   - "raw/Context Is the New Code — Patrick Debois, Tessl.md"
-tags: [agent-skills, authoring, workflow, context]
+  - "raw/2026-05-10 Skill Authoring Patterns Cross-Project Research.md"
+tags: [agent-skills, authoring, workflow, context, skillification]
 ---
 
 # Skill Authoring Workflow
@@ -67,6 +68,85 @@ Debois identifies several context creation patterns beyond manual prompting:
 
 These methods form the **Generate** stage of the [[Context Development Lifecycle]].
 
+## Authoring Patterns from Cross-Project Research
+
+A May 2026 cross-project study compared four skill collections: obra/superpowers, mattpocock/skills, garrytan/gstack, and garrytan/gbrain. Several convergent patterns emerged.
+
+### SKILL.md Structure Convergence
+
+All projects converge on a common skeleton:
+
+| Section | Superpowers | Gstack | Matt Pocock |
+|---------|:-----------:|:------:|:-----------:|
+| Overview/Core principle | Yes | Yes | Yes |
+| When to Use / Triggers | Yes | Yes (triggers array) | Yes |
+| Process/Workflow steps | Yes | Yes (Step 0, 1, 2...) | Yes |
+| Iron Laws / Rules | Yes | Yes (STOP points) | Yes |
+| Red Flags / Anti-patterns | Yes | Yes | Yes |
+| Examples | Yes | Yes | Yes |
+| Reference files | Yes | Yes | Yes |
+| Checklists | Yes | Yes | Yes |
+| Voice guidelines | No | Yes | No |
+| Telemetry | No | Yes | No |
+| Flowcharts | Yes (Graphviz) | No | No |
+
+### Description Field Design
+
+The most important cross-cutting insight: the `description` field should describe **only triggering conditions**, not what the skill does. When descriptions summarize workflow, the agent follows the description instead of reading the full skill contents.
+
+```yaml
+# BAD: Summarizes workflow
+description: Use when executing plans - dispatches subagent per task with code review
+
+# GOOD: Just triggering conditions
+description: Use when executing implementation plans with independent tasks in the current session
+```
+
+Gstack extends this with a `triggers` array listing specific phrases that activate the skill.
+
+**Rules for writing descriptions:**
+1. Start with "Use when..." to focus on triggering conditions.
+2. Include specific symptoms, situations, and contexts.
+3. Never summarize the skill's process or workflow in the description.
+4. Write in third person (injected into system prompt).
+5. Add keywords: error messages, symptoms, tool names.
+6. Keep under 500 characters.
+
+### Constraint Design
+
+All projects use similar patterns for specifying prohibitions:
+
+1. **Iron Laws** (Superpowers): Non-negotiable declarations like `NO PRODUCTION CODE WITHOUT A FAILING TEST FIRST`.
+2. **STOP points** (Gstack): Named checkpoints where workflow must pause for user input.
+3. **Red Flags lists:** Explicit thought patterns to watch for — "ALL of these mean: STOP."
+4. **Rationalization tables:** Mapping agent excuses to reality counters.
+5. **Explicit negation:** "Don't just state the rule — forbid specific workarounds."
+
+### Testing Before Deployment
+
+From superpowers' TDD-for-skills methodology:
+
+1. Run the task **without** the skill first. Watch the agent fail.
+2. Document the exact rationalizations the agent uses verbatim.
+3. Write the skill to address those specific failures.
+4. Re-run the task **with** the skill. Verify compliance.
+5. If the agent finds new rationalizations, add counters and re-test.
+6. Repeat until bulletproof under maximum combined pressure.
+
+### Choosing the Right Freedom Level
+
+- **Low freedom** (specific scripts, exact commands): Database migrations, deployment sequences.
+- **Medium freedom** (pseudocode with parameters): Report generation, data analysis.
+- **High freedom** (text-based instructions): Code review, design decisions.
+
+### Voice and Tone Guidelines
+
+Gstack's explicit voice guidelines are notable:
+- Direct, concrete, builder-to-builder.
+- Name the file, function, command, and user-visible impact.
+- No em dashes. No AI vocabulary (delve, crucial, robust, comprehensive, nuanced).
+- Short paragraphs. End with what to do.
+
 ## Connections
 
 - [[Progressive Disclosure]] explains why authoring should split content into layers.
@@ -76,6 +156,8 @@ These methods form the **Generate** stage of the [[Context Development Lifecycle
 - [[Agent Skills]] explains why workflow skills still count as skills.
 - [[MCP and Tool-Integration Architecture]] helps decide when a workflow needs tools, scripts, resources, or an MCP server.
 - [[Agent Frameworks and Orchestration]] helps decide when a repeated behavior should become a skill versus framework-level control flow.
+- [[Meta-Skills and Skillification]] — skillification as an authoring method; the skillify meta-skill.
+- [[Self-Improving Skills]] — autonomous iteration as an extension of the manual authoring cycle.
 
 ## Open Questions
 

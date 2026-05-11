@@ -1,7 +1,7 @@
 ---
 type: index
 created: 2026-04-26
-updated: 2026-05-10
+updated: 2026-05-11
 status: active
 sources:
   - "raw/skill.md for AI Agents.md"
@@ -74,6 +74,8 @@ sources:
   - "raw/Snyk Finds Prompt Injection in 36%, 1467 Malicious Payloads in a ToxicSkills Study of Agent Skills Supply Chain Compromise.md"
   - "raw/Meta-Meta-Prompting The Secret to Making AI Agents Work.md"
   - "raw/2026-05-10 Skill Authoring Patterns Cross-Project Research.md"
+  - "raw/Build Self-Improving Claude Code Skills. The Results Are Crazy.md"
+  - "raw/karpathyautoresearch AI agents running research on single-GPU nanochat training automatically.md"
 tags: [index, agent-skills, llm-providers]
 ---
 
@@ -123,10 +125,15 @@ tags: [index, agent-skills, llm-providers]
 - [[concepts/Context Development Lifecycle|Context Development Lifecycle]] — Debois's DevOps-inspired framework: Generate → Evaluate → Distribute → Observe as the lifecycle for context, with library authoring and organizational loops, and the context flywheel.
 - [[concepts/Context Observability and Feedback|Context Observability and Feedback]] — Monitoring context effectiveness through agent logs, PR feedback, production failures, sandbox testing, context filters, and AI SBOM.
 - [[concepts/Skill Security and Supply Chain Risk|Skill Security and Supply Chain Risk]] — Security landscape: 36% of skills have flaws, 76 confirmed malicious payloads, and the convergence of prompt injection with traditional malware.
+- [[concepts/Self-Improving Skills|Self-Improving Skills]] — Autonomous improvement loops using binary assertions, applying Karpathy's autoresearch pattern to skills for overnight self-refinement.
+- [[concepts/Autonomous Research Agents|Autonomous Research Agents]] — Karpathy's autoresearch: agents given a real experimental setup, fixed time budgets, and indefinite autonomy to iterate on their own code.
+- [[concepts/Meta-Skills and Skillification|Meta-Skills and Skillification]] — Skills that create skills (skillify), fat skills/thin harness architecture, skill composition, and Garry Tan's compounding personal AI infrastructure.
 
 ## Lesson Plans
 
 - [[courses/ai-fundamentals-to-agent-skills/lesson-plan|AI Fundamentals to Agent Skills]] - 16-module curriculum (~40-60 hours) progressing from ML basics through authoring, testing, and publishing reusable Agent Skills. Includes three learning pathways (Skill Author, Agent Developer, Quick Start).
+- [[courses/from-agents-to-skills/lesson-plan|From Agents to Skills]] - Long-form lesson plan covering the transition from agent-based workflows to skill-based repeatability.
+- [[courses/from-agents-to-skills/article|From Agents to Skills: Long-form Article]] - Accompanying long-form article for the course: "The gap isn't intelligence. It's operating procedure."
 
 ## Raw Sources
 
@@ -201,6 +208,8 @@ tags: [index, agent-skills, llm-providers]
 - `raw/Indirect Prompt Injection Attacks Hidden AI Risks.md` - CrowdStrike blog: indirect prompt injection as OWASP #1 GenAI risk, 300K+ adversarial prompts analyzed, shadow AI (45% BYO AI), real-world examples (AI hiring manipulation, LinkedIn bio injection), and 6-layer defense framework.
 - `raw/Snyk Finds Prompt Injection in 36%, 1467 Malicious Payloads in a ToxicSkills Study of Agent Skills Supply Chain Compromise.md` - Snyk security audit of 3,984 skills from ClawHub: 13.4% critical issues, 36.82% any flaw, 76 confirmed malicious payloads, 8-skill threat taxonomy, identified threat actors, and mcp-scan defense tool.
 - `raw/Meta-Meta-Prompting The Secret to Making AI Agents Work.md` - Garry Tan's "fat skills, fat code, thin harness" architecture: Skillify meta-skill, book-mirror workflow, 100K-page brain, GBrain/OpenClaw/Hermes Agent, compounding personal AI system.
+- `raw/Build Self-Improving Claude Code Skills. The Results Are Crazy.md` - Simon Scrapes video transcript: applying Karpathy's autoresearch loop to Claude Code skills, binary assertions for automated scoring, two-layer self-improvement (description optimization + output quality).
+- `raw/karpathyautoresearch AI agents running research on single-GPU nanochat training automatically.md` - Karpathy's autoresearch README: AI agents running overnight experiments on single-GPU LLM training, fixed time budgets, autonomous iteration loop, program.md as lightweight skill.
 
 ## Source Summaries
 
@@ -211,3 +220,10 @@ tags: [index, agent-skills, llm-providers]
 - [[Indirect Prompt Injection Attacks (CrowdStrike)]] — CrowdStrike on indirect prompt injection: OWASP #1 risk, shadow AI problem, real-world examples, and defense layers.
 - [[Snyk ToxicSkills Research]] — First comprehensive security audit: 36.82% of skills have flaws, 76 confirmed malicious payloads, threat taxonomy, and defense recommendations.
 - [[Meta-Meta-Prompting The Secret to Making AI Agents Work]] — Garry Tan's personal AI system: fat skills + fat data + thin harness, Skillify meta-skill, 100K-page brain, compounding workflows.
+
+## Development Artifacts
+
+- [[docs/superpowers/specs/2026-05-10-from-agents-to-skills-v2-design|From Agents to Skills v2 design spec]] — Design brief for the SKILL.md-centered rewrite of the presentation.
+- [[docs/superpowers/plans/2026-05-10-from-agents-to-skills-v2-plan|From Agents to Skills v2 implementation plan]] — Task plan for producing `presentation-v2.html`.
+- [[docs/superpowers/specs/2026-05-10-from-agents-to-skills-v3-design|From Agents to Skills v3 design spec]] — Problem-first impact rewrite brief for the presentation.
+- [[docs/superpowers/plans/2026-05-10-from-agents-to-skills-v3-plan|From Agents to Skills v3 implementation plan]] — Task plan for producing `presentation-v3.html`.
