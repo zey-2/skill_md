@@ -5,6 +5,7 @@ updated: 2026-05-02
 status: active
 sources:
   - "raw/Andrej Karpathy From Vibe Coding to Agentic Engineering.md"
+  - "raw/The Rise of the AI Engineer.md"
 tags: [software-3-0, prompting, context-window, karpathy]
 ---
 
@@ -50,7 +51,9 @@ Software 3.0 explains why [[concepts/Agent Skills]] are structured the way they 
 - [[concepts/Harness Engineering Principles]] — At team scale, the context window becomes the shared programming surface, with repository structure and guardrails acting as the build system.
 - [[concepts/Spec-Driven Development]] — Specs are the source code in Software 3.0; code is the compiled output.
 - [[concepts/Replacing Code with Skills]] — Cursor replaced ~15K lines of TypeScript with a ~200-line markdown skill. The skill IS the program; the agent IS the interpreter.
+- [[concepts/Agentic Engineering vs Vibe Coding]] — The AI Engineer role is the human operator in the Software 3.0 loop, writing context instead of code.
 
 ## Source
 
 - [[raw/Andrej Karpathy From Vibe Coding to Agentic Engineering]]
+- [[raw/The Rise of the AI Engineer]] — Latent Space (2023): coined the Software 3.0 framing, evolving from Karpathy's original Software 2.0 essay.

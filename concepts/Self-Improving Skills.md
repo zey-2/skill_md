@@ -1,7 +1,7 @@
 ---
 type: concept
 created: 2026-05-11
-updated: 2026-05-11
+updated: 2026-05-16
 status: active
 sources:
   - "raw/Build Self-Improving Claude Code Skills. The Results Are Crazy.md"

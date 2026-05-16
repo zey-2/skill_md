@@ -1,3 +1,12 @@
+---
+type: article
+created: 2026-05-10
+updated: 2026-05-10
+status: draft
+tags: [article, course, agent-skills]
+sources: []
+---
+
 # From Agents to Skills: Capturing Expertise, Making It Repeatable
 
 *The gap isn't intelligence. It's operating procedure.*

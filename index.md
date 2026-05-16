@@ -1,7 +1,7 @@
 ---
 type: index
 created: 2026-04-26
-updated: 2026-05-11
+updated: 2026-05-16
 status: active
 sources:
   - "raw/skill.md for AI Agents.md"
@@ -22,6 +22,8 @@ sources:
   - "raw/2026-04-26 OpenClaw Skills docs.md"
   - "raw/2026-04-26 Windsurf Cascade Skills docs.md"
   - "raw/2026-04-26 Microsoft Agent Framework Agent Skills docs.md"
+  - "raw/2026-04-30 AI Coding Plans Comparison 2026.md"
+  - "raw/2026-04-30 Claude Code Third-Party LLM Provider Configuration.md"
   - "raw/2026-04-30 Microsoft Copilot SKILL.md support roadmap.md"
   - "raw/2026-04-26 Google Cloud Vertex AI and Model Garden LLM provider source.md"
   - "raw/2026-04-26 AWS Amazon Bedrock LLM provider source.md"
@@ -79,6 +81,9 @@ sources:
   - "raw/Tokenmaxxing How Top Builders Use AI To Do The Work Of 400 Engineers.md"
   - "raw/Running an AI-native engineering org.md"
   - "raw/There will only be four jobs.md"
+  - "raw/Building a Second Brain Vivian Balakrishnan AI Engineer Singapore.md"
+  - "raw/The Rise of the AI Engineer.md"
+  - "raw/You can outsource your thinking but not your understanding - Yacine MTB.md"
 tags: [index, agent-skills, llm-providers]
 ---
 
@@ -134,6 +139,10 @@ tags: [index, agent-skills, llm-providers]
 - [[concepts/Tokenmaxxing|Tokenmaxxing]] — Spending more model time, context, agents, and verification to buy back scarce human attention when extra machine work improves quality.
 - [[concepts/AI-Native Engineering Organizations|AI-Native Engineering Organizations]] — Org-level operating model for teams where coding throughput is no longer the main bottleneck.
 - [[concepts/AI-Native Work Archetypes|AI-Native Work Archetypes]] — Working-style taxonomy for AI-native companies: acceleration, stabilization, governance, and interface.
+- [[concepts/Personal AI Agents and Memory Systems|Personal AI Agents and Memory Systems]] — Pattern of individuals building bespoke personal AI agents with graph-based memory, local deployment, and tool assembly.
+- [[concepts/Neuro-Symbolic AI Architecture|Neuro-Symbolic AI Architecture]] — Pure LLMs as pattern recognition with emergent behavior vs. hybrid neural+symbolic systems for verifiable reasoning and efficiency.
+- [[concepts/Graph-Based Memory for AI Agents|Graph-Based Memory for AI Agents]] — Persistent memory as graphs with entities, causal/temporal/semantic edges, and local embeddings for semantic search.
+- [[concepts/Tool Assembly as a Skill|Tool Assembly as a Skill]] — Selecting, configuring, and connecting existing tools without writing glue code as a distinct capability between vibe coding and agentic engineering.
 
 ## Lesson Plans
 
@@ -162,6 +171,8 @@ tags: [index, agent-skills, llm-providers]
 - `raw/2026-04-26 Windsurf Cascade Skills docs.md` - Windsurf Cascade workspace, global, enterprise, and compatibility skill paths.
 - `raw/2026-04-26 Microsoft Agent Framework Agent Skills docs.md` - Microsoft Agent Framework provider model for loading and exposing skills.
 - `raw/2026-04-30 Microsoft Copilot SKILL.md support roadmap.md` - Microsoft Copilot family SKILL.md support: GitHub Copilot in VS Code/Visual Studio 2026, Copilot Cowork (M365 OneDrive/SharePoint), Copilot Studio, and timeline through April 2026.
+- `raw/2026-04-30 AI Coding Plans Comparison 2026.md` - Comprehensive comparison of six Chinese coding plans and four international coding-tool subscriptions with pricing, quotas, model access, and selection guidance.
+- `raw/2026-04-30 Claude Code Third-Party LLM Provider Configuration.md` - Raw synthesis of Claude Code third-party provider setup including OpenRouter, LiteLLM, Bedrock, Vertex AI, Foundry, environment variables, and VS Code integration.
 - `raw/2026-04-26 Google Cloud Vertex AI and Model Garden LLM provider source.md` - Google Cloud model hub evidence for Gemini, open models, partner models, deployment, and MLOps.
 - `raw/2026-04-26 AWS Amazon Bedrock LLM provider source.md` - AWS Bedrock model hub evidence for Amazon and third-party foundation models, agents, knowledge bases, and provisioned throughput.
 - `raw/2026-04-26 Azure AI Foundry Models LLM provider source.md` - Azure Foundry Models evidence for Microsoft's broad curated model catalog and serverless model deployment.
@@ -232,6 +243,9 @@ tags: [index, agent-skills, llm-providers]
 - [[sources/Tokenmaxxing How Top Builders Use AI To Do The Work Of 400 Engineers|Tokenmaxxing How Top Builders Use AI To Do The Work Of 400 Engineers]] — Garry Tan on tokenmaxxing, GStack, high-throughput personal AI workflows, QA automation, and personal AI ownership.
 - [[sources/Running an AI-native engineering org|Running an AI-native engineering org]] — Fiona Fung on Claude Code team norms after coding stops being the bottleneck.
 - [[sources/There will only be four jobs|There will only be four jobs]] — Yoni Rechtman on AI-native work archetypes and the shift from output-based roles to production styles.
+- [[sources/Building a Second Brain Vivian Balakrishnan AI Engineer Singapore|Building a Second Brain Vivian Balakrishnan AI Engineer Singapore]] — Singapore's Foreign Minister on building a personal AI agent with NanoClaw, graph-based memory, and Obsidian, without writing code.
+- [[sources/Build Self-Improving Claude Code Skills. The Results Are Crazy|Build Self-Improving Claude Code Skills. The Results Are Crazy]] — Simon Scrapes on applying Karpathy's autoresearch loop to Claude Code skills using binary assertions for structural quality testing.
+- [[sources/The Rise of the AI Engineer|The Rise of the AI Engineer]] — Latent Space (2023): the foundational article coining "AI Engineer" as a job title, the shift right of applied AI, and Software 3.0.
 
 ## Development Artifacts
 

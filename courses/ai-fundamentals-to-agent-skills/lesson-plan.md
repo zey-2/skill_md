@@ -4,6 +4,7 @@ created: 2026-05-01
 updated: 2026-05-01
 status: draft
 tags: [lesson-plan, curriculum, agent-skills]
+sources: []
 ---
 
 # AI Fundamentals to Agent Skills: A Lesson Plan

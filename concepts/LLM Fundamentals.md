@@ -71,4 +71,6 @@ Understanding these fundamentals clarifies why Agent Skills are structured the w
 - [[concepts/Validation and Evaluation]] — addresses the stochastic behavior that makes systematic evaluation necessary.
 - [[concepts/MCP and Tool-Integration Architecture]] — tools are the mechanism that extends LLMs beyond pure text generation.
 - [[concepts/OpenAI Responses API]] — shows how the Responses API manages the statelessness of LLM inference via server-side conversation state.
+- [[concepts/Neuro-Symbolic AI Architecture]] — LLM fundamentals explain what LLMs can do; neuro-symbolic architecture addresses what they cannot (deterministic reasoning, verifiable logic).
+- [[concepts/Graph-Based Memory for AI Agents]] — LLMs have no persistent memory; graph memory solves this architectural gap.
 - [[courses/ai-fundamentals-to-agent-skills/lesson-plan]] — Modules 1–4 cover these foundations as prerequisites for the full curriculum.

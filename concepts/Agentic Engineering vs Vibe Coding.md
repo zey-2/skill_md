@@ -73,6 +73,7 @@ The distinction between vibe coding and agentic engineering directly informs [[c
 - [[concepts/Collaborative AI Engineering]] — At team scale, agentic engineering requires alignment infrastructure to prevent coordination debt and wasted work.
 - [[concepts/Replacing Code with Skills]] — The journey from "vibes-based" prompt trust to evals and RL training is the agentic engineering maturity curve applied to a single feature.
 - [[concepts/Agent Skills]] — Skills package the reusable operating knowledge that separates agentic engineering from ad-hoc prompting.
+- [[concepts/Tool Assembly as a Skill]] — Tool assembly is a third pattern between vibe coding and agentic engineering: no code generated, but genuine system building through tool selection and configuration.
 
 ## Source
 

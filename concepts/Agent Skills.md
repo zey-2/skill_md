@@ -87,10 +87,10 @@ The article also frames building a skill as "putting together an onboarding guid
 - [[concepts/Claude Code Architecture Deep Dive]] provides the source-level analysis of where skills sit in Claude Code's extensibility spectrum (Hooks → Skills → Plugins → MCP) and how SkillTool vs AgentTool differ in context cost.
 - [[concepts/LLM Fundamentals]] explains how LLMs work under the hood — why skills need precise wording, why context matters, and why evaluation is necessary.
 - [[concepts/OpenAI Responses API]] explains OpenAI's stateful API primitive for agentic tool use and reasoning models.
-- [[Equipping Agents for the Real World with Agent Skills]] Anthropic's engineering article: the official narrative introducing skills, with the PDF skill walk-through and development guidelines.
-- [[Agent Skills Overview (agentskills.io)]] The open standard homepage: concise definition, three-stage loading (Discovery, Activation, Execution), and cross-product reuse.
-- [[Agent Skills (platform docs)]] Official platform docs: VM architecture, beta API requirements, runtime constraints per surface, and ZDR notice.
-- [[Introduction to Claude Skills (cookbook)]] Official cookbook: Excel/PPT/PDF examples, token optimization (98% savings), and versioning strategy.
+- [[sources/Equipping Agents for the Real World with Agent Skills]] Anthropic's engineering article: the official narrative introducing skills, with the PDF skill walk-through and development guidelines.
+- [[sources/Agent Skills Overview (agentskills.io)]] The open standard homepage: concise definition, three-stage loading (Discovery, Activation, Execution), and cross-product reuse.
+- [[sources/Agent Skills (platform docs)]] Official platform docs: VM architecture, beta API requirements, runtime constraints per surface, and ZDR notice.
+- [[sources/Introduction to Claude Skills (cookbook)]] Official cookbook: Excel/PPT/PDF examples, token optimization (98% savings), and versioning strategy.
 - [[concepts/Skill Security and Supply Chain Risk]] Security landscape: 36% of skills have flaws, 76 confirmed malicious payloads, and the convergence of prompt injection with traditional malware.
 
 ## Open Questions

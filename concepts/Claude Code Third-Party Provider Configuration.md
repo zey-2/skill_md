@@ -1,5 +1,5 @@
 ---
-type: synthesis
+type: concept
 created: 2026-04-30
 updated: 2026-04-30
 status: active

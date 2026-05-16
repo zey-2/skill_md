@@ -69,7 +69,7 @@ Agent Skills parallels early npm/PyPI security but is worse in key ways:
 
 ## Connections
 
-- [[Skill Security and Supply Chain Risk]] — This source is the primary evidence for the dedicated concept page.
+- [[concepts/Skill Security and Supply Chain Risk]] — This source is the primary evidence for the dedicated concept page.
 - [[concepts/Skill Governance and Metrics]] — Trust and audit requirements, curation vs audit distinction.
-- [[Indirect Prompt Injection Attacks (CrowdStrike)]] — Third-party content exposure becomes an indirect injection vector.
+- [[sources/Indirect Prompt Injection Attacks (CrowdStrike)]] — Third-party content exposure becomes an indirect injection vector.
 - [[concepts/MCP and Tool-Integration Architecture]] — mcp-scan detects both MCP server and Agent Skills security issues.

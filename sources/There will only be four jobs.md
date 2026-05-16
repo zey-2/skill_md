@@ -1,7 +1,7 @@
 ---
 type: source-summary
 created: 2026-05-11
-updated: 2026-05-11
+updated: 2026-05-16
 status: active
 sources:
   - "raw/There will only be four jobs.md"

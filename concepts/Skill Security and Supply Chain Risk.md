@@ -103,10 +103,10 @@ Sources also agree that third-party content fetching is the highest-risk pattern
 
 - [[concepts/Skill Governance and Metrics]] — Governance framework that includes trust and review requirements.
 - [[concepts/MCP and Tool-Integration Architecture]] — mcp-scan detects both MCP server and Agent Skills security issues.
-- [[Indirect Prompt Injection Attacks (CrowdStrike)]] — Broader prompt injection threat landscape beyond skills specifically.
-- [[Snyk ToxicSkills Research]] — Primary security audit data and threat taxonomy.
-- [[Equipping Agents for the Real World with Agent Skills]] — Anthropic's security section: install from trusted sources, audit before use.
-- [[Agent Skills (platform docs)]] — Runtime constraints and ZDR notice for security planning.
+- [[sources/Indirect Prompt Injection Attacks (CrowdStrike)]] — Broader prompt injection threat landscape beyond skills specifically.
+- [[sources/Snyk ToxicSkills Research]] — Primary security audit data and threat taxonomy.
+- [[sources/Equipping Agents for the Real World with Agent Skills]] — Anthropic's security section: install from trusted sources, audit before use.
+- [[sources/Agent Skills (platform docs)]] — Runtime constraints and ZDR notice for security planning.
 - [[concepts/Context Observability and Feedback]] — Context filters as WAF for prompt injections, AI SBOM for supply chain visibility.
 
 ## Open Questions

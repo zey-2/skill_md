@@ -1,7 +1,7 @@
 ---
 type: log
 created: 2026-04-26
-updated: 2026-05-11
+updated: 2026-05-16
 status: active
 sources:
   - "raw/skill.md for AI Agents.md"
@@ -935,3 +935,108 @@ Verification:
 
 - Follow-up link checks found no remaining unqualified `[[Agent Skills]]` links in generated pages.
 - `index.md` source-summary links now use path-qualified `sources/` targets.
+
+## [2026-05-16] ingest | Building a Second Brain — Vivian Balakrishnan at AI Engineer Singapore
+
+Processed one new raw source: a keynote transcript from Singapore's Minister for Foreign Affairs sharing his 3-month experience building a personal AI agent without writing code.
+
+Raw source note processed:
+
+- `raw/Building a Second Brain Vivian Balakrishnan AI Engineer Singapore.md` - Dr. Balakrishnan's keynote: three key messages (personal understanding cannot be outsourced, real value is created at ground level, barriers have collapsed), tech stack (NanoClaw, Neoman, Ollama, Whisper, Obsidian, Claude, Raspberry Pi), and policy arguments for decentralized deployment and neuro-symbolic future.
+
+Generated pages created:
+
+- `sources/Building a Second Brain Vivian Balakrishnan AI Engineer Singapore.md` — Source summary with key points, tech stack table, and connections.
+- `concepts/Personal AI Agents and Memory Systems.md` — New concept page on the emerging pattern of individuals building personal AI agents with graph-based memory, local deployment, and tool assembly.
+
+Generated pages updated:
+
+- `concepts/Understanding as the Human Bottleneck.md` — Added Balakrishnan source (direct alignment: "personal understanding cannot be outsourced").
+- `concepts/Self-Improving Skills.md` — Updated timestamp.
+- `index.md` — Added new raw source to frontmatter, new concept article, and 2 new source summaries.
+- `log.md`
+
+Important decisions:
+
+- Created "Personal AI Agents and Memory Systems" as a standalone concept because the combination of graph-based personal memory, local deployment, tool assembly, and neuro-symbolic argument forms a distinct pattern from the wiki's existing focus on developer-facing agent skills.
+- Included a detailed tech stack table because the specific tool choices (NanoClaw, Neoman, Ollama, Whisper, Obsidian) are the concrete evidence for the "tool assembly" claim.
+- Noted the accessibility tension: "barriers have fallen" is true for a technically curious tinkerer but may overstate accessibility for non-technical users.
+
+## [2026-05-16] ingest | Build Self-Improving Claude Code Skills (full transcript)
+
+Processed updated raw source — went from short placeholder to full YouTube transcript with detailed tutorial on applying Karpathy's autoresearch to Claude Code skills.
+
+Raw source note processed:
+
+- `raw/Build Self-Improving Claude Code Skills. The Results Are Crazy.md` - Full transcript of Simon Scrapes tutorial: two-layer self-improvement (description optimization + binary assertion output quality), evals.json setup, autonomous loop logic, marketing copywriting example (23/24 → 25/25), and limitations.
+
+Generated pages created:
+
+- `sources/Build Self-Improving Claude Code Skills. The Results Are Crazy.md` — Source summary with two-layer architecture, binary assertion methodology, concrete results, and limitations.
+
+Generated pages updated:
+
+- `concepts/Self-Improving Skills.md` — Updated timestamp (already had this source in frontmatter).
+- `index.md` — Added new source summary entry.
+- `log.md`
+
+Important decisions:
+
+- Previously ingested this source only at the concept level; now created a proper source summary because the full transcript has significantly more detail (specific evals.json structure, concrete results, limitation boundaries).
+
+## [2026-05-16] ingest | There will only be four jobs (full transcript)
+
+Processed updated raw source — went from short placeholder to full Substack article with "Some Stray Notes" section.
+
+No new pages created. Existing source summary (`sources/There will only be four jobs.md`) already captured the main points well from the earlier version.
+
+Generated pages updated:
+
+- `sources/There will only be four jobs.md` — Updated timestamp.
+- `index.md` — Updated frontmatter date.
+- `log.md`
+
+Important decisions:
+
+- Did not modify the source summary because the existing summary already covered all key archetypes, the working-styles-vs-titles distinction, and the product/design/eng replacement thesis. The full article adds illustrative examples (OpenAI/TBPN deal, GLP-1 company) but no new structural claims.
+
+## [2026-05-16] extract | Three new concept pages from ingested material
+
+Extracted three standalone concept pages from ideas that were previously captured only as bullet points in `Personal AI Agents and Memory Systems.md`.
+
+Generated pages created:
+
+- `concepts/Neuro-Symbolic AI Architecture.md` — Pure LLMs as pattern recognition vs. hybrid neural+symbolic systems. LeCun's critique, biological efficiency argument, token economics, and the already-working neuro-symbolic pattern in self-improving skills.
+- `concepts/Graph-Based Memory for AI Agents.md` — Graph memory architecture: entities, causal/temporal/semantic edges, local embeddings, privacy preservation. Memory tool landscape (Neoman, Zep, Graphiti, Mem0). Architecture layers table.
+- `concepts/Tool Assembly as a Skill.md` — Tool assembly as distinct capability between vibe coding and agentic engineering. Evidence from Balakrishnan's personal agent. Comparison table vs. vibe coding, agentic engineering, software engineering.
+
+Generated pages updated (cross-references):
+
+- `concepts/Personal AI Agents and Memory Systems.md` — Added connections to all three new pages.
+- `concepts/LLM Fundamentals.md` — Added neuro-symbolic and graph-memory connections.
+- `concepts/Agentic Engineering vs Vibe Coding.md` — Added tool assembly as third pattern.
+- `concepts/Harness Engineering Principles.md` — Added neuro-symbolic (guardrails as symbolic layer) and tool assembly connections.
+- `index.md` — Added three new concept articles.
+- `log.md`
+
+## [2026-05-16] enhance | Understanding as the Human Bottleneck — accountability dimension
+
+Added the accountability dimension to the concept page after user emphasis on Dr. Balakrishnan's full quote: "you can delegate work. You can't delegate accountability."
+
+What changed:
+
+- Added full quote including accountability.
+- Added "What Can and Cannot Be Outsourced" table.
+- Added "Understanding and Accountability" section.
+- Added connections to AI-Native Work Archetypes and Harness Engineering.
+- Added new raw source capturing the tweet.
+
+Files updated:
+
+- `concepts/Understanding as the Human Bottleneck.md`
+- `index.md` — Added new raw source to frontmatter.
+- `log.md`
+
+Files created:
+
+- `raw/You can outsource your thinking but not your understanding - Yacine MTB.md`

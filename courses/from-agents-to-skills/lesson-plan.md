@@ -4,6 +4,7 @@ created: 2026-05-05
 updated: 2026-05-05
 status: draft
 tags: [lesson-plan, curriculum, agent-skills, quick-start]
+sources: []
 ---
 
 # From Agents to Skills: A 1-Hour Crash Course

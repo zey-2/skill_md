@@ -97,6 +97,8 @@ Fiona Fung's "Running an AI-native engineering org" talk extends harness thinkin
 - [[concepts/Replacing Code with Skills]] — The cursor worktree skill shows a harness boundary shift: hard-coded filesystem isolation replaced by prompt-based instructions backed by evals.
 - [[concepts/Context Development Lifecycle]] — Debois frames harness engineering observability as the Observe stage of the context lifecycle, where logs, traces, and feedback close the improvement loop.
 - [[concepts/Context Observability and Feedback]] — Covers the specific observability patterns (agent logs, production monitoring, context filters) that complement harness guardrails.
+- [[concepts/Neuro-Symbolic AI Architecture]] — Deterministic guardrails (lints, tests, CI gates) are the symbolic layer around the LLM's neural generation.
+- [[concepts/Tool Assembly as a Skill]] — Assembling harness tools (AGENTS.md, reviewer agents, custom lints) is itself a form of tool assembly.
 
 ## Source
 
