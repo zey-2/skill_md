@@ -1,14 +1,15 @@
 ---
 type: concept
 created: 2026-05-03
-updated: 2026-05-11
+updated: 2026-05-17
 status: active
 sources:
   - "raw/Harness engineering leveraging Codex in an agent-first world.md"
   - "raw/Harness Engineering How to Build Software When Humans Steer, Agents Execute — Ryan Lopopolo, OpenAI.md"
   - "raw/Tokenmaxxing How Top Builders Use AI To Do The Work Of 400 Engineers.md"
   - "raw/Running an AI-native engineering org.md"
-tags: [harness-engineering, agent-first, code-is-free, scarcity, openai]
+  - "raw/new_economics_of_software.md"
+tags: [harness-engineering, agent-first, code-is-free, scarcity, software-economics, openai]
 ---
 
 # Harness Engineering Principles
@@ -83,6 +84,10 @@ The Tokenmaxxing source reinforces that abundant model work is useful only when 
 ## Org Processes as Harnesses
 
 Fiona Fung's "Running an AI-native engineering org" talk extends harness thinking from repo infrastructure to team process. Planning, review, ownership, hiring, onboarding, and org shape are all part of the harness. When coding is no longer the slow part, stale processes can become the new failure mode; teams need explicit permission to automate or remove them.
+
+## Economic Framing: Scarcity to Abundance
+
+Max Buckley's "New Economics of Software" frames harness engineering's "code is free" insight as a broader economic shift. The collapse of development costs means SaaS moats built on code alone erode — competitive advantage moves to brand, data, ML models, and integration. Bottlenecks shift from implementation to attention and governance: any idea can be built quickly, so the scarce resource becomes discernment (which ideas matter) and validation (can humans evaluate agent output fast enough). This economic lens reinforces why harness design is the critical skill — it is the infrastructure that makes abundance usable rather than overwhelming.
 
 ## Connections
 

@@ -1,7 +1,7 @@
 ---
 type: concept
 created: 2026-05-02
-updated: 2026-05-16
+updated: 2026-05-17
 status: active
 sources:
   - "raw/Andrej Karpathy From Vibe Coding to Agentic Engineering.md"
