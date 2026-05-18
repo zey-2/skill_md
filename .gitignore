@@ -1,3 +1,4 @@
 .playwright-mcp/
 .claude/settings.local.json
 docs/superpowers/
+.obsidian/
