@@ -180,6 +180,16 @@ Produce a short report with recommended fixes. If the user asked you to repair t
 - Avoid dumping long source excerpts into generated pages.
 - If a workflow convention changes, update `AGENTS.md` and log the schema change.
 
+## Presentation Output
+
+All generated presentation HTML files (e.g., from `/presentation-slides` or similar skills) must be deposited in the `courses/` folder at the repo root, following the naming convention:
+
+```
+courses/presentation-{topic-slug}.html
+```
+
+Do NOT place presentations under `content/`, `skill_md/`, or any other directory. The `courses/` folder is the canonical output location for all slide decks and presentation artifacts.
+
 ## Tooling Preferences
 
 - Use `rg` or `rg --files` for search when available.
