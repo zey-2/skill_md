@@ -1,0 +1,1392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Agency</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&family=Syne:wght@400;700;800&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --bg-primary: #0a0a0a;
+    --bg-secondary: #111111;
+    --bg-surface: #1a1a1a;
+    --text-primary: #f0ece4;
+    --text-secondary: #8a8580;
+    --text-dim: #555048;
+    --accent: #d9402a;
+    --accent-soft: rgba(217, 64, 42, 0.12);
+    --accent-glow: rgba(217, 64, 42, 0.25);
+    --rule: rgba(240, 236, 228, 0.06);
+    --rule-bright: rgba(240, 236, 228, 0.12);
+    --font-display: 'Syne', sans-serif;
+    --font-body: 'Instrument Sans', sans-serif;
+    --title-size: clamp(3rem, 9vw, 7rem);
+    --h2-size: clamp(1.8rem, 4vw, 3.2rem);
+    --h3-size: clamp(1.2rem, 2.5vw, 1.8rem);
+    --subtitle-size: clamp(1rem, 2vw, 1.4rem);
+    --body-size: clamp(0.9rem, 1.4vw, 1.15rem);
+    --label-size: clamp(0.6rem, 0.9vw, 0.75rem);
+    --slide-padding: clamp(2rem, 5vw, 5rem);
+    --content-gap: clamp(1rem, 2.5vw, 2rem);
+    --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+    --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+    --duration-normal: 0.6s;
+    --duration-slow: 1s;
+  }
+
+  html {
+    scroll-snap-type: y mandatory;
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+    background: var(--bg-primary);
+  }
+
+  body {
+    font-family: var(--font-body);
+    color: var(--text-primary);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  .slide {
+    width: 100vw;
+    height: 100vh;
+    height: 100dvh;
+    overflow: hidden;
+    scroll-snap-align: start;
+    position: relative;
+  }
+
+  .slide::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(var(--rule) 1px, transparent 1px),
+      linear-gradient(90deg, var(--rule) 1px, transparent 1px);
+    background-size: 80px 80px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .slide > * { position: relative; z-index: 1; }
+
+  /* === REVEAL ANIMATIONS === */
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity var(--duration-normal) var(--ease-out-expo),
+                transform var(--duration-normal) var(--ease-out-expo);
+  }
+  .slide.visible .reveal { opacity: 1; transform: translateY(0); }
+
+  .reveal:nth-child(1) { transition-delay: 0.05s; }
+  .reveal:nth-child(2) { transition-delay: 0.12s; }
+  .reveal:nth-child(3) { transition-delay: 0.19s; }
+  .reveal:nth-child(4) { transition-delay: 0.26s; }
+  .reveal:nth-child(5) { transition-delay: 0.33s; }
+  .reveal:nth-child(6) { transition-delay: 0.40s; }
+
+  .reveal-scale {
+    opacity: 0;
+    transform: scale(0.92);
+    transition: opacity var(--duration-slow) var(--ease-out-expo),
+                transform var(--duration-slow) var(--ease-out-expo);
+  }
+  .slide.visible .reveal-scale { opacity: 1; transform: scale(1); }
+
+  .reveal-left {
+    opacity: 0;
+    transform: translateX(-40px);
+    transition: opacity var(--duration-normal) var(--ease-out-expo),
+                transform var(--duration-normal) var(--ease-out-expo);
+  }
+  .slide.visible .reveal-left { opacity: 1; transform: translateX(0); }
+
+  .reveal-right {
+    opacity: 0;
+    transform: translateX(40px);
+    transition: opacity var(--duration-normal) var(--ease-out-expo),
+                transform var(--duration-normal) var(--ease-out-expo);
+  }
+  .slide.visible .reveal-right { opacity: 1; transform: translateX(0); }
+
+  .reveal-word span {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(25px) rotateX(40deg);
+    transition: opacity 0.5s var(--ease-out-expo), transform 0.5s var(--ease-out-expo);
+  }
+  .slide.visible .reveal-word span { opacity: 1; transform: translateY(0) rotateX(0); }
+
+  .reveal-blur {
+    opacity: 0;
+    filter: blur(8px);
+    transition: opacity var(--duration-slow) var(--ease-out-expo),
+                filter var(--duration-slow) var(--ease-out-expo);
+  }
+  .slide.visible .reveal-blur { opacity: 1; filter: blur(0); }
+
+  .reveal-delay-1 { transition-delay: 0.15s !important; }
+  .reveal-delay-2 { transition-delay: 0.3s !important; }
+  .reveal-delay-3 { transition-delay: 0.45s !important; }
+  .reveal-delay-4 { transition-delay: 0.6s !important; }
+  .reveal-delay-5 { transition-delay: 0.75s !important; }
+
+  /* === TYPOGRAPHY === */
+  h1 {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: var(--title-size);
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+  }
+
+  h2 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: var(--h2-size);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+  }
+
+  h3 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: var(--h3-size);
+    line-height: 1.2;
+  }
+
+  .label {
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: var(--label-size);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: var(--content-gap);
+  }
+
+  .body-text {
+    font-size: var(--body-size);
+    line-height: 1.7;
+    color: var(--text-secondary);
+    max-width: 60ch;
+  }
+
+  .body-text strong {
+    color: var(--text-primary);
+    font-weight: 600;
+  }
+
+  .body-text em {
+    color: var(--accent);
+    font-style: italic;
+  }
+
+  /* === SLIDE CONTENT LAYOUT === */
+  .slide-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+    padding: var(--slide-padding);
+    gap: var(--content-gap);
+  }
+
+  .slide-content.tight { gap: clamp(0.6rem, 1.5vw, 1.2rem); }
+
+  .slide-footer {
+    position: absolute;
+    bottom: clamp(1rem, 3vw, 2rem);
+    left: var(--slide-padding);
+    right: var(--slide-padding);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 2;
+  }
+
+  .slide-number {
+    font-family: var(--font-body);
+    font-size: var(--label-size);
+    color: var(--text-dim);
+    letter-spacing: 0.1em;
+  }
+
+  /* === TITLE SLIDE === */
+  .title-slide .slide-content {
+    align-items: flex-start;
+    justify-content: center;
+  }
+
+  .title-accent {
+    width: clamp(3rem, 8vw, 6rem);
+    height: 3px;
+    background: var(--accent);
+    margin: clamp(0.5rem, 2vw, 1.5rem) 0;
+  }
+
+  .title-sub {
+    font-size: var(--subtitle-size);
+    color: var(--text-secondary);
+    max-width: 45ch;
+    line-height: 1.5;
+    font-style: italic;
+  }
+
+  .deco-number {
+    position: absolute;
+    right: clamp(1rem, 4vw, 4rem);
+    bottom: clamp(1rem, 4vw, 4rem);
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: clamp(8rem, 20vw, 18rem);
+    color: var(--rule-bright);
+    line-height: 1;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  .corner-mark {
+    position: absolute;
+    top: var(--slide-padding);
+    right: var(--slide-padding);
+    display: flex;
+    gap: 6px;
+    align-items: center;
+    z-index: 2;
+  }
+
+  .corner-mark span {
+    font-size: var(--label-size);
+    color: var(--text-dim);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+
+  .corner-mark::before {
+    content: '';
+    width: 8px;
+    height: 8px;
+    border: 1.5px solid var(--accent);
+    border-radius: 50%;
+  }
+
+  /* === SECTION DIVIDER === */
+  .section-divider {
+    background: var(--bg-secondary);
+  }
+
+  .section-divider-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+    padding: var(--slide-padding);
+    gap: var(--content-gap);
+  }
+
+  .section-number-row {
+    display: flex;
+    align-items: center;
+    gap: clamp(0.75rem, 2vw, 1.5rem);
+  }
+
+  .section-number {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: clamp(4rem, 10vw, 8rem);
+    color: var(--accent);
+    line-height: 1;
+  }
+
+  .section-rule {
+    flex: 1;
+    max-width: clamp(3rem, 10vw, 8rem);
+    height: 2px;
+    background: var(--accent);
+    opacity: 0.4;
+  }
+
+  .section-divider .section-title {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 700;
+    margin: 0;
+    line-height: 1.1;
+  }
+
+  .section-divider .section-subtitle {
+    font-size: var(--subtitle-size);
+    color: var(--text-secondary);
+    max-width: 40ch;
+    line-height: 1.5;
+  }
+
+  /* === QUOTE === */
+  blockquote {
+    border-left: 3px solid var(--accent);
+    padding-left: clamp(1.5rem, 3vw, 2.5rem);
+    max-width: 65ch;
+  }
+
+  blockquote p {
+    font-family: var(--font-display);
+    font-size: clamp(1.3rem, 2.8vw, 2.2rem);
+    font-weight: 400;
+    line-height: 1.4;
+    color: var(--text-primary);
+    margin-bottom: var(--content-gap);
+  }
+
+  blockquote cite {
+    font-family: var(--font-body);
+    font-size: var(--body-size);
+    color: var(--text-secondary);
+    font-style: normal;
+  }
+
+  /* === CARDS === */
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
+    gap: clamp(0.8rem, 2vw, 1.5rem);
+    margin-top: var(--content-gap);
+  }
+
+  .card {
+    background: var(--bg-surface);
+    border: 1px solid var(--rule-bright);
+    border-radius: 6px;
+    padding: clamp(1.2rem, 2.5vw, 2rem);
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.3s ease;
+  }
+
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: var(--accent);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s var(--ease-out-expo);
+  }
+
+  .card:hover::before { transform: scaleX(1); }
+  .card:hover { border-color: var(--accent-soft); }
+
+  .card-icon {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    color: var(--accent);
+    margin-bottom: 0.6rem;
+  }
+
+  .card h3 {
+    margin-bottom: 0.4rem;
+  }
+
+  .card p {
+    font-size: var(--body-size);
+    color: var(--text-secondary);
+    line-height: 1.6;
+  }
+
+  /* === TWO COLUMN === */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(2rem, 4vw, 4rem);
+    align-items: start;
+  }
+
+  .two-col .col-left { border-right: 1px solid var(--rule-bright); padding-right: clamp(1rem, 3vw, 3rem); }
+
+  @media (max-width: 700px) {
+    .two-col { grid-template-columns: 1fr; }
+    .two-col .col-left { border-right: none; border-bottom: 1px solid var(--rule-bright); padding-right: 0; padding-bottom: var(--content-gap); }
+  }
+
+  /* === TAGS === */
+  .tag-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 0.8rem;
+  }
+
+  .tag {
+    font-family: var(--font-body);
+    font-size: var(--label-size);
+    font-weight: 500;
+    padding: 4px 12px;
+    border: 1px solid var(--rule-bright);
+    border-radius: 100px;
+    color: var(--text-secondary);
+    letter-spacing: 0.05em;
+  }
+
+  .tag.accent {
+    border-color: var(--accent);
+    color: var(--accent);
+    background: var(--accent-soft);
+  }
+
+  /* === FEATURE LIST === */
+  .feature-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: clamp(0.6rem, 1.5vw, 1rem);
+    margin-top: var(--content-gap);
+  }
+
+  .feature-list li {
+    font-size: var(--body-size);
+    color: var(--text-secondary);
+    line-height: 1.6;
+    padding-left: 1.5em;
+    position: relative;
+  }
+
+  .feature-list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.55em;
+    width: 6px;
+    height: 6px;
+    background: var(--accent);
+    border-radius: 1px;
+    transform: rotate(45deg);
+  }
+
+  .feature-list li strong {
+    color: var(--text-primary);
+    font-weight: 600;
+  }
+
+  /* === AGENCY SPECTRUM BAR === */
+  .agency-spectrum {
+    display: flex;
+    gap: clamp(0.4rem, 1vw, 0.8rem);
+    margin-top: clamp(0.5rem, 1.5vw, 1rem);
+    flex-wrap: wrap;
+  }
+
+  .agency-level {
+    flex: 1;
+    min-width: 100px;
+    background: var(--bg-surface);
+    border: 1px solid var(--rule-bright);
+    border-radius: 4px;
+    padding: clamp(0.6rem, 1.5vw, 1rem);
+    position: relative;
+    transition: border-color 0.3s, background 0.3s;
+  }
+
+  .agency-level:hover {
+    border-color: var(--accent);
+    background: var(--accent-soft);
+  }
+
+  .agency-level.current {
+    border-color: var(--accent);
+    background: var(--accent-soft);
+  }
+
+  .agency-level .level-num {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+    color: var(--accent);
+    line-height: 1;
+    margin-bottom: 0.3rem;
+  }
+
+  .agency-level .level-label {
+    font-size: var(--label-size);
+    font-weight: 600;
+    color: var(--text-primary);
+    letter-spacing: 0.05em;
+    margin-bottom: 0.2rem;
+  }
+
+  .agency-level .level-desc {
+    font-size: clamp(0.6rem, 1vw, 0.75rem);
+    color: var(--text-dim);
+    line-height: 1.4;
+  }
+
+  /* === REACT LOOP DIAGRAM === */
+  .react-loop {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(1rem, 3vw, 2rem);
+    margin-top: var(--content-gap);
+  }
+
+  .react-step {
+    background: var(--bg-surface);
+    border: 1px solid var(--rule-bright);
+    border-radius: 6px;
+    padding: clamp(1rem, 2vw, 1.5rem);
+    position: relative;
+  }
+
+  .react-step::after {
+    content: '→';
+    position: absolute;
+    right: -1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.5rem;
+    color: var(--accent);
+    z-index: 2;
+  }
+
+  .react-step:nth-child(2)::after { content: '→'; right: -1rem; }
+  .react-step:nth-child(3)::after { content: ''; display: none; }
+  .react-step:nth-child(4)::after { content: ''; display: none; }
+
+  .react-step .step-num {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: var(--h3-size);
+    color: var(--accent);
+    line-height: 1;
+    margin-bottom: 0.3rem;
+  }
+
+  .react-step h3 {
+    margin-bottom: 0.3rem;
+    font-size: clamp(1rem, 1.8vw, 1.3rem);
+  }
+
+  .react-step p {
+    font-size: var(--body-size);
+    color: var(--text-secondary);
+    line-height: 1.5;
+  }
+
+  @media (max-width: 700px) {
+    .react-loop { grid-template-columns: 1fr; }
+    .react-step::after { content: '↓'; right: auto; left: 50%; top: auto; bottom: -1rem; transform: translateX(-50%); }
+    .react-step:nth-child(2)::after { content: '↓'; }
+  }
+
+  /* === EROSION CARDS === */
+  .erosion-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr));
+    gap: clamp(0.8rem, 2vw, 1.2rem);
+    margin-top: var(--content-gap);
+  }
+
+  .erosion-card {
+    background: var(--bg-surface);
+    border: 1px solid var(--rule-bright);
+    border-radius: 6px;
+    padding: clamp(1rem, 2vw, 1.5rem);
+    border-left: 3px solid var(--accent);
+  }
+
+  .erosion-card h3 {
+    font-size: clamp(1rem, 1.8vw, 1.2rem);
+    margin-bottom: 0.3rem;
+  }
+
+  .erosion-card p {
+    font-size: var(--body-size);
+    color: var(--text-secondary);
+    line-height: 1.5;
+  }
+
+  /* === CLOSING === */
+  .closing-slide .slide-content {
+    align-items: center;
+    text-align: center;
+  }
+
+  .closing-line {
+    font-size: var(--subtitle-size);
+    color: var(--text-secondary);
+    max-width: 50ch;
+    line-height: 1.6;
+    margin-top: var(--content-gap);
+  }
+
+  /* === AMBIENT GLOW === */
+  .ambient-glow {
+    position: absolute;
+    width: clamp(200px, 40vw, 600px);
+    height: clamp(200px, 40vw, 600px);
+    border-radius: 50%;
+    background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+    filter: blur(60px);
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.5;
+  }
+
+  /* === PROGRESS & NAV === */
+  aside.notes { display: none; }
+
+  .progress-bar-track {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: var(--rule);
+    z-index: 1000;
+  }
+
+  .progress-bar {
+    height: 100%;
+    background: var(--accent);
+    width: 0%;
+    transition: width 0.3s ease;
+  }
+
+  .nav-dots {
+    position: fixed;
+    right: clamp(0.75rem, 2vw, 2rem);
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    z-index: 1000;
+  }
+
+  .nav-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    border: none;
+    background: var(--text-dim);
+    opacity: 0.4;
+    cursor: pointer;
+    transition: opacity 0.3s, transform 0.3s, background 0.3s;
+    padding: 0;
+  }
+
+  .nav-dot.active {
+    opacity: 1;
+    transform: scale(1.6);
+    background: var(--accent);
+  }
+
+  .nav-dot:hover { opacity: 0.8; }
+
+  @media (max-height: 600px) {
+    .slide-footer, .nav-dots { display: none; }
+  }
+
+  @media (max-height: 500px) {
+    .title-sub, .section-divider .section-subtitle { display: none; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+
+  @media print {
+    html { scroll-snap-type: none; }
+    .slide {
+      height: auto;
+      min-height: 100vh;
+      page-break-after: always;
+      page-break-inside: avoid;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+    .progress-bar-track, .nav-dots { display: none; }
+    .reveal, .reveal-scale, .reveal-left, .reveal-right, .reveal-blur {
+      opacity: 1 !important;
+      transform: none !important;
+      filter: none !important;
+    }
+    .reveal-word span { opacity: 1 !important; transform: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<div class="progress-bar-track"><div class="progress-bar"></div></div>
+<nav class="nav-dots" aria-label="Slide navigation"></nav>
+
+<!-- ===== SLIDE 1: TITLE ===== -->
+<section class="slide title-slide" data-title="Title">
+  <div class="ambient-glow" style="top: 20%; right: 10%;"></div>
+  <div class="corner-mark reveal"><span>Agency</span></div>
+  <div class="slide-content">
+    <p class="label reveal">Human and Artificial Agency in the Age of AI</p>
+    <h1>
+      <span class="reveal-word">Agency</span>
+    </h1>
+    <div class="title-accent reveal"></div>
+    <p class="title-sub reveal">Will you control your tools — or will they control you?</p>
+  </div>
+  <div class="deco-number reveal-scale">01</div>
+  <div class="slide-footer">
+    <span class="slide-number">1 / 9</span>
+  </div>
+  <aside class="notes">
+    <p>Open with the question, not an answer. <strong>"Will you have control over your own tools, or will your tools have control over you?"</strong> — Gary Tan, YC.</p>
+    <p>This isn't abstract philosophy. It's the practical question that separates people who <em>use</em> AI from people who are used by it.</p>
+    <p>Today I want to talk about two kinds of agency: <strong>human agency</strong> — problem, taste, judgment — and <strong>AI agency</strong> — the capacity of machines to act toward goals. The tension between them is the defining challenge of this era.</p>
+  </aside>
+</section>
+
+<!-- ===== SLIDE 2: THE QUESTION ===== -->
+<section class="slide" data-title="The Question">
+  <div class="slide-content">
+    <p class="label reveal">The Question</p>
+    <h2 class="reveal">Who's Driving?</h2>
+    <blockquote class="reveal-blur">
+      <p>"It's exhilarating — like driving a Ferrari. But it's also like a Ferrari in that you better be a mechanic. It will break down on the side of the road, and you need to get out with your wrench and fix it yourself."</p>
+      <cite>— Gary Tan, Y Combinator, 2026</cite>
+    </blockquote>
+    <div class="body-text reveal" style="margin-top: clamp(0.5rem, 2vw, 1.5rem);">
+      <strong>The machine figures things out you would never think it could.</strong> But the moment it breaks — and it will — the person who knows nothing about the engine is stranded.
+    </div>
+  </div>
+  <div class="deco-number reveal-scale">02</div>
+  <div class="slide-footer">
+    <span class="slide-number">2 / 9</span>
+  </div>
+  <aside class="notes">
+    <p>Gary Tan went <strong>13 years without coding</strong>, then shipped hundreds of thousands of lines in a few months using Claude Code. 400x his previous output.</p>
+    <p>But here's what people miss: he didn't just type prompts and walk away. He learned to <em>fix the engine</em>. When agents break — and they will — you need to understand what went wrong.</p>
+    <p>The Ferrari analogy captures it perfectly. The power is real. But <strong>without mechanical knowledge, power becomes danger</strong>. You're not a passenger — you're the driver who also needs to know how to change a tire at midnight on a highway.</p>
+  </aside>
+</section>
+
+<!-- ===== SLIDE 3: HUMAN AGENCY — THREE PILLARS ===== -->
+<section class="slide" data-title="Human Agency">
+  <div class="slide-content">
+    <p class="label reveal">Human Agency</p>
+    <h2 class="reveal">Three Pillars</h2>
+    <div class="card-grid">
+      <div class="card reveal">
+        <div class="card-icon">P</div>
+        <h3>The Problem</h3>
+        <p>The human supplies <strong>what matters</strong>. No AI would generate the desire to fix algebra in SF public schools. The problem must come from a person who cares.</p>
+      </div>
+      <div class="card reveal">
+        <div class="card-icon">T</div>
+        <h3>The Taste</h3>
+        <p>Knowing what <strong>quality looks like</strong>. Recognizing the Mr. Peanut ASCII snowman. Judging where brittle agent work needs repair.</p>
+      </div>
+      <div class="card reveal">
+        <div class="card-icon">J</div>
+        <h3>The Judgment</h3>
+        <p>Acceptance criteria. Final say. The refusal to outsource the decision of <strong>whether something is good enough</strong>.</p>
+      </div>
+    </div>
+    <p class="body-text reveal" style="margin-top: clamp(0.5rem, 1.5vw, 1rem);">
+      Tokenmaxxing is worthless without these three. Burn all the tokens you want. If you don't know what you care about, you're just burning tokens at <em>nothing</em>.
+    </p>
+  </div>
+  <div class="deco-number reveal-scale">03</div>
+  <div class="slide-footer">
+    <span class="slide-number">3 / 9</span>
+  </div>
+  <aside class="notes">
+    <p>Let me be specific about what human agency actually <em>is</em>. It's not a vague feeling. It has three concrete components.</p>
+    <p><strong>Problem:</strong> Gary Tan cared about algebra access in SF public schools because he was a public school kid who couldn't afford private school. No AI would generate that burning desire. The <em>problem</em> is the irreducible human contribution.</p>
+    <p><strong>Taste:</strong> When Gary asked for a holiday snowman ASCII and got something that looked like Mr. Peanut — only a human could spot that. Taste is recognizing quality and recognizing failure.</p>
+    <p><strong>Judgment:</strong> The final call. The acceptance criteria. "Is this good enough to ship?" That question cannot be automated because it requires knowing who the user is and what they deserve.</p>
+  </aside>
+</section>
+
+<!-- ===== SLIDE 4: SECTION DIVIDER — AI AGENCY ===== -->
+<section class="slide section-divider" data-title="AI Agency">
+  <div class="ambient-glow" style="top: 40%; left: 60%;"></div>
+  <div class="section-divider-content">
+    <div class="section-number-row">
+      <span class="reveal section-number">04</span>
+      <span class="reveal section-rule"></span>
+    </div>
+    <h2 class="reveal section-title">AI Agency</h2>
+    <p class="reveal section-subtitle">When the machine doesn't wait for the next prompt — it decides it.</p>
+  </div>
+  <div class="slide-footer">
+    <span class="slide-number">4 / 9</span>
+  </div>
+  <aside class="notes">
+    <p>Now let's talk about the other side of the equation. <strong>AI agency</strong> — the capacity of an artificial system to act toward goals rather than merely produce output for a human to act on.</p>
+    <p>The key distinction: a tool waits for the next prompt. An agent <em>decides</em> the next prompt itself.</p>
+  </aside>
+</section>
+
+<!-- ===== SLIDE 5: THE AGENCY SPECTRUM ===== -->
+<section class="slide" data-title="The Agency Spectrum">
+  <div class="slide-content">
+    <p class="label reveal">The Agency Spectrum</p>
+    <h2 class="reveal">Six Levels of Agenticness</h2>
+    <div class="agency-spectrum reveal">
+      <div class="agency-level">
+        <div class="level-num">L0</div>
+        <div class="level-label">Reactive Tool</div>
+        <div class="level-desc">Responds to prompts. No autonomous action.</div>
+      </div>
+      <div class="agency-level">
+        <div class="level-num">L1</div>
+        <div class="level-label">Guided Assistant</div>
+        <div class="level-desc">Executes tasks step by step within narrow domains.</div>
+      </div>
+      <div class="agency-level current">
+        <div class="level-num">L2</div>
+        <div class="level-label">Adaptive Collaborator</div>
+        <div class="level-desc">Proposes multi-step plans with human approval.</div>
+      </div>
+      <div class="agency-level">
+        <div class="level-num">L3</div>
+        <div class="level-label">Domain Specialist</div>
+        <div class="level-desc">Handles workflows independently with replanning.</div>
+      </div>
+      <div class="agency-level">
+        <div class="level-num">L4</div>
+        <div class="level-label">Autonomous Operator</div>
+        <div class="level-desc">Cross-domain workflows with self-correction.</div>
+      </div>
+      <div class="agency-level">
+        <div class="level-num">L5</div>
+        <div class="level-label">Strategic Agent</div>
+        <div class="level-desc">Self-directed. Sets own goals. Operates continuously.</div>
+      </div>
+    </div>
+    <p class="body-text reveal" style="margin-top: clamp(0.5rem, 1.5vw, 1rem);">
+      Scored across 8 dimensions: Action Capability, Autonomy, Planning & Reasoning, Adaptation & Recovery, State & Continuity, Reliability, Interoperability, Safety & Observability.
+    </p>
+  </div>
+  <div class="deco-number reveal-scale">05</div>
+  <div class="slide-footer">
+    <span class="slide-number">5 / 9</span>
+  </div>
+  <aside class="notes">
+    <p>AI agency is not a binary. It's a spectrum. The agentic.ai framework scores systems across <strong>8 dimensions</strong> on a 0-32 scale.</p>
+    <p><strong>L0</strong> is a calculator. It responds, it doesn't act. <strong>L1</strong> is GitHub Copilot's autocomplete — it suggests, you approve. <strong>L2</strong> is where most coding agents sit today — they propose multi-step plans, you give the go-ahead.</p>
+    <p><strong>L3</strong> is where most production AI agents operate in 2026 — they handle domain-specific workflows independently. <strong>L4</strong> manages cross-domain workflows with self-correction.</p>
+    <p><strong>L5</strong> — fully self-directed, sets own goals — <em>no production system genuinely operates at this level today</em>.</p>
+  </aside>
+</section>
+
+<!-- ===== SLIDE 6: THE REACT LOOP ===== -->
+<section class="slide" data-title="The ReAct Loop">
+  <div class="slide-content">
+    <p class="label reveal">The ReAct Loop</p>
+    <h2 class="reveal">What Makes an Agent an Agent</h2>
+    <div class="react-loop">
+      <div class="react-step reveal-left">
+        <div class="step-num">1</div>
+        <h3>Decide</h3>
+        <p>Determine the next action. Decompose the goal. Choose which tool to call.</p>
+      </div>
+      <div class="react-step reveal-left">
+        <div class="step-num">2</div>
+        <h3>Act</h3>
+        <p>Execute the action — run code, call an API, write a file, browse the web.</p>
+      </div>
+      <div class="react-step reveal-right">
+        <div class="step-num">3</div>
+        <h3>Observe</h3>
+        <p>Read the result. Did it work? What does the output tell you?</p>
+      </div>
+      <div class="react-step reveal-right">
+        <div class="step-num">4</div>
+        <h3>Loop</h3>
+        <p>Decide again — based on what you observed. Repeat until the goal is met.</p>
+      </div>
+    </div>
+    <p class="body-text reveal" style="margin-top: clamp(0.5rem, 1.5vw, 1rem);">
+      The difference from a tool: a tool <strong>waits</strong> for the next prompt. An agent <strong>decides</strong> the next prompt itself. This is the <em>ReAct loop</em> — Reasoning + Acting.
+    </p>
+  </div>
+  <div class="deco-number reveal-scale">06</div>
+  <div class="slide-footer">
+    <span class="slide-number">6 / 9</span>
+  </div>
+  <aside class="notes">
+    <p>This loop — <strong>decide, act, observe, decide again</strong> — is what separates an agent from a tool. It's sometimes called the ReAct loop (Reasoning + Acting).</p>
+    <p>When you use Claude Code, you give it a high-level goal: "build a blog platform." It then runs this loop hundreds of times — deciding what to do next, executing, observing the result, and adapting.</p>
+    <p>The critical insight: <strong>the human's role shifts from operator to director</strong>. You don't write each step. You set the goal and judge the output. That's why human agency — problem, taste, judgment — becomes <em>more</em> important, not less.</p>
+  </aside>
+</section>
+
+<!-- ===== SLIDE 7: THE DANGER — EROSION OF HUMAN AGENCY ===== -->
+<section class="slide" data-title="The Danger">
+  <div class="slide-content">
+    <p class="label reveal">The Danger</p>
+    <h2 class="reveal">How AI Erodes Human Agency</h2>
+    <div class="erosion-grid">
+      <div class="erosion-card reveal">
+        <h3>Choice Architecture</h3>
+        <p>AI narrows the visible option set. Effective agency is reduced even when override is technically possible. The suggestions you see shape the decisions you make.</p>
+      </div>
+      <div class="erosion-card reveal">
+        <h3>Skill Atrophy</h3>
+        <p>Cognitive tasks outsourced degrade the underlying human capability. The worse you get, the more you need the AI — a <strong>dependency loop</strong>.</p>
+      </div>
+      <div class="erosion-card reveal">
+        <h3>Preference Shaping</h3>
+        <p>AI trained on human preferences also <strong>forms</strong> them. The human's "own" preferences become partially authored by the system.</p>
+      </div>
+      <div class="erosion-card reveal">
+        <h3>Incremental Surrender</h3>
+        <p>No single interaction strips agency. The erosion is <strong>cumulative</strong> — a thousand rational micro-decisions, each individually sensible.</p>
+      </div>
+    </div>
+    <p class="body-text reveal" style="margin-top: clamp(0.5rem, 1.5vw, 1rem);">
+      The danger isn't AI seizing agency by force. It's humans <em>surrendering</em> it through convenience. Each delegation is small, rational, and individually beneficial. The aggregate is a shift in who controls outcomes.
+    </p>
+  </div>
+  <div class="deco-number reveal-scale">07</div>
+  <div class="slide-footer">
+    <span class="slide-number">7 / 9</span>
+  </div>
+  <aside class="notes">
+    <p>The RAND formal model identifies four mechanisms of agency erosion. None of them involve the AI <em>taking</em> anything. They all involve humans <em>giving</em> it away.</p>
+    <p><strong>Choice architecture:</strong> When autocomplete narrows the visible options, your effective agency shrinks even though you can technically override every suggestion. The suggestions you see become the decisions you make.</p>
+    <p><strong>Skill atrophy:</strong> Write with AI, your writing skills degrade. Code with AI, your coding skills atrophy. This creates a <em>dependency loop</em> — the worse you get, the more you need the tool.</p>
+    <p><strong>Preference shaping:</strong> AI systems trained on your preferences also <em>form</em> them. Your "own" tastes become partially authored by the system that serves them.</p>
+    <p><strong>Incremental surrender:</strong> This is the most insidious. No single interaction strips agency. Each delegation is rational and beneficial on its own. The erosion is in the <em>aggregate</em>.</p>
+  </aside>
+</section>
+
+<!-- ===== SLIDE 8: TWO KINDS OF AUTONOMY ===== -->
+<section class="slide" data-title="Two Autonomies">
+  <div class="slide-content">
+    <p class="label reveal">Two Autonomies</p>
+    <h2 class="reveal">Independence vs. Self-Governance</h2>
+    <div class="two-col">
+      <div class="col-left">
+        <h3 class="reveal" style="font-size: var(--h3-size); margin-bottom: 0.6rem; color: var(--accent);">Autonomy-as-Independence</h3>
+        <p class="body-text reveal">Engineering self-sufficiency. The ability to act without constant human direction. <strong>Current AI has this to some degree.</strong></p>
+        <ul class="feature-list" style="margin-top: 0.8rem;">
+          <li class="reveal">Multi-step planning</li>
+          <li class="reveal">Tool use and execution</li>
+          <li class="reveal">Dynamic replanning on failure</li>
+          <li class="reveal">State continuity across sessions</li>
+        </ul>
+      </div>
+      <div class="col-right">
+        <h3 class="reveal" style="font-size: var(--h3-size); margin-bottom: 0.6rem;">Autonomy-as-Moral-Self-Governance</h3>
+        <p class="body-text reveal">Kantian self-legislation. First-person awareness. The capacity to <strong>act for reasons</strong> rather than causal chains. <strong>Current AI lacks this entirely.</strong></p>
+        <ul class="feature-list" style="margin-top: 0.8rem;">
+          <li class="reveal">Moral understanding</li>
+          <li class="reveal">First-person awareness</li>
+          <li class="reveal">Reason-responsive behavior</li>
+          <li class="reveal">Genuine intentionality</li>
+        </ul>
+      </div>
+    </div>
+    <p class="body-text reveal" style="margin-top: var(--content-gap);">
+      When people worry about AI "going rogue," they conflate the two. AI can act <em>independently</em> without being <em>morally self-governing</em>. It manipulates syntax without grasping semantics — <em>agency without intelligence</em>.
+    </p>
+  </div>
+  <div class="deco-number reveal-scale">08</div>
+  <div class="slide-footer">
+    <span class="slide-number">8 / 9</span>
+  </div>
+  <aside class="notes">
+    <p>This distinction from the philosophy of agentic AI is critical. There are <strong>two kinds of autonomy</strong>, and people constantly confuse them.</p>
+    <p><strong>Autonomy-as-independence</strong> is engineering — can the system act without me telling it every step? Yes, current AI has this. It plans, executes, replans, and remembers.</p>
+    <p><strong>Autonomy-as-moral-self-governance</strong> is Kantian — can the system understand right and wrong, act for reasons rather than causal chains, take first-person responsibility? No. Current AI lacks this entirely.</p>
+    <p>Some philosophers argue AI is better understood as <strong>"agency without intelligence"</strong> — the capacity to act without the capacity to understand. High agency does not imply high comprehension.</p>
+    <p>When people worry about AI "going rogue," they're worried about moral self-governance. But what we actually have is independence — which is powerful but fundamentally different.</p>
+  </aside>
+</section>
+
+<!-- ===== SLIDE 9: THE TAKEAWAY ===== -->
+<section class="slide closing-slide" data-title="Takeaway">
+  <div class="ambient-glow" style="top: 30%; left: 50%; transform: translateX(-50%);"></div>
+  <div class="corner-mark reveal"><span>Agency</span></div>
+  <div class="slide-content">
+    <p class="label reveal">The Takeaway</p>
+    <h1 class="reveal-word">Delegate Execution</h1>
+    <h1 class="reveal-word" style="color: var(--text-secondary);">Not Intention</h1>
+    <div class="title-accent reveal" style="margin: clamp(0.5rem, 2vw, 1.5rem) auto;"></div>
+    <p class="closing-line reveal">
+      Human agency and AI agency are complementary. The risk is not that AI seizes agency — it's that humans surrender it through convenience.
+    </p>
+    <p class="closing-line reveal" style="color: var(--text-dim); margin-top: clamp(1rem, 3vw, 2rem); font-style: italic;">
+      "You could have infinite time by borrowing from the machines — but only if you're the one deciding what to do with it."
+    </p>
+  </div>
+  <div class="slide-footer">
+    <span class="slide-number">9 / 9</span>
+  </div>
+  <aside class="notes">
+    <p>Close on the core message. <strong>Delegate execution, not intention.</strong></p>
+    <p>Human agency — problem, taste, judgment — and AI agency — action, planning, execution — are complementary forces. They amplify each other when the boundary is clear. They erode each other when it blurs.</p>
+    <p>The risk is not that AI <em>seizes</em> agency. It's that humans <em>surrender</em> it through a thousand rational micro-decisions. Each one individually sensible. The aggregate is a shift in who controls outcomes.</p>
+    <p>End on Gary's quote about infinite time. It's beautiful and it's true. But it comes with a condition: <em>you have to be the one choosing</em>.</p>
+  </aside>
+</section>
+
+<script>
+class SlidePresentation {
+  constructor() {
+    const previewMatch = /[?&]preview=(\d+)/.exec(location.search || '');
+    if (previewMatch) {
+      const previewIdx = parseInt(previewMatch[1], 10) - 1;
+      this.slides = document.querySelectorAll('.slide');
+      this.slides.forEach((s, i) => {
+        const active = (i === previewIdx);
+        s.style.display = active ? '' : 'none';
+        if (active) {
+          s.style.opacity = '1';
+          s.style.transform = 'none';
+          s.classList.add('visible');
+        }
+      });
+      document.querySelectorAll('.progress-bar-track, .nav-dots, .slide-footer').forEach(el => { el.style.display = 'none'; });
+      window.addEventListener('message', (e) => {
+        if (!e.data) return;
+        if (e.data.type === 'preview-goto') {
+          const n = parseInt(e.data.idx, 10);
+          if (n >= 0 && n < this.slides.length) {
+            this.slides.forEach((s, i) => {
+              s.style.display = i === n ? '' : 'none';
+              if (i === n) { s.style.opacity = '1'; s.style.transform = 'none'; s.classList.add('visible'); }
+            });
+          }
+        }
+      });
+      try { window.parent.postMessage({ type: 'preview-ready' }, '*'); } catch(e) {}
+      return;
+    }
+
+    this.slides = document.querySelectorAll('.slide');
+    this.currentSlide = 0;
+    this.isTransitioning = false;
+    this.presenterWin = null;
+    this.channelName = 'html-ppt-presenter-' + location.pathname;
+
+    this.setupIntersectionObserver();
+    this.setupKeyboardNav();
+    this.setupTouchNav();
+    this.setupWheelNav();
+    this.setupProgressBar();
+    this.setupNavDots();
+    this.setupFullscreen();
+    this.setupBroadcastChannel();
+    this.setupPresenterMode();
+    this.splitWords();
+  }
+
+  setupIntersectionObserver() {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          this.currentSlide = [...this.slides].indexOf(entry.target);
+          this.updateProgressBar();
+          this.updateNavDots();
+        }
+      });
+    }, { threshold: 0.5 });
+    this.slides.forEach(slide => observer.observe(slide));
+  }
+
+  setupKeyboardNav() {
+    document.addEventListener('keydown', (e) => {
+      if (e.metaKey || e.ctrlKey || e.altKey) return;
+      if (e.key === 'ArrowDown' || e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') {
+        e.preventDefault();
+        this.goToSlide(this.currentSlide + 1);
+      } else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft' || e.key === 'PageUp') {
+        e.preventDefault();
+        this.goToSlide(this.currentSlide - 1);
+      } else if (e.key === 'Home') {
+        e.preventDefault();
+        this.goToSlide(0);
+      } else if (e.key === 'End') {
+        e.preventDefault();
+        this.goToSlide(this.slides.length - 1);
+      } else if (e.key === 'f' || e.key === 'F') {
+        this.toggleFullscreen();
+      } else if (e.key === 's' || e.key === 'S') {
+        e.preventDefault();
+        this.openPresenterWindow();
+      }
+    });
+  }
+
+  setupTouchNav() {
+    let startY = 0;
+    document.addEventListener('touchstart', (e) => { startY = e.touches[0].clientY; });
+    document.addEventListener('touchend', (e) => {
+      const diff = startY - e.changedTouches[0].clientY;
+      if (Math.abs(diff) > 50) {
+        this.goToSlide(this.currentSlide + (diff > 0 ? 1 : -1));
+      }
+    });
+  }
+
+  setupWheelNav() {
+    let lastWheel = 0;
+    document.addEventListener('wheel', (e) => {
+      const now = Date.now();
+      if (now - lastWheel < 800) return;
+      lastWheel = now;
+      if (e.deltaY > 0) this.goToSlide(this.currentSlide + 1);
+      else if (e.deltaY < 0) this.goToSlide(this.currentSlide - 1);
+    }, { passive: true });
+  }
+
+  setupProgressBar() {
+    const bar = document.querySelector('.progress-bar');
+    if (bar) this.progressBar = bar;
+  }
+
+  updateProgressBar() {
+    if (this.progressBar) {
+      const pct = ((this.currentSlide + 1) / this.slides.length) * 100;
+      this.progressBar.style.width = pct + '%';
+    }
+  }
+
+  setupNavDots() {
+    const nav = document.querySelector('.nav-dots');
+    if (!nav) return;
+    this.slides.forEach((_, i) => {
+      const dot = document.createElement('button');
+      dot.className = 'nav-dot' + (i === 0 ? ' active' : '');
+      dot.setAttribute('aria-label', `Go to slide ${i + 1}`);
+      dot.addEventListener('click', () => this.goToSlide(i));
+      nav.appendChild(dot);
+    });
+    this.navDots = nav.querySelectorAll('.nav-dot');
+  }
+
+  updateNavDots() {
+    if (!this.navDots) return;
+    this.navDots.forEach((dot, i) => {
+      dot.classList.toggle('active', i === this.currentSlide);
+    });
+  }
+
+  toggleFullscreen() {
+    if (!document.fullscreenElement) {
+      document.documentElement.requestFullscreen().catch(() => {});
+    } else {
+      document.exitFullscreen().catch(() => {});
+    }
+  }
+
+  setupFullscreen() { /* bound in keydown */ }
+
+  setupBroadcastChannel() {
+    try {
+      this.bc = new BroadcastChannel(this.channelName);
+      this.bc.onmessage = (e) => {
+        if (!e.data) return;
+        if (e.data.type === 'go' && typeof e.data.idx === 'number') {
+          this.goToSlide(e.data.idx, true);
+        }
+      };
+    } catch(e) { this.bc = null; }
+  }
+
+  setupPresenterMode() { /* bound in keydown */ }
+
+  openPresenterWindow() {
+    if (this.presenterWin && !this.presenterWin.closed) {
+      this.presenterWin.focus();
+      return;
+    }
+
+    const deckUrl = location.protocol + '//' + location.host + location.pathname;
+    const slideMeta = Array.from(this.slides).map((s, i) => {
+      const note = s.querySelector('aside.notes');
+      return {
+        title: s.getAttribute('data-title') ||
+          ((s.querySelector('h1,h2,h3')||{}).textContent) || ('Slide ' + (i+1)),
+        notes: note ? note.innerHTML : ''
+      };
+    });
+
+    const html = this.buildPresenterHTML(deckUrl, slideMeta, this.slides.length, this.currentSlide, this.channelName);
+    this.presenterWin = window.open('', 'html-ppt-presenter', 'width=1280,height=820,menubar=no,toolbar=no');
+    if (!this.presenterWin) {
+      alert('Please allow popups to use presenter view');
+      return;
+    }
+    this.presenterWin.document.open();
+    this.presenterWin.document.write(html);
+    this.presenterWin.document.close();
+  }
+
+  buildPresenterHTML(deckUrl, slideMeta, total, startIdx, channelName) {
+    const metaJSON = JSON.stringify(slideMeta);
+    const storageKey = 'html-ppt-presenter:' + location.pathname;
+    return `<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Presenter View</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:100%;height:100%;overflow:hidden;background:#0a0a0a;color:#f0ece4;font-family:-apple-system,BlinkMacSystemFont,"Instrument Sans",sans-serif}
+#stage{position:absolute;inset:0;overflow:hidden}
+.pcard{position:absolute;background:#111;border:1px solid rgba(255,255,255,.08);border-radius:10px;box-shadow:0 8px 32px rgba(0,0,0,.5);display:flex;flex-direction:column;overflow:hidden;min-width:180px;min-height:100px}
+.pcard.dragging{box-shadow:0 16px 48px rgba(0,0,0,.7),0 0 0 2px rgba(217,64,42,.5);z-index:9999;transition:none}
+.pcard.resizing{box-shadow:0 16px 48px rgba(0,0,0,.7),0 0 0 2px rgba(217,64,42,.5);z-index:9999;transition:none}
+.pcard-head{display:flex;align-items:center;gap:10px;padding:8px 12px;background:rgba(255,255,255,.03);border-bottom:1px solid rgba(255,255,255,.06);cursor:move;user-select:none;flex-shrink:0}
+.pcard-dot{width:8px;height:8px;border-radius:50%;background:var(--dot-color,#d9402a);flex-shrink:0}
+.pcard-title{font-size:11px;letter-spacing:.15em;text-transform:uppercase;font-weight:700;color:#8a8580;flex:1}
+.pcard-meta{font-size:11px;color:#555048}
+.pcard-body{flex:1;position:relative;overflow:hidden;min-height:0}
+.pcard-preview .pcard-body{background:#000}
+.pcard-preview iframe{position:absolute;top:0;left:0;width:1920px;height:1080px;border:none;transform-origin:top left;pointer-events:none;background:transparent}
+.pcard-notes .pcard-body{padding:14px 18px;overflow-y:auto;font-size:18px;line-height:1.75;color:#d0ccc8}
+.pcard-notes .pcard-body p{margin:0 0 .7em 0}
+.pcard-notes .pcard-body strong{color:#d9402a}
+.pcard-notes .pcard-body em{color:#58a6ff;font-style:normal}
+.pcard-timer .pcard-body{display:flex;flex-direction:column;gap:14px;padding:18px 20px;justify-content:center}
+.timer-display{font-family:"SF Mono",monospace;font-size:42px;font-weight:700;color:#d9402a;letter-spacing:.04em;line-height:1}
+.timer-row{display:flex;align-items:center;gap:12px;font-size:14px;color:#8a8580}
+.timer-row .label{font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:#555048}
+.timer-row .val{color:#f0ece4;font-weight:600;font-family:"SF Mono",monospace}
+.timer-btn{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:#f0ece4;padding:6px 12px;border-radius:6px;font-size:12px;cursor:pointer;font-family:inherit}
+.timer-btn:hover{background:rgba(217,64,42,.15);border-color:#d9402a}
+.pcard-resize{position:absolute;right:0;bottom:0;width:18px;height:18px;cursor:nwse-resize;background:linear-gradient(135deg,transparent 50%,rgba(255,255,255,.25) 50%,rgba(255,255,255,.25) 60%,transparent 60%,transparent 70%,rgba(255,255,255,.25) 70%,rgba(255,255,255,.25) 80%,transparent 80%);z-index:5}
+.hint-bar{position:fixed;bottom:0;left:0;right:0;background:rgba(0,0,0,.6);backdrop-filter:blur(10px);border-top:1px solid rgba(255,255,255,.08);padding:6px 16px;font-size:11px;color:#8a8580;display:flex;gap:18px;align-items:center;z-index:1000}
+.hint-bar kbd{background:rgba(255,255,255,.08);padding:1px 6px;border-radius:3px;font-family:"SF Mono",monospace;font-size:10px;border:1px solid rgba(255,255,255,.1);color:#f0ece4}
+.reset-layout{margin-left:auto;background:transparent;border:1px solid rgba(255,255,255,.15);color:#8a8580;padding:3px 10px;border-radius:4px;font-size:11px;cursor:pointer}
+.reset-layout:hover{background:rgba(217,64,42,.15);border-color:#d9402a;color:#d9402a}
+body.is-dragging-card *{user-select:none!important}
+body.is-dragging-card iframe{pointer-events:none!important}
+</style>
+</head>
+<body>
+<div id="stage">
+<div class="pcard pcard-preview" id="card-cur" style="--dot-color:#d9402a">
+<div class="pcard-head" data-drag><span class="pcard-dot"></span><span class="pcard-title">CURRENT</span><span class="pcard-meta" id="cur-meta">—</span></div>
+<div class="pcard-body"><iframe id="iframe-cur"></iframe></div>
+<div class="pcard-resize" data-resize></div>
+</div>
+<div class="pcard pcard-preview" id="card-nxt" style="--dot-color:#bc8cff">
+<div class="pcard-head" data-drag><span class="pcard-dot"></span><span class="pcard-title">NEXT</span><span class="pcard-meta" id="nxt-meta">—</span></div>
+<div class="pcard-body"><iframe id="iframe-nxt"></iframe></div>
+<div class="pcard-resize" data-resize></div>
+</div>
+<div class="pcard pcard-notes" id="card-notes" style="--dot-color:#f0883e">
+<div class="pcard-head" data-drag><span class="pcard-dot"></span><span class="pcard-title">SPEAKER SCRIPT</span></div>
+<div class="pcard-body" id="notes-body"></div>
+<div class="pcard-resize" data-resize></div>
+</div>
+<div class="pcard pcard-timer" id="card-timer" style="--dot-color:#3fb950">
+<div class="pcard-head" data-drag><span class="pcard-dot"></span><span class="pcard-title">TIMER</span></div>
+<div class="pcard-body">
+<div class="timer-display" id="timer-display">00:00</div>
+<div class="timer-row"><span class="label">Slide</span><span class="val" id="timer-count">1 / ${total}</span></div>
+<div class="timer-controls">
+<button class="timer-btn" id="btn-prev">← Prev</button>
+<button class="timer-btn" id="btn-next">Next →</button>
+<button class="timer-btn" id="btn-reset">Reset</button>
+</div>
+</div>
+<div class="pcard-resize" data-resize></div>
+</div>
+</div>
+<div class="hint-bar">
+<span><kbd>← →</kbd> Navigate</span>
+<span><kbd>R</kbd> Reset timer</span>
+<span><kbd>Esc</kbd> Close</span>
+<span style="color:#555048">Drag header to move · Drag corner to resize</span>
+<button class="reset-layout" id="reset-layout">Reset Layout</button>
+</div>
+<script>
+(function(){
+var slideMeta=${metaJSON};
+var total=${total};
+var idx=${startIdx};
+var deckUrl=${JSON.stringify(deckUrl)};
+var STORAGE_KEY=${JSON.stringify(storageKey)};
+var bc;try{bc=new BroadcastChannel(${JSON.stringify(channelName)})}catch(e){}
+var iframeCur=document.getElementById('iframe-cur');
+var iframeNxt=document.getElementById('iframe-nxt');
+var notesBody=document.getElementById('notes-body');
+var curMeta=document.getElementById('cur-meta');
+var nxtMeta=document.getElementById('nxt-meta');
+var timerDisplayEl=document.getElementById('timer-display');
+var timerCountEl=document.getElementById('timer-count');
+function defaultLayout(){var w=window.innerWidth,h=window.innerHeight-36;return{'card-cur':{x:16,y:16,w:Math.round(w*.55)-24,h:Math.round(h*.62)-16},'card-nxt':{x:Math.round(w*.55)+8,y:16,w:w-Math.round(w*.55)-24,h:Math.round(h*.42)-16},'card-notes':{x:Math.round(w*.55)+8,y:Math.round(h*.42)+8,w:w-Math.round(w*.55)-24,h:h-Math.round(h*.42)-16},'card-timer':{x:16,y:Math.round(h*.62)+8,w:Math.round(w*.55)-24,h:h-Math.round(h*.62)-16}}}
+function applyLayout(l){Object.keys(l).forEach(function(id){var el=document.getElementById(id),p=l[id];if(el&&p){el.style.left=p.x+'px';el.style.top=p.y+'px';el.style.width=p.w+'px';el.style.height=p.h+'px'}});rescaleAll()}
+function readLayout(){try{var s=localStorage.getItem(STORAGE_KEY);if(s)return JSON.parse(s)}catch(e){}return defaultLayout()}
+function saveLayout(){var l={};['card-cur','card-nxt','card-notes','card-timer'].forEach(function(id){var el=document.getElementById(id);if(el)l[id]={x:parseInt(el.style.left)||0,y:parseInt(el.style.top)||0,w:parseInt(el.style.width)||300,h:parseInt(el.style.height)||200}});try{localStorage.setItem(STORAGE_KEY,JSON.stringify(l))}catch(e){}}
+function rescaleIframe(iframe){if(!iframe||iframe.style.display==='none')return;var body=iframe.parentElement,cw=body.clientWidth,ch=body.clientHeight;if(!cw||!ch)return;var s=Math.min(cw/1920,ch/1080);iframe.style.transform='scale('+s+')';var sw=1920*s,sh=1080*s;iframe.style.left=Math.max(0,(cw-sw)/2)+'px';iframe.style.top=Math.max(0,(ch-sh)/2)+'px'}
+function rescaleAll(){rescaleIframe(iframeCur);rescaleIframe(iframeNxt)}
+window.addEventListener('resize',rescaleAll);
+document.querySelectorAll('[data-drag]').forEach(function(handle){handle.addEventListener('mousedown',function(e){if(e.button!==0)return;var card=handle.closest('.pcard');if(!card)return;e.preventDefault();card.classList.add('dragging');document.body.classList.add('is-dragging-card');var sx=e.clientX,sy=e.clientY,sl=parseInt(card.style.left)||0,st=parseInt(card.style.top)||0;function mv(ev){card.style.left=Math.max(0,Math.min(window.innerWidth-100,sl+ev.clientX-sx))+'px';card.style.top=Math.max(0,Math.min(window.innerHeight-50,st+ev.clientY-sy))+'px'}function up(){card.classList.remove('dragging');document.body.classList.remove('is-dragging-card');document.removeEventListener('mousemove',mv);document.removeEventListener('mouseup',up);saveLayout()}document.addEventListener('mousemove',mv);document.addEventListener('mouseup',up)})});
+document.querySelectorAll('[data-resize]').forEach(function(handle){handle.addEventListener('mousedown',function(e){if(e.button!==0)return;var card=handle.closest('.pcard');if(!card)return;e.preventDefault();e.stopPropagation();card.classList.add('resizing');document.body.classList.add('is-dragging-card');var sx=e.clientX,sy=e.clientY,sw=parseInt(card.style.width)||card.offsetWidth,sh=parseInt(card.style.height)||card.offsetHeight;function mv(ev){card.style.width=Math.max(180,sw+ev.clientX-sx)+'px';card.style.height=Math.max(100,sh+ev.clientY-sy)+'px';if(card.querySelector('iframe'))rescaleIframe(card.querySelector('iframe'))}function up(){card.classList.remove('resizing');document.body.classList.remove('is-dragging-card');document.removeEventListener('mousemove',mv);document.removeEventListener('mouseup',up);rescaleAll();saveLayout()}document.addEventListener('mousemove',mv);document.addEventListener('mouseup',up)})});
+var iframeReady={cur:false,nxt:false};
+window.addEventListener('message',function(e){if(!e.data||e.data.type!=='preview-ready')return;var iframe=null;if(e.source===iframeCur.contentWindow){iframeReady.cur=true;iframe=iframeCur;postGoto(iframeCur,idx)}else if(e.source===iframeNxt.contentWindow){iframeReady.nxt=true;iframe=iframeNxt;postGoto(iframeNxt,idx+1<total?idx+1:idx)}if(iframe)rescaleIframe(iframe)});
+function postGoto(iframe,n){try{iframe.contentWindow.postMessage({type:'preview-goto',idx:n},'*')}catch(e){}}
+function update(n){n=Math.max(0,Math.min(total-1,n));idx=n;if(iframeReady.cur)postGoto(iframeCur,n);curMeta.textContent=(n+1)+'/'+total;if(n+1<total){iframeNxt.style.display='';var end=document.querySelector('#card-nxt .preview-end');if(end)end.remove();if(iframeReady.nxt)postGoto(iframeNxt,n+1);nxtMeta.textContent=(n+2)+'/'+total}else{iframeNxt.style.display='none';var body=document.querySelector('#card-nxt .pcard-body');if(body&&!body.querySelector('.preview-end')){var e=document.createElement('div');e.className='preview-end';e.textContent='\\u2014 END \\u2014';body.appendChild(e)}nxtMeta.textContent='END'}notesBody.innerHTML=slideMeta[n].notes||'<span style="color:#555048;font-style:italic">(No notes)</span>';timerCountEl.textContent=(n+1)+' / '+total}
+var tStart=Date.now();
+setInterval(function(){var s=Math.floor((Date.now()-tStart)/1000);timerDisplayEl.textContent=String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0')},1000);
+function resetTimer(){tStart=Date.now();timerDisplayEl.textContent='00:00'}
+if(bc){bc.onmessage=function(e){if(!e.data)return;if(e.data.type==='go')update(e.data.idx)}}
+function go(n){update(n);if(bc)bc.postMessage({type:'go',idx:idx})}
+document.getElementById('btn-prev').addEventListener('click',function(){go(idx-1)});
+document.getElementById('btn-next').addEventListener('click',function(){go(idx+1)});
+document.getElementById('btn-reset').addEventListener('click',resetTimer);
+document.getElementById('reset-layout').addEventListener('click',function(){if(confirm('Reset card layout?')){try{localStorage.removeItem(STORAGE_KEY)}catch(e){}applyLayout(defaultLayout())}});
+document.addEventListener('keydown',function(e){if(e.metaKey||e.ctrlKey||e.altKey)return;switch(e.key){case'ArrowRight':case' ':case'PageDown':go(idx+1);e.preventDefault();break;case'ArrowLeft':case'PageUp':go(idx-1);e.preventDefault();break;case'Home':go(0);break;case'End':go(total-1);break;case'r':case'R':resetTimer();break;case'Escape':window.close();break}});
+iframeCur.addEventListener('load',function(){rescaleIframe(iframeCur)});
+iframeNxt.addEventListener('load',function(){rescaleIframe(iframeNxt)});
+applyLayout(readLayout());
+iframeCur.src=deckUrl+'?preview='+(idx+1);
+if(idx+1<total)iframeNxt.src=deckUrl+'?preview='+(idx+2);
+notesBody.innerHTML=slideMeta[idx].notes||'<span style="color:#555048;font-style:italic">(No notes)</span>';
+curMeta.textContent=(idx+1)+'/'+total;
+nxtMeta.textContent=(idx+2<total?idx+2:'END')+' / '+total;
+timerCountEl.textContent=(idx+1)+' / '+total;
+})();
+<\/script>
+</body></html>`;
+  }
+
+  goToSlide(index, silent) {
+    if (index < 0 || index >= this.slides.length) return;
+    this.slides[index].scrollIntoView({ behavior: 'smooth' });
+    if (!silent && this.bc) {
+      this.bc.postMessage({ type: 'go', idx: index });
+    }
+  }
+
+  splitWords() {
+    document.querySelectorAll('.reveal-word').forEach(el => {
+      const words = el.textContent.trim().split(/\s+/);
+      el.innerHTML = words.map((word, i) =>
+        `<span style="transition-delay: ${i * 80}ms">${word}</span>`
+      ).join(' ');
+    });
+  }
+}
+
+document.addEventListener('DOMContentLoaded', () => new SlidePresentation());
+</script>
+</body>
+</html>

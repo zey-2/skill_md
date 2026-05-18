@@ -1,10 +1,12 @@
 ---
 type: concept
 created: 2026-05-11
-updated: 2026-05-11
+updated: 2026-05-18
 status: active
 sources:
   - "raw/There will only be four jobs.md"
+  - "raw/How to get your company AI pilled - geoffintech.md"
+  - "raw/How Block is becoming the most AI-native enterprise in the world  Dhanji R. Prasanna.md"
 tags: [ai-native-work, org-design, job-archetypes, product-engineering]
 ---
 
@@ -44,6 +46,12 @@ The archetypes are most useful as a balance model:
 
 The source's strongest claim is not that there will literally be four jobs. It is that AI-native companies need to design for complementary modes of work after output becomes easier to produce.
 
+## Enterprise Case Evidence
+
+Ramp and Block both show the archetypes moving outside engineering. In Ramp's account, risk analysts, sales ops, L&D, finance, sellers, CX, legal, and marketing employees become product-minded builders by creating local tools and workflows. In Block's account, non-technical teams using Goose are among the highest-impact adopters because they can optimize their own workdays without waiting for internal app teams.
+
+These cases also show why the other archetypes remain necessary. Central platform teams, MCP/tooling builders, and review/governance functions act as stabilizers. Executives and senior technical leaders provide the "adult" function by setting expectations, shaping org design, and preserving taste, critical thinking, security, and reliability. Interface work appears in demos, onboarding, office hours, skills marketplaces, and shared channels that make new workflows understandable to the rest of the organization.
+
 ## Connections
 
 - [[sources/There will only be four jobs]] - Source summary.
@@ -52,6 +60,7 @@ The source's strongest claim is not that there will literally be four jobs. It i
 - [[concepts/Harness Engineering Principles]] - Stabilizers and adults are part of the organizational harness around agentic output.
 - [[concepts/Collaborative AI Engineering]] - Alignment and interface work prevent decentralized execution from becoming coordination debt.
 - [[concepts/Tokenmaxxing]] - High-token acceleration needs stabilizing and judgment layers.
+- [[concepts/Enterprise AI Adoption Flywheel]] - Explains how these archetypes show up in company-wide adoption.
 
 ## Open Questions
 

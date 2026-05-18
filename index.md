@@ -1,7 +1,7 @@
 ---
 type: index
 created: 2026-04-26
-updated: 2026-05-16
+updated: 2026-05-18
 status: active
 sources:
   - "raw/skill.md for AI Agents.md"
@@ -84,6 +84,13 @@ sources:
   - "raw/Building a Second Brain Vivian Balakrishnan AI Engineer Singapore.md"
   - "raw/The Rise of the AI Engineer.md"
   - "raw/You can outsource your thinking but not your understanding - Yacine MTB.md"
+  - "raw/How to get your company AI pilled - geoffintech.md"
+  - "raw/How Block is becoming the most AI-native enterprise in the world  Dhanji R. Prasanna.md"
+  - "raw/new_economics_of_software.md"
+  - "raw/A Formal Model of How Artificial Intelligence Erodes Human Agency.md"
+  - "raw/AI Agent Autonomy Levels From Assistive to Fully Autonomous.md"
+  - "raw/Six Levels of Agenticness Scoring AI Agency.md"
+  - "raw/The Philosophy of Agentic AI Agency Autonomy and Moral Responsibility.md"
 tags: [index, agent-skills, llm-providers]
 ---
 
@@ -139,10 +146,14 @@ tags: [index, agent-skills, llm-providers]
 - [[concepts/Tokenmaxxing|Tokenmaxxing]] — Spending more model time, context, agents, and verification to buy back scarce human attention when extra machine work improves quality.
 - [[concepts/AI-Native Engineering Organizations|AI-Native Engineering Organizations]] — Org-level operating model for teams where coding throughput is no longer the main bottleneck.
 - [[concepts/AI-Native Work Archetypes|AI-Native Work Archetypes]] — Working-style taxonomy for AI-native companies: acceleration, stabilization, governance, and interface.
+- [[concepts/Enterprise AI Adoption Flywheel|Enterprise AI Adoption Flywheel]] — Company-wide adoption loop: leadership usage, integrated agents, visible wins, shared platforms, and governance.
 - [[concepts/Personal AI Agents and Memory Systems|Personal AI Agents and Memory Systems]] — Pattern of individuals building bespoke personal AI agents with graph-based memory, local deployment, and tool assembly.
 - [[concepts/Neuro-Symbolic AI Architecture|Neuro-Symbolic AI Architecture]] — Pure LLMs as pattern recognition with emergent behavior vs. hybrid neural+symbolic systems for verifiable reasoning and efficiency.
 - [[concepts/Graph-Based Memory for AI Agents|Graph-Based Memory for AI Agents]] — Persistent memory as graphs with entities, causal/temporal/semantic edges, and local embeddings for semantic search.
 - [[concepts/Tool Assembly as a Skill|Tool Assembly as a Skill]] — Selecting, configuring, and connecting existing tools without writing glue code as a distinct capability between vibe coding and agentic engineering.
+- [[concepts/Software Economics|Software Economics]] — The shift from scarcity-driven to abundance-driven software development. When code is free, bottlenecks move to attention, governance, and judgment.
+- [[concepts/The New Meta - Measurement, Ideation, Iteration|The New Meta: Measurement, Ideation, Iteration]] — When building is cheap, value creation shifts to measuring what matters, choosing the right ideas, and iterating fast.
+- [[concepts/AI agency|AI Agency]] — Spectrum of AI agency: autonomy levels, agency dimensions, instrumental vs terminal goals, the responsibility gap, and how AI erodes human agency.
 
 ## Lesson Plans
 
@@ -198,8 +209,6 @@ tags: [index, agent-skills, llm-providers]
 - `raw/2026-04-26 OpenAI Codex SDK and App Server source.md` - OpenAI official evidence for Codex SDK, Codex App Server, Codex Skills, and Codex subagents.
 - `raw/2026-04-26 Claude Agent SDK source.md` - Anthropic/Claude official evidence for the Claude Agent SDK, TypeScript and Python packages, MCP integration, sessions, permissions, and filesystem skills.
 - `raw/2026-04-26 OpenAI Codex Plugins docs.md` - OpenAI Codex plugin evidence for bundling skills, app integrations, MCP servers, manifests, marketplaces, and install-surface metadata.
-- `raw/2026-04-30 AI Coding Plans Comparison 2026.md` - Comprehensive comparison of six Chinese coding plans and four international coding-tool subscriptions with pricing, quotas, model access, and selection guidance.
-- `raw/2026-04-30 Claude Code Third-Party LLM Provider Configuration.md` - Raw synthesis of Claude Code third-party provider setup including OpenRouter, LiteLLM, Bedrock, Vertex AI, Foundry, environment variables, and VS Code integration.
 - `raw/2026-04-26 Claude Code Plugins docs.md` - Claude Code plugin evidence for plugin components, marketplaces, scopes, MCP servers, caching, and distribution behavior.
 - `raw/OpenAI’s 5 Levels Of ‘Super AI’ (AGI To Outperform Human Capability).md` - Forbes article on OpenAI's five-level AGI framework: conversational, reasoners, agents, innovators, and organizations, with timeline estimates.
 - `raw/LangChain vs LangGraph vs LangSmith vs LangFlow Key Differences Explained.md` - DataCamp comparison of the LangChain ecosystem: LCEL chains, tool calling, structured outputs, memory, LangGraph state graphs, LangSmith tracing, and LangFlow visual builder.
@@ -230,6 +239,14 @@ tags: [index, agent-skills, llm-providers]
 - `raw/Tokenmaxxing How Top Builders Use AI To Do The Work Of 400 Engineers.md` - Y Combinator / Garry Tan transcript on tokenmaxxing, GStack, model cross-review, Playwright QA automation, personal AI ownership, and using tokens to buy back scarce human time.
 - `raw/Running an AI-native engineering org.md` - Fiona Fung / Claude transcript on shifted bottlenecks, JIT planning, code review, ownership, hiring, flat orgs, dogfooding, and killing stale processes in AI-native engineering teams.
 - `raw/There will only be four jobs.md` - Yoni Rechtman essay arguing that AI-native companies will organize around working styles: product-minded builders, stabilizers, judgment-heavy adults, and interface people.
+- `raw/You can outsource your thinking but not your understanding - Yacine MTB.md` - Tweet/source emphasizing "you can delegate work, you can't delegate accountability" as a key dimension of the understanding bottleneck.
+- `raw/How to get your company AI pilled - geoffintech.md` - X post on Ramp's company-wide AI adoption playbook: internal agents, skills marketplace, hackathons, leaderboards, hiring expectations, and unconstrained AI access.
+- `raw/How Block is becoming the most AI-native enterprise in the world  Dhanji R. Prasanna.md` - Lenny's Podcast transcript with Block CTO Dhanji R. Prasanna on Goose, MCP, functional org design, executive dogfooding, and company-wide AI adoption.
+- `raw/new_economics_of_software.md` - Notes on the economic shift from scarcity to abundance in software development: code cost collapsing to zero, moat erosion, and new bottlenecks.
+- `raw/A Formal Model of How Artificial Intelligence Erodes Human Agency.md` - RAND formal model: AI erodes human agency through choice architecture narrowing, skill atrophy, preference shaping, and incremental surrender.
+- `raw/AI Agent Autonomy Levels From Assistive to Fully Autonomous.md` - Five-level autonomy scale (assistive → advisory → supervised autonomous → monitored autonomous → fully autonomous) with examples.
+- `raw/Six Levels of Agenticness Scoring AI Agency.md` - Six-level agenticness scale (L0-L5) scored across 8 dimensions: action capability, autonomy, planning, adaptation, state continuity, reliability, interoperability, safety.
+- `raw/The Philosophy of Agentic AI Agency Autonomy and Moral Responsibility.md` - Philosophical analysis of AI agency without intelligence, the responsibility gap when autonomous systems cause harm, and moral accountability.
 
 ## Source Summaries
 
@@ -243,9 +260,12 @@ tags: [index, agent-skills, llm-providers]
 - [[sources/Tokenmaxxing How Top Builders Use AI To Do The Work Of 400 Engineers|Tokenmaxxing How Top Builders Use AI To Do The Work Of 400 Engineers]] — Garry Tan on tokenmaxxing, GStack, high-throughput personal AI workflows, QA automation, and personal AI ownership.
 - [[sources/Running an AI-native engineering org|Running an AI-native engineering org]] — Fiona Fung on Claude Code team norms after coding stops being the bottleneck.
 - [[sources/There will only be four jobs|There will only be four jobs]] — Yoni Rechtman on AI-native work archetypes and the shift from output-based roles to production styles.
+- [[sources/How to get your company AI pilled|How to get your company AI pilled]] — Ramp case study on broad AI adoption through Glass, Dojo, leaderboards, hackathons, internal PRs, and constraint removal.
+- [[sources/How Block is becoming the most AI-native enterprise in the world|How Block is becoming the most AI-native enterprise in the world]] — Block case study on Goose, MCP, functional org design, non-technical builders, and executive AI usage.
 - [[sources/Building a Second Brain Vivian Balakrishnan AI Engineer Singapore|Building a Second Brain Vivian Balakrishnan AI Engineer Singapore]] — Singapore's Foreign Minister on building a personal AI agent with NanoClaw, graph-based memory, and Obsidian, without writing code.
 - [[sources/Build Self-Improving Claude Code Skills. The Results Are Crazy|Build Self-Improving Claude Code Skills. The Results Are Crazy]] — Simon Scrapes on applying Karpathy's autoresearch loop to Claude Code skills using binary assertions for structural quality testing.
 - [[sources/The Rise of the AI Engineer|The Rise of the AI Engineer]] — Latent Space (2023): the foundational article coining "AI Engineer" as a job title, the shift right of applied AI, and Software 3.0.
+- [[sources/The New Economics of Software (AI Engineer Singapore 2026)|The New Economics of Software (AI Engineer Singapore 2026)]] — Software creation cost collapsing to zero, moat erosion, attention as the new scarce resource, and implications for engineering orgs.
 
 ## Development Artifacts
 
@@ -253,3 +273,8 @@ tags: [index, agent-skills, llm-providers]
 - [[docs/superpowers/plans/2026-05-10-from-agents-to-skills-v2-plan|From Agents to Skills v2 implementation plan]] — Task plan for producing `presentation-v2.html`.
 - [[docs/superpowers/specs/2026-05-10-from-agents-to-skills-v3-design|From Agents to Skills v3 design spec]] — Problem-first impact rewrite brief for the presentation.
 - [[docs/superpowers/plans/2026-05-10-from-agents-to-skills-v3-plan|From Agents to Skills v3 implementation plan]] — Task plan for producing `presentation-v3.html`.
+
+## Presentations
+
+- `courses/presentation-agency.html` — Presentation on AI agency for a general audience.
+- `courses/presentation-the-human-bottleneck.html` — Presentation on understanding as the human bottleneck.

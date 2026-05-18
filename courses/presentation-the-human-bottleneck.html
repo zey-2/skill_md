@@ -1,0 +1,1525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Human Bottleneck</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg-primary: #0f0f0f;
+    --bg-deep: #080808;
+    --text-primary: #e8e4df;
+    --text-secondary: #9a9590;
+    --accent-warm: #d4a574;
+    --accent-pink: #e8b4b8;
+    --accent-gold: #c9b896;
+    --surface: rgba(255, 255, 255, 0.04);
+    --rule: rgba(255, 255, 255, 0.06);
+    --font-display: 'Cormorant', serif;
+    --font-body: 'IBM Plex Sans', sans-serif;
+    --title-size: clamp(2rem, 6vw, 5rem);
+    --subtitle-size: clamp(1rem, 2.5vw, 1.5rem);
+    --body-size: clamp(0.875rem, 1.5vw, 1.25rem);
+    --label-size: clamp(0.625rem, 1vw, 0.875rem);
+    --slide-padding: clamp(1.5rem, 5vw, 5rem);
+    --content-gap: clamp(1rem, 2.5vw, 2.5rem);
+    --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+    --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+    --duration-normal: 0.6s;
+    --duration-slow: 1s;
+  }
+
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html {
+    scroll-snap-type: y mandatory;
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+    background: var(--bg-primary);
+  }
+
+  body {
+    font-family: var(--font-body);
+    color: var(--text-primary);
+    background: var(--bg-primary);
+  }
+
+  .slide {
+    width: 100vw;
+    height: 100vh;
+    height: 100dvh;
+    overflow: hidden;
+    scroll-snap-align: start;
+    position: relative;
+  }
+
+  .slide-content {
+    position: relative;
+    z-index: 2;
+    padding: var(--slide-padding);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* === Atmosphere === */
+  .slide-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    overflow: hidden;
+  }
+
+  .bg-blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(120px);
+    opacity: 0.3;
+    animation: float 8s ease-in-out infinite alternate;
+  }
+
+  @keyframes float {
+    0% { transform: translate(0, 0) scale(1); }
+    100% { transform: translate(40px, -30px) scale(1.15); }
+  }
+
+  .bg-gradient-mesh {
+    background:
+      radial-gradient(ellipse at 20% 80%, rgba(212, 165, 116, 0.08) 0%, transparent 50%),
+      radial-gradient(ellipse at 80% 20%, rgba(232, 180, 184, 0.06) 0%, transparent 50%),
+      var(--bg-primary);
+  }
+
+  .bg-gradient-mesh-deep {
+    background:
+      radial-gradient(ellipse at 30% 70%, rgba(212, 165, 116, 0.12) 0%, transparent 50%),
+      radial-gradient(ellipse at 70% 30%, rgba(201, 184, 150, 0.08) 0%, transparent 50%),
+      var(--bg-deep);
+  }
+
+  .bg-blob-1 {
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(212, 165, 116, 0.15), transparent 70%);
+    top: -10%; right: -10%;
+    animation-delay: 0s;
+  }
+
+  .bg-blob-2 {
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(232, 180, 184, 0.1), transparent 70%);
+    bottom: -15%; left: 5%;
+    animation-delay: 2s;
+  }
+
+  .bg-blob-3 {
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(201, 184, 150, 0.1), transparent 70%);
+    top: 30%; left: 50%;
+    animation-delay: 4s;
+  }
+
+  /* === Reveals === */
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity var(--duration-normal) var(--ease-out-expo),
+                transform var(--duration-normal) var(--ease-out-expo);
+  }
+  .slide.visible .reveal { opacity: 1; transform: translateY(0); }
+  .reveal:nth-child(1) { transition-delay: 0.1s; }
+  .reveal:nth-child(2) { transition-delay: 0.2s; }
+  .reveal:nth-child(3) { transition-delay: 0.3s; }
+  .reveal:nth-child(4) { transition-delay: 0.4s; }
+  .reveal:nth-child(5) { transition-delay: 0.5s; }
+  .reveal:nth-child(6) { transition-delay: 0.6s; }
+  .reveal:nth-child(7) { transition-delay: 0.7s; }
+  .reveal:nth-child(8) { transition-delay: 0.8s; }
+
+  .reveal-scale {
+    opacity: 0;
+    transform: scale(0.95);
+    transition: opacity var(--duration-slow) var(--ease-out-expo),
+                transform var(--duration-slow) var(--ease-out-expo);
+  }
+  .slide.visible .reveal-scale { opacity: 1; transform: scale(1); }
+
+  .reveal-left {
+    opacity: 0;
+    transform: translateX(-50px);
+    transition: opacity var(--duration-normal) var(--ease-out-expo),
+                transform var(--duration-normal) var(--ease-out-expo);
+  }
+  .slide.visible .reveal-left { opacity: 1; transform: translateX(0); }
+
+  .reveal-right {
+    opacity: 0;
+    transform: translateX(50px);
+    transition: opacity var(--duration-normal) var(--ease-out-expo),
+                transform var(--duration-normal) var(--ease-out-expo);
+  }
+  .slide.visible .reveal-right { opacity: 1; transform: translateX(0); }
+
+  .reveal-blur {
+    opacity: 0;
+    filter: blur(10px);
+    transition: opacity var(--duration-slow) var(--ease-out-expo),
+                filter var(--duration-slow) var(--ease-out-expo);
+  }
+  .slide.visible .reveal-blur { opacity: 1; filter: blur(0); }
+
+  .reveal-word span {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.4s var(--ease-out-expo), transform 0.4s var(--ease-out-expo);
+  }
+  .slide.visible .reveal-word span { opacity: 1; transform: translateY(0); }
+
+  /* === Labels === */
+  .label {
+    font-family: var(--font-body);
+    font-size: var(--label-size);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent-warm);
+    margin-bottom: var(--content-gap);
+    font-weight: 500;
+  }
+
+  /* === Title Slide === */
+  .title-slide {
+    background: var(--bg-deep);
+  }
+
+  .title-slide .slide-content {
+    justify-content: center;
+    align-items: flex-start;
+    max-width: clamp(400px, 80vw, 900px);
+  }
+
+  .title-slide h1 {
+    font-family: var(--font-display);
+    font-size: var(--title-size);
+    font-weight: 300;
+    line-height: 1.1;
+    color: var(--text-primary);
+    margin-bottom: var(--content-gap);
+  }
+
+  .title-slide .subtitle {
+    font-family: var(--font-body);
+    font-size: var(--subtitle-size);
+    font-weight: 300;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    max-width: 60ch;
+    margin-bottom: clamp(2rem, 4vw, 4rem);
+  }
+
+  .title-slide .author {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .author-name {
+    font-family: var(--font-display);
+    font-size: clamp(1.1rem, 2vw, 1.5rem);
+    font-weight: 500;
+    color: var(--accent-gold);
+  }
+
+  .author-detail {
+    font-size: var(--label-size);
+    color: var(--text-secondary);
+    letter-spacing: 0.05em;
+  }
+
+  .title-rule {
+    width: clamp(3rem, 8vw, 6rem);
+    height: 1px;
+    background: var(--accent-warm);
+    margin: var(--content-gap) 0;
+    opacity: 0.5;
+  }
+
+  /* === Section Divider === */
+  .section-divider {
+    background: var(--bg-deep);
+  }
+
+  .section-divider-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+    padding: var(--slide-padding);
+    gap: var(--content-gap);
+  }
+
+  .section-number-row {
+    display: flex;
+    align-items: center;
+    gap: clamp(0.75rem, 2vw, 1.5rem);
+  }
+
+  .section-number {
+    font-size: clamp(4rem, 12vw, 10rem);
+    font-weight: 300;
+    line-height: 1;
+    color: var(--accent-warm);
+    font-family: var(--font-display);
+  }
+
+  .section-rule {
+    flex: 1;
+    max-width: clamp(3rem, 10vw, 8rem);
+    height: 1px;
+    background: var(--accent-warm);
+    opacity: 0.4;
+  }
+
+  .section-divider .section-title {
+    font-size: clamp(2rem, 5vw, 4rem);
+    font-weight: 300;
+    font-family: var(--font-display);
+    margin: 0;
+    line-height: 1.1;
+    color: var(--text-primary);
+  }
+
+  .section-divider .section-subtitle {
+    font-size: var(--subtitle-size);
+    color: var(--text-secondary);
+    margin: 0;
+    max-width: 30ch;
+    font-weight: 300;
+    line-height: 1.5;
+  }
+
+  /* === Content Slides === */
+  .slide-content h2 {
+    font-family: var(--font-display);
+    font-size: clamp(1.8rem, 4vw, 3.2rem);
+    font-weight: 300;
+    line-height: 1.2;
+    margin-bottom: var(--content-gap);
+    color: var(--text-primary);
+  }
+
+  .slide-content p {
+    font-size: var(--body-size);
+    line-height: 1.7;
+    color: var(--text-secondary);
+    max-width: 70ch;
+  }
+
+  .body-content p + p { margin-top: 0.75rem; }
+
+  /* === Bullet Points === */
+  .bullet-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: clamp(0.6rem, 1.5vw, 1rem);
+    max-width: 65ch;
+  }
+
+  .bullet-list li {
+    font-size: var(--body-size);
+    line-height: 1.6;
+    color: var(--text-secondary);
+    padding-left: 1.5rem;
+    position: relative;
+  }
+
+  .bullet-list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.65em;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent-warm);
+    opacity: 0.7;
+  }
+
+  .bullet-list li strong {
+    color: var(--text-primary);
+    font-weight: 500;
+  }
+
+  /* === Quote === */
+  .quote-slide {
+    background: var(--bg-deep);
+  }
+
+  .quote-slide blockquote {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+    padding: var(--slide-padding);
+    max-width: clamp(350px, 70vw, 800px);
+  }
+
+  .quote-slide p {
+    font-family: var(--font-display);
+    font-size: clamp(1.5rem, 3.5vw, 2.8rem);
+    font-weight: 300;
+    font-style: italic;
+    line-height: 1.5;
+    color: var(--text-primary);
+    margin-bottom: var(--content-gap);
+  }
+
+  .quote-slide cite {
+    font-family: var(--font-body);
+    font-style: normal;
+    font-size: var(--label-size);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent-warm);
+    opacity: 0.8;
+  }
+
+  /* === Comparison === */
+  .comparison {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(1rem, 3vw, 3rem);
+    flex: 1;
+    align-content: start;
+    margin-top: var(--content-gap);
+  }
+
+  .comparison-col h3 {
+    font-family: var(--font-body);
+    font-size: var(--label-size);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: clamp(0.75rem, 2vw, 1.5rem);
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .comparison-col:first-child h3 { color: var(--text-secondary); }
+  .comparison-col:last-child h3 { color: var(--accent-warm); }
+
+  .comparison-col ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: clamp(0.4rem, 1vw, 0.75rem);
+  }
+
+  .comparison-col li {
+    font-size: var(--body-size);
+    line-height: 1.5;
+    color: var(--text-secondary);
+    padding-left: 1.25rem;
+    position: relative;
+  }
+
+  .comparison-col:first-child li::before {
+    content: '--';
+    position: absolute;
+    left: 0;
+    color: var(--text-secondary);
+    opacity: 0.4;
+  }
+
+  .comparison-col:last-child li::before {
+    content: '//';
+    position: absolute;
+    left: 0;
+    color: var(--accent-warm);
+    opacity: 0.7;
+  }
+
+  /* === Stats Grid === */
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(clamp(140px, 20vw, 220px), 1fr));
+    gap: clamp(1rem, 3vw, 2rem);
+    margin-top: var(--content-gap);
+  }
+
+  .stat {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .stat-number {
+    font-family: var(--font-display);
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    font-weight: 300;
+    color: var(--accent-gold);
+    line-height: 1;
+  }
+
+  .stat-unit {
+    font-size: var(--label-size);
+    color: var(--accent-warm);
+    opacity: 0.7;
+  }
+
+  .stat-label {
+    font-size: var(--body-size);
+    color: var(--text-secondary);
+    font-weight: 300;
+  }
+
+  /* === Glassmorphism Cards === */
+  .glass-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(clamp(200px, 28vw, 320px), 1fr));
+    gap: clamp(0.75rem, 2vw, 1.5rem);
+    margin-top: var(--content-gap);
+  }
+
+  .glass-card {
+    background: var(--surface);
+    backdrop-filter: blur(12px);
+    border: 1px solid var(--rule);
+    border-radius: 8px;
+    padding: clamp(1rem, 2vw, 1.5rem);
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .glass-card .card-icon {
+    font-family: var(--font-display);
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-weight: 300;
+    color: var(--accent-warm);
+    line-height: 1;
+  }
+
+  .glass-card h4 {
+    font-family: var(--font-display);
+    font-size: clamp(1.1rem, 2vw, 1.4rem);
+    font-weight: 500;
+    color: var(--text-primary);
+  }
+
+  .glass-card p {
+    font-size: var(--body-size);
+    line-height: 1.5;
+    color: var(--text-secondary);
+  }
+
+  /* === Closing Slide === */
+  .closing-slide {
+    background: var(--bg-deep);
+  }
+
+  .closing-slide .slide-content {
+    justify-content: center;
+    align-items: flex-start;
+    max-width: clamp(400px, 75vw, 850px);
+  }
+
+  .closing-slide h2 {
+    font-family: var(--font-display);
+    font-size: var(--title-size);
+    font-weight: 300;
+    line-height: 1.1;
+    margin-bottom: var(--content-gap);
+  }
+
+  .closing-slide .subtitle {
+    font-size: var(--subtitle-size);
+    color: var(--text-secondary);
+    font-weight: 300;
+    line-height: 1.6;
+    max-width: 55ch;
+  }
+
+  /* === Progress Bar === */
+  .progress-bar-track {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: var(--rule);
+    z-index: 1000;
+  }
+
+  .progress-bar {
+    height: 100%;
+    background: var(--accent-warm);
+    width: 0%;
+    transition: width 0.3s ease;
+  }
+
+  /* === Nav Dots === */
+  .nav-dots {
+    position: fixed;
+    right: clamp(0.75rem, 2vw, 2rem);
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    z-index: 1000;
+  }
+
+  .nav-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    border: none;
+    background: var(--text-secondary);
+    opacity: 0.3;
+    cursor: pointer;
+    transition: opacity 0.3s, transform 0.3s;
+    padding: 0;
+  }
+
+  .nav-dot.active {
+    opacity: 1;
+    transform: scale(1.6);
+    background: var(--accent-warm);
+  }
+
+  /* === Footer === */
+  .slide-footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: clamp(0.75rem, 2vw, 1.5rem) var(--slide-padding);
+    display: flex;
+    justify-content: space-between;
+    z-index: 2;
+  }
+
+  .slide-number {
+    font-size: var(--label-size);
+    color: var(--text-secondary);
+    opacity: 0.4;
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* === Split Content === */
+  .split-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(1.5rem, 4vw, 4rem);
+    flex: 1;
+    align-items: start;
+    margin-top: var(--content-gap);
+  }
+
+  .split-content .left, .split-content .right {
+    display: flex;
+    flex-direction: column;
+    gap: var(--content-gap);
+  }
+
+  .accent-rule {
+    width: 3rem;
+    height: 1px;
+    background: var(--accent-warm);
+    opacity: 0.5;
+  }
+
+  .highlight { color: var(--accent-warm); font-weight: 400; }
+
+  /* === Reduced Motion === */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+
+  /* === Small Viewport === */
+  @media (max-height: 600px) { .slide-footer, .nav-dots { display: none; } }
+  @media (max-height: 500px) { .slide-content .subtitle, .section-subtitle { display: none; } }
+
+  /* === Print === */
+  @media print {
+    html { scroll-snap-type: none; }
+    .slide {
+      height: auto;
+      min-height: 100vh;
+      page-break-after: always;
+      page-break-inside: avoid;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+    .progress-bar-track, .nav-dots { display: none; }
+    .reveal, .reveal-scale, .reveal-left, .reveal-right, .reveal-blur {
+      opacity: 1 !important;
+      transform: none !important;
+      filter: none !important;
+    }
+    .reveal-word span { opacity: 1 !important; transform: none !important; }
+  }
+
+  /* === Notes (hidden in audience view) === */
+  aside.notes { display: none; }
+
+  /* === Preview mode (for presenter iframes) === */
+  body.preview-mode .slide { display: none; }
+  body.preview-mode .slide.is-active { display: block; opacity: 1; transform: none; }
+</style>
+</head>
+<body>
+<div class="progress-bar-track">
+  <div class="progress-bar"></div>
+</div>
+<nav class="nav-dots" aria-label="Slide navigation"></nav>
+
+<!-- ===== SLIDE 1: TITLE ===== -->
+<section class="slide title-slide">
+  <div class="slide-bg">
+    <div class="bg-blob bg-blob-1"></div>
+    <div class="bg-blob bg-blob-2"></div>
+    <div class="bg-blob bg-blob-3"></div>
+  </div>
+  <div class="slide-content">
+    <p class="reveal label">The Human Bottleneck</p>
+    <h1 class="reveal reveal-word">Understanding Is<br>the Last Thing You<br>Can Outsource</h1>
+    <div class="title-rule reveal"></div>
+    <p class="reveal subtitle">AI collapsed the cost of building software. The bottleneck didn't disappear -- it moved. Into you.</p>
+    <div class="reveal author">
+      <span class="author-name">A Thought Leadership Talk</span>
+      <span class="author-detail">2026</span>
+    </div>
+  </div>
+  <div class="slide-footer">
+    <span class="slide-number">1 / 19</span>
+  </div>
+  <aside class="notes">
+    <p>Good morning/afternoon. I want to talk about something most people in this room haven't fully internalized yet.</p>
+    <p><strong>The fundamental economics of software just changed.</strong> Not in a "new framework" way. In a "the constraints we built our entire careers around have flipped" way.</p>
+    <p>I'm going to walk through what shifted, why your bottleneck is now <em>you</em>, and how to turn that from a problem into an advantage.</p>
+  </aside>
+</section>
+
+<!-- ===== SLIDE 2: SECTION 01 ===== -->
+<section class="slide section-divider" data-title="The Shift">
+  <div class="slide-bg bg-gradient-mesh-deep">
+    <div class="bg-blob bg-blob-1"></div>
+    <div class="bg-blob bg-blob-3"></div>
+  </div>
+  <div class="section-divider-content">
+    <div class="section-number-row">
+      <span class="reveal section-number">01</span>
+      <span class="reveal section-rule"></span>
+    </div>
+    <h2 class="reveal section-title">The Economics Changed</h2>
+    <p class="reveal section-subtitle">What was scarce is now abundant. The constraint moved downstream.</p>
+  </div>
+  <div class="slide-footer">
+    <span class="slide-number">2 / 19</span>
+  </div>
+  <aside class="notes">
+    <p>Let's start with the economic shift. For decades, software was defined by scarcity.</p>
+  </aside>
+</section>
+
+<!-- ===== SLIDE 3: From Scarcity to Abundance ===== -->
+<section class="slide">
+  <div class="slide-bg bg-gradient-mesh"></div>
+  <div class="slide-content">
+    <p class="reveal label">01 -- The Shift</p>
+    <h2 class="reveal">From Scarcity to Abundance</h2>
+    <div class="comparison reveal">
+      <div class="comparison-col">
+        <h3>Before</h3>
+        <ul>
+          <li>Engineer-hours were expensive</li>
+          <li>Timelines measured in quarters</li>
+          <li>Ruthless scope reduction</li>
+          <li>Roadmaps were bottlenecks</li>
+        </ul>
+      </div>
+      <div class="comparison-col">
+        <h3>Now</h3>
+        <ul>
+          <li>Implementation is nearly free</li>
+          <li>Prototypes built in hours or days</li>
+          <li>All ideas can be tested cheaply</li>
+          <li>Attention is the bottleneck</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer">
+    <span class="slide-number">3 / 19</span>
+  </div>
+  <aside class="notes">
+    <p><strong>Before: every feature was a cost decision.</strong> Roadmaps were about whittling thirty ideas down to three. Scarcity thinking was baked into every process.</p>
+    <p><strong>Now: a CRUD app that used to take a team a month can be replicated in a weekend.</strong> The unit economics of code have collapsed. Any idea can be built. Cheaply. Fast.</p>
+    <p>This isn't a marginal improvement. It's a regime change. And regime changes don't come with a manual.</p>
+  </aside>
+</section>
+
+<!-- ===== SLIDE 4: The Bottleneck Moved ===== -->
+<section class="slide">
+  <div class="slide-bg bg-gradient-mesh"></div>
+  <div class="slide-content">
+    <p class="reveal label">01 -- The Shift</p>
+    <h2 class="reveal">The Bottleneck Moved</h2>
+    <div class="glass-cards reveal">
+      <div class="glass-card">
+        <span class="card-icon">></span>
+        <h4>Judgment</h4>
+        <p>Recognizing which problem is worth solving, which tradeoff matters, which user need is real versus stated.</p>
+      </div>
+      <div class="glass-card">
+        <span class="card-icon">//</span>
+        <h4>Taste</h4>
+        <p>When all thirty ideas can be built, choosing the one that will resonate becomes the scarce skill.</p>
+      </div>
+      <div class="glass-card">
+        <span class="card-icon">*</span>
+        <h4>Accountability</h4>
+        <p>Agents produce options, analysis, and recommendations at velocity. The human still owns the decision.</p>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer">
+    <span class="slide-number">4 / 19</span>
+  </div>
+  <aside class="notes">
+    <p>When implementation becomes free, the value-creating activities shift <em>downstream</em>.</p>
+    <p><strong>Judgment:</strong> knowing which problem is actually worth solving. Not the stated problem -- the real one.</p>
+    <p><strong>Taste:</strong> when there's no cost filter anymore, how do you choose? Without the scarcity constraint, teams risk building everything and achieving nothing.</p>
+    <p><strong>Accountability:</strong> this is the one that catches people off guard. I'll get to it in the next section.</p>
+  </aside>
+</section>
+
+<!-- ===== SLIDE 5: Jagged Intelligence ===== -->
+<section class="slide quote-slide">
+  <div class="slide-bg bg-gradient-mesh-deep">
+    <div class="bg-blob bg-blob-2"></div>
+  </div>
+  <div class="slide-content">
+    <p class="reveal label">01 -- The Shift</p>
+    <blockquote class="reveal-blur">
+      <p>"The agent executes.<br>The human provides judgment."</p>
+      <cite>-- The Jagged Intelligence Problem</cite>
+    </blockquote>
+  </div>
+  <div class="slide-footer">
+    <span class="slide-number">5 / 19</span>
+  </div>
+  <aside class="notes">
+    <p>AI agents exhibit what researchers call <strong>"jagged intelligence"</strong> -- they may know the answer, but they won't surface it unless prompted correctly.</p>
+    <p>Think about that. The agent can write the code, but it can't know <em>which</em> code matters. That gap -- between execution and judgment -- is where the new bottleneck lives.</p>
+  </aside>
+</section>
+
+<!-- ===== SLIDE 6: SECTION 02 ===== -->
+<section class="slide section-divider" data-title="The Human Layer">
+  <div class="slide-bg bg-gradient-mesh-deep">
+    <div class="bg-blob bg-blob-2"></div>
+    <div class="bg-blob bg-blob-3"></div>
+  </div>
+  <div class="section-divider-content">
+    <div class="section-number-row">
+      <span class="reveal section-number">02</span>
+      <span class="reveal section-rule"></span>
+    </div>
+    <h2 class="reveal section-title">The Human Layer</h2>
+    <p class="reveal section-subtitle">What you can hand off and what you can't. Most people confuse the two.</p>
+  </div>
+  <div class="slide-footer">
+    <span class="slide-number">6 / 19</span>
+  </div>
+  <aside class="notes">
+    <p>Now let's talk about the part that can't be automated. And I'm going to make a claim that sounds paradoxical at first.</p>
+  </aside>
+</section>
+
+<!-- ===== SLIDE 7: Thinking vs Understanding ===== -->
+<section class="slide quote-slide">
+  <div class="slide-bg bg-gradient-mesh-deep">
+    <div class="bg-blob bg-blob-1"></div>
+  </div>
+  <div class="slide-content">
+    <p class="reveal label">02 -- The Human Layer</p>
+    <blockquote class="reveal-blur">
+      <p>"You can outsource your thinking,<br>but you can't outsource your understanding."</p>
+      <cite>-- Yacine MTB & Dr. Vivian Balakrishnan, AI Engineer Singapore 2026</cite>
+    </blockquote>
+  </div>
+  <div class="slide-footer">
+    <span class="slide-number">7 / 19</span>
+  </div>
+  <aside class="notes">
+    <p>This quote, independently expressed by two people in early 2026, captures the entire problem.</p>
+    <p><strong>Thinking</strong> -- calculations, computations, memory, replication, dissemination. All of that can be outsourced now. And it should be.</p>
+    <p><strong>Understanding</strong> -- personal comprehension of the underlying concepts. That stays with you. It always will. And the trap is confusing the left column for the right column.</p>
+    <p>Dr. Balakrishnan added a dimension: accountability. <em>"You can delegate work. You can't delegate accountability."</em></p>
+  </aside>
+</section>
+
+<!-- ===== SLIDE 8: Can vs Cannot Outsource ===== -->
+<section class="slide">
+  <div class="slide-bg bg-gradient-mesh"></div>
+  <div class="slide-content">
+    <p class="reveal label">02 -- The Human Layer</p>
+    <h2 class="reveal">What Can and Cannot Be Outsourced</h2>
+    <div class="comparison reveal">
+      <div class="comparison-col">
+        <h3>Can Outsource</h3>
+        <ul>
+          <li>Calculations and computation</li>
+          <li>Memory -- storage and retrieval</li>
+          <li>Replication -- copying and scaling</li>
+          <li>Dissemination and summarization</li>
+          <li>Syntax and API details</li>
+        </ul>
+      </div>
+      <div class="comparison-col">
+        <h3>Cannot Outsource</h3>
+        <ul>
+          <li>Personal understanding</li>
+          <li>Accountability for decisions</li>
+          <li>Judgment of what matters</li>
+          <li>Taste -- what will resonate</li>
+          <li>Tradeoff reasoning</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer">
+    <span class="slide-number">8 / 19</span>
+  </div>
+  <aside class="notes">
+    <p>Here's the practical framework. The left column -- all of that is now cheap. You should be outsourcing it.</p>
+    <p><strong>The right column is where you now live as a professional.</strong> Your value isn't in writing the code faster. Your value is in knowing what code should exist at all.</p>
+    <p>The trap is real: when you outsource computation and feel productive, you may also be outsourcing understanding without noticing. And that's where things break.</p>
+  </aside>
+</section>
+
+<!-- ===== SLIDE 9: Obedient Before Wise ===== -->
+<section class="slide">
+  <div class="slide-bg bg-gradient-mesh"></div>
+  <div class="slide-content">
+    <p class="reveal label">02 -- The Human Layer</p>
+    <h2 class="reveal">Obedient Before Wise</h2>
+    <div class="split-content reveal">
+      <div class="left">
+        <p>An agent will do exactly what you asked. The failure is rarely disobedience -- it's that you asked for the wrong thing.</p>
+        <div class="accent-rule"></div>
+        <p class="highlight">The agent selected the obvious implementation. The human needed to identify the correct assumption.</p>
+      </div>
+      <div class="right">
+        <p style="font-size: var(--label-size); color: var(--text-secondary); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.5rem;">The Stripe/Email Failure</p>
+        <p>Karpathy's agent matched Stripe accounts to Google accounts by email address. Reasonable. Obvious. Wrong.</p>
+        <p>People use different emails across services. Only a human who understood the business context could write the correct specification.</p>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer">
+    <span class="slide-number">9 / 19</span>
+  </div>
+  <aside class="notes">
+    <p>Agents are often <strong>obedient before they are wise.</strong> They won't challenge weak assumptions. They won't know which business rule matters. They won't distinguish between a prototype shortcut and a production requirement.</p>
+    <p><strong>The Stripe/email failure</strong> is the perfect example. Karpathy asked his agent to match accounts by email. The agent did exactly that. It seemed reasonable. It failed in production because people use different emails for different services.</p>
+    <p>The lesson: the failure wasn't the agent. The failure was the spec. And the spec was bad because the human didn't understand the constraint well enough to articulate it.</p>
+  </aside>
+</section>
+
+<!-- ===== SLIDE 10: Syntax vs Concepts ===== -->
+<section class="slide">
+  <div class="slide-bg bg-gradient-mesh"></div>
+  <div class="slide-content">
+    <p class="reveal label">02 -- The Human Layer</p>
+    <h2 class="reveal">Syntax vs Concepts</h2>
+    <div class="glass-cards reveal">
+      <div class="glass-card">
+        <span class="card-icon">--</span>
+        <h4>Syntax Can Be Outsourced</h4>
+        <p>Whether it's <code>keepdim</code> or <code>keepdims</code>. The exact method name. The API surface. An agent can retrieve and apply these instantly.</p>
+      </div>
+      <div class="glass-card">
+        <span class="card-icon">//</span>
+        <h4>Concepts Must Stay Sharp</h4>
+        <p>Memory layout, tensor views, copying vs reshaping, performance implications -- without this understanding, the agent generates working code that is inefficient, incorrect, or fragile.</p>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer">
+    <span class="slide-number">10 / 19</span>
+  </div>
+  <aside class="notes">
+    <p>This doesn't mean you stop learning. It means you <strong>learn different things</strong>.</p>
+    <p>Small API details -- those can be outsourced. It's genuinely less important to remember whether a library uses <code>keepdim</code> or <code>keepdims</code>.</p>
+    <p>But the underlying model? Memory layout, performance implications, why one approach over another? <strong>That foundation is now more important than ever.</strong> Without it, the agent may generate code that works but is structurally wrong.</p>
+  </aside>
+</section>
+
+<!-- ===== SLIDE 11: SECTION 03 ===== -->
+<section class="slide section-divider" data-title="The New Meta">
+  <div class="slide-bg bg-gradient-mesh-deep">
+    <div class="bg-blob bg-blob-1"></div>
+    <div class="bg-blob bg-blob-2"></div>
+  </div>
+  <div class="section-divider-content">
+    <div class="section-number-row">
+      <span class="reveal section-number">03</span>
+      <span class="reveal section-rule"></span>
+    </div>
+    <h2 class="reveal section-title">The New Meta</h2>
+    <p class="reveal section-subtitle">When building is cheap, value shifts to measurement, ideation, and iteration.</p>
+  </div>
+  <div class="slide-footer">
+    <span class="slide-number">11 / 19</span>
+  </div>
+  <aside class="notes">
+    <p>So if the economics shifted and the human layer is understanding -- what does that mean for how we actually work?</p>
+    <p>The answer is what I call the new meta.</p>
+  </aside>
+</section>
+
+<!-- ===== SLIDE 12: Measurement, Ideation, Iteration ===== -->
+<section class="slide">
+  <div class="slide-bg bg-gradient-mesh"></div>
+  <div class="slide-content">
+    <p class="reveal label">03 -- The New Meta</p>
+    <h2 class="reveal">Measurement, Ideation, Iteration</h2>
+    <div class="glass-cards reveal">
+      <div class="glass-card">
+        <span class="card-icon">01</span>
+        <h4>Measurement</h4>
+        <p>When anyone can prototype any idea in hours, the constraint shifts to understanding whether what was built actually works. Instrument first, build second.</p>
+      </div>
+      <div class="glass-card">
+        <span class="card-icon">02</span>
+        <h4>Ideation</h4>
+        <p>When the cost filter disappears, ideas are plentiful. Discernment becomes rare. Taste -- recognizing what will resonate -- is the new limiting factor.</p>
+      </div>
+      <div class="glass-card">
+        <span class="card-icon">03</span>
+        <h4>Iteration</h4>
+        <p>Shipping, measuring, learning, adjusting. The faster the cycle, the more compound learning accumulates. Speed is the compounder.</p>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer">
+    <span class="slide-number">12 / 19</span>
+  </div>
+  <aside class="notes">
+    <p><strong>Measurement:</strong> this is the true bottleneck. Profiling, A/B testing, instrumentation. In the old regime, observability was a nice-to-have you deferred. In abundance, it's the only way to evaluate agent output.</p>
+    <p><strong>Ideation:</strong> without the cost constraint, teams risk building everything. Taste becomes the new prioritization mechanism. Understanding users, markets, and tradeoffs -- this cannot be automated.</p>
+    <p><strong>Iteration:</strong> syntax mastery devalues. Tradeoff understanding appreciates. The faster you can ship-measure-learn-adjust, the more you compound.</p>
+  </aside>
+</section>
+
+<!-- ===== SLIDE 13: The New Skill Stack ===== -->
+<section class="slide">
+  <div class="slide-bg bg-gradient-mesh"></div>
+  <div class="slide-content">
+    <p class="reveal label">03 -- The New Meta</p>
+    <h2 class="reveal">The New Skill Stack</h2>
+    <div class="comparison reveal">
+      <div class="comparison-col">
+        <h3>Old Valued Skills</h3>
+        <ul>
+          <li>Writing code fast</li>
+          <li>Remembering APIs</li>
+          <li>Building the spec</li>
+          <li>Reducing scope</li>
+          <li>Technical execution</li>
+        </ul>
+      </div>
+      <div class="comparison-col">
+        <h3>New Valued Skills</h3>
+        <ul>
+          <li>Asking precise questions</li>
+          <li>Recognizing the right tool</li>
+          <li>Defining what to measure</li>
+          <li>Choosing the right scope</li>
+          <li>Iteration speed</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer">
+    <span class="slide-number">13 / 19</span>
+  </div>
+  <aside class="notes">
+    <p>Look at this side by side. <strong>Every single shift moves the value upstream.</strong></p>
+    <p>Not writing code faster -- asking better questions. Not remembering APIs -- knowing which tool to reach for. Not building the spec -- defining what to measure.</p>
+    <p><strong>The meta rewards different skills than the old regime.</strong> If you're still optimizing for the left column, you're competing in a race that's already been won by machines.</p>
+  </aside>
+</section>
+
+<!-- ===== SLIDE 14: Encoding Taste ===== -->
+<section class="slide">
+  <div class="slide-bg bg-gradient-mesh"></div>
+  <div class="slide-content">
+    <p class="reveal label">03 -- The New Meta</p>
+    <h2 class="reveal">Encoding Taste</h2>
+    <div class="split-content reveal">
+      <div class="left">
+        <p>Agents replicate patterns that already exist -- including suboptimal ones. At high throughput, "AI slop" accumulates: bad patterns propagate, code drifts, quality degrades.</p>
+        <div class="accent-rule"></div>
+        <p class="highlight">Human taste must be captured once, then enforced continuously on every line of code.</p>
+      </div>
+      <div class="right">
+        <ul class="bullet-list">
+          <li><strong>Define golden principles</strong> -- opinionated, mechanical rules for the repository</li>
+          <li><strong>Background garbage collection</strong> -- agents scan for deviations on a cadence</li>
+          <li><strong>Persona-based review</strong> -- spin up review agents per role: security, reliability, product</li>
+          <li><strong>Encode taste into code</strong> -- when docs fall short, promote rules into lints and tests</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer">
+    <span class="slide-number">14 / 19</span>
+  </div>
+  <aside class="notes">
+    <p>Here's where taste becomes operational. <strong>It's not abstract.</strong></p>
+    <p>When agents produce code at high throughput, they propagate bad patterns. They copy suboptimal implementations. Code drifts. This is "AI slop" -- and it accumulates.</p>
+    <p><strong>The solution is continuous garbage collection for taste.</strong> Define golden principles. Run background agents that scan for deviations. Capture human review comments and encode them into lints and tests.</p>
+    <p>Your taste -- captured once, enforced continuously. That's how you scale quality without scaling headcount.</p>
+  </aside>
+</section>
+
+<!-- ===== SLIDE 15: SECTION 04 ===== -->
+<section class="slide section-divider" data-title="How to Leverage AI">
+  <div class="slide-bg bg-gradient-mesh-deep">
+    <div class="bg-blob bg-blob-3"></div>
+  </div>
+  <div class="section-divider-content">
+    <div class="section-number-row">
+      <span class="reveal section-number">04</span>
+      <span class="reveal section-rule"></span>
+    </div>
+    <h2 class="reveal section-title">How to Leverage AI</h2>
+    <p class="reveal section-subtitle">Stop writing code. Start writing specs.</p>
+  </div>
+  <div class="slide-footer">
+    <span class="slide-number">15 / 19</span>
+  </div>
+  <aside class="notes">
+    <p>Let's bring it all together. What do you actually do differently tomorrow morning?</p>
+  </aside>
+</section>
+
+<!-- ===== SLIDE 16: Agentic Engineering ===== -->
+<section class="slide">
+  <div class="slide-bg bg-gradient-mesh"></div>
+  <div class="slide-content">
+    <p class="reveal label">04 -- Leverage</p>
+    <h2 class="reveal">Agentic Engineering vs Vibe Coding</h2>
+    <div class="comparison reveal">
+      <div class="comparison-col">
+        <h3>Vibe Coding</h3>
+        <ul>
+          <li>Describe, nudge, repeat</li>
+          <li>Raises the floor -- anyone can build</li>
+          <li>Exploration quality</li>
+          <li>Functional but structurally weak</li>
+        </ul>
+      </div>
+      <div class="comparison-col">
+        <h3>Agentic Engineering</h3>
+        <ul>
+          <li>Specify, validate, iterate</li>
+          <li>Preserves the ceiling -- production quality</li>
+          <li>Production quality</li>
+          <li>Secure, tested, maintainable</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer">
+    <span class="slide-number">16 / 19</span>
+  </div>
+  <aside class="notes">
+    <p><strong>Two modes exist now.</strong> Vibe coding -- describe, nudge, repeat. It raises the floor. Anyone can build something. That's valuable for exploration.</p>
+    <p><strong>But it's not enough for production.</strong> Agentic engineering is the discipline of coordinating powerful but fallible agents to go faster without sacrificing the quality bar.</p>
+    <p>The distinction isn't wording. It's understanding. And the spec is where it shows.</p>
+  </aside>
+</section>
+
+<!-- ===== SLIDE 17: The Spec is the Program ===== -->
+<section class="slide">
+  <div class="slide-bg bg-gradient-mesh"></div>
+  <div class="slide-content">
+    <p class="reveal label">04 -- Leverage</p>
+    <h2 class="reveal">The Spec Is the Program</h2>
+    <div class="split-content reveal">
+      <div class="left">
+        <p style="font-size: var(--label-size); color: var(--text-secondary); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.5rem;">Weak Spec</p>
+        <p style="font-family: var(--font-body); font-style: italic; color: var(--text-secondary);">"Build a login system."</p>
+        <div class="accent-rule"></div>
+        <p style="font-size: var(--label-size); color: var(--text-secondary); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.5rem;">Strong Spec</p>
+        <p style="font-size: var(--body-size); color: var(--text-primary);">Users authenticate via Google OAuth. Stripe records map to internal IDs, not emails. Access enforced server-side. Tests for mismatched emails included.</p>
+      </div>
+      <div class="right">
+        <p class="highlight" style="font-size: var(--subtitle-size); font-family: var(--font-display); font-weight: 300;">The difference is not wording.<br><br>The difference is understanding.</p>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer">
+    <span class="slide-number">17 / 19</span>
+  </div>
+  <aside class="notes">
+    <p><strong>Look at the difference between these two specs.</strong> "Build a login system" -- sounds fine. Is vague. Produces a login system with email-based matching that breaks in production.</p>
+    <p>The strong spec is <em>specific</em>. It maps Stripe records to internal IDs, not emails. It enforces access server-side. It includes tests for the edge case people actually hit.</p>
+    <p><strong>"The difference is not wording. The difference is understanding."</strong> Only a human who understands the business context can write the strong spec. That's the real job now.</p>
+  </aside>
+</section>
+
+<!-- ===== SLIDE 18: The Human's Real Job ===== -->
+<section class="slide">
+  <div class="slide-bg bg-gradient-mesh"></div>
+  <div class="slide-content">
+    <p class="reveal label">04 -- Leverage</p>
+    <h2 class="reveal">The Human's Real Job</h2>
+    <div class="stats-grid reveal">
+      <div class="stat">
+        <span class="stat-number">Ask</span>
+        <span class="stat-label">Precise, high-value questions</span>
+      </div>
+      <div class="stat">
+        <span class="stat-number">Define</span>
+        <span class="stat-label">What "correct" actually means</span>
+      </div>
+      <div class="stat">
+        <span class="stat-number">Measure</span>
+        <span class="stat-label">Instrument first, evaluate output</span>
+      </div>
+      <div class="stat">
+        <span class="stat-number">Iterate</span>
+        <span class="stat-label">Ship, learn, adjust. Repeat fast.</span>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer">
+    <span class="slide-number">18 / 19</span>
+  </div>
+  <aside class="notes">
+    <p>So what's your job now? Four things.</p>
+    <p><strong>Ask.</strong> Precise, high-value questions. The agent won't surface the right answer unless you ask the right question.</p>
+    <p><strong>Define.</strong> What does "correct" mean for this problem? Only you can define that, because only you understand the context.</p>
+    <p><strong>Measure.</strong> Instrument first. In a world where building is free, measurement is the only way to know if you built the right thing.</p>
+    <p><strong>Iterate.</strong> The faster the cycle, the more compound learning. Speed is the compounder.</p>
+  </aside>
+</section>
+
+<!-- ===== SLIDE 19: CLOSING ===== -->
+<section class="slide closing-slide">
+  <div class="slide-bg bg-gradient-mesh-deep">
+    <div class="bg-blob bg-blob-1"></div>
+    <div class="bg-blob bg-blob-2"></div>
+    <div class="bg-blob bg-blob-3"></div>
+  </div>
+  <div class="slide-content">
+    <p class="reveal label">The Human Bottleneck</p>
+    <h2 class="reveal reveal-word">You Are the Bottleneck.<br>That's a Feature.</h2>
+    <div class="title-rule reveal"></div>
+    <p class="reveal subtitle">Understanding cannot be outsourced. Accountability cannot be delegated. Your judgment -- the filter between good ideas and right ones -- is the last scarce resource in a world of abundant code.</p>
+    <p class="reveal subtitle" style="margin-top: 1rem; color: var(--accent-warm); font-family: var(--font-display); font-style: italic;">Own it.</p>
+  </div>
+  <div class="slide-footer">
+    <span class="slide-number">19 / 19</span>
+  </div>
+  <aside class="notes">
+    <p><strong>You are the bottleneck. And that's not a bug -- it's a feature.</strong></p>
+    <p>Understanding cannot be outsourced. Accountability cannot be delegated. Your judgment -- the filter between good ideas and right ones -- is the last scarce resource.</p>
+    <p>Don't compete with agents on speed. <strong>Compete on understanding.</strong></p>
+    <p>Thank you.</p>
+  </aside>
+</section>
+
+<script>
+class SlidePresentation {
+  constructor() {
+    // Preview-only mode
+    const previewMatch = /[?&]preview=(\d+)/.exec(location.search || '');
+    if (previewMatch) {
+      document.body.classList.add('preview-mode');
+      const previewIdx = parseInt(previewMatch[1], 10) - 1;
+      this.slides = document.querySelectorAll('.slide');
+      this.slides.forEach((s, i) => {
+        const active = (i === previewIdx);
+        s.classList.toggle('is-active', active);
+        s.style.display = active ? '' : 'none';
+        if (active) { s.style.opacity = '1'; s.style.transform = 'none'; s.style.pointerEvents = 'auto'; }
+      });
+      document.querySelectorAll('.progress-bar-track, .nav-dots, .slide-footer').forEach(el => { el.style.display = 'none'; });
+      window.addEventListener('message', (e) => {
+        if (!e.data) return;
+        if (e.data.type === 'preview-goto') {
+          const n = parseInt(e.data.idx, 10);
+          if (n >= 0 && n < this.slides.length) {
+            this.slides.forEach((s, i) => {
+              s.classList.toggle('is-active', i === n);
+              s.style.display = i === n ? '' : 'none';
+            });
+          }
+        }
+      });
+      try { window.parent.postMessage({ type: 'preview-ready' }, '*'); } catch(e) {}
+      return;
+    }
+
+    this.slides = document.querySelectorAll('.slide');
+    this.currentSlide = 0;
+    this.isTransitioning = false;
+
+    this.setupIntersectionObserver();
+    this.setupKeyboardNav();
+    this.setupTouchNav();
+    this.setupWheelNav();
+    this.setupProgressBar();
+    this.setupNavDots();
+    this.setupFullscreen();
+    this.setupPresenterMode();
+
+    // Split words for reveal-word
+    splitWords();
+    // Counter animation
+    animateCounters();
+  }
+
+  setupIntersectionObserver() {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          this.currentSlide = [...this.slides].indexOf(entry.target);
+          this.updateProgressBar();
+          this.updateNavDots();
+        }
+      });
+    }, { threshold: 0.5 });
+    this.slides.forEach(slide => observer.observe(slide));
+
+    // Ensure first slide is visible immediately on load
+    if (this.slides.length > 0) {
+      this.slides[0].classList.add('visible');
+      this.updateProgressBar();
+      this.updateNavDots();
+    }
+  }
+
+  setupKeyboardNav() {
+    document.addEventListener('keydown', (e) => {
+      if (e.metaKey || e.ctrlKey || e.altKey) return;
+      if (e.key === 'ArrowDown' || e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') {
+        e.preventDefault();
+        this.goToSlide(this.currentSlide + 1);
+      } else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft' || e.key === 'PageUp') {
+        e.preventDefault();
+        this.goToSlide(this.currentSlide - 1);
+      } else if (e.key === 'Home') {
+        e.preventDefault();
+        this.goToSlide(0);
+      } else if (e.key === 'End') {
+        e.preventDefault();
+        this.goToSlide(this.slides.length - 1);
+      } else if (e.key === 'f' || e.key === 'F') {
+        this.toggleFullscreen();
+      }
+    });
+  }
+
+  setupTouchNav() {
+    let startY = 0;
+    document.addEventListener('touchstart', (e) => { startY = e.touches[0].clientY; });
+    document.addEventListener('touchend', (e) => {
+      const diff = startY - e.changedTouches[0].clientY;
+      if (Math.abs(diff) > 50) {
+        this.goToSlide(this.currentSlide + (diff > 0 ? 1 : -1));
+      }
+    });
+  }
+
+  setupWheelNav() {
+    let lastWheel = 0;
+    document.addEventListener('wheel', (e) => {
+      const now = Date.now();
+      if (now - lastWheel < 800) return;
+      lastWheel = now;
+      if (e.deltaY > 0) this.goToSlide(this.currentSlide + 1);
+      else if (e.deltaY < 0) this.goToSlide(this.currentSlide - 1);
+    }, { passive: true });
+  }
+
+  setupProgressBar() {
+    const bar = document.querySelector('.progress-bar');
+    if (bar) this.progressBar = bar;
+  }
+
+  updateProgressBar() {
+    if (this.progressBar) {
+      const pct = ((this.currentSlide + 1) / this.slides.length) * 100;
+      this.progressBar.style.width = pct + '%';
+    }
+  }
+
+  setupNavDots() {
+    const nav = document.querySelector('.nav-dots');
+    if (!nav) return;
+    this.slides.forEach((_, i) => {
+      const dot = document.createElement('button');
+      dot.className = 'nav-dot' + (i === 0 ? ' active' : '');
+      dot.setAttribute('aria-label', `Go to slide ${i + 1}`);
+      dot.addEventListener('click', () => this.goToSlide(i));
+      nav.appendChild(dot);
+    });
+    this.navDots = nav.querySelectorAll('.nav-dot');
+  }
+
+  updateNavDots() {
+    if (!this.navDots) return;
+    this.navDots.forEach((dot, i) => {
+      dot.classList.toggle('active', i === this.currentSlide);
+    });
+  }
+
+  setupFullscreen() {}
+  toggleFullscreen() {
+    if (!document.fullscreenElement) document.documentElement.requestFullscreen();
+    else document.exitFullscreen();
+  }
+
+  // === Presenter Mode ===
+  setupPresenterMode() {
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 's' || e.key === 'S') {
+        e.preventDefault();
+        this.openPresenterWindow();
+      }
+    });
+  }
+
+  openPresenterWindow() {
+    if (this.presenterWin && !this.presenterWin.closed) {
+      this.presenterWin.focus();
+      return;
+    }
+    const deckUrl = location.protocol + '//' + location.host + location.pathname;
+    const slideMeta = [...this.slides].map((s, i) => {
+      const note = s.querySelector('aside.notes');
+      return {
+        title: s.getAttribute('data-title') || (s.querySelector('h1,h2,h3')||{}).textContent || ('Slide '+(i+1)),
+        notes: note ? note.innerHTML : ''
+      };
+    });
+
+    this.presenterWin = window.open('', 'presenter', 'width=1280,height=820,menubar=no,toolbar=no');
+    if (!this.presenterWin) { alert('Please allow popups to use presenter view'); return; }
+    this.presenterWin.document.open();
+    this.presenterWin.document.write(this.buildPresenterHTML(deckUrl, slideMeta, this.slides.length, this.currentSlide));
+    this.presenterWin.document.close();
+  }
+
+  buildPresenterHTML(deckUrl, slideMeta, total, startIdx) {
+    const metaJSON = JSON.stringify(slideMeta);
+    return `<!DOCTYPE html><html><head><meta charset="utf-8"><title>Presenter View</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{width:100vw;height:100vh;overflow:hidden;background:#080808;color:#e8e4df;font-family:-apple-system,sans-serif;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:2px;padding:2px}
+.card{background:#0f0f0f;border:1px solid rgba(255,255,255,0.06);border-radius:6px;display:flex;flex-direction:column;overflow:hidden}
+.card-head{padding:6px 10px;background:rgba(255,255,255,0.03);border-bottom:1px solid rgba(255,255,255,0.06);font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:#666;cursor:move;flex-shrink:0}
+.card-body{flex:1;overflow:hidden;position:relative}
+.card-body iframe{width:1920px;height:1080px;border:none;transform-origin:top left;pointer-events:none}
+.notes-body{padding:12px 14px;overflow-y:auto;font-size:16px;line-height:1.7;color:#9a9590}
+.notes-body p{margin:0 0 0.5em}
+.notes-body strong{color:#d4a574}
+.notes-body em{color:#e8b4b8;font-style:normal}
+.timer-body{display:flex;flex-direction:column;gap:12px;padding:14px;justify-content:center}
+.timer-display{font-family:monospace;font-size:36px;color:#c9b896}
+.timer-btn{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);color:#e8e4df;padding:5px 10px;border-radius:4px;font-size:11px;cursor:pointer}
+</style></head><body>
+<div class="card"><div class="card-head">Current Slide</div><div class="card-body"><iframe id="iframe-cur"></iframe></div></div>
+<div class="card"><div class="card-head">Next Slide</div><div class="card-body"><iframe id="iframe-nxt"></iframe></div></div>
+<div class="card"><div class="card-head">Speaker Notes</div><div class="notes-body" id="notes-body"></div></div>
+<div class="card"><div class="card-head">Timer</div><div class="timer-body">
+<div class="timer-display" id="timer">00:00</div>
+<div style="font-size:12px;color:#666" id="slide-count">1 / ${total}</div>
+<div style="display:flex;gap:6px"><button class="timer-btn" id="prev">Prev</button><button class="timer-btn" id="next">Next</button></div>
+</div></div>
+<script>
+var s=${metaJSON},n=${startIdx},t=${total};
+var c=document.getElementById('iframe-cur'),nx=document.getElementById('iframe-nxt'),nb=document.getElementById('notes-body'),tc=document.getElementById('slide-count');
+function u(m){m=Math.max(0,Math.min(t-1,m));n=m;try{c.contentWindow.postMessage({type:'preview-goto',idx:n},'*')}catch(e){}
+try{nx.contentWindow.postMessage({type:'preview-goto',idx:Math.min(n+1,t-1)},'*')}catch(e){}
+nb.innerHTML=s[n].notes||'';tc.textContent=(n+1)+' / '+t}
+function rescale(f){var b=f.parentElement;if(!b)return;var w=b.clientWidth,h=b.clientHeight,s=Math.min(w/1920,h/1080);f.style.transform='scale('+s+')';f.style.left=Math.max(0,(w-1920*s)/2)+'px';f.style.top=Math.max(0,(h-1080*s)/2)+'px'}
+c.onload=function(){rescale(c)};nx.onload=function(){rescale(nx)};
+window.addEventListener('resize',function(){rescale(c);rescale(nx)});
+c.src=deckUrl+'?preview='+(n+1);nx.src=deckUrl+'?preview='+(Math.min(n+2,t));
+document.getElementById('prev').onclick=function(){u(n-1)};
+document.getElementById('next').onclick=function(){u(n+1)};
+var ts=Date.now();setInterval(function(){var e=Math.floor((Date.now()-ts)/1000);document.getElementById('timer').textContent=String(Math.floor(e/60)).padStart(2,'0')+':'+String(e%60).padStart(2,'0')},1000);
+document.addEventListener('keydown',function(e){if(e.key==='ArrowRight'||e.key===' ')u(n+1);if(e.key==='ArrowLeft')u(n-1)});
+u(n);
+<\/script></body></html>`;
+  }
+
+  goToSlide(index) {
+    if (index < 0 || index >= this.slides.length) return;
+    this.slides[index].scrollIntoView({ behavior: 'smooth' });
+  }
+}
+
+function splitWords() {
+  document.querySelectorAll('.reveal-word').forEach(el => {
+    // Get HTML content and split by <br> first, then by whitespace
+    const html = el.innerHTML;
+    const lines = html.split(/<br\s*\/?>/i);
+    let index = 0;
+    const allSpans = [];
+
+    lines.forEach((line, lineIdx) => {
+      const words = line.trim().split(/\s+/).filter(w => w.length > 0);
+      words.forEach(word => {
+        allSpans.push({ word, delay: index * 80 });
+        index++;
+      });
+    });
+
+    el.innerHTML = allSpans.map(s =>
+      `<span style="transition-delay: ${s.delay}ms">${s.word}</span>`
+    ).join(' ');
+  });
+}
+
+function animateCounters() {
+  document.querySelectorAll('.stat-number[data-target]').forEach(el => {
+    const observer = new IntersectionObserver(entries => {
+      if (entries[0].isIntersecting) {
+        const target = parseInt(el.dataset.target);
+        const duration = 1500;
+        const start = performance.now();
+        function tick(now) {
+          const elapsed = now - start;
+          const progress = Math.min(elapsed / duration, 1);
+          const eased = 1 - Math.pow(1 - progress, 3);
+          el.textContent = Math.round(target * eased);
+          if (progress < 1) requestAnimationFrame(tick);
+        }
+        requestAnimationFrame(tick);
+        observer.disconnect();
+      }
+    }, { threshold: 0.5 });
+    observer.observe(el);
+  });
+}
+
+document.addEventListener('DOMContentLoaded', () => new SlidePresentation());
+</script>
+</body>
+</html>

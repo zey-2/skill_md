@@ -1,7 +1,7 @@
 ---
 type: log
 created: 2026-04-26
-updated: 2026-05-16
+updated: 2026-05-18
 status: active
 sources:
   - "raw/skill.md for AI Agents.md"
@@ -984,6 +984,51 @@ Important decisions:
 
 - Previously ingested this source only at the concept level; now created a proper source summary because the full transcript has significantly more detail (specific evals.json structure, concrete results, limitation boundaries).
 
+## [2026-05-18] ingest | Ramp and Block enterprise AI adoption sources
+
+Ingested new raw materials into the wiki as source summaries and a reusable synthesis concept about company-wide AI adoption.
+
+Raw sources ingested:
+
+- `raw/How to get your company AI pilled - geoffintech.md`
+- `raw/How Block is becoming the most AI-native enterprise in the world  Dhanji R. Prasanna.md`
+
+Generated pages created:
+
+- `sources/How to get your company AI pilled.md`
+- `sources/How Block is becoming the most AI-native enterprise in the world.md`
+- `concepts/Enterprise AI Adoption Flywheel.md`
+
+Generated pages updated:
+
+- `concepts/AI-Native Engineering Organizations.md` — Added enterprise adoption pattern and links to Ramp/Block evidence.
+- `concepts/AI-Native Work Archetypes.md` — Added enterprise case evidence showing non-engineers as builders and the continuing need for stabilizers, adults, and interface work.
+- `index.md` — Added the Block raw source, new concept, and new source summaries.
+- `log.md`
+
+Important decisions:
+
+- Treated Ramp and Block as complementary case studies: Ramp emphasizes cultural pressure, broad access, Glass/Dojo, and leaderboards; Block emphasizes functional org design, Goose/MCP, open tooling, and executive dogfooding.
+- Created a new synthesis concept because the material extends beyond engineering-team norms into whole-company adoption.
+
+## [2026-05-18] ingest | How to get your company AI pilled
+
+Created a raw source capture from a user-provided X post by @geoffintech about Ramp's company-wide AI adoption playbook.
+
+Files created:
+
+- `raw/How to get your company AI pilled - geoffintech.md`
+
+Files updated:
+
+- `index.md` — Added the raw source to frontmatter and Raw Sources.
+- `log.md`
+
+Important decisions:
+
+- Treated this as raw-source capture only, not a full synthesized source summary.
+- Published date is inferred from the X status ID timestamp; the post text itself was supplied by the user.
+
 ## [2026-05-16] ingest | There will only be four jobs (full transcript)
 
 Processed updated raw source — went from short placeholder to full Substack article with "Some Stray Notes" section.
@@ -1040,3 +1085,26 @@ Files updated:
 Files created:
 
 - `raw/You can outsource your thinking but not your understanding - Yacine MTB.md`
+
+## [2026-05-17] lint | Full wiki health check
+
+Ran a comprehensive lint pass across all concept pages, raw sources, source summaries, courses, and docs.
+
+Issues found and fixed:
+
+1. **Critical**: 3 concept pages missing from `index.md` — `Software Economics`, `The New Meta - Measurement, Ideation, Iteration`, `AI agency`. Added with descriptions to the Concept Articles section.
+2. **Critical**: `raw/new_economics_of_software.md` missing from `index.md` — referenced by Software Economics and The New Meta frontmatter but absent from both frontmatter and Raw Sources body. Added to both.
+3. **Critical**: 4 new raw files about AI agency not in `index.md` — `A Formal Model of How Artificial Intelligence Erodes Human Agency`, `AI Agent Autonomy Levels`, `Six Levels of Agenticness`, `The Philosophy of Agentic AI Agency`. Added to frontmatter and Raw Sources section.
+4. **Critical**: `sources/The New Economics of Software (AI Engineer Singapore 2026).md` missing from Source Summaries section. Added.
+5. **Critical**: `raw/You can outsource your thinking but not your understanding - Yacine MTB.md` was in frontmatter only, never added to Raw Sources body section. Added.
+6. **Medium**: Duplicate raw source entries removed from Raw Sources section — `2026-04-30 AI Coding Plans Comparison 2026.md` and `2026-04-30 Claude Code Third-Party LLM Provider Configuration.md` appeared twice (lines ~174-175 and ~201-202).
+7. **Medium**: `concepts/AI agency.md` frontmatter used non-standard `name:/metadata:` format instead of `type:/created:/updated:`. Fixed to match wiki convention with proper source references.
+8. **Low**: 2 new course HTML files (`courses/presentation-agency.html`, `courses/presentation-the-human-bottleneck.html`) missing from index. Added a Presentations section.
+
+Verification:
+
+- All concept pages now listed in `index.md` Concept Articles.
+- All raw markdown files in `raw/` now listed in frontmatter and Raw Sources body.
+- All source summaries in `sources/` now listed in Source Summaries section.
+- No broken wikilinks detected in new concept pages — all referenced pages exist.
+- Duplicate frontmatter entries for AI Coding Plans and Third-Party Provider Configuration remain in frontmatter (they were added in separate ingests); deduplicated only in the body section to avoid breaking existing source citations.

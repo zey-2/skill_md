@@ -1,11 +1,13 @@
 ---
 type: concept
 created: 2026-05-11
-updated: 2026-05-11
+updated: 2026-05-18
 status: active
 sources:
   - "raw/Running an AI-native engineering org.md"
   - "raw/There will only be four jobs.md"
+  - "raw/How to get your company AI pilled - geoffintech.md"
+  - "raw/How Block is becoming the most AI-native enterprise in the world  Dhanji R. Prasanna.md"
 tags: [ai-native-orgs, engineering-management, verification, review, org-design]
 ---
 
@@ -15,7 +17,7 @@ tags: [ai-native-orgs, engineering-management, verification, review, org-design]
 
 An AI-native engineering organization is one that rewrites its operating model around the fact that coding throughput is no longer the main constraint. The new bottlenecks are verification, review, security, maintainability, alignment, product taste, and whether old processes still serve their purpose.
 
-Source: `raw/Running an AI-native engineering org.md`.
+Sources: `raw/Running an AI-native engineering org.md`, `raw/There will only be four jobs.md`, `raw/How to get your company AI pilled - geoffintech.md`, and `raw/How Block is becoming the most AI-native enterprise in the world  Dhanji R. Prasanna.md`.
 
 ## Shifted Bottlenecks
 
@@ -41,6 +43,7 @@ This confirms the broader [[concepts/Harness Engineering Principles]] claim that
 | Hiring | Reward raw throughput | Prefer creative builders with product sense and deep systems experts |
 | Management | Managers can be farther from code | Managers dogfood, start as ICs, and understand the workflow directly |
 | Process | Add rituals as teams grow | Explicit permission to kill stale processes |
+| Enterprise adoption | AI handled as procurement or isolated pilots | Integrated agents, broad access, public demos, shared platforms, and executive usage |
 
 ## Verification as the New Center
 
@@ -63,6 +66,17 @@ Yoni Rechtman's "There will only be four jobs" source complements Fiona Fung's o
 
 Source: `raw/There will only be four jobs.md`.
 
+## Enterprise Adoption Pattern
+
+Ramp and Block extend the engineering-team view into a company-wide adoption model. The durable pattern is not "buy AI tools and wait." It is a flywheel: leaders use and mandate the tools, integrated agents connect to real work systems, employees ship visible local wins, those wins become cultural proof, and central platform teams turn repeated patterns into shared infrastructure.
+
+Ramp emphasizes speed, constraint removal, leaderboards, hackathons, skills marketplaces, and a central-plus-spokes operating model. Block emphasizes technology-company identity, functional org design, shared engineering/design leadership, Goose as an open MCP-based agent platform, and executives dogfooding the tools directly.
+
+Together they add two caveats to AI-native org design:
+
+- Adoption depends on system access. A chat UI alone does not change work very much; agents need connectors, permissions, data, code, documents, and workflow primitives.
+- Org structure can matter as much as model capability. Block's source explicitly attributes major progress to moving out of GM-style silos into functional engineering and design orgs, while Ramp's source argues that central platform teams and functional spokes should drive each other.
+
 ## Connections
 
 - [[sources/Running an AI-native engineering org]] - Source summary.
@@ -72,6 +86,9 @@ Source: `raw/There will only be four jobs.md`.
 - [[concepts/Validation and Evaluation]] - Verification shifts left and becomes central.
 - [[concepts/The AI-Native Engineer and the Rising Ceiling]] - The team-level version of the individual rising-ceiling pattern.
 - [[concepts/Agent Legibility]] - Code as source of truth works only if the repo is legible to agents and humans.
+- [[concepts/Enterprise AI Adoption Flywheel]] - Company-wide adoption pattern synthesized from Ramp and Block.
+- [[sources/How to get your company AI pilled]] - Ramp case study on broad AI usage, Glass, Dojo, leaderboards, and constraint removal.
+- [[sources/How Block is becoming the most AI-native enterprise in the world]] - Block case study on Goose, MCP, functional org design, and executive dogfooding.
 
 ## Open Questions
 
