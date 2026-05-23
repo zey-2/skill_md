@@ -1,7 +1,7 @@
 ---
 type: source-summary
 created: 2026-05-10
-updated: 2026-05-10
+updated: 2026-05-23
 status: active
 sources:
   - "raw/Meta-Meta-Prompting The Secret to Making AI Agents Work.md"
@@ -51,6 +51,10 @@ Garry Tan describes his personal AI system built around the "fat skills, fat cod
 2. **Start a brain with GBrain** — Git repo where every entity gets a page. 97.6% recall on LongMemEval. Ships 39 installable skills.
 3. **Do something interesting** — Don't plan architecture first. Do a task, iterate until good, then Skillify the pattern. Run `check_resolvable` to verify wiring.
 4. **Keep using it** — The skill will be mediocre at first. Use cross-modal eval to catch errors. Fix gets baked into the skill. In 6 months you have something no chatbot can replicate.
+
+## Evidence
+
+The source-summary claims above are grounded in the local raw source file listed in frontmatter.
 
 ## Connections
 

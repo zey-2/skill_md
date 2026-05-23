@@ -1,7 +1,7 @@
 ---
 type: source-summary
 created: 2026-05-10
-updated: 2026-05-10
+updated: 2026-05-23
 status: active
 sources:
   - "raw/Agent Skills Overview.md"
@@ -69,6 +69,10 @@ The official Agent Skills open standard homepage. Defines the skill format as a 
 | Hard to audit agent behavior | Human-readable Markdown makes skills transparent and auditable |
 | Sharing workflows is difficult | Skills are just folders — easy to copy, fork, and share |
 | Tribal knowledge loss | Captures team practices in version-controlled, portable format |
+
+## Evidence
+
+The source-summary claims above are grounded in the local raw source file listed in frontmatter.
 
 ## Connections
 

@@ -1,7 +1,7 @@
 ---
 type: source-summary
 created: 2026-05-10
-updated: 2026-05-10
+updated: 2026-05-23
 status: active
 sources:
   - "raw/Equipping agents for the real world with Agent Skills.md"
@@ -32,6 +32,10 @@ Anthropic's official engineering article introducing Agent Skills as composable,
 - "Building a skill for an agent is like putting together an onboarding guide for a new hire."
 - "Agents with a filesystem and code execution tools don't need to read the entirety of a skill into their context window when working on a particular task. This means that the amount of context that can be bundled into a skill is effectively unbounded."
 - "Code can serve as both executable tools and as documentation. It should be clear whether Claude should run scripts directly or read them into context as reference."
+
+## Evidence
+
+The source-summary claims above are grounded in the local raw source file listed in frontmatter.
 
 ## Connections
 

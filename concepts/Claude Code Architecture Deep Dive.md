@@ -4,7 +4,7 @@ created: 2026-05-01
 updated: 2026-05-01
 status: active
 sources:
-  - "raw/VILA-labDive-into-Claude-Code A Systematic Analysis and Discussion of Claude Code for Designing Today's and Future AI Agent Systems.md"
+  - "raw/VILA-LabDive-into-Claude-Code A Systematic Analysis and Discussion of Claude Code for Designing Today's and Future AI Agent Systems.md"
 tags: [claude-code, architecture, harness-engineering, agent-design, safety, context-management]
 ---
 
@@ -133,4 +133,4 @@ This article provides the most detailed source-level view of a coding agent's in
 ## Source
 
 - VILA-Lab/Dive-into-Claude-Code GitHub repo and arXiv paper 2604.14228
-- [[raw/VILA-labDive-into-Claude-Code A Systematic Analysis and Discussion of Claude Code for Designing Today's and Future AI Agent Systems]]
+- [[raw/VILA-LabDive-into-Claude-Code A Systematic Analysis and Discussion of Claude Code for Designing Today's and Future AI Agent Systems]]

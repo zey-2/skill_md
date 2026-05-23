@@ -1,7 +1,7 @@
 ---
 type: concept
 created: 2026-04-26
-updated: 2026-05-11
+updated: 2026-05-23
 status: active
 sources:
   - "raw/skill.md for AI Agents.md"
@@ -12,7 +12,9 @@ sources:
   - "raw/2026-04-26 tau-bench tool-agent reliability benchmark.md"
   - "raw/Context Is the New Code — Patrick Debois, Tessl.md"
   - "raw/Tokenmaxxing How Top Builders Use AI To Do The Work Of 400 Engineers.md"
+  - "raw/The tokenmaxxing math nobody wants to admit.md"
   - "raw/Running an AI-native engineering org.md"
+  - "raw/Superpowers How Jesse Built the 1 AI Claude Code  Codex Plugin — and Stopped Writing Code.md"
 tags: [agent-skills, validation, evaluation, context]
 ---
 
@@ -106,11 +108,21 @@ Beyond checking generated code against rules, Debois describes giving the judge 
 
 Given a specific commit and context, this approach can answer: "did this context change make a difference, yes or no?" And the judge agent can use the feedback to automatically suggest context improvements.
 
+The Superpowers interview gives a vivid practitioner example: Vincent asked an agent to deliver an MP4 proving that an app workflow ran end to end. The final file was version 33 because the first 32 validation attempts exposed bugs that the agent fixed before producing the proof. The lesson is that verification artifacts can become part of the agent task itself. For user-facing workflows, a screenshot tour, video, browser trace, or other runtime demonstration may be stronger evidence than a unit-test report alone.
+
+The same source also warns that agents can game poorly designed success criteria. Vincent caught agents removing tests to avoid failure. This supports evaluating not only whether tests pass, but whether coverage, files, and intended checks remained intact.
+
 ## Verification as the New Bottleneck
 
 The Tokenmaxxing and AI-native-org sources both reinforce that higher code throughput increases the importance of verification. Garry Tan's workflow pushed from unit and integration tests toward browser QA because manual verification became the queue. Fiona Fung's team-level account makes the same point organizationally: once coding is no longer the slow part, review, security, maintainability, and shift-left verification become the bottlenecks.
 
 The practical lesson is that evaluation capacity must scale with generation capacity. More agents, tokens, and PRs should be matched by more automated checks, model cross-review, browser tests, human review for judgment-heavy areas, and metrics that track product quality rather than raw output.
+
+## Metric Gaming and Output Ratios
+
+The Agentmail tokenmaxxing source adds a sharper metric warning: tokens measure what an agent reads or writes, not what the agent did. Token volume can show adoption and experimentation, but it can also become a Goodharted target where people produce activity to satisfy the dashboard.
+
+For evaluation, the practical implication is to treat token count as a cost input or diagnostic signal, not a success metric. Better metrics compare useful outcomes against token spend: resolved tasks, accepted PRs, booked meetings, payments collected, verified research claims, defect reduction, or other task-specific outputs. High token burn is acceptable when it produces valuable outcomes; it is waste when the spending itself becomes the score.
 
 ## Practical Minimum for a Skill Repository
 
@@ -151,7 +163,9 @@ There is also a tension between path grading and outcome grading. Some sources s
 - [[Context Development Lifecycle]] frames evaluation as the Evaluate stage within the broader Generate → Evaluate → Distribute → Observe loop, including error budgets and CI/CD for context.
 - [[Self-Improving Skills]] — applies binary assertions and eval-driven iteration to autonomously improve skills overnight.
 - [[Tokenmaxxing]] — Increased model work only pays off when verification scales with it.
+- [[sources/The tokenmaxxing math nobody wants to admit]] — Agentmail source arguing for output-over-token metrics and warning about metric gaming.
 - [[AI-Native Engineering Organizations]] — Team-level verification, review, and quality norms after coding stops being the bottleneck.
+- [[sources/Superpowers How Jesse Built the 1 AI Claude Code Codex Plugin]] — practitioner evidence for end-to-end proof artifacts, TDD for agents, and guarding against test-gaming behavior.
 
 ## Open Questions
 

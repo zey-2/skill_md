@@ -1,7 +1,7 @@
 ---
 type: concept
 created: 2026-04-26
-updated: 2026-05-10
+updated: 2026-05-20
 status: active
 sources:
   - "raw/skill.md for AI Agents.md"
@@ -21,6 +21,7 @@ sources:
   - "raw/Agent Skills Overview.md"
   - "raw/Agent Skills.md"
   - "raw/Introduction to Claude Skills.md"
+  - "raw/Superpowers How Jesse Built the 1 AI Claude Code  Codex Plugin — and Stopped Writing Code.md"
 tags: [agent-skills, ai-agents]
 ---
 
@@ -46,6 +47,8 @@ The earlier synthesis in `raw/skill.md for AI Agents.md` frames skills as a dire
 - SDKs turn skills into automatable runtime assets. Codex SDK can invoke Codex programmatically, Codex App Server can embed rich Codex client behavior, and Claude Agent SDK can load filesystem skills alongside commands, memory, plugins, MCP servers, and sessions.
 
 The combined sources suggest a practical mental model for a curious beginner: a skill is a reusable operating procedure for an agent. Sometimes that procedure is "use this API correctly." Sometimes it is "plan before coding," "write tests first," or "stay inside a safe editing boundary."
+
+The Superpowers video strengthens this operating-procedure view. Jesse Vincent describes skills as a way to encode the development habits he learned from managing junior engineers: clarify intent, write a spec, break work into small tasks, require tests, use fresh reviewers, and verify real behavior. This is evidence that mature skills can package a whole method of work, not merely a reusable prompt or tool wrapper. Source: [[sources/Superpowers How Jesse Built the 1 AI Claude Code Codex Plugin]].
 
 ## Where Sources Agree
 
@@ -92,6 +95,7 @@ The article also frames building a skill as "putting together an onboarding guid
 - [[sources/Agent Skills (platform docs)]] Official platform docs: VM architecture, beta API requirements, runtime constraints per surface, and ZDR notice.
 - [[sources/Introduction to Claude Skills (cookbook)]] Official cookbook: Excel/PPT/PDF examples, token optimization (98% savings), and versioning strategy.
 - [[concepts/Skill Security and Supply Chain Risk]] Security landscape: 36% of skills have flaws, 76 confirmed malicious payloads, and the convergence of prompt injection with traditional malware.
+- [[sources/Superpowers How Jesse Built the 1 AI Claude Code Codex Plugin]] Jesse Vincent on Superpowers as a skill-driven agentic development workflow built around specs, TDD, ephemeral review agents, and end-to-end validation.
 
 ## Open Questions
 

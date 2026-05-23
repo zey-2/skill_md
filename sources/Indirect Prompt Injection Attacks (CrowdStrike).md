@@ -1,7 +1,7 @@
 ---
 type: source-summary
 created: 2026-05-10
-updated: 2026-05-10
+updated: 2026-05-23
 status: active
 sources:
   - "raw/Indirect Prompt Injection Attacks Hidden AI Risks.md"
@@ -27,6 +27,10 @@ CrowdStrike analysis of indirect prompt injection attacks — where attackers em
 - **Real-world examples**: Job applicant manipulated AI hiring platform with 120+ lines of hidden code in a headshot photo file. Employee embedded prompt injection in LinkedIn bio instructing AI recruiting systems to share flan recipe (and one did).
 - **Attack capabilities**: Data exfiltration, business process manipulation, reconnaissance, lateral movement within enterprise environments.
 - **Defense layers**: (1) Prompt injection detection systems, (2) input validation/sanitization, (3) content security policies with allowlisting, (4) privilege separation for enterprise AI tools, (5) AI use monitoring and access control, (6) user education.
+
+## Evidence
+
+The source-summary claims above are grounded in the local raw source file listed in frontmatter.
 
 ## Connections
 

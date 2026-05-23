@@ -1,10 +1,11 @@
 ---
 type: concept
 created: 2026-05-02
-updated: 2026-05-02
+updated: 2026-05-20
 status: active
 sources:
   - "raw/Andrej Karpathy From Vibe Coding to Agentic Engineering.md"
+  - "raw/Superpowers How Jesse Built the 1 AI Claude Code  Codex Plugin — and Stopped Writing Code.md"
 tags: [agentic-engineering, vibe-coding, quality-bar, karpathy]
 ---
 
@@ -32,6 +33,8 @@ Agentic engineering is the discipline of coordinating powerful but fallible agen
 - **Responsibility**: You are still accountable for your software
 - **Control**: Agents are fast but stochastic; oversight is required
 
+The Superpowers workflow adds a concrete production pattern: brainstorm until the goal is clear, write and review a spec, write an implementation plan for small tasks, dispatch narrow agents, use fresh review agents, and require tests plus end-to-end proof. This turns agentic engineering from a posture into an operating loop.
+
 ## The Intern Analogy
 
 Agents are like interns with strong recall but no judgment. They can:
@@ -54,6 +57,8 @@ A strong specification: "Users authenticate using Google OAuth. Stripe customer 
 
 The difference is not wording. The difference is understanding.
 
+Vincent's interview sharpens this point: if generated code is cheap, the spec becomes the scarce artifact. Humans should spend their attention reviewing what the system is supposed to do and how completion will be proven. Code still matters as the thing that runs, but the spec is what makes agent-generated code governable.
+
 ## The Stripe/Email Failure
 
 Karpathy's agent tried to match a Stripe account to a Google account using an email address. That seems reasonable at first glance, but it fails in real usage because people may use different emails across services. The agent selected the obvious implementation. The human needed to identify the correct assumption.
@@ -74,7 +79,9 @@ The distinction between vibe coding and agentic engineering directly informs [[c
 - [[concepts/Replacing Code with Skills]] — The journey from "vibes-based" prompt trust to evals and RL training is the agentic engineering maturity curve applied to a single feature.
 - [[concepts/Agent Skills]] — Skills package the reusable operating knowledge that separates agentic engineering from ad-hoc prompting.
 - [[concepts/Tool Assembly as a Skill]] — Tool assembly is a third pattern between vibe coding and agentic engineering: no code generated, but genuine system building through tool selection and configuration.
+- [[sources/Superpowers How Jesse Built the 1 AI Claude Code Codex Plugin]] — operational example of agentic engineering through spec review, TDD, ephemeral reviewers, and runtime validation.
 
 ## Source
 
 - [[raw/Andrej Karpathy From Vibe Coding to Agentic Engineering]]
+- [[raw/Superpowers How Jesse Built the 1 AI Claude Code  Codex Plugin — and Stopped Writing Code]]

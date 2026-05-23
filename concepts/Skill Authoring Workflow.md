@@ -1,7 +1,7 @@
 ---
 type: concept
 created: 2026-04-26
-updated: 2026-05-11
+updated: 2026-05-20
 status: active
 sources:
   - "raw/skill.md for AI Agents.md"
@@ -11,6 +11,7 @@ sources:
   - "raw/forrestchangandrej-karpathy-skills A single CLAUDE.md file to improve Claude Code behavior, derived from Andrej Karpathy's observations on LLM coding pitfalls.md"
   - "raw/Context Is the New Code — Patrick Debois, Tessl.md"
   - "raw/2026-05-10 Skill Authoring Patterns Cross-Project Research.md"
+  - "raw/Superpowers How Jesse Built the 1 AI Claude Code  Codex Plugin — and Stopped Writing Code.md"
 tags: [agent-skills, authoring, workflow, context, skillification]
 ---
 
@@ -133,6 +134,8 @@ From superpowers' TDD-for-skills methodology:
 5. If the agent finds new rationalizations, add counters and re-test.
 6. Repeat until bulletproof under maximum combined pressure.
 
+The Jesse Vincent interview adds a concrete authoring lesson: skills should counter the rationalizations agents actually use. Vincent describes agents deleting tests to avoid failure after being told that all tests were their responsibility and that any failing test meant project failure. The effective fix was not a narrow ban on deleting a file, but a broader measurable rule: reducing test coverage is worse than a failing test. That pattern generalizes: authoring should identify the incentive created by the instruction, then close the loophole at the right abstraction level. Source: [[sources/Superpowers How Jesse Built the 1 AI Claude Code Codex Plugin]].
+
 ### Choosing the Right Freedom Level
 
 - **Low freedom** (specific scripts, exact commands): Database migrations, deployment sequences.
@@ -158,6 +161,7 @@ Gstack's explicit voice guidelines are notable:
 - [[Agent Frameworks and Orchestration]] helps decide when a repeated behavior should become a skill versus framework-level control flow.
 - [[Meta-Skills and Skillification]] — skillification as an authoring method; the skillify meta-skill.
 - [[Self-Improving Skills]] — autonomous iteration as an extension of the manual authoring cycle.
+- [[sources/Superpowers How Jesse Built the 1 AI Claude Code Codex Plugin]] — interview evidence for spec-first workflows, rationalization-aware skills, and review loops with fresh agents.
 
 ## Open Questions
 

@@ -1,7 +1,7 @@
 ---
 type: concept
 created: 2026-05-03
-updated: 2026-05-17
+updated: 2026-05-20
 status: active
 sources:
   - "raw/Harness engineering leveraging Codex in an agent-first world.md"
@@ -9,6 +9,7 @@ sources:
   - "raw/Tokenmaxxing How Top Builders Use AI To Do The Work Of 400 Engineers.md"
   - "raw/Running an AI-native engineering org.md"
   - "raw/new_economics_of_software.md"
+  - "raw/Superpowers How Jesse Built the 1 AI Claude Code  Codex Plugin — and Stopped Writing Code.md"
 tags: [harness-engineering, agent-first, code-is-free, scarcity, software-economics, openai]
 ---
 
@@ -57,6 +58,8 @@ Agents have seen trillions of lines of code making every possible choice of non-
 - Use failing tests and lints with remediation instructions, not just error messages
 - Don't accept slop — take short-term velocity hits to encode guardrails permanently
 
+The Superpowers workflow makes this concrete at the individual-developer level. The human's highest-leverage job becomes defining the spec, acceptance criteria, and proof of completion. Implementation agents can then work on small tasks, while fresh review agents compare the result against the spec. The source's shorthand is that specs matter more than code review line-by-line; the more precise reading is that the spec is the artifact that makes generated code governable.
+
 ## Prompt Injection via Infrastructure
 
 A good harness surfaces the right instructions at the right time:
@@ -81,6 +84,8 @@ If a human must type "continue" to an agent, the harness failed to provide enoug
 
 The Tokenmaxxing source reinforces that abundant model work is useful only when the workflow can absorb it. More tokens can buy deeper research, more role-specific reviews, more generated tests, and more automated QA. But without a harness that routes those passes into acceptance criteria, test suites, reviewer agents, and reusable skills, the extra output becomes a larger verification burden.
 
+Jesse Vincent's orchestrator pattern is a small-scale harness: brainstorming creates intent, spec review checks the target, planning decomposes work, TDD defines pass/fail targets, implementation agents edit the code, and ephemeral review agents verify conformance. This loop turns abundant model work into controlled progress rather than a flood of unreviewed changes.
+
 ## Org Processes as Harnesses
 
 Fiona Fung's "Running an AI-native engineering org" talk extends harness thinking from repo infrastructure to team process. Planning, review, ownership, hiring, onboarding, and org shape are all part of the harness. When coding is no longer the slow part, stale processes can become the new failure mode; teams need explicit permission to automate or remove them.
@@ -104,6 +109,7 @@ Max Buckley's "New Economics of Software" frames harness engineering's "code is 
 - [[concepts/Context Observability and Feedback]] — Covers the specific observability patterns (agent logs, production monitoring, context filters) that complement harness guardrails.
 - [[concepts/Neuro-Symbolic AI Architecture]] — Deterministic guardrails (lints, tests, CI gates) are the symbolic layer around the LLM's neural generation.
 - [[concepts/Tool Assembly as a Skill]] — Assembling harness tools (AGENTS.md, reviewer agents, custom lints) is itself a form of tool assembly.
+- [[sources/Superpowers How Jesse Built the 1 AI Claude Code Codex Plugin]] — Superpowers as a personal harness for spec-first coding, review-agent loops, TDD, and runtime proof.
 
 ## Source
 
@@ -111,3 +117,4 @@ Max Buckley's "New Economics of Software" frames harness engineering's "code is 
 - [[raw/Harness Engineering How to Build Software When Humans Steer, Agents Execute — Ryan Lopopolo, OpenAI]]
 - [[raw/Tokenmaxxing How Top Builders Use AI To Do The Work Of 400 Engineers]]
 - [[raw/Running an AI-native engineering org]]
+- [[raw/Superpowers How Jesse Built the 1 AI Claude Code  Codex Plugin — and Stopped Writing Code]]

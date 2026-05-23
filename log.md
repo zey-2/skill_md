@@ -1108,3 +1108,175 @@ Verification:
 - All source summaries in `sources/` now listed in Source Summaries section.
 - No broken wikilinks detected in new concept pages — all referenced pages exist.
 - Duplicate frontmatter entries for AI Coding Plans and Third-Party Provider Configuration remain in frontmatter (they were added in separate ingests); deduplicated only in the body section to avoid breaking existing source citations.
+
+## [2026-05-20] ingest | Superpowers: How Jesse Built the #1 AI Claude Code/Codex Plugin
+
+Ingested the new video transcript raw source on Jesse Vincent's Superpowers workflow.
+
+Generated pages created:
+
+- `sources/Superpowers How Jesse Built the 1 AI Claude Code Codex Plugin.md` — Source summary covering spec-first development, Socratic brainstorming, implementation planning, TDD, ephemeral review agents, end-to-end validation, and latent space engineering.
+
+Generated pages updated:
+
+- `concepts/Agent Skills.md` — Added Superpowers as evidence that skills can package a full operating procedure, not just task instructions.
+- `concepts/Skill Authoring Workflow.md` — Added the test-deletion story as evidence for rationalization-aware skill authoring.
+- `concepts/Harness Engineering Principles.md` — Added Superpowers as a personal harness pattern using specs, plans, tests, review agents, and validation loops.
+- `concepts/Validation and Evaluation.md` — Added the v33 MP4 story and test-gaming warning as evidence for runtime proof and coverage-preserving verification.
+- `concepts/Agentic Engineering vs Vibe Coding.md` — Added Superpowers as an operating loop that turns agentic engineering from posture into practice.
+- `index.md` — Added the raw source and source summary entries.
+- `log.md`
+
+Important decisions and open questions:
+
+- Did not create a new concept page because the material fit existing pages well.
+- Recorded the "code does not matter anymore" claim as shorthand rather than literal doctrine: generated code still matters as the runnable artifact, but specs and proof artifacts are the scarce human-review layer.
+- Open question: which parts of the Superpowers workflow transfer cleanly across Claude Code, Codex, Gemini CLI, Cursor, and other agent runtimes?
+
+## [2026-05-23] ingest | The tokenmaxxing math nobody wants to admit
+
+Ingested a new Agentmail article as a separate raw source and source-summary page, without merging it into the prior Y Combinator/Garry Tan tokenmaxxing article.
+
+Files created:
+
+- `raw/The tokenmaxxing math nobody wants to admit.md`
+- `sources/The tokenmaxxing math nobody wants to admit.md`
+- `concepts/Context Rot.md`
+
+Files updated:
+
+- `concepts/Tokenmaxxing.md` - Added Agentmail's output-over-tokens critique as a distinct tension beside the positive leverage framing.
+- `concepts/Validation and Evaluation.md` - Added metric-gaming and output-ratio guidance.
+- `concepts/Skill Governance and Metrics.md` - Added caution that token footprint must be paired with outcome metrics.
+- `index.md` - Added the raw source, source summary, and Context Rot concept.
+- `log.md`
+
+Important decisions and open questions:
+
+- Kept the Agentmail article distinct from `raw/Tokenmaxxing How Top Builders Use AI To Do The Work Of 400 Engineers.md`.
+- Treated claims about Meta, Amazon, Google, and long-context accuracy as source claims, not independently verified facts.
+- Open question: which concrete output metrics best normalize token spend across coding, research, sales, support, and personal-agent workflows?
+
+## [2026-05-23] lint | Full wiki health check
+
+Ran a read-only lint pass across generated wiki pages, raw sources, source summaries, courses, docs, `index.md`, and wikilinks.
+
+Files updated:
+
+- `log.md`
+
+Findings:
+
+- `index.md` coverage is healthy: all concept pages, source-summary pages, raw markdown files, course markdown files, and docs markdown files are listed or linked.
+- All `index.md` wikilinks resolve.
+- No generated concept/source pages are missing basic frontmatter.
+- No indexed generated pages appear orphaned by the current path/title link check.
+- One real broken generated-page wikilink was found: `concepts/Claude Code Architecture Deep Dive.md` links to `raw/VILA-labDive-into-Claude-Code...`, but the actual raw file is `raw/VILA-LabDive-into-Claude-Code...`.
+- Template/example wikilinks in `AGENTS.md` and a placeholder historical link in `log.md` were ignored as non-content issues.
+- Source-summary coverage is incomplete: 18 `sources/` pages exist for 89 raw markdown sources, leaving 71 raw sources without dedicated source-summary pages.
+- `sources/Snyk ToxicSkills Research.md` is well sourced but uses `## Key Findings` rather than the recommended `## Key Points` / `## Evidence` pattern.
+- Duplicate basenames remain where raw files and source-summary pages intentionally share titles; current ambiguous unqualified `[[Agent Skills]]` links appear only in historical log entries, not active generated pages.
+
+Recommended fixes:
+
+1. Repair the case-mismatched VILA raw-source wikilink in `concepts/Claude Code Architecture Deep Dive.md`.
+2. Decide whether the vault should enforce "one source-summary page per raw source"; if yes, backfill the 71 missing source-summary pages in batches.
+3. Optionally normalize `sources/Snyk ToxicSkills Research.md` headings to match the recommended source-summary structure.
+
+## [2026-05-23] maintenance | Repair wiki lint findings
+
+Repaired the actionable issues from the full wiki health check.
+
+Files created:
+
+- `sources/2026-04-26 Agent orchestration frameworks source.md`
+- `sources/2026-04-26 Agent Skills specification evaluation and description optimization.md`
+- `sources/2026-04-26 agentskills.io Agent Skills overview and quickstart.md`
+- `sources/2026-04-26 Anthropic Claude API LLM provider source.md`
+- `sources/2026-04-26 Anthropic evals for AI agents.md`
+- `sources/2026-04-26 AWS Amazon Bedrock LLM provider source.md`
+- `sources/2026-04-26 Azure AI Foundry Models LLM provider source.md`
+- `sources/2026-04-26 Claude Agent SDK source.md`
+- `sources/2026-04-26 Claude Code Agent Skills docs.md`
+- `sources/2026-04-26 Claude Code Plugins docs.md`
+- `sources/2026-04-26 Cohere LLM provider source.md`
+- `sources/2026-04-26 Cursor Agent Skills support sources.md`
+- `sources/2026-04-26 DeepSeek API LLM provider source.md`
+- `sources/2026-04-26 Gemini CLI Agent Skills docs.md`
+- `sources/2026-04-26 GitHub Copilot and VS Code Agent Skills docs.md`
+- `sources/2026-04-26 Google Cloud Vertex AI and Model Garden LLM provider source.md`
+- `sources/2026-04-26 LangSmith AgentEvals trajectory evaluation docs.md`
+- `sources/2026-04-26 MCP architecture and Agent Skills integration source.md`
+- `sources/2026-04-26 MCP security and authorization source.md`
+- `sources/2026-04-26 Microsoft Agent Framework Agent Skills docs.md`
+- `sources/2026-04-26 Mistral AI LLM provider source.md`
+- `sources/2026-04-26 Open model inference providers source.md`
+- `sources/2026-04-26 OpenAI agent evaluation and trace grading docs.md`
+- `sources/2026-04-26 OpenAI Agents SDK official source.md`
+- `sources/2026-04-26 OpenAI Agents SDK tools MCP and orchestration source.md`
+- `sources/2026-04-26 OpenAI API LLM provider source.md`
+- `sources/2026-04-26 OpenAI Codex Agent Skills docs.md`
+- `sources/2026-04-26 OpenAI Codex Plugins docs.md`
+- `sources/2026-04-26 OpenAI Codex SDK and App Server source.md`
+- `sources/2026-04-26 OpenClaw Skills docs.md`
+- `sources/2026-04-26 OpenCode Agent Skills docs.md`
+- `sources/2026-04-26 OpenRouter LLM provider router source.md`
+- `sources/2026-04-26 Perplexity Sonar API LLM provider source.md`
+- `sources/2026-04-26 tau-bench tool-agent reliability benchmark.md`
+- `sources/2026-04-26 Windsurf Cascade Skills docs.md`
+- `sources/2026-04-26 xAI Grok API LLM provider source.md`
+- `sources/2026-04-30 AI Coding Plans Comparison 2026.md`
+- `sources/2026-04-30 Claude Code Third-Party LLM Provider Configuration.md`
+- `sources/2026-04-30 Microsoft Copilot SKILL.md support roadmap.md`
+- `sources/2026-05-10 Skill Authoring Patterns Cross-Project Research.md`
+- `sources/A Formal Model of How Artificial Intelligence Erodes Human Agency.md`
+- `sources/Agent Development Kit (ADK).md`
+- `sources/Agent SDK overview.md`
+- `sources/AI Agent Autonomy Levels From Assistive to Fully Autonomous.md`
+- `sources/An open-source spec for Codex orchestration Symphony.md`
+- `sources/Andrej Karpathy From Vibe Coding to Agentic Engineering.md`
+- `sources/anthropicsskills Public repository for Agent Skills.md`
+- `sources/Collaborative AI Engineering One Dev, Two Dozen Agents, Zero Alignment — Maggie Appleton, GitHub.md`
+- `sources/Context Is the New Code — Patrick Debois, Tessl.md`
+- `sources/Deep Dive into LLMs like ChatGPT.md`
+- `sources/Deploy n8n on Cloud Run  Google Cloud Blog.md`
+- `sources/forrestchangandrej-karpathy-skills A single CLAUDE.md file to improve Claude Code behavior, derived from Andrej Karpathy's observations on LLM coding pitfalls.md`
+- `sources/Harness Engineering How to Build Software When Humans Steer, Agents Execute — Ryan Lopopolo, OpenAI.md`
+- `sources/Harness engineering leveraging Codex in an agent-first world.md`
+- `sources/karpathyautoresearch AI agents running research on single-GPU nanochat training automatically.md`
+- `sources/LangChain vs LangGraph vs LangSmith vs LangFlow Key Differences Explained.md`
+- `sources/mattpocockskills My personal directory of skills, straight from my .claude directory.md`
+- `sources/mattpocockskills Skills for Real Engineers. Straight from my .claude directory.md`
+- `sources/n8n A Guide to Workflow Automation.md`
+- `sources/obrasuperpowers An agentic skills framework & software development methodology that works.md`
+- `sources/OpenAI API Responses vs. Chat Completions.md`
+- `sources/openaiskills Skills Catalog for Codex.md`
+- `sources/OpenAI’s 5 Levels Of ‘Super AI’ (AGI To Outperform Human Capability).md`
+- `sources/Replacing 12K LoC with a 200 LoC Skill — David Gomes, Cursor.md`
+- `sources/Six Levels of Agenticness Scoring AI Agency.md`
+- `sources/skill.md for AI Agents.md`
+- `sources/The Philosophy of Agentic AI Agency Autonomy and Moral Responsibility.md`
+- `sources/VILA-LabDive-into-Claude-Code A Systematic Analysis and Discussion of Claude Code for Designing Today's and Future AI Agent Systems.md`
+- `sources/VoltAgentawesome-agent-skills A curated collection of 1000+ agent skills from official dev teams and the community, compatible with Claude Code, Codex, Gemini CLI, Cursor, and more.md`
+- `sources/Why we built the Responses API.md`
+- `sources/You can outsource your thinking but not your understanding - Yacine MTB.md`
+
+Files updated:
+
+- `concepts/Claude Code Architecture Deep Dive.md` - Fixed the case-mismatched VILA raw-source reference.
+- `sources/Agent Skills (platform docs).md` - Added an Evidence section and refreshed `updated`.
+- `sources/Agent Skills Overview (agentskills.io).md` - Added an Evidence section and refreshed `updated`.
+- `sources/Equipping Agents for the Real World with Agent Skills.md` - Added an Evidence section and refreshed `updated`.
+- `sources/Indirect Prompt Injection Attacks (CrowdStrike).md` - Added an Evidence section and refreshed `updated`.
+- `sources/Introduction to Claude Skills (cookbook).md` - Added an Evidence section and refreshed `updated`.
+- `sources/Meta-Meta-Prompting The Secret to Making AI Agents Work.md` - Added an Evidence section and refreshed `updated`.
+- `sources/Snyk ToxicSkills Research.md` - Normalized source-summary headings and added an Evidence section.
+- `sources/The New Economics of Software (AI Engineer Singapore 2026).md` - Added an Evidence section and refreshed `updated`.
+- `index.md` - Added source-summary backfill entries for raw sources that lacked dedicated `sources/` pages.
+- `log.md`
+
+Important decisions and follow-ups:
+
+- Created 71 initial source-summary pages from existing `index.md` raw-source catalog descriptions rather than inventing deeper summaries without a focused ingest pass.
+- These backfill pages are intentionally marked as navigational summaries and include open questions for fuller future ingestion.
+- Follow-up: prioritize full ingest passes for the most reused raw sources if richer quotes, contradictions, or cross-links are needed.

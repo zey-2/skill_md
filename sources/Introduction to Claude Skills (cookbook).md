@@ -1,7 +1,7 @@
 ---
 type: source-summary
 created: 2026-05-10
-updated: 2026-05-10
+updated: 2026-05-23
 status: active
 sources:
   - "raw/Introduction to Claude Skills.md"
@@ -26,6 +26,10 @@ Anthropic's official Jupyter notebook cookbook demonstrating Claude Skills with 
 - **Skills vs MCPs**: "Skills are higher-level than individual tools — they combine instructions, code, and resources." Skills are composable and use progressive disclosure for efficiency.
 - **Token reuse tip**: Reuse containers via `container.id` from previous responses to avoid reloading skills.
 - **Anthropic-managed skills**: `xlsx`, `pptx`, `pdf`, `docx` — pre-built, maintained by Anthropic.
+
+## Evidence
+
+The source-summary claims above are grounded in the local raw source file listed in frontmatter.
 
 ## Connections
 

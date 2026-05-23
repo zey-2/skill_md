@@ -1,0 +1,1032 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>What Is a Good Agent?</title>
+<link rel="preconnect" href="https://api.fontshare.com">
+<link href="https://api.fontshare.com/v2/css?f[]=clash-display@700,600&f[]=satoshi@400,500,700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:           #0b0b0e;
+  --surface:      rgba(255,255,255,0.04);
+  --text:         #ece8e1;
+  --text-muted:   rgba(236,232,225,0.55);
+  --text-faint:   rgba(236,232,225,0.22);
+  --accent:       #f0a020;
+  --accent-glow:  rgba(240,160,32,0.22);
+  --accent-dim:   rgba(240,160,32,0.10);
+  --blue:         #4f9cf9;
+  --rule:         rgba(255,255,255,0.08);
+  --red-dim:      rgba(255,80,80,0.07);
+  --red-border:   rgba(255,80,80,0.28);
+  --red-text:     rgba(255,120,120,0.75);
+  --font-d:       'Clash Display', sans-serif;
+  --font-b:       'Satoshi', sans-serif;
+  --pad:          clamp(2rem, 5vw, 5rem);
+  --gap:          clamp(0.9rem, 2vw, 1.75rem);
+  --ease-expo:    cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-spring:  cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+html {
+  scroll-snap-type: y mandatory;
+  overflow-y: scroll;
+  scroll-behavior: smooth;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-b);
+}
+
+/* ── SLIDE BASE ─────────────────────────────────────────── */
+.slide {
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
+  overflow: hidden;
+  scroll-snap-align: start;
+  position: relative;
+  display: flex;
+  align-items: stretch;
+}
+
+/* dot-grid atmosphere */
+.slide::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle, rgba(255,255,255,0.065) 1px, transparent 1px);
+  background-size: 30px 30px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── SLIDE CONTENT ──────────────────────────────────────── */
+.slide-content {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  padding: var(--pad);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--gap);
+}
+
+/* ── SLIDE FOOTER ───────────────────────────────────────── */
+.slide-footer {
+  position: absolute;
+  bottom: calc(var(--pad) * 0.7);
+  left: var(--pad);
+  right: var(--pad);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 2;
+}
+.slide-num, .slide-section {
+  font-family: var(--font-b);
+  font-size: clamp(0.6rem, 0.9vw, 0.72rem);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+}
+
+/* ── PROGRESS BAR ───────────────────────────────────────── */
+.progress-track {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 2px;
+  background: var(--rule);
+  z-index: 1000;
+}
+.progress-bar {
+  height: 100%;
+  width: 0;
+  background: var(--accent);
+  box-shadow: 0 0 10px var(--accent-glow);
+  transition: width 0.4s var(--ease-expo);
+}
+
+/* ── NAV DOTS ───────────────────────────────────────────── */
+.nav-dots {
+  position: fixed;
+  right: clamp(0.75rem, 1.5vw, 1.5rem);
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  z-index: 1000;
+}
+.nav-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  border: none;
+  background: var(--text-faint);
+  cursor: pointer;
+  transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
+  padding: 0;
+}
+.nav-dot.active {
+  background: var(--accent);
+  transform: scale(1.6);
+  box-shadow: 0 0 6px var(--accent-glow);
+}
+
+/* ── REVEAL ANIMATIONS ──────────────────────────────────── */
+.reveal {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 0.6s var(--ease-expo), transform 0.6s var(--ease-expo);
+}
+.slide.visible .reveal { opacity: 1; transform: translateY(0); }
+.reveal:nth-child(1) { transition-delay: 0.05s; }
+.reveal:nth-child(2) { transition-delay: 0.15s; }
+.reveal:nth-child(3) { transition-delay: 0.25s; }
+.reveal:nth-child(4) { transition-delay: 0.35s; }
+.reveal:nth-child(5) { transition-delay: 0.45s; }
+.reveal:nth-child(6) { transition-delay: 0.55s; }
+.reveal:nth-child(7) { transition-delay: 0.65s; }
+
+.reveal-blur {
+  opacity: 0;
+  filter: blur(14px);
+  transition: opacity 1s var(--ease-expo), filter 1s var(--ease-expo);
+}
+.slide.visible .reveal-blur { opacity: 1; filter: blur(0); }
+
+.reveal-scale {
+  opacity: 0;
+  transform: scale(0.93);
+  transition: opacity 0.7s var(--ease-expo), transform 0.7s var(--ease-spring);
+}
+.slide.visible .reveal-scale { opacity: 1; transform: scale(1); }
+
+.reveal-word span {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 0.45s var(--ease-expo), transform 0.45s var(--ease-expo);
+}
+.slide.visible .reveal-word span { opacity: 1; transform: translateY(0); }
+
+/* ── TYPOGRAPHY UTILITIES ───────────────────────────────── */
+.eyebrow {
+  font-family: var(--font-b);
+  font-size: clamp(0.6rem, 0.95vw, 0.72rem);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 500;
+}
+h1 {
+  font-family: var(--font-d);
+  font-size: clamp(2.8rem, 8vw, 7rem);
+  font-weight: 700;
+  line-height: 0.96;
+  letter-spacing: -0.025em;
+}
+h2 {
+  font-family: var(--font-d);
+  font-size: clamp(1.6rem, 4vw, 3.2rem);
+  font-weight: 700;
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+}
+p { font-size: clamp(0.875rem, 1.4vw, 1.05rem); line-height: 1.6; color: var(--text-muted); }
+.em   { color: var(--text); font-weight: 700; }
+.acc  { color: var(--accent); }
+
+/* ── SLIDE 1 — TITLE ────────────────────────────────────── */
+.title-slide .slide-content { justify-content: flex-end; padding-bottom: calc(var(--pad) * 1.6); }
+
+.bg-blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  pointer-events: none;
+  z-index: 0;
+}
+.blob-amber {
+  width: 55vw; height: 55vw;
+  background: radial-gradient(circle, rgba(240,160,32,0.12) 0%, transparent 70%);
+  top: -15%; right: -8%;
+  animation: drift-a 14s ease-in-out infinite alternate;
+}
+.blob-blue {
+  width: 38vw; height: 38vw;
+  background: radial-gradient(circle, rgba(79,156,249,0.07) 0%, transparent 70%);
+  bottom: 5%; left: -5%;
+  animation: drift-b 18s ease-in-out infinite alternate;
+}
+@keyframes drift-a { from { transform: translate(0,0) scale(1); } to { transform: translate(25px,-20px) scale(1.1); } }
+@keyframes drift-b { from { transform: translate(0,0) scale(1); } to { transform: translate(-15px,20px) scale(1.08); } }
+
+.title-rule {
+  width: clamp(2.5rem, 5vw, 4rem);
+  height: 2px;
+  background: var(--accent);
+  box-shadow: 0 0 12px var(--accent-glow);
+}
+
+/* ── SLIDE 2 — LOOP ─────────────────────────────────────── */
+.loop-row {
+  display: flex;
+  align-items: center;
+  gap: clamp(0.6rem, 1.5vw, 1.1rem);
+  flex-wrap: wrap;
+}
+.loop-node {
+  font-family: var(--font-b);
+  font-size: clamp(0.78rem, 1.2vw, 0.95rem);
+  font-weight: 500;
+  padding: 0.45em 0.9em;
+  border-radius: 5px;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+}
+.ln-fail  { background: var(--red-dim); border: 1px solid var(--red-border); color: var(--red-text); }
+.ln-swap  { background: var(--accent-dim); border: 1px solid rgba(240,160,32,0.3); color: var(--accent); }
+.loop-arr { color: var(--text-faint); font-size: clamp(0.85rem, 1.3vw, 1rem); }
+.loop-tag { font-size: clamp(0.6rem, 0.9vw, 0.72rem); letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-faint); }
+
+.insight {
+  border-left: 2px solid var(--accent);
+  padding-left: clamp(0.8rem, 1.5vw, 1.2rem);
+}
+.insight p { font-size: clamp(0.85rem, 1.35vw, 1rem); }
+
+/* ── SLIDE 3 — FORMULA ──────────────────────────────────── */
+.formula {
+  display: flex;
+  align-items: center;
+  gap: clamp(0.5rem, 1.3vw, 1.1rem);
+  flex-wrap: wrap;
+}
+.f-part { display: flex; flex-direction: column; align-items: center; gap: 0.3em; }
+.f-token {
+  font-family: var(--font-d);
+  font-size: clamp(0.95rem, 2.2vw, 1.65rem);
+  font-weight: 700;
+  padding: 0.3em 0.65em;
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  background: var(--surface);
+  white-space: nowrap;
+}
+.f-token.hi {
+  border-color: rgba(240,160,32,0.4);
+  color: var(--accent);
+  background: var(--accent-dim);
+  box-shadow: 0 0 18px rgba(240,160,32,0.12);
+}
+.f-op   { font-family: var(--font-d); font-size: clamp(0.95rem, 2.2vw, 1.65rem); color: var(--text-faint); }
+.f-lbl  { font-size: clamp(0.5rem, 0.8vw, 0.65rem); letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-faint); }
+.f-lbl.hi { color: rgba(240,160,32,0.6); }
+
+.callout {
+  border: 1px solid rgba(240,160,32,0.22);
+  background: var(--accent-dim);
+  border-radius: 8px;
+  padding: clamp(0.8rem, 1.5vw, 1.25rem) clamp(1rem, 2vw, 1.75rem);
+}
+.callout p { color: var(--text); font-size: clamp(0.875rem, 1.4vw, 1.05rem); }
+
+/* ── SLIDE 4 — THESIS ───────────────────────────────────── */
+.thesis-slide .slide-content {
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: clamp(1rem, 2.5vw, 2rem);
+}
+.thesis-word {
+  font-family: var(--font-d);
+  font-size: clamp(4rem, 13vw, 11.5rem);
+  font-weight: 700;
+  line-height: 0.9;
+  letter-spacing: -0.03em;
+}
+.thesis-is {
+  color: var(--accent);
+  text-shadow: 0 0 60px rgba(240,160,32,0.35);
+}
+.thesis-sub {
+  font-size: clamp(0.85rem, 1.4vw, 1rem);
+  color: var(--text-muted);
+  max-width: 42ch;
+  text-align: center;
+}
+
+/* ── SLIDES 5-7 — PRINCIPLES ────────────────────────────── */
+.principle-slide .slide-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: clamp(2rem, 5vw, 5rem);
+  flex-direction: unset;
+  justify-content: unset;
+}
+
+.p-left  { display: flex; flex-direction: column; gap: calc(var(--gap) * 0.6); }
+.p-right { display: flex; flex-direction: column; gap: var(--gap); }
+
+.p-number {
+  font-family: var(--font-d);
+  font-size: clamp(5.5rem, 16vw, 13rem);
+  font-weight: 700;
+  line-height: 0.85;
+  letter-spacing: -0.04em;
+  color: var(--accent);
+  opacity: 0.16;
+  margin-bottom: -0.35em;
+}
+.p-name {
+  font-family: var(--font-d);
+  font-size: clamp(1.6rem, 3.8vw, 2.9rem);
+  font-weight: 700;
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  color: var(--text);
+}
+.p-tagline {
+  font-size: clamp(0.84rem, 1.3vw, 1rem);
+  color: var(--text-muted);
+  line-height: 1.55;
+  max-width: 28ch;
+}
+
+.cmp-pair { display: flex; flex-direction: column; gap: clamp(0.4rem, 0.8vw, 0.65rem); }
+.cmp-block {
+  background: rgba(0,0,0,0.35);
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  padding: clamp(0.7rem, 1.3vw, 1rem) clamp(0.85rem, 1.6vw, 1.35rem);
+  font-size: clamp(0.75rem, 1.15vw, 0.88rem);
+  line-height: 1.6;
+  color: var(--text-muted);
+}
+.cmp-block.bad  { border-color: var(--red-border); border-left: 3px solid rgba(255,80,80,0.45); }
+.cmp-block.good { border-color: rgba(240,160,32,0.28); border-left: 3px solid var(--accent); }
+.cmp-lbl {
+  font-size: clamp(0.52rem, 0.82vw, 0.66rem);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  margin-bottom: 0.4em;
+  display: block;
+}
+.cmp-lbl.bad  { color: rgba(255,120,120,0.55); }
+.cmp-lbl.good { color: rgba(240,160,32,0.65); }
+
+.p-key {
+  font-size: clamp(0.8rem, 1.25vw, 0.94rem);
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+/* ── SLIDE 8 — SPEC IS SCARCE ───────────────────────────── */
+.scarce-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(0.75rem, 1.5vw, 1.25rem);
+}
+.sc-card {
+  border-radius: 9px;
+  padding: clamp(0.9rem, 1.8vw, 1.5rem);
+  border: 1px solid var(--rule);
+  background: var(--surface);
+  position: relative;
+  overflow: hidden;
+}
+.sc-card.dim { opacity: 0.4; }
+.sc-card.dim::after {
+  content: '';
+  position: absolute;
+  top: 50%; left: -4px; right: -4px;
+  height: 1px;
+  background: rgba(255,80,80,0.38);
+  transform: rotate(-2deg);
+}
+.sc-card.hi {
+  border-color: rgba(240,160,32,0.32);
+  background: var(--accent-dim);
+  box-shadow: 0 0 28px rgba(240,160,32,0.08);
+}
+.sc-lbl {
+  font-size: clamp(0.55rem, 0.85vw, 0.68rem);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+  margin-bottom: 0.45em;
+}
+.sc-card.hi .sc-lbl { color: rgba(240,160,32,0.65); }
+.sc-val {
+  font-family: var(--font-d);
+  font-size: clamp(1.1rem, 2.5vw, 1.9rem);
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.1;
+}
+.sc-card.hi .sc-val { color: var(--accent); }
+.sc-detail { font-size: clamp(0.75rem, 1.15vw, 0.86rem); color: var(--text-muted); line-height: 1.5; margin-top: 0.45em; }
+
+/* ── SLIDE 9 — COMPARISON ───────────────────────────────── */
+.cmp-cols {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(0.75rem, 2vw, 1.75rem);
+}
+.cmp-col {
+  border-radius: 10px;
+  border: 1px solid var(--rule);
+  padding: clamp(1.1rem, 2.2vw, 1.85rem);
+  display: flex;
+  flex-direction: column;
+  gap: clamp(0.6rem, 1.2vw, 1rem);
+}
+.cmp-col.vibe { background: rgba(255,255,255,0.02); opacity: 0.55; }
+.cmp-col.good { background: rgba(240,160,32,0.07); border-color: rgba(240,160,32,0.22); opacity: 1; }
+.cmp-col-h {
+  font-family: var(--font-d);
+  font-size: clamp(0.95rem, 1.8vw, 1.4rem);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  margin-bottom: 0.25em;
+}
+.cmp-col.vibe .cmp-col-h { color: var(--text-muted); }
+.cmp-col.good .cmp-col-h { color: var(--accent); }
+.cmp-row { display: flex; gap: 0.55em; align-items: flex-start; }
+.cmp-dot {
+  width: 5px; height: 5px; border-radius: 50%;
+  margin-top: 0.5em; flex-shrink: 0;
+}
+.cmp-col.vibe .cmp-dot { background: rgba(255,80,80,0.45); }
+.cmp-col.good .cmp-dot { background: var(--accent); }
+.cmp-row p { font-size: clamp(0.78rem, 1.2vw, 0.9rem); line-height: 1.45; }
+.cmp-col.good .cmp-row p { color: var(--text); }
+
+/* ── SLIDE 10 — RECAP ───────────────────────────────────── */
+.recap-list { display: flex; flex-direction: column; gap: clamp(0.65rem, 1.3vw, 1.1rem); }
+.recap-item {
+  display: flex;
+  align-items: center;
+  gap: clamp(1rem, 2.5vw, 2rem);
+  padding: clamp(0.85rem, 1.6vw, 1.35rem) clamp(1.1rem, 2.2vw, 1.85rem);
+  border: 1px solid var(--rule);
+  border-radius: 9px;
+  background: var(--surface);
+}
+.recap-n {
+  font-family: var(--font-d);
+  font-size: clamp(1.5rem, 3.5vw, 2.6rem);
+  font-weight: 700;
+  color: var(--accent);
+  opacity: 0.65;
+  flex-shrink: 0;
+  min-width: 2.2ch;
+}
+.recap-title {
+  font-family: var(--font-d);
+  font-size: clamp(0.95rem, 1.8vw, 1.4rem);
+  font-weight: 700;
+  color: var(--text);
+}
+.recap-desc { font-size: clamp(0.73rem, 1.1vw, 0.86rem); color: var(--text-muted); line-height: 1.4; margin-top: 0.15em; }
+
+/* ── SLIDE 11 — WHERE TO START ──────────────────────────── */
+.steps { display: flex; flex-direction: column; gap: clamp(0.65rem, 1.3vw, 1.1rem); }
+.step {
+  display: flex;
+  gap: clamp(0.85rem, 1.6vw, 1.35rem);
+  align-items: flex-start;
+  padding: clamp(0.85rem, 1.5vw, 1.25rem) clamp(1.1rem, 2.2vw, 1.85rem);
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+}
+.step-n {
+  font-family: var(--font-d);
+  font-size: clamp(0.72rem, 1.1vw, 0.86rem);
+  font-weight: 700;
+  color: var(--accent);
+  flex-shrink: 0;
+  padding-top: 0.15em;
+}
+.step p { font-size: clamp(0.84rem, 1.3vw, 0.98rem); line-height: 1.5; }
+
+/* ── SLIDE 12 — CLOSING ─────────────────────────────────── */
+.closing-slide .slide-content {
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+.closing-glow {
+  position: absolute;
+  width: 70vw; height: 70vh;
+  border-radius: 50%;
+  background: radial-gradient(ellipse, rgba(240,160,32,0.09) 0%, transparent 70%);
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  animation: pulse 7s ease-in-out infinite alternate;
+  z-index: 0;
+}
+@keyframes pulse {
+  from { opacity: 0.5; transform: translate(-50%,-50%) scale(0.93); }
+  to   { opacity: 1;   transform: translate(-50%,-50%) scale(1.07); }
+}
+.q-mark {
+  font-family: var(--font-d);
+  font-size: clamp(3.5rem, 9vw, 7rem);
+  color: var(--accent);
+  opacity: 0.18;
+  line-height: 0.65;
+  margin-bottom: 0.15em;
+}
+.q-text {
+  font-family: var(--font-d);
+  font-size: clamp(1.8rem, 5.5vw, 4.5rem);
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -0.025em;
+  max-width: 16ch;
+  text-align: center;
+}
+.q-attr {
+  font-size: clamp(0.7rem, 1.1vw, 0.84rem);
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+  margin-top: var(--gap);
+}
+
+/* ── UTILITIES ──────────────────────────────────────────── */
+@media (max-height: 600px) { .slide-footer, .nav-dots { display: none; } }
+@media (max-height: 500px) { .eyebrow { display: none; } }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@media print {
+  html { scroll-snap-type: none; }
+  .slide { height: auto; min-height: 100vh; page-break-after: always; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .progress-track, .nav-dots { display: none; }
+  .reveal, .reveal-blur, .reveal-scale { opacity: 1 !important; transform: none !important; filter: none !important; }
+  .reveal-word span { opacity: 1 !important; transform: none !important; }
+}
+</style>
+</head>
+<body>
+
+<div class="progress-track" aria-hidden="true"><div class="progress-bar" id="pb"></div></div>
+<nav class="nav-dots" id="nd" aria-label="Slide navigation"></nav>
+
+<!-- ── 01 TITLE ─────────────────────────────────────────── -->
+<section class="slide title-slide" data-title="Title">
+  <div class="bg-blob blob-amber" aria-hidden="true"></div>
+  <div class="bg-blob blob-blue"  aria-hidden="true"></div>
+  <div class="slide-content">
+    <p class="reveal eyebrow">Lightning Talk</p>
+    <h1 class="reveal-word">What Is a Good Agent?</h1>
+    <p class="reveal" style="font-size:clamp(1rem,2vw,1.4rem);max-width:30ch;color:var(--text-muted);line-height:1.45;margin-top:calc(var(--gap)*0.3)">
+      The answer isn't the model you pick.
+    </p>
+    <div class="reveal title-rule" style="margin-top:calc(var(--gap)*0.5)"></div>
+  </div>
+  <div class="slide-footer">
+    <span class="slide-num">01 / 12</span>
+  </div>
+</section>
+
+<!-- ── 02 THE WRONG LOOP ──────────────────────────────────── -->
+<section class="slide" data-title="The Wrong Diagnosis">
+  <div class="slide-content">
+    <p class="reveal eyebrow">The problem</p>
+    <h2 class="reveal">Every fix looks the same</h2>
+    <div class="reveal loop-row" style="margin-top:calc(var(--gap)*0.2)">
+      <span class="loop-node ln-fail">Agent fails</span>
+      <span class="loop-arr">→</span>
+      <span class="loop-node ln-swap">Swap model</span>
+      <span class="loop-arr">→</span>
+      <span class="loop-node ln-fail">Agent fails</span>
+      <span class="loop-arr">→</span>
+      <span class="loop-tag">repeat</span>
+    </div>
+    <div class="reveal insight">
+      <p>GPT-4 → Claude → Gemini → next release.<br>
+      The agent still drifts. Still breaks. Still surprises.<br>
+      <span class="em">The model is the engine. You keep tuning the engine while the map is wrong.</span></p>
+    </div>
+  </div>
+  <div class="slide-footer">
+    <span class="slide-num">02 / 12</span>
+    <span class="slide-section">The Problem</span>
+  </div>
+</section>
+
+<!-- ── 03 WHAT AN AGENT IS ───────────────────────────────── -->
+<section class="slide" data-title="What an Agent Is">
+  <div class="slide-content">
+    <p class="reveal eyebrow">Quick reset</p>
+    <h2 class="reveal">What an agent actually is</h2>
+    <div class="reveal formula" style="margin-top:calc(var(--gap)*0.2)">
+      <div class="f-part">
+        <span class="f-token">LLM</span>
+        <span class="f-lbl">reasoning</span>
+      </div>
+      <span class="f-op">+</span>
+      <div class="f-part">
+        <span class="f-token">tools</span>
+        <span class="f-lbl">actions</span>
+      </div>
+      <span class="f-op">+</span>
+      <div class="f-part">
+        <span class="f-token">loop</span>
+        <span class="f-lbl">iteration</span>
+      </div>
+      <span class="f-op">+</span>
+      <div class="f-part">
+        <span class="f-token">goal</span>
+        <span class="f-lbl">intent</span>
+      </div>
+      <span class="f-op">=</span>
+      <div class="f-part">
+        <span class="f-token hi">Agent</span>
+        <span class="f-lbl hi">the whole system</span>
+      </div>
+    </div>
+    <div class="reveal callout">
+      <p>The LLM provides reasoning. <span class="em">Everything else is context.</span><br>
+      Most agent failures live in "everything else."</p>
+    </div>
+  </div>
+  <div class="slide-footer">
+    <span class="slide-num">03 / 12</span>
+    <span class="slide-section">The Reframe</span>
+  </div>
+</section>
+
+<!-- ── 04 THESIS ─────────────────────────────────────────── -->
+<section class="slide thesis-slide" data-title="The Thesis">
+  <div class="slide-content">
+    <p class="reveal eyebrow">The reframe</p>
+    <div class="reveal-blur" style="display:flex;flex-direction:column;align-items:center;gap:0.05em;margin-top:calc(var(--gap)*0.4)">
+      <span class="thesis-word">Context</span>
+      <span class="thesis-word thesis-is">IS</span>
+      <span class="thesis-word">the Agent</span>
+    </div>
+    <p class="reveal thesis-sub" style="transition-delay:0.9s">
+      A good agent is a well-authored context — scope, procedures, feedback signals.<br>
+      The model is the least interesting part.
+    </p>
+  </div>
+  <div class="slide-footer">
+    <span class="slide-num">04 / 12</span>
+  </div>
+</section>
+
+<!-- ── 05 PRINCIPLE 1 — SCOPE ────────────────────────────── -->
+<section class="slide principle-slide" data-title="Principle 1: Scope">
+  <div class="slide-content">
+    <div class="p-left">
+      <div class="reveal p-number">01</div>
+      <h2 class="reveal p-name">Scope<br>Discipline</h2>
+      <p class="reveal p-tagline">A good agent knows what it <em>won't</em> do. Scope without constraints is an agent that never stops.</p>
+    </div>
+    <div class="p-right">
+      <p class="reveal eyebrow" style="color:var(--text-faint)">Contrast</p>
+      <div class="reveal cmp-pair">
+        <div class="cmp-block bad">
+          <span class="cmp-lbl bad">— without scope</span>
+          Help me with my code.
+        </div>
+        <div class="cmp-block good">
+          <span class="cmp-lbl good">+ with scope</span>
+          Review PRs for security and correctness.<br>
+          Do not refactor unless explicitly asked.<br>
+          Stop after one pass.
+        </div>
+      </div>
+      <p class="reveal p-key"><span class="em">The constraint is the feature.</span> An agent that knows its boundary is more useful than one that tries everything.</p>
+    </div>
+  </div>
+  <div class="slide-footer">
+    <span class="slide-num">05 / 12</span>
+    <span class="slide-section">Three Principles</span>
+  </div>
+</section>
+
+<!-- ── 06 PRINCIPLE 2 — PROCEDURES ──────────────────────── -->
+<section class="slide principle-slide" data-title="Principle 2: Procedures">
+  <div class="slide-content">
+    <div class="p-left">
+      <div class="reveal p-number">02</div>
+      <h2 class="reveal p-name">Operating<br>Procedures</h2>
+      <p class="reveal p-tagline">Without packaged procedures, the agent reinvents the task every time — differently.</p>
+    </div>
+    <div class="p-right">
+      <p class="reveal eyebrow" style="color:var(--text-faint)">What a skill encodes</p>
+      <div class="reveal cmp-pair">
+        <div class="cmp-block bad">
+          <span class="cmp-lbl bad">— without a skill</span>
+          Same prompt. Different result every time.<br>
+          Behavior depends on luck.
+        </div>
+        <div class="cmp-block good">
+          <span class="cmp-lbl good">+ with a skill</span>
+          name: review-pr<br>
+          trigger: user asks to review a PR<br>
+          steps: [check scope, security, tests...]<br>
+          do not: refactor, rewrite, opine on style
+        </div>
+      </div>
+      <p class="reveal p-key">A skill is an <span class="em">SOP for an agent</span>: when to use it, steps to follow, what to avoid. Consistency encoded — not left to chance.</p>
+    </div>
+  </div>
+  <div class="slide-footer">
+    <span class="slide-num">06 / 12</span>
+    <span class="slide-section">Three Principles</span>
+  </div>
+</section>
+
+<!-- ── 07 PRINCIPLE 3 — FEEDBACK ─────────────────────────── -->
+<section class="slide principle-slide" data-title="Principle 3: Feedback">
+  <div class="slide-content">
+    <div class="p-left">
+      <div class="reveal p-number">03</div>
+      <h2 class="reveal p-name">Feedback<br>Loops</h2>
+      <p class="reveal p-tagline">Good agents have signals that tell them when they're wrong. Most deployed agents have none.</p>
+    </div>
+    <div class="p-right">
+      <p class="reveal eyebrow" style="color:var(--text-faint)">The harness</p>
+      <div class="reveal callout">
+        <p>Tests, lints, CI gates, reviewer agents — the harness surfaces the right signal at the right time.</p>
+      </div>
+      <div class="reveal insight" style="margin-top:calc(var(--gap)*0.3)">
+        <p style="font-size:clamp(0.82rem,1.3vw,0.96rem)">
+          <span class="em">Key insight:</span> Don't front-load all instructions. Let the agent prototype — then enforce constraints at lint and test time, when the agent can see both the work and the requirements at once.
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer">
+    <span class="slide-num">07 / 12</span>
+    <span class="slide-section">Three Principles</span>
+  </div>
+</section>
+
+<!-- ── 08 SPEC IS SCARCE ──────────────────────────────────── -->
+<section class="slide" data-title="The Spec Is Scarce">
+  <div class="slide-content">
+    <p class="reveal eyebrow">When code is free</p>
+    <h2 class="reveal">The spec is the scarce resource</h2>
+    <div class="reveal scarce-grid" style="margin-top:calc(var(--gap)*0.2)">
+      <div class="sc-card dim">
+        <div class="sc-lbl">Was scarce</div>
+        <div class="sc-val">Implementation</div>
+        <div class="sc-detail">Writing code was the bottleneck. Agents changed that.</div>
+      </div>
+      <div class="sc-card hi">
+        <div class="sc-lbl">Now scarce</div>
+        <div class="sc-val">The Spec</div>
+        <div class="sc-detail">Can you specify what good looks like well enough for an agent to build it?</div>
+      </div>
+      <div class="sc-card dim">
+        <div class="sc-lbl">Was the job</div>
+        <div class="sc-val">Writing code</div>
+        <div class="sc-detail">Line-by-line implementation. Repeatable. Delegatable.</div>
+      </div>
+      <div class="sc-card hi">
+        <div class="sc-lbl">Now the job</div>
+        <div class="sc-val">Defining "done"</div>
+        <div class="sc-detail">Goal clarity, acceptance criteria, proof of completion. The spec makes agent output governable.</div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer">
+    <span class="slide-num">08 / 12</span>
+    <span class="slide-section">The Punchline</span>
+  </div>
+</section>
+
+<!-- ── 09 COMPARISON ─────────────────────────────────────── -->
+<section class="slide" data-title="Vibe vs Good Agent">
+  <div class="slide-content">
+    <p class="reveal eyebrow">Side by side</p>
+    <h2 class="reveal" style="margin-bottom:calc(var(--gap)*0.3)">Vibe agent vs. good agent</h2>
+    <div class="reveal cmp-cols">
+      <div class="cmp-col vibe">
+        <div class="cmp-col-h">Vibe Agent</div>
+        <div class="cmp-row"><div class="cmp-dot"></div><p>"Help me with my code"</p></div>
+        <div class="cmp-row"><div class="cmp-dot"></div><p>Reinvents the task every time</p></div>
+        <div class="cmp-row"><div class="cmp-dot"></div><p>No feedback, no correction</p></div>
+        <div class="cmp-row"><div class="cmp-dot"></div><p>You review every line of output</p></div>
+        <div class="cmp-row"><div class="cmp-dot"></div><p>Behavior tied to the model version</p></div>
+      </div>
+      <div class="cmp-col good">
+        <div class="cmp-col-h">Good Agent</div>
+        <div class="cmp-row"><div class="cmp-dot"></div><p>Clear scope + explicit constraints</p></div>
+        <div class="cmp-row"><div class="cmp-dot"></div><p>Packaged skills — same task, consistent result</p></div>
+        <div class="cmp-row"><div class="cmp-dot"></div><p>Harness + test gates as feedback signals</p></div>
+        <div class="cmp-row"><div class="cmp-dot"></div><p>You review the spec, not the diff</p></div>
+        <div class="cmp-row"><div class="cmp-dot"></div><p>Behavior encoded in context, not the model</p></div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer">
+    <span class="slide-num">09 / 12</span>
+    <span class="slide-section">The Punchline</span>
+  </div>
+</section>
+
+<!-- ── 10 RECAP ──────────────────────────────────────────── -->
+<section class="slide" data-title="Recap">
+  <div class="slide-content">
+    <p class="reveal eyebrow">The three principles</p>
+    <h2 class="reveal">What makes an agent good</h2>
+    <div class="reveal recap-list" style="margin-top:calc(var(--gap)*0.3)">
+      <div class="recap-item">
+        <div class="recap-n">01</div>
+        <div>
+          <div class="recap-title">Scope Discipline</div>
+          <div class="recap-desc">It knows what it won't do. Constraints are features.</div>
+        </div>
+      </div>
+      <div class="recap-item">
+        <div class="recap-n">02</div>
+        <div>
+          <div class="recap-title">Operating Procedures</div>
+          <div class="recap-desc">It works the same way every time. Knowledge is encoded, not improvised.</div>
+        </div>
+      </div>
+      <div class="recap-item">
+        <div class="recap-n">03</div>
+        <div>
+          <div class="recap-title">Feedback Loops</div>
+          <div class="recap-desc">It knows when it's wrong. The harness is part of the agent.</div>
+        </div>
+      </div>
+    </div>
+    <p class="reveal" style="font-size:clamp(0.78rem,1.2vw,0.92rem);color:var(--text-faint);margin-top:calc(var(--gap)*0.5)">
+      You're not configuring a model. You're authoring an agent.
+    </p>
+  </div>
+  <div class="slide-footer">
+    <span class="slide-num">10 / 12</span>
+  </div>
+</section>
+
+<!-- ── 11 WHERE TO START ──────────────────────────────────── -->
+<section class="slide" data-title="Where to Start">
+  <div class="slide-content">
+    <p class="reveal eyebrow">Where to start</p>
+    <h2 class="reveal">Don't fix everything at once.<br>Write one skill.</h2>
+    <div class="reveal steps" style="margin-top:calc(var(--gap)*0.3)">
+      <div class="step">
+        <span class="step-n">01</span>
+        <p><span class="em">Pick one recurring task</span> your agent does inconsistently</p>
+      </div>
+      <div class="step">
+        <span class="step-n">02</span>
+        <p><span class="em">Write a SKILL.md:</span> name, trigger conditions, steps, one "do NOT"</p>
+      </div>
+      <div class="step">
+        <span class="step-n">03</span>
+        <p><span class="em">Test it.</span> Does it trigger when it should? Stay quiet when it shouldn't?</p>
+      </div>
+    </div>
+    <p class="reveal" style="font-size:clamp(0.78rem,1.2vw,0.92rem);color:var(--text-faint);margin-top:calc(var(--gap)*0.4)">
+      The best skills emerge from real usage, not theory.
+    </p>
+  </div>
+  <div class="slide-footer">
+    <span class="slide-num">11 / 12</span>
+    <span class="slide-section">Closing</span>
+  </div>
+</section>
+
+<!-- ── 12 CLOSING QUOTE ───────────────────────────────────── -->
+<section class="slide closing-slide" data-title="Closing">
+  <div class="closing-glow" aria-hidden="true"></div>
+  <div class="slide-content">
+    <div class="q-mark reveal">"</div>
+    <div class="q-text reveal-blur">Context is the <span class="acc">new code</span>.</div>
+    <div class="q-attr reveal" style="transition-delay:0.9s">— Patrick Debois, Tessl</div>
+  </div>
+  <div class="slide-footer">
+    <span class="slide-num">12 / 12</span>
+  </div>
+</section>
+
+<script>
+function splitWords() {
+  document.querySelectorAll('.reveal-word').forEach(el => {
+    const words = el.textContent.trim().split(/\s+/);
+    el.innerHTML = words.map((w, i) =>
+      `<span style="transition-delay:${80 + i * 75}ms">${w}</span>`
+    ).join(' ');
+  });
+}
+
+class Deck {
+  constructor() {
+    this.slides = [...document.querySelectorAll('.slide')];
+    this.current = 0;
+    this.setupObserver();
+    this.setupKeys();
+    this.setupTouch();
+    this.setupWheel();
+    this.buildDots();
+    this.updateBar();
+  }
+
+  setupObserver() {
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          this.current = this.slides.indexOf(e.target);
+          this.updateBar();
+          this.updateDots();
+        }
+      });
+    }, { threshold: 0.5 });
+    this.slides.forEach(s => obs.observe(s));
+  }
+
+  setupKeys() {
+    document.addEventListener('keydown', e => {
+      const fwd = ['ArrowDown','ArrowRight',' ','PageDown'];
+      const bck = ['ArrowUp','ArrowLeft','PageUp'];
+      if (fwd.includes(e.key))       { e.preventDefault(); this.go(this.current + 1); }
+      else if (bck.includes(e.key))  { e.preventDefault(); this.go(this.current - 1); }
+      else if (e.key === 'Home')     { e.preventDefault(); this.go(0); }
+      else if (e.key === 'End')      { e.preventDefault(); this.go(this.slides.length - 1); }
+      else if (e.key.toLowerCase() === 'f') this.fullscreen();
+    });
+  }
+
+  setupTouch() {
+    let y0 = 0;
+    document.addEventListener('touchstart', e => { y0 = e.touches[0].clientY; });
+    document.addEventListener('touchend',   e => {
+      const d = y0 - e.changedTouches[0].clientY;
+      if (Math.abs(d) > 50) this.go(this.current + (d > 0 ? 1 : -1));
+    });
+  }
+
+  setupWheel() {
+    let t = 0;
+    document.addEventListener('wheel', e => {
+      const now = Date.now();
+      if (now - t < 800) return;
+      t = now;
+      this.go(this.current + (e.deltaY > 0 ? 1 : -1));
+    }, { passive: true });
+  }
+
+  buildDots() {
+    const nav = document.getElementById('nd');
+    this.slides.forEach((_, i) => {
+      const b = document.createElement('button');
+      b.className = 'nav-dot' + (i === 0 ? ' active' : '');
+      b.setAttribute('aria-label', `Slide ${i + 1}`);
+      b.addEventListener('click', () => this.go(i));
+      nav.appendChild(b);
+    });
+    this.dots = [...nav.querySelectorAll('.nav-dot')];
+  }
+
+  updateBar() {
+    const pb = document.getElementById('pb');
+    if (pb) pb.style.width = ((this.current + 1) / this.slides.length * 100) + '%';
+  }
+
+  updateDots() {
+    this.dots.forEach((d, i) => d.classList.toggle('active', i === this.current));
+  }
+
+  fullscreen() {
+    if (!document.fullscreenElement) document.documentElement.requestFullscreen();
+    else document.exitFullscreen();
+  }
+
+  go(i) {
+    if (i < 0 || i >= this.slides.length) return;
+    this.slides[i].scrollIntoView({ behavior: 'smooth' });
+  }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  splitWords();
+  new Deck();
+});
+</script>
+</body>
+</html>

@@ -1,7 +1,7 @@
 ---
 type: source-summary
 created: 2026-05-10
-updated: 2026-05-10
+updated: 2026-05-23
 status: active
 sources:
   - "raw/Agent Skills.md"
@@ -36,6 +36,10 @@ Official Claude Agent Skills documentation covering the VM-based architecture, p
   - Claude Code: full network access, but skills should only install packages locally
 - **Cross-surface sync**: Custom skills do NOT sync across surfaces. Each surface requires separate management and uploads.
 - **Security**: "Treat like installing software." Audit all files. External URL fetching is the highest-risk pattern.
+
+## Evidence
+
+The source-summary claims above are grounded in the local raw source file listed in frontmatter.
 
 ## Connections
 

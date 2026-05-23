@@ -1,13 +1,14 @@
 ---
 type: concept
 created: 2026-04-26
-updated: 2026-05-10
+updated: 2026-05-23
 status: active
 sources:
   - "raw/skill.md for AI Agents.md"
   - "raw/openaiskills Skills Catalog for Codex.md"
   - "raw/obrasuperpowers An agentic skills framework & software development methodology that works.md"
   - "raw/VoltAgentawesome-agent-skills A curated collection of 1000+ agent skills from official dev teams and the community, compatible with Claude Code, Codex, Gemini CLI, Cursor, and more.md"
+  - "raw/The tokenmaxxing math nobody wants to admit.md"
 tags: [agent-skills, governance, metrics]
 ---
 
@@ -50,6 +51,8 @@ The newer ecosystem sources add concrete trust and quality concerns:
 
 These details sharpen the meaning of governance. It is not only about "Is this our skill?" It is also about "Can we trust this skill enough to let it shape agent behavior?"
 
+The Agentmail tokenmaxxing source adds a metric-governance caution: token footprint is useful only beside outcome measures. If token count becomes the target, teams may optimize for activity rather than work. For skill repositories and agent programs, token metrics should be interpreted as cost, adoption, or diagnostic signals, then paired with task success, output quality, downstream value, and [[concepts/Context Rot]] checks.
+
 ## Where Sources Agree
 
 The sources agree that skills are operational artifacts, not decorative documentation. That makes ownership and quality checks necessary.
@@ -74,6 +77,7 @@ There is also a tension between curation and audit. A curated list can improve d
 - [[Skill Distribution and Installation]] explains why public distribution increases trust requirements.
 - [[Context Development Lifecycle]] frames governance as the organizational loop that scales individual skill authoring to team-level context management.
 - [[Context Observability and Feedback]] covers the security scanning, AI SBOM, and context filter patterns that governance must enforce for third-party skills.
+- [[concepts/Tokenmaxxing]] and [[sources/The tokenmaxxing math nobody wants to admit]] explain why token spend should not become the scoreboard.
 
 ## Open Questions
 

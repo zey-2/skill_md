@@ -1,7 +1,7 @@
 ---
 type: source-summary
 created: 2026-05-17
-updated: 2026-05-17
+updated: 2026-05-23
 status: active
 sources:
   - "raw/new_economics_of_software.md"
@@ -24,6 +24,10 @@ Max Buckley frames the shift from software scarcity to abundance as an economic 
 - **Bottlenecks shift to attention and governance**: Prototyping is no longer a constraint. The scarce resource is attention, not implementation. Code review becomes insufficient when agents produce code faster than humans can evaluate it.
 - **New meta: measurement, ideation, iteration**: Rapid building makes measurement the true bottleneck — profiling, benchmarks, A/B testing, and user behavior metrics. Discernment (identifying which ideas are worth pursuing) becomes the limiting factor.
 - **Jagged intelligence**: AI agents may know the answer but will not surface it unless prompted correctly. Deep technical knowledge remains essential — not to code faster, but to ask, evaluate, and direct effectively. The agent executes; humans provide judgment.
+
+## Evidence
+
+The source-summary claims above are grounded in the local raw source file listed in frontmatter.
 
 ## Connections
 

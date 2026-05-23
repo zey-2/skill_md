@@ -1,7 +1,7 @@
 ---
 type: source-summary
 created: 2026-05-10
-updated: 2026-05-10
+updated: 2026-05-23
 status: active
 sources:
   - "raw/Snyk Finds Prompt Injection in 36%, 1467 Malicious Payloads in a ToxicSkills Study of Agent Skills Supply Chain Compromise.md"
@@ -19,7 +19,7 @@ tags: [skill-security, supply-chain, malware, prompt-injection, toxic-skills]
 
 First comprehensive security audit of the Agent Skills ecosystem. Snyk scanned 3,984 skills from ClawHub and skills.sh, finding 36.82% contain at least one security flaw and 76 confirmed malicious payloads. The research establishes a threat taxonomy for skill-specific attacks including prompt injection convergence with traditional malware.
 
-## Key Findings
+## Key Points
 
 - **13.4% critical**: 534 of 3,984 skills contain at least one critical-level security issue
 - **36.82% any flaw**: 1,467 skills affected (hardcoded API keys, insecure credential handling, dangerous third-party content exposure)
@@ -66,6 +66,10 @@ Agent Skills parallels early npm/PyPI security but is worse in key ways:
 2. Rotate credentials if installed skills handled API keys or cloud credentials
 3. Review memory files (`SOUL.md`, `MEMORY.md`) for unauthorized modifications
 4. Skills that fetch untrusted content create indirect prompt injection vectors even when skill author had benign intent
+
+## Evidence
+
+The source-summary claims above are grounded in the cited Snyk blog and the local raw source file listed in frontmatter.
 
 ## Connections
 
