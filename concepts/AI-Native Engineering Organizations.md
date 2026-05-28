@@ -1,13 +1,14 @@
 ---
 type: concept
 created: 2026-05-11
-updated: 2026-05-18
+updated: 2026-05-28
 status: active
 sources:
   - "raw/Running an AI-native engineering org.md"
   - "raw/There will only be four jobs.md"
   - "raw/How to get your company AI pilled - geoffintech.md"
   - "raw/How Block is becoming the most AI-native enterprise in the world  Dhanji R. Prasanna.md"
+  - "raw/The AI paradox More automation, more humans, more work  Dan Shipper.md"
 tags: [ai-native-orgs, engineering-management, verification, review, org-design]
 ---
 
@@ -15,9 +16,9 @@ tags: [ai-native-orgs, engineering-management, verification, review, org-design]
 
 ## Summary
 
-An AI-native engineering organization is one that rewrites its operating model around the fact that coding throughput is no longer the main constraint. The new bottlenecks are verification, review, security, maintainability, alignment, product taste, and whether old processes still serve their purpose.
+An AI-native engineering organization is one that rewrites its operating model around the fact that coding throughput is no longer the main constraint. The new bottlenecks are verification, review, security, maintainability, alignment, product taste, agent management, and whether old processes still serve their purpose.
 
-Sources: `raw/Running an AI-native engineering org.md`, `raw/There will only be four jobs.md`, `raw/How to get your company AI pilled - geoffintech.md`, and `raw/How Block is becoming the most AI-native enterprise in the world  Dhanji R. Prasanna.md`.
+Sources: `raw/Running an AI-native engineering org.md`, `raw/There will only be four jobs.md`, `raw/How to get your company AI pilled - geoffintech.md`, `raw/How Block is becoming the most AI-native enterprise in the world  Dhanji R. Prasanna.md`, and `raw/The AI paradox More automation, more humans, more work  Dan Shipper.md`.
 
 ## Shifted Bottlenecks
 
@@ -29,6 +30,7 @@ When agents make code generation cheap, the slow work moves elsewhere:
 - How is it maintained?
 - Can CI, QA, security, and cross-functional partners keep up?
 - Which old planning or ownership rituals are now friction rather than safety?
+- Who manages, observes, and improves the agents that now produce work artifacts?
 
 This confirms the broader [[concepts/Harness Engineering Principles]] claim that code is no longer the scarce resource. It also adds a management layer: org processes have to be audited because processes rarely remove themselves.
 
@@ -77,6 +79,12 @@ Together they add two caveats to AI-native org design:
 - Adoption depends on system access. A chat UI alone does not change work very much; agents need connectors, permissions, data, code, documents, and workflow primitives.
 - Org structure can matter as much as model capability. Block's source explicitly attributes major progress to moving out of GM-style silos into functional engineering and design orgs, while Ramp's source argues that central platform teams and functional spokes should drive each other.
 
+## Automation Creates Management Work
+
+Dan Shipper's "AI paradox" source adds a useful caution: more automation does not automatically mean less human work. At Every, broad AI use coincided with the company growing from roughly 15 to almost 30 people. Shipper's explanation is that every serious automation needs someone to monitor quality, repair failures, improve the workflow, and decide when the task itself has been framed wrongly.
+
+This reframes the job of AI-native organizations. They are not just trying to remove people from loops; they are deciding which loops deserve automation, which loops need human approval, and which loops create new work because the volume of PRs, bug reports, analyses, and experiments has increased. The durable role is closer to model manager or forward deployed engineer than to passive automation owner.
+
 ## Connections
 
 - [[sources/Running an AI-native engineering org]] - Source summary.
@@ -89,6 +97,7 @@ Together they add two caveats to AI-native org design:
 - [[concepts/Enterprise AI Adoption Flywheel]] - Company-wide adoption pattern synthesized from Ramp and Block.
 - [[sources/How to get your company AI pilled]] - Ramp case study on broad AI usage, Glass, Dojo, leaderboards, and constraint removal.
 - [[sources/How Block is becoming the most AI-native enterprise in the world]] - Block case study on Goose, MCP, functional org design, and executive dogfooding.
+- [[sources/The AI paradox More automation, more humans, more work  Dan Shipper]] - Every case study on automation as management work, agent-native SaaS, and forward deployed engineers.
 
 ## Open Questions
 

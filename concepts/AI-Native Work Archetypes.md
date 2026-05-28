@@ -1,12 +1,13 @@
 ---
 type: concept
 created: 2026-05-11
-updated: 2026-05-18
+updated: 2026-05-28
 status: active
 sources:
   - "raw/There will only be four jobs.md"
   - "raw/How to get your company AI pilled - geoffintech.md"
   - "raw/How Block is becoming the most AI-native enterprise in the world  Dhanji R. Prasanna.md"
+  - "raw/The AI paradox More automation, more humans, more work  Dan Shipper.md"
 tags: [ai-native-work, org-design, job-archetypes, product-engineering]
 ---
 
@@ -52,6 +53,12 @@ Ramp and Block both show the archetypes moving outside engineering. In Ramp's ac
 
 These cases also show why the other archetypes remain necessary. Central platform teams, MCP/tooling builders, and review/governance functions act as stabilizers. Executives and senior technical leaders provide the "adult" function by setting expectations, shaping org design, and preserving taste, critical thinking, security, and reliability. Interface work appears in demos, onboarding, office hours, skills marketplaces, and shared channels that make new workflows understandable to the rest of the organization.
 
+## PMs, Full-Stack Designers, and Forward Deployed Engineers
+
+Dan Shipper's Every case adds a more concrete role forecast. He is especially bullish on PMs because AI lets people with product sense, user understanding, and enough technical literacy implement directly instead of coordinating a large team for every change. He is similarly bullish on full-stack designers because taste and interaction quality become more valuable when default AI output makes many products look the same.
+
+The source also identifies forward deployed engineer as a durable AI-native role. The reason is not that agents are weak; it is that stronger agents create more places where someone must understand the customer's workflow, manage the agent harness, debug the integration, and decide what good output looks like. This role blends builder, stabilizer, and interface functions.
+
 ## Connections
 
 - [[sources/There will only be four jobs]] - Source summary.
@@ -61,6 +68,7 @@ These cases also show why the other archetypes remain necessary. Central platfor
 - [[concepts/Collaborative AI Engineering]] - Alignment and interface work prevent decentralized execution from becoming coordination debt.
 - [[concepts/Tokenmaxxing]] - High-token acceleration needs stabilizing and judgment layers.
 - [[concepts/Enterprise AI Adoption Flywheel]] - Explains how these archetypes show up in company-wide adoption.
+- [[sources/The AI paradox More automation, more humans, more work  Dan Shipper]] - Every case evidence for PMs, designers, and forward deployed engineers.
 
 ## Open Questions
 

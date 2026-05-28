@@ -1,7 +1,7 @@
 ---
 type: index
 created: 2026-04-26
-updated: 2026-05-23
+updated: 2026-05-28
 status: active
 sources:
   - "raw/skill.md for AI Agents.md"
@@ -93,6 +93,7 @@ sources:
   - "raw/AI Agent Autonomy Levels From Assistive to Fully Autonomous.md"
   - "raw/Six Levels of Agenticness Scoring AI Agency.md"
   - "raw/The Philosophy of Agentic AI Agency Autonomy and Moral Responsibility.md"
+  - "raw/The AI paradox More automation, more humans, more work  Dan Shipper.md"
 tags: [index, agent-skills, llm-providers]
 ---
 
@@ -273,6 +274,7 @@ tags: [index, agent-skills, llm-providers]
 - [[sources/Superpowers How Jesse Built the 1 AI Claude Code Codex Plugin|Superpowers How Jesse Built the #1 AI Claude Code/Codex Plugin]] — Jesse Vincent on Superpowers as a spec-first agentic development workflow with TDD, ephemeral review agents, and runtime proof.
 - [[sources/The Rise of the AI Engineer|The Rise of the AI Engineer]] — Latent Space (2023): the foundational article coining "AI Engineer" as a job title, the shift right of applied AI, and Software 3.0.
 - [[sources/The New Economics of Software (AI Engineer Singapore 2026)|The New Economics of Software (AI Engineer Singapore 2026)]] — Software creation cost collapsing to zero, moat erosion, attention as the new scarce resource, and implications for engineering orgs.
+- [[sources/The AI paradox More automation, more humans, more work  Dan Shipper|The AI paradox: More automation, more humans, more work]] — Dan Shipper on agentic work surfaces, automation as management work, agent-native SaaS, PMs/designers, and forward deployed engineers.
 
 - [[sources/2026-04-26 Agent orchestration frameworks source|2026-04-26 Agent orchestration frameworks source]] - Initial source-summary backfill: LangGraph, Microsoft Agent Framework, and CrewAI evidence for graph workflows, durable execution, state, human-in-the-loop, observability, and multi-agent orchestration.
 - [[sources/2026-04-26 Agent Skills specification evaluation and description optimization|2026-04-26 Agent Skills specification evaluation and description optimization]] - Initial source-summary backfill: AgentSkills.io evidence for `SKILL.md` validation, trigger evals, output evals, assertions, baselines, and iteration.

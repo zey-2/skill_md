@@ -1280,3 +1280,25 @@ Important decisions and follow-ups:
 - Created 71 initial source-summary pages from existing `index.md` raw-source catalog descriptions rather than inventing deeper summaries without a focused ingest pass.
 - These backfill pages are intentionally marked as navigational summaries and include open questions for fuller future ingestion.
 - Follow-up: prioritize full ingest passes for the most reused raw sources if richer quotes, contradictions, or cross-links are needed.
+
+## [2026-05-28] ingest | The AI paradox: More automation, more humans, more work
+
+Ingested Dan Shipper's Lenny's Podcast / YouTube transcript from `raw/The AI paradox More automation, more humans, more work  Dan Shipper.md`.
+
+Files created:
+
+- `sources/The AI paradox More automation, more humans, more work  Dan Shipper.md`
+
+Files updated:
+
+- `concepts/AI-Native Engineering Organizations.md` - Added automation-as-management-work and agent-management bottlenecks.
+- `concepts/AI-Native Work Archetypes.md` - Added PMs, full-stack designers, and forward deployed engineers as concrete AI-native role forecasts.
+- `concepts/Software Economics.md` - Added agent-native SaaS as a counterpoint to pure SaaS-moat erosion.
+- `index.md` - Added the raw source and source-summary catalog entry.
+- `log.md`
+
+Important decisions and follow-ups:
+
+- Recorded a tension between Shipper's SaaS optimism and the existing software-economics thesis that cheap software erodes SaaS moats.
+- Treated the "automation is a lie" claim as an operating-model insight rather than a literal rejection of automation.
+- Follow-up: gather more evidence on whether agent-native SaaS pricing will support bring-your-own-model-token workflows.
