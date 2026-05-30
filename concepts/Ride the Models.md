@@ -4,7 +4,7 @@ created: 2026-05-30
 updated: 2026-05-30
 status: active
 sources:
-  - "raw/The AI paradox More automation, more humans, more work  Dan Shipper 1.md"
+  - "raw/The AI paradox More automation, more humans, more work  Dan Shipper.md"
   - "raw/How the engineer behind Claude Cowork actually uses Claude  Felix Rieseberg (Anthropic).md"
 tags: [career-strategy, model-adoption, continuous-learning, ai-survival]
 ---
@@ -15,7 +15,7 @@ tags: [career-strategy, model-adoption, continuous-learning, ai-survival]
 
 "Ride the models" is Dan Shipper's career survival thesis: the only durable strategy for staying employable as AI capabilities accelerate is to continuously play with new models as they arrive, apply them to real work, and discover new uses before they become mainstream.
 
-Source: `raw/The AI paradox More automation, more humans, more work  Dan Shipper 1.md`.
+Source: `raw/The AI paradox More automation, more humans, more work  Dan Shipper.md`.
 
 ## The Core Strategy
 

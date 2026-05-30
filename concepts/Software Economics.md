@@ -6,7 +6,6 @@ status: active
 sources:
   - "raw/new_economics_of_software.md"
   - "raw/The AI paradox More automation, more humans, more work  Dan Shipper.md"
-  - "raw/The AI paradox More automation, more humans, more work  Dan Shipper 1.md"
 tags: [software-economics, scarcity, abundance, saas-moats, attention-economy, agent-native-saas]
 ---
 

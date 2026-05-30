@@ -7,7 +7,7 @@ sources:
   - "[[sources/How to get your company AI pilled]]"
   - "[[sources/How Block is becoming the most AI-native enterprise in the world]]"
   - "[[sources/Running an AI-native engineering org]]"
-  - "raw/The AI paradox More automation, more humans, more work  Dan Shipper 1.md"
+  - "raw/The AI paradox More automation, more humans, more work  Dan Shipper.md"
 tags: [ai-adoption, ai-native-orgs, enterprise-ai, internal-agents, org-design]
 ---
 

@@ -9,7 +9,6 @@ sources:
   - "raw/How to get your company AI pilled - geoffintech.md"
   - "raw/How Block is becoming the most AI-native enterprise in the world  Dhanji R. Prasanna.md"
   - "raw/The AI paradox More automation, more humans, more work  Dan Shipper.md"
-  - "raw/The AI paradox More automation, more humans, more work  Dan Shipper 1.md"
 tags: [ai-native-orgs, engineering-management, verification, review, org-design]
 ---
 
