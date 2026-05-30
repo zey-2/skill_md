@@ -8,6 +8,7 @@ sources:
   - "raw/How to get your company AI pilled - geoffintech.md"
   - "raw/How Block is becoming the most AI-native enterprise in the world  Dhanji R. Prasanna.md"
   - "raw/The AI paradox More automation, more humans, more work  Dan Shipper.md"
+  - "raw/The AI paradox More automation, more humans, more work  Dan Shipper 1.md"
 tags: [ai-native-work, org-design, job-archetypes, product-engineering]
 ---
 
@@ -59,6 +60,18 @@ Dan Shipper's Every case adds a more concrete role forecast. He is especially bu
 
 The source also identifies forward deployed engineer as a durable AI-native role. The reason is not that agents are weak; it is that stronger agents create more places where someone must understand the customer's workflow, manage the agent harness, debug the integration, and decide what good output looks like. This role blends builder, stabilizer, and interface functions.
 
+## The Generalist Advantage
+
+Shipper observes that when everyone can do everything — engineers design, PMs code, marketing people ship website changes — role confusion is a real side effect. People ask "what is my job anymore?" At Every, this settles because everyone is already a generalist who enjoys having fingers in multiple pots. The prediction is that this will feel more normal over time: marketing people still do marketing, but touching the website directly is just part of marketing now.
+
+The generalist advantage is especially powerful in smaller companies. A PM with product sense, user understanding, and light technical literacy can implement directly without coordinating a large team. A designer with taste and interaction quality can build their own designs instead of handing off to engineers. Both become "dangerous" in the sense that they ship faster than specialists who wait for coordination.
+
+## Two Agents Are Better Than One
+
+The full transcript identifies a non-obvious pattern: when a user's work agent (Codex/Co-work) interacts with another agent (a SaaS product's agent or server), the agent-to-agent conversation carries much more context about the user than the user could type directly. Codex knows what the user has been working on, their preferences, their project history, and can share all of that during onboarding to a new tool. This creates a speed-up effect when the software experience assumes the user always has an agent in the loop.
+
+It also changes debugging: when something goes wrong, the user tells their agent to go fix it, and the agent talks directly to the product's system to diagnose the issue. This is a fundamentally different interaction pattern from human-to-product.
+
 ## Connections
 
 - [[sources/There will only be four jobs]] - Source summary.
@@ -69,6 +82,7 @@ The source also identifies forward deployed engineer as a durable AI-native role
 - [[concepts/Tokenmaxxing]] - High-token acceleration needs stabilizing and judgment layers.
 - [[concepts/Enterprise AI Adoption Flywheel]] - Explains how these archetypes show up in company-wide adoption.
 - [[sources/The AI paradox More automation, more humans, more work  Dan Shipper]] - Every case evidence for PMs, designers, and forward deployed engineers.
+- [[concepts/Ride the Models]] - The career strategy that enables generalists to thrive.
 
 ## Open Questions
 

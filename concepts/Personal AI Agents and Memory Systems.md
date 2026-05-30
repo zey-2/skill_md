@@ -5,6 +5,7 @@ updated: 2026-05-16
 status: active
 sources:
   - "[[sources/Building a Second Brain Vivian Balakrishnan AI Engineer Singapore]]"
+  - "raw/How the engineer behind Claude Cowork actually uses Claude  Felix Rieseberg (Anthropic).md"
 tags: [personal-agents, second-brain, memory-systems, tool-assembly, local-deployment, neuro-symbolic]
 ---
 
@@ -32,6 +33,14 @@ Emerging pattern of individuals building personal AI agents — not as SaaS prod
 - "I have not dared to switch it off."
 - NanoClaw v1→v2 transition was rough; kept v1 running and installed v2 on another computer.
 - Requires Claude to make all models first-class citizens by June 15 (model flexibility, not vendor lock-in).
+
+## Implicit Data Extraction from Digital Exhaust
+
+Felix Rieseberg (Anthropic, engineering lead for Claude Cowork) demonstrates a pattern of using email as a structured personal data source. Since most purchases generate email receipts, a personal agent with email access can build an inventory of furniture, clothing, appliances, and other possessions without any manual entry. This extends to other domains: travel history, subscriptions, professional commitments, and social connections.
+
+Rieseberg also built a "promise tracker" — an agent that reads his messages, extracts commitments he's made to people, stores them in a SQLite database, and periodically reminds him of outstanding promises. The agent avoids re-reading all messages each time by using the database as incremental memory.
+
+These examples show a shift from explicit personal knowledge bases (Obsidian wikis, manually curated notes) to **implicit data extraction** from existing digital exhaust. The agent discovers what matters from communication records rather than requiring the user to structure it.
 
 ## Tech Stack Pattern
 

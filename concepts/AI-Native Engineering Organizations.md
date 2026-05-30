@@ -9,6 +9,7 @@ sources:
   - "raw/How to get your company AI pilled - geoffintech.md"
   - "raw/How Block is becoming the most AI-native enterprise in the world  Dhanji R. Prasanna.md"
   - "raw/The AI paradox More automation, more humans, more work  Dan Shipper.md"
+  - "raw/The AI paradox More automation, more humans, more work  Dan Shipper 1.md"
 tags: [ai-native-orgs, engineering-management, verification, review, org-design]
 ---
 
@@ -79,6 +80,28 @@ Together they add two caveats to AI-native org design:
 - Adoption depends on system access. A chat UI alone does not change work very much; agents need connectors, permissions, data, code, documents, and workflow primitives.
 - Org structure can matter as much as model capability. Block's source explicitly attributes major progress to moving out of GM-style silos into functional engineering and design orgs, while Ramp's source argues that central platform teams and functional spokes should drive each other.
 
+## Super-Agent Architecture
+
+The full transcript adds an important org-design pattern from Every's experience. Shipper initially believed in personal agents — one per employee, like a daemon on your shoulder. He has **completely flipped** to a super-agent model: one shared agent for the entire company, maintained by a forward deployed engineer.
+
+The reason is the **agent caretaker principle**: for an AI agent to be useful, it needs a human who cares about it — someone watching its output, repairing failures, improving prompts, and ensuring it stays useful. When that human connection is severed (people abandon their OpenClaw setup because it's "way too much work"), the agent stops being useful. This drives consolidation: companies centralize around one well-maintained agent rather than many neglected personal ones.
+
+Shipper predicts this will trickle down over time — as models become more independent and less fiddly, team-level and personal agents will re-emerge. But the current working model is agents at the top, used by many people, gradually specializing.
+
+## Human-Agent Co-Usage Pattern
+
+The transcript identifies a new software paradigm: instead of building a CLI that an agent uses independently (delegated task model), the emerging pattern is **human and agent using the same application together**. The agent uses the CLI while the human uses the web interface, and both need to stay in sync.
+
+This changes what SaaS products need to build:
+
+- **Visibility**: both human and agent need to see what the other is doing.
+- **Approval queues**: summaries of what the agent has done or is about to do.
+- **Logs and rollback**: the ability to undo bulk agent changes quickly.
+- **High-throughput infrastructure**: agents can make "a billion requests in 3 seconds."
+- **Simplified UI**: formatting, page breaks, table construction become agent responsibilities, not human-facing features.
+
+This paradigm also enables a faster closed loop: when a user encounters a bug, their agent sends a bug report with exact reproduction steps, suspected code locations, and context — which becomes a GitHub issue that the company's agent can fix. This is fundamentally different from human support tickets.
+
 ## Automation Creates Management Work
 
 Dan Shipper's "AI paradox" source adds a useful caution: more automation does not automatically mean less human work. At Every, broad AI use coincided with the company growing from roughly 15 to almost 30 people. Shipper's explanation is that every serious automation needs someone to monitor quality, repair failures, improve the workflow, and decide when the task itself has been framed wrongly.
@@ -97,7 +120,8 @@ This reframes the job of AI-native organizations. They are not just trying to re
 - [[concepts/Enterprise AI Adoption Flywheel]] - Company-wide adoption pattern synthesized from Ramp and Block.
 - [[sources/How to get your company AI pilled]] - Ramp case study on broad AI usage, Glass, Dojo, leaderboards, and constraint removal.
 - [[sources/How Block is becoming the most AI-native enterprise in the world]] - Block case study on Goose, MCP, functional org design, and executive dogfooding.
-- [[sources/The AI paradox More automation, more humans, more work  Dan Shipper]] - Every case study on automation as management work, agent-native SaaS, and forward deployed engineers.
+- [[sources/The AI paradox More automation, more humans, more work  Dan Shipper]] - Every case study on automation as management work, agent-native SaaS, forward deployed engineers, super-agent architecture, and human-agent co-usage.
+- [[concepts/Ride the Models]] - Career survival strategy that parallels org-level model dogfooding.
 
 ## Open Questions
 

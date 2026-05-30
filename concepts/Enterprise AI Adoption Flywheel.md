@@ -7,6 +7,7 @@ sources:
   - "[[sources/How to get your company AI pilled]]"
   - "[[sources/How Block is becoming the most AI-native enterprise in the world]]"
   - "[[sources/Running an AI-native engineering org]]"
+  - "raw/The AI paradox More automation, more humans, more work  Dan Shipper 1.md"
 tags: [ai-adoption, ai-native-orgs, enterprise-ai, internal-agents, org-design]
 ---
 
@@ -36,6 +37,14 @@ Enterprise AI adoption compounds when the organization treats AI as an operating
 - Non-engineers can become major builders when tooling hides setup complexity and gives them access to safe, useful primitives.
 - Metrics help adoption when they create discovery and accountability, but they need outcome checks so visible activity does not become the goal.
 - AI adoption interacts with org design. Shared platforms, shared policies, and clear technical leadership can matter as much as the tool itself.
+
+## Super-Agent vs Personal Agent Trajectory
+
+Every's experience adds a nuance to the flywheel pattern. When OpenClaw first launched, Every's team all adopted personal agents — one per employee. The initial enthusiasm faded as people realized the maintenance burden: things break, SSH access is needed, and most employees don't want to spend time on infrastructure.
+
+The pattern that emerged instead is a **super-agent model**: one shared company agent managed by a forward deployed engineer, with the option to specialize into team-level agents over time. This suggests the flywheel may not naturally produce personal agents for everyone in the early stages. The first durable pattern is a shared agent that everyone accesses (typically through Slack), maintained by a dedicated person whose job is to keep it working.
+
+The prediction is that personal agents will re-emerge as models become more independent and less fiddly. But for now, the agent caretaker requirement drives centralization.
 
 ## Operating Model
 

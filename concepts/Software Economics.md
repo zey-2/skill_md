@@ -6,6 +6,7 @@ status: active
 sources:
   - "raw/new_economics_of_software.md"
   - "raw/The AI paradox More automation, more humans, more work  Dan Shipper.md"
+  - "raw/The AI paradox More automation, more humans, more work  Dan Shipper 1.md"
 tags: [software-economics, scarcity, abundance, saas-moats, attention-economy, agent-native-saas]
 ---
 
@@ -37,6 +38,8 @@ AI agents, reusable components, and automation have collapsed the unit economics
 Dan Shipper's "AI paradox" source complicates the strongest version of the SaaS-moat-erosion thesis. He argues that agents may increase demand for SaaS rather than replace it, because agents become additional users of existing systems and because companies still want trusted shared workflows, data, permissions, and collaboration surfaces.
 
 In this view, the question for SaaS vendors shifts from "can we bolt an AI assistant onto the product?" to "can humans and agents collaborate on the same artifact?" Agent-native SaaS needs visibility into agent actions, approval queues, logs, rollback, high-throughput infrastructure, and interfaces that let a user's personal agent talk to the vendor's system or agent. If users bring their own model tokens through Codex-like or Claude-like work surfaces, the vendor may preserve margins while still supporting AI-heavy workflows.
+
+The agent-native SaaS paradigm also creates qualitatively better support loops. When a user's agent encounters a bug, it sends a bug report with exact reproduction steps, suspected code locations, and context — far superior to a human support ticket. This enables a closed loop where the user's agent talks to the company's agent, which fixes the issue. This changes both the support economics and the user experience of software maintenance.
 
 ## Bottlenecks Shift to Attention and Governance
 

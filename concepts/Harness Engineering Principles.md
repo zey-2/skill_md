@@ -10,6 +10,7 @@ sources:
   - "raw/Running an AI-native engineering org.md"
   - "raw/new_economics_of_software.md"
   - "raw/Superpowers How Jesse Built the 1 AI Claude Code  Codex Plugin — and Stopped Writing Code.md"
+  - "raw/How the engineer behind Claude Cowork actually uses Claude  Felix Rieseberg (Anthropic).md"
 tags: [harness-engineering, agent-first, code-is-free, scarcity, software-economics, openai]
 ---
 
@@ -90,6 +91,20 @@ Jesse Vincent's orchestrator pattern is a small-scale harness: brainstorming cre
 
 Fiona Fung's "Running an AI-native engineering org" talk extends harness thinking from repo infrastructure to team process. Planning, review, ownership, hiring, onboarding, and org shape are all part of the harness. When coding is no longer the slow part, stale processes can become the new failure mode; teams need explicit permission to automate or remove them.
 
+## Async Design and Output-Based Trust
+
+Felix Rieseberg adds two harness insights from building Claude Cowork and Claude Code Desktop:
+
+**Async as a design principle.** Products with built-in latency (like agent execution) should embrace asynchrony rather than fight it. Users are comfortable waiting if the end quality is high. The Cowork interface deliberately lets users continue other work while the agent runs in the background — it chitchats and shows progress rather than demanding attention. This is a harness choice: the human should not watch the agent work; the agent should do annoying things in the background to free up the human's creative energy.
+
+**Output-based trust.** Rieseberg describes moving from "reading every single line that Claude writes" to "only judging it on its impact." This is a harness maturity pattern: early users inspect the process; experienced users evaluate the outcome. The harness must be reliable enough that the human can step away. This connects to the "every human interaction is a harness failure" principle — if you need to supervise closely, the spec or guardrails are insufficient.
+
+## The Biggest Gap: Problem Recognition, Not Capability
+
+Rieseberg observes that the biggest barrier to AI adoption is not model capability — "it is literally people being able to understand that almost any problem can go into these tools." This is a harness design challenge: the human-model interface needs to make it obvious which problems are solvable, not just powerful when a problem is already framed.
+
+The practical advice is simple: "Whenever you do something that you find annoying and you're not enjoying and it doesn't feel creative — that is a good time to pause for a second and wonder, is there a way I can use AI to do this?" This is the [[concepts/Anti-To-Do List and Abstraction Layering]] pattern in practice.
+
 ## Economic Framing: Scarcity to Abundance
 
 Max Buckley's "New Economics of Software" frames harness engineering's "code is free" insight as a broader economic shift. The collapse of development costs means SaaS moats built on code alone erode — competitive advantage moves to brand, data, ML models, and integration. Bottlenecks shift from implementation to attention and governance: any idea can be built quickly, so the scarce resource becomes discernment (which ideas matter) and validation (can humans evaluate agent output fast enough). This economic lens reinforces why harness design is the critical skill — it is the infrastructure that makes abundance usable rather than overwhelming.
@@ -109,6 +124,7 @@ Max Buckley's "New Economics of Software" frames harness engineering's "code is 
 - [[concepts/Context Observability and Feedback]] — Covers the specific observability patterns (agent logs, production monitoring, context filters) that complement harness guardrails.
 - [[concepts/Neuro-Symbolic AI Architecture]] — Deterministic guardrails (lints, tests, CI gates) are the symbolic layer around the LLM's neural generation.
 - [[concepts/Tool Assembly as a Skill]] — Assembling harness tools (AGENTS.md, reviewer agents, custom lints) is itself a form of tool assembly.
+- [[concepts/Anti-To-Do List and Abstraction Layering]] — The behavioral discipline of eliminating tedious tasks by going up abstraction layers.
 - [[sources/Superpowers How Jesse Built the 1 AI Claude Code Codex Plugin]] — Superpowers as a personal harness for spec-first coding, review-agent loops, TDD, and runtime proof.
 
 ## Source
@@ -118,3 +134,4 @@ Max Buckley's "New Economics of Software" frames harness engineering's "code is 
 - [[raw/Tokenmaxxing How Top Builders Use AI To Do The Work Of 400 Engineers]]
 - [[raw/Running an AI-native engineering org]]
 - [[raw/Superpowers How Jesse Built the 1 AI Claude Code  Codex Plugin — and Stopped Writing Code]]
+- [[raw/How the engineer behind Claude Cowork actually uses Claude  Felix Rieseberg (Anthropic)]]
