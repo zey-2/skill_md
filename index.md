@@ -164,6 +164,7 @@ tags: [index, agent-skills, llm-providers]
 - [[courses/ai-fundamentals-to-agent-skills/lesson-plan|AI Fundamentals to Agent Skills]] - 16-module curriculum (~40-60 hours) progressing from ML basics through authoring, testing, and publishing reusable Agent Skills. Includes three learning pathways (Skill Author, Agent Developer, Quick Start).
 - [[courses/from-agents-to-skills/lesson-plan|From Agents to Skills]] - Long-form lesson plan covering the transition from agent-based workflows to skill-based repeatability.
 - [[courses/from-agents-to-skills/article|From Agents to Skills: Long-form Article]] - Accompanying long-form article for the course: "The gap isn't intelligence. It's operating procedure."
+- [[courses/ride-the-models/article|Ride the Models: Article]] - "The only durable career strategy in the AI Era." Covers why people are still figuring out what AI can do, why yesterday's competence gets cheaper, the ride-the-models stance, practical tactics, and model selection heuristics.
 
 ## Raw Sources
 
