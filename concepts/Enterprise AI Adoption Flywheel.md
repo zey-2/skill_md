@@ -1,12 +1,12 @@
 ---
 type: concept
 created: 2026-05-18
-updated: 2026-05-18
+updated: 2026-06-01
 status: active
 sources:
-  - "[[sources/How to get your company AI pilled]]"
-  - "[[sources/How Block is becoming the most AI-native enterprise in the world]]"
-  - "[[sources/Running an AI-native engineering org]]"
+  - "raw/How to get your company AI pilled - geoffintech.md"
+  - "raw/How Block is becoming the most AI-native enterprise in the world  Dhanji R. Prasanna.md"
+  - "raw/Running an AI-native engineering org.md"
   - "raw/The AI paradox More automation, more humans, more work  Dan Shipper.md"
 tags: [ai-adoption, ai-native-orgs, enterprise-ai, internal-agents, org-design]
 ---

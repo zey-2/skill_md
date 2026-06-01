@@ -1,11 +1,13 @@
 ---
 type: concept
 created: 2026-05-30
-updated: 2026-05-30
+updated: 2026-06-01
 status: active
 sources:
   - "raw/The AI paradox More automation, more humans, more work  Dan Shipper.md"
   - "raw/How the engineer behind Claude Cowork actually uses Claude  Felix Rieseberg (Anthropic).md"
+  - "raw/The AI Skill I Rely On Daily — Priscila Andre de Oliveira, Sentry.md"
+  - "raw/Why this Claude Code engineer uses HTML files as AI specs  Thariq Shihipar (Anthropic).md"
 tags: [career-strategy, model-adoption, continuous-learning, ai-survival]
 ---
 
@@ -69,3 +71,7 @@ For most people, Rieseberg suggests not thinking about model selection too deepl
 - [[concepts/Software Economics]] - Models commoditize yesterday's competence; riders create tomorrow's.
 - [[concepts/Enterprise AI Adoption Flywheel]] - Organizations that enable riding the models accelerate adoption; those that restrict it slow it.
 - [[concepts/AI-Native Engineering Organizations]] - Manager dogfooding is one expression of riding the models inside an org.
+- [[concepts/Comprehension-Driven Development]] — Priscila's 67/2 data is empirical evidence of what riding the models looks like in practice.
+- [[concepts/HTML as AI Spec Format]] — Thariq's HTML workflow exemplifies adapting to richer model capabilities.
+- [[sources/The AI Skill I Rely On Daily — Priscila Andre de Oliveira, Sentry]] — 67% comprehension, 2% generation; "agent manager" role.
+- [[sources/Why this Claude Code engineer uses HTML files as AI specs  Thariq Shihipar (Anthropic)]] — HTML as the new Markdown for specs.

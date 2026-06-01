@@ -1,12 +1,13 @@
 ---
 type: concept
 created: 2026-05-11
-updated: 2026-05-23
+updated: 2026-06-01
 status: active
 sources:
   - "raw/Tokenmaxxing How Top Builders Use AI To Do The Work Of 400 Engineers.md"
   - "raw/The tokenmaxxing math nobody wants to admit.md"
-tags: [tokenmaxxing, ai-native-engineering, context, personal-ai, validation]
+  - "raw/Why this Claude Code engineer uses HTML files as AI specs  Thariq Shihipar (Anthropic).md"
+tags: [tokenmaxxing, ai-native-engineering, context, personal-ai, validation, planning]
 ---
 
 # Tokenmaxxing
@@ -56,7 +57,9 @@ It also adds a useful economic lens to [[concepts/Context Development Lifecycle]
 
 - [[sources/Tokenmaxxing How Top Builders Use AI To Do The Work Of 400 Engineers]] - Source summary.
 - [[sources/The tokenmaxxing math nobody wants to admit]] - Agentmail critique of tokenmaxxing as a vanity metric when not tied to outputs.
+- [[sources/Why this Claude Code engineer uses HTML files as AI specs  Thariq Shihipar (Anthropic)]] — "99% of tokens on planning" is a concrete tokenmaxxing allocation pattern.
 - [[concepts/Context Rot]] - Why larger context and higher token spend can reduce quality after a threshold.
+- [[concepts/HTML as AI Spec Format]] — Spending tokens on visual specs instead of production code.
 - [[concepts/The AI-Native Engineer and the Rising Ceiling]] - Deep users get disproportionate leverage from AI tools.
 - [[concepts/Harness Engineering Principles]] - Harnesses preserve scarce human attention and make high-token workflows safer.
 - [[concepts/Validation and Evaluation]] - More model work needs stronger checks, not weaker ones.

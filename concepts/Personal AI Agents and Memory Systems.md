@@ -1,10 +1,10 @@
 ---
 type: concept
 created: 2026-05-16
-updated: 2026-05-16
+updated: 2026-06-01
 status: active
 sources:
-  - "[[sources/Building a Second Brain Vivian Balakrishnan AI Engineer Singapore]]"
+  - "raw/Building a Second Brain Vivian Balakrishnan AI Engineer Singapore.md"
   - "raw/How the engineer behind Claude Cowork actually uses Claude  Felix Rieseberg (Anthropic).md"
 tags: [personal-agents, second-brain, memory-systems, tool-assembly, local-deployment, neuro-symbolic]
 ---

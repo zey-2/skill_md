@@ -1,7 +1,7 @@
 ---
 type: concept
 created: 2026-05-02
-updated: 2026-05-17
+updated: 2026-06-01
 status: active
 sources:
   - "raw/Andrej Karpathy From Vibe Coding to Agentic Engineering.md"
@@ -87,9 +87,13 @@ This concept is the foundational justification for the entire wiki's approach. [
 - [[concepts/Personal AI Agents and Memory Systems]] — Dr. Balakrishnan's thesis: "the one thing which you cannot outsource is your personal understanding" — personal agents amplify understanding but cannot replace it.
 - [[concepts/AI-Native Work Archetypes]] — The "adults" archetype is accountability embodied: judgment, earned intuition, and authority to say no.
 - [[concepts/Harness Engineering Principles]] — "Every human interaction is a harness failure" — the human must understand the system well enough to design constraints that prevent failure without manual intervention.
+- [[concepts/Comprehension-Driven Development]] — Empirical evidence: 67% of AI sessions are comprehension, 2% generation. Understanding is the dominant activity.
+- [[concepts/HTML as AI Spec Format]] — HTML specs exist because humans must understand the plan before delegating compute.
 
 ## Source
 
 - [[raw/Andrej Karpathy From Vibe Coding to Agentic Engineering]]
 - [[raw/Building a Second Brain Vivian Balakrishnan AI Engineer Singapore]]
 - [[raw/You can outsource your thinking but not your understanding - Yacine MTB]] — Original tweet source.
+- [[sources/The AI Skill I Rely On Daily — Priscila Andre de Oliveira, Sentry]] — 67/2 comprehension/generation data.
+- [[sources/Why this Claude Code engineer uses HTML files as AI specs  Thariq Shihipar (Anthropic)]] — 99% tokens on planning, HTML keeps humans in the loop.

@@ -1,7 +1,7 @@
 ---
 type: concept
 created: 2026-04-26
-updated: 2026-05-20
+updated: 2026-06-01
 status: active
 sources:
   - "raw/skill.md for AI Agents.md"
@@ -22,6 +22,8 @@ sources:
   - "raw/Agent Skills.md"
   - "raw/Introduction to Claude Skills.md"
   - "raw/Superpowers How Jesse Built the 1 AI Claude Code  Codex Plugin — and Stopped Writing Code.md"
+  - "raw/The AI Skill I Rely On Daily — Priscila Andre de Oliveira, Sentry.md"
+  - "raw/Why this Claude Code engineer uses HTML files as AI specs  Thariq Shihipar (Anthropic).md"
 tags: [agent-skills, ai-agents]
 ---
 
@@ -96,6 +98,9 @@ The article also frames building a skill as "putting together an onboarding guid
 - [[sources/Introduction to Claude Skills (cookbook)]] Official cookbook: Excel/PPT/PDF examples, token optimization (98% savings), and versioning strategy.
 - [[concepts/Skill Security and Supply Chain Risk]] Security landscape: 36% of skills have flaws, 76 confirmed malicious payloads, and the convergence of prompt injection with traditional malware.
 - [[sources/Superpowers How Jesse Built the 1 AI Claude Code Codex Plugin]] Jesse Vincent on Superpowers as a skill-driven agentic development workflow built around specs, TDD, ephemeral review agents, and end-to-end validation.
+- [[sources/The AI Skill I Rely On Daily — Priscila Andre de Oliveira, Sentry]] — Empirical evidence of skill creation from usage data: 116 sessions analyzed → repeated patterns → "Catch Me Up" skill with 6 exploration modes.
+- [[concepts/Comprehension-Driven Development]] — 67% of AI sessions are comprehension; skills for understanding are the most-used category.
+- [[concepts/HTML as AI Spec Format]] — HTML as output format for planning and spec skills.
 
 ## Open Questions
 

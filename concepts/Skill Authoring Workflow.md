@@ -1,7 +1,7 @@
 ---
 type: concept
 created: 2026-04-26
-updated: 2026-05-20
+updated: 2026-06-01
 status: active
 sources:
   - "raw/skill.md for AI Agents.md"
@@ -12,7 +12,8 @@ sources:
   - "raw/Context Is the New Code — Patrick Debois, Tessl.md"
   - "raw/2026-05-10 Skill Authoring Patterns Cross-Project Research.md"
   - "raw/Superpowers How Jesse Built the 1 AI Claude Code  Codex Plugin — and Stopped Writing Code.md"
-tags: [agent-skills, authoring, workflow, context, skillification]
+  - "raw/The AI Skill I Rely On Daily — Priscila Andre de Oliveira, Sentry.md"
+tags: [agent-skills, authoring, workflow, context, skillification, comprehension]
 ---
 
 # Skill Authoring Workflow
@@ -162,6 +163,7 @@ Gstack's explicit voice guidelines are notable:
 - [[Meta-Skills and Skillification]] — skillification as an authoring method; the skillify meta-skill.
 - [[Self-Improving Skills]] — autonomous iteration as an extension of the manual authoring cycle.
 - [[sources/Superpowers How Jesse Built the 1 AI Claude Code Codex Plugin]] — interview evidence for spec-first workflows, rationalization-aware skills, and review loops with fresh agents.
+- [[sources/The AI Skill I Rely On Daily — Priscila Andre de Oliveira, Sentry]] — data-driven skill authoring: analyze 116 sessions, find repeated patterns, create "Catch Me Up" skill.
 
 ## Open Questions
 

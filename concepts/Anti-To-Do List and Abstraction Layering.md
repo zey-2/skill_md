@@ -1,7 +1,7 @@
 ---
 type: concept
 created: 2026-05-30
-updated: 2026-05-30
+updated: 2026-06-01
 status: active
 sources:
   - "raw/How the engineer behind Claude Cowork actually uses Claude  Felix Rieseberg (Anthropic).md"
