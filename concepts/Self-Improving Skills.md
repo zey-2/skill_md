@@ -1,11 +1,12 @@
 ---
 type: concept
 created: 2026-05-11
-updated: 2026-05-16
+updated: 2026-06-06
 status: active
 sources:
   - "raw/Build Self-Improving Claude Code Skills. The Results Are Crazy.md"
   - "raw/karpathyautoresearch AI agents running research on single-GPU nanochat training automatically.md"
+  - "raw/How Anthropic Engineers ACTUALLY Prompt Claude Code.md"
 tags: [agent-skills, self-improvement, evaluation, autonomous-loops]
 ---
 
@@ -118,12 +119,20 @@ In the documented example, a marketing copywriting skill that had already gone t
 
 This demonstrates a key value: self-improving loops surface inconsistencies between reference files and skill instructions that humans miss during manual review.
 
+## Manual Self-Improvement (Anthropic Practice)
+
+Anthropic engineers practice a manual version of this loop. Rule 4 from their Claude Code prompting methodology: "Skills get smarter every session." After every skill run where the output isn't right, the engineer asks: "Is this a one-time fix or should it be in the skill forever?" If forever, the skill is updated immediately — adding the rule, example, or edge case. This creates a compounding loop where each session starts smarter than the last.
+
+The manual approach trades automation for human judgment. The engineer decides what matters; the autonomous loop optimizes against assertions. Both share the same core insight: skills are living documents, not static files. Source: `raw/How Anthropic Engineers ACTUALLY Prompt Claude Code.md`.
+
 ## Connections
 
 - [[Validation and Evaluation]] — binary assertions are a specific type of output evaluation.
 - [[Skill Authoring Workflow]] — the self-improvement loop is an automated extension of the manual authoring cycle.
 - [[Autonomous Research Agents]] — Karpathy's autoresearch is the origin pattern.
 - [[Context Development Lifecycle]] — self-improving skills operationalize the Observe and Evaluate stages into a continuous loop.
+- [[Prompting Skills Not Prompts]] — Rule 4 (skills get smarter every session) is the manual version of this concept.
+- [[sources/How Anthropic Engineers ACTUALLY Prompt Claude Code]] — source for the manual self-improvement practice at Anthropic.
 
 ## Open Questions
 

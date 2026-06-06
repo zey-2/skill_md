@@ -1,12 +1,13 @@
 ---
 type: concept
 created: 2026-05-11
-updated: 2026-05-11
+updated: 2026-06-06
 status: active
 sources:
   - "raw/Meta-Meta-Prompting The Secret to Making AI Agents Work.md"
   - "raw/2026-05-10 Skill Authoring Patterns Cross-Project Research.md"
-tags: [meta-skills, skillification, personal-ai, skill-composition]
+  - "raw/How Anthropic Engineers ACTUALLY Prompt Claude Code.md"
+tags: [meta-skills, skillification, personal-ai, skill-composition, composable-skills]
 ---
 
 # Meta-Skills and Skillification
@@ -53,6 +54,8 @@ Skills compose into complex workflows:
 - **perplexity-research** checks what the brain already knows before synthesizing new findings.
 
 Each skill does one thing. When one skill improves, every workflow that uses it gets better automatically.
+
+Anthropic's engineering guidance reinforces this composability principle. Rule 3: "Build composable skills, not custom skills." The concrete example — splitting a monolithic `/content-creation` skill into separate YouTube idea research, YouTube script writer, and LinkedIn post skills — mirrors GBrain's decomposition pattern. The three benefits Anthropic identifies (issues are easy to spot, improvements compound, reuse beats rebuilding) are the same reasons GBrain maintains 100+ focused skills rather than fewer monolithic ones. Source: `raw/How Anthropic Engineers ACTUALLY Prompt Claude Code.md`.
 
 ### Cross-Modal Evaluation
 
@@ -110,6 +113,8 @@ The difference is "between keeping a journal and having a nervous system. The fi
 - [[Harness Engineering Principles]] — thin harness over fat skills is a core architecture pattern.
 - [[Context Development Lifecycle]] — the brain is a continuously maintained context repository.
 - [[Understanding as the Human Bottleneck]] — skillification addresses the bottleneck by encoding human judgment into reusable patterns.
+- [[Prompting Skills Not Prompts]] — composability is a prerequisite for skillification; you can't create skills from skills if skills aren't composable.
+- [[sources/How Anthropic Engineers ACTUALLY Prompt Claude Code]] — source for Anthropic's composable skills guidance.
 
 ## Open Questions
 

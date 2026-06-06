@@ -1,7 +1,7 @@
 ---
 type: log
 created: 2026-04-26
-updated: 2026-05-18
+updated: 2026-06-06
 status: active
 sources:
   - "raw/skill.md for AI Agents.md"
@@ -18,6 +18,7 @@ sources:
   - "raw/Indirect Prompt Injection Attacks Hidden AI Risks.md"
   - "raw/Snyk Finds Prompt Injection in 36%, 1467 Malicious Payloads in a ToxicSkills Study of Agent Skills Supply Chain Compromise.md"
   - "raw/Meta-Meta-Prompting The Secret to Making AI Agents Work.md"
+  - "raw/How Anthropic Engineers ACTUALLY Prompt Claude Code.md"
 tags: [log, agent-skills, agentic-engineering]
 ---
 
@@ -1302,3 +1303,43 @@ Important decisions and follow-ups:
 - Recorded a tension between Shipper's SaaS optimism and the existing software-economics thesis that cheap software erodes SaaS moats.
 - Treated the "automation is a lie" claim as an operating-model insight rather than a literal rejection of automation.
 - Follow-up: gather more evidence on whether agent-native SaaS pricing will support bring-your-own-model-token workflows.
+
+## [2026-06-06] ingest | How Anthropic Engineers ACTUALLY Prompt Claude Code + fix index gaps
+
+Ingested Austin Marchese's video transcript on four rules from Anthropic engineers for prompting Claude Code. Also fixed 3 raw sources that had source-summary pages but were missing from `index.md`.
+
+Raw source processed:
+
+- `raw/How Anthropic Engineers ACTUALLY Prompt Claude Code.md` - YouTube transcript: four rules (prompt skills not Claude, skills have three layers, build composable skills, skills improve every session) plus two patterns (save scripts inside skills, control invocation flags).
+
+Raw sources added to index (previously missing):
+
+- `raw/How the engineer behind Claude Cowork actually uses Claude  Felix Rieseberg (Anthropic).md`
+- `raw/The AI Skill I Rely On Daily — Priscila Andre de Oliveira, Sentry.md`
+- `raw/Why this Claude Code engineer uses HTML files as AI specs  Thariq Shihipar (Anthropic).md`
+
+Files created:
+
+- `sources/How Anthropic Engineers ACTUALLY Prompt Claude Code.md` — Source summary with four rules, three-layer skill architecture, composability principle, and compounding improvement loop.
+- `concepts/Prompting Skills Not Prompts.md` — New concept page for the mental model shift from ad-hoc prompts to reusable skills, three-layer architecture, composability, and the compounding loop.
+
+Files updated:
+
+- `concepts/Self-Improving Skills.md` — Added Anthropic source and "Manual Self-Improvement" section documenting Rule 4 as the manual version of the autonomous loop.
+- `concepts/Meta-Skills and Skillification.md` — Added composability evidence from Anthropic's Rule 3 (build composable, not custom).
+- `concepts/Skill Authoring Workflow.md` — Added "Save Scripts Inside Skills" and "Invocation Control Flags" sections.
+- `concepts/Progressive Disclosure.md` — Added Anthropic's three-layer model (description, instructions, tools) as mapping to the Discovery/Activation/Execution stages.
+- `concepts/Comprehension-Driven Development.md` — Already existed from prior ingestion; no changes needed.
+- `index.md` — Added 4 raw sources to frontmatter and Raw Sources; added new concept page and source summary entries; added 3 previously-missing source summaries (Felix Rieseberg, Priscila, Thariq).
+
+Important decisions:
+
+- Created "Prompting Skills, Not Prompts" as a standalone concept rather than folding into Agent Skills, because it captures a mental model shift (how to think about prompting) rather than a definition (what skills are).
+- Did not create concept pages for "Ride the Models" or "Anti-To-Do List" despite those being referenced by existing source summaries — those are pre-existing broken links from prior ingestions, not part of this source.
+- The 3 partially-ingested files (Felix Rieseberg, Priscila, Thariq) already had source-summary pages and concept-page cross-references from commit `051e0bd`; only the `index.md` entries were missing.
+
+Follow-ups:
+
+- The `[[concepts/Ride the Models]]` and `[[concepts/Anti-To-Do List and Abstraction Layering]]` links in existing source summaries point to non-existent concept pages — consider creating them or redirecting to the course article.
+- The `[[concepts/HTML as AI Spec Format]]` link in the Thariq source summary points to a non-existent concept page.
+- The `[[concepts/Ride the Models]]` link in the new source summary also points to a non-existent concept page (exists only as a course article).

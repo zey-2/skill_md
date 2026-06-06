@@ -1,7 +1,7 @@
 ---
 type: index
 created: 2026-04-26
-updated: 2026-05-28
+updated: 2026-06-06
 status: active
 sources:
   - "raw/skill.md for AI Agents.md"
@@ -94,6 +94,10 @@ sources:
   - "raw/Six Levels of Agenticness Scoring AI Agency.md"
   - "raw/The Philosophy of Agentic AI Agency Autonomy and Moral Responsibility.md"
   - "raw/The AI paradox More automation, more humans, more work  Dan Shipper.md"
+  - "raw/How Anthropic Engineers ACTUALLY Prompt Claude Code.md"
+  - "raw/How the engineer behind Claude Cowork actually uses Claude  Felix Rieseberg (Anthropic).md"
+  - "raw/The AI Skill I Rely On Daily — Priscila Andre de Oliveira, Sentry.md"
+  - "raw/Why this Claude Code engineer uses HTML files as AI specs  Thariq Shihipar (Anthropic).md"
 tags: [index, agent-skills, llm-providers]
 ---
 
@@ -120,6 +124,7 @@ tags: [index, agent-skills, llm-providers]
 - [[concepts/MCP and Tool-Integration Architecture|MCP and Tool-Integration Architecture]] - Explains how Agent Skills relate to MCP hosts, clients, servers, tools, resources, prompts, approval policies, and tool security.
 - [[concepts/Claude Code Third-Party Provider Configuration|Claude Code Third-Party Provider Configuration]] - Explains how to configure Claude Code in VS Code with OpenRouter, LiteLLM, Bedrock, Vertex AI, and Foundry via environment variables and settings files.
 - [[concepts/Plugin-Based Agent Extensions|Plugin-Based Agent Extensions]] - Explains plugins as installable bundles that can package skills, app integrations, MCP servers, metadata, and marketplace distribution.
+- [[concepts/Prompting Skills Not Prompts|Prompting Skills, Not Prompts]] - The mental model shift from ad-hoc prompts to reusable skills, the three-layer skill architecture (description, instructions, tools), composability, and the compounding improvement loop.
 - [[concepts/Agent Frameworks and Orchestration|Agent Frameworks and Orchestration]] - Compares when skills should be combined with tools, subagents, handoffs, graph workflows, state, human review, and orchestration frameworks.
 - [[concepts/Agent SDKs and Codex Automation|Agent SDKs and Codex Automation]] - Compares OpenAI Agents SDK, OpenAI Codex SDK, Codex App Server, and Claude Agent SDK as runtime surfaces around Agent Skills.
 - [[concepts/OpenAI AGI Progression Framework|OpenAI AGI Progression Framework]] - Describes OpenAI's five-level AGI progression (conversational → reasoners → agents → innovators → organizations) and its implications for skill design.
@@ -139,6 +144,7 @@ tags: [index, agent-skills, llm-providers]
 - [[concepts/Symphony Orchestration|Symphony Orchestration]] — Open-source spec that turns issue trackers into always-on agent control planes. Every open task gets a dedicated agent, achieving 500% PR increases.
 - [[concepts/Spec-Driven Development|Spec-Driven Development]] — Specifications become the primary programming surface. Code is a disposable build artifact compiled from specs by LLMs as "fuzzy compilers."
 - [[concepts/Collaborative AI Engineering|Collaborative AI Engineering]] — Alignment must happen before agents start working, not after. Individual productivity without team coordination creates wasted work and coordination debt. Quality, not speed, is the new differentiator.
+- [[concepts/Comprehension-Driven Development|Comprehension-Driven Development]] — 67% of AI-assisted work is comprehension, not generation. Empirical data from Priscila's 116-session analysis at Sentry and Thariq Shihipar's 99% planning token allocation.
 - [[concepts/Replacing Code with Skills|Replacing Code with Skills]] — Cursor replaced ~15K lines of application code with a ~200-line skill, trading hard-coded guardrails for prompt-based instructions backed by evals and RL training.
 - [[concepts/Context Development Lifecycle|Context Development Lifecycle]] — Debois's DevOps-inspired framework: Generate → Evaluate → Distribute → Observe as the lifecycle for context, with library authoring and organizational loops, and the context flywheel.
 - [[concepts/Context Observability and Feedback|Context Observability and Feedback]] — Monitoring context effectiveness through agent logs, PR feedback, production failures, sandbox testing, context filters, and AI SBOM.
@@ -254,6 +260,10 @@ tags: [index, agent-skills, llm-providers]
 - `raw/AI Agent Autonomy Levels From Assistive to Fully Autonomous.md` - Five-level autonomy scale (assistive → advisory → supervised autonomous → monitored autonomous → fully autonomous) with examples.
 - `raw/Six Levels of Agenticness Scoring AI Agency.md` - Six-level agenticness scale (L0-L5) scored across 8 dimensions: action capability, autonomy, planning, adaptation, state continuity, reliability, interoperability, safety.
 - `raw/The Philosophy of Agentic AI Agency Autonomy and Moral Responsibility.md` - Philosophical analysis of AI agency without intelligence, the responsibility gap when autonomous systems cause harm, and moral accountability.
+- `raw/How Anthropic Engineers ACTUALLY Prompt Claude Code.md` - Austin Marchese's breakdown of four rules from Anthropic engineers: prompt skills not Claude, skills have three layers (description/instructions/tools), build composable skills, skills improve every session.
+- `raw/How the engineer behind Claude Cowork actually uses Claude  Felix Rieseberg (Anthropic).md` - Felix Rieseberg on model selection heuristics, anti-to-do list pattern, email as personal inventory, hardware Claude buddy, and the imagination gap.
+- `raw/The AI Skill I Rely On Daily — Priscila Andre de Oliveira, Sentry.md` - Priscila's analysis of 116 Claude sessions: 67% comprehension, 2% generation. "Catch Me Up" skill with six exploration modes.
+- `raw/Why this Claude Code engineer uses HTML files as AI specs  Thariq Shihipar (Anthropic).md` - Thariq Shihipar on HTML as spec format, compute allocation, 99% tokens on planning, and living design systems.
 
 ## Source Summaries
 
@@ -276,6 +286,10 @@ tags: [index, agent-skills, llm-providers]
 - [[sources/The Rise of the AI Engineer|The Rise of the AI Engineer]] — Latent Space (2023): the foundational article coining "AI Engineer" as a job title, the shift right of applied AI, and Software 3.0.
 - [[sources/The New Economics of Software (AI Engineer Singapore 2026)|The New Economics of Software (AI Engineer Singapore 2026)]] — Software creation cost collapsing to zero, moat erosion, attention as the new scarce resource, and implications for engineering orgs.
 - [[sources/The AI paradox More automation, more humans, more work  Dan Shipper|The AI paradox: More automation, more humans, more work]] — Dan Shipper on agentic work surfaces, automation as management work, agent-native SaaS, PMs/designers, and forward deployed engineers.
+- [[sources/How Anthropic Engineers ACTUALLY Prompt Claude Code|How Anthropic Engineers ACTUALLY Prompt Claude Code]] — Austin Marchese on four rules from Anthropic engineers: prompt skills not Claude, three-layer skill architecture, composable skills, and the compounding improvement loop.
+- [[sources/How the engineer behind Claude Cowork actually uses Claude  Felix Rieseberg (Anthropic)|How the engineer behind Claude Cowork actually uses Claude — Felix Rieseberg]] — Felix Rieseberg on model selection heuristics, anti-to-do list, email as personal inventory, hardware Claude buddy, and the imagination gap.
+- [[sources/The AI Skill I Rely On Daily — Priscila Andre de Oliveira, Sentry|The AI Skill I Rely On Daily — Priscila Andre de Oliveira, Sentry]] — Priscila's 116-session analysis: 67% comprehension, 2% generation. "Catch Me Up" skill with six exploration modes.
+- [[sources/Why this Claude Code engineer uses HTML files as AI specs  Thariq Shihipar (Anthropic)|Why this Claude Code engineer uses HTML files as AI specs — Thariq Shihipar]] — Thariq Shihipar on HTML as spec format, compute allocation, 99% tokens on planning, and living design systems.
 
 - [[sources/2026-04-26 Agent orchestration frameworks source|2026-04-26 Agent orchestration frameworks source]] - Initial source-summary backfill: LangGraph, Microsoft Agent Framework, and CrewAI evidence for graph workflows, durable execution, state, human-in-the-loop, observability, and multi-agent orchestration.
 - [[sources/2026-04-26 Agent Skills specification evaluation and description optimization|2026-04-26 Agent Skills specification evaluation and description optimization]] - Initial source-summary backfill: AgentSkills.io evidence for `SKILL.md` validation, trigger evals, output evals, assertions, baselines, and iteration.

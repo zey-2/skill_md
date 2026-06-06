@@ -1,7 +1,7 @@
 ---
 type: concept
 created: 2026-04-26
-updated: 2026-06-01
+updated: 2026-06-06
 status: active
 sources:
   - "raw/skill.md for AI Agents.md"
@@ -13,6 +13,7 @@ sources:
   - "raw/2026-05-10 Skill Authoring Patterns Cross-Project Research.md"
   - "raw/Superpowers How Jesse Built the 1 AI Claude Code  Codex Plugin — and Stopped Writing Code.md"
   - "raw/The AI Skill I Rely On Daily — Priscila Andre de Oliveira, Sentry.md"
+  - "raw/How Anthropic Engineers ACTUALLY Prompt Claude Code.md"
 tags: [agent-skills, authoring, workflow, context, skillification, comprehension]
 ---
 
@@ -143,6 +144,23 @@ The Jesse Vincent interview adds a concrete authoring lesson: skills should coun
 - **Medium freedom** (pseudocode with parameters): Report generation, data analysis.
 - **High freedom** (text-based instructions): Code review, design decisions.
 
+### Save Scripts Inside Skills
+
+When Claude writes the same script repeatedly across sessions, save it inside the skill as a tool. Code is deterministic — same input, same output — while AI inference is probabilistic, token-costly, and variable. The rule of thumb: "If you can use code instead of AI, you should." The author doesn't need to write the code; they can have AI write it once and then reuse it as a tool indefinitely.
+
+This pattern addresses the tools layer of the three-layer skill architecture (description, instructions, tools). Most authors over-invest in instructions and under-invest in tools, but tools are where deterministic leverage lives. Source: `raw/How Anthropic Engineers ACTUALLY Prompt Claude Code.md`.
+
+### Invocation Control Flags
+
+Two flags control who can invoke a skill:
+
+| Flag | Effect | Use Case |
+|---|---|---|
+| `user_invocable: false` | Hides from slash menu; agent-only | Internal tools the user shouldn't directly trigger |
+| `disable_model_invocation` | Model cannot invoke; human-only | High-risk actions (deployments, messages) |
+
+These flags are governance tools at the skill level. They sit below plugin-level permissions and MCP approval policies but above raw prompt instructions. Source: `raw/How Anthropic Engineers ACTUALLY Prompt Claude Code.md`.
+
 ### Voice and Tone Guidelines
 
 Gstack's explicit voice guidelines are notable:
@@ -164,6 +182,8 @@ Gstack's explicit voice guidelines are notable:
 - [[Self-Improving Skills]] — autonomous iteration as an extension of the manual authoring cycle.
 - [[sources/Superpowers How Jesse Built the 1 AI Claude Code Codex Plugin]] — interview evidence for spec-first workflows, rationalization-aware skills, and review loops with fresh agents.
 - [[sources/The AI Skill I Rely On Daily — Priscila Andre de Oliveira, Sentry]] — data-driven skill authoring: analyze 116 sessions, find repeated patterns, create "Catch Me Up" skill.
+- [[Prompting Skills Not Prompts]] — the mental model shift from ad-hoc prompts to reusable skills.
+- [[sources/How Anthropic Engineers ACTUALLY Prompt Claude Code]] — source for scripts-inside-skills and invocation control patterns.
 
 ## Open Questions
 
