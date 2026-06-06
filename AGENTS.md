@@ -197,6 +197,7 @@ Do NOT place presentations under `content/`, `skill_md/`, or any other directory
 - For PDFs, use an appropriate PDF extraction workflow and cite page numbers when available.
 - Use Obsidian-compatible Markdown and wikilinks.
 - Optional future search tools such as `qmd` may be added when the wiki grows beyond what `index.md` plus `rg` can handle.
+- **Git commit messages**: The Bash tool runs in bash, not PowerShell. Do not use PowerShell here-strings (`@'...'@` or `@"..."@`) for multi-line commit messages — bash will split them on newlines and pass each line as a separate argument, causing `error: pathspec` failures. Use a single-line `-m "..."` flag instead, or use the `&&` operator to chain `git add` and `git commit` in a single call.
 
 ## Completion Checklist
 
