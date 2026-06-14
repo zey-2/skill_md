@@ -6,7 +6,9 @@ status: active
 sources:
   - "raw/new_economics_of_software.md"
   - "raw/The AI paradox More automation, more humans, more work  Dan Shipper.md"
-tags: [software-economics, scarcity, abundance, saas-moats, attention-economy, agent-native-saas]
+  - "raw/Why We’ll Still Be Employed When AI Can Do Everything.md"
+  - "raw/Geoffrey Huntley - Software Development Now Costs Less Than Minimum Wage.md"
+tags: [software-economics, scarcity, abundance, saas-moats, attention-economy, agent-native-saas, compute-costs]
 ---
 
 # Software Economics: From Scarcity to Abundance
@@ -31,6 +33,22 @@ AI agents, reusable components, and automation have collapsed the unit economics
 - **Development speed**: Tasks that once took months can now be completed in hours or days
 - **SaaS moats erode**: If a CRUD app can be replicated in a weekend, code is no longer the primary competitive advantage. Moats shift to brand, data, ML models, and integration depth
 - **Low-cost experimentation**: The long tail of ideas can now be evaluated and discarded efficiently rather than pre-rejected by cost constraints
+
+## Concrete Unit Economics
+
+Geoffrey Huntley calculated that running frontier models in a loop costs ~$10.42/hour for autonomous software development (Sonnet 4.5 pricing). With cheaper models, it's cents per hour. This transforms the economics of building: a 5-person "model-first company" can produce the output of 100 people, operating on margins that make traditional SaaS companies uncompetitive.
+
+The implication extends beyond software. If knowledge work costs $10.42/hour to automate, every industry structured on knowledge scarcity — legal, medical, financial, consulting — faces the same pressure. The shift is from a knowledge-scarcity economy (charge more because knowledge is rare) to a knowledge-abundance economy (AI amplifies what anyone knows).
+
+Source: `raw/Geoffrey Huntley - Software Development Now Costs Less Than Minimum Wage.md`.
+
+## Model-First Companies
+
+A new organizational form is emerging: the model-first company. These companies work "with the grain of the wood" — using languages and tools that frontier labs dogfood (Rust, Python) rather than fighting the grain with languages where models are weaker (Java, .NET). They have 5–20 people, focus on automating job functions rather than writing code, and produce parabolic revenue growth.
+
+The competitive dynamic: model-first companies are "apex predators that can work on margins." When a 10-person company enters a market against an incumbent with 1,000 employees, the incumbent cannot respond fast enough. The timeline is compressed from years to months because model-first companies improve automatically as models improve — they're building with latent space.
+
+The cascading effect: displaced engineers from incumbents go to new employers, implement AI there, and displace more people. "It could get recursively feral really fast."
 
 ## Agent-Native SaaS as a Counterpoint
 
@@ -59,6 +77,18 @@ AI agents exhibit "jagged intelligence" — they may know the answer but will no
 
 The agent executes; humans provide judgment.
 
+## The Compute Cost Ceiling
+
+After scarcity collapses, a second constraint emerges: compute costs. AI models can outperform humans on many tasks, but intelligence costs energy. Humans run on heuristics evolved over millions of years; AI brute-forces equivalent judgment through expensive inference tokens. The question shifts from "Can AI do this?" to "Is it worth the compute?"
+
+The empirical case: Waymo is objectively safer than human drivers (90% fewer claims per Swiss Re data) and already cheaper than Uber/Lyft for riders. Yet San Francisco's taxi workforce grew. AGI for driving has arrived, and humans are still employed — because scaling compute-intensive driving to every trip doesn't outweigh the marginal cost of human drivers for many use cases.
+
+This creates a ceiling that is economic, not technical. A $20/month model handles routine tasks. A $200/month model handles complex work. But at $2,000/month, the tradeoff for slide decks and email becomes questionable. The "jagged free lunch" — the period when AI capability dramatically exceeds its cost — is temporary. As AI absorbs more tasks, the remaining ones require more compute, and the cost curve bends upward.
+
+See [[concepts/The Compute Cost Tradeoff]] for the full treatment.
+
+Source: MT's counterpoint in `raw/Why We’ll Still Be Employed When AI Can Do Everything.md`.
+
 ## The New Meta
 
 With creation becoming cheap, the value-creating activities shift downstream. See [[concepts/The New Meta - Measurement, Ideation, Iteration]] for the full treatment of measurement, ideation, and iteration as the new bottlenecks.
@@ -71,4 +101,7 @@ With creation becoming cheap, the value-creating activities shift downstream. Se
 - [[concepts/AI Slop and Garbage Collection]] addresses the quality degradation risk when abundant code is generated without governance
 - [[concepts/The New Meta - Measurement, Ideation, Iteration]] — How the value-creating activities shift when building becomes cheap
 - [[concepts/Software 3.0]] covers the broader shift in how software is created and maintained
+- [[concepts/The Compute Cost Tradeoff]] — The economic ceiling on AI adoption when compute exceeds human labor costs
+- [[concepts/AI-Native Engineering Organizations]] — Model-first companies as the organizational template; middle management collapse
 - [[sources/The AI paradox More automation, more humans, more work  Dan Shipper]] - Counterpoint on SaaS demand, agent-native workflows, and automation as management work
+- [[sources/Geoffrey Huntley - Software Development Now Costs Less Than Minimum Wage]] - $10.42/hour unit economics, model-first companies, K-shaped economy

@@ -1,13 +1,16 @@
 ---
 type: concept
 created: 2026-05-11
-updated: 2026-05-28
+updated: 2026-06-14
 status: active
 sources:
   - "raw/There will only be four jobs.md"
   - "raw/How to get your company AI pilled - geoffintech.md"
   - "raw/How Block is becoming the most AI-native enterprise in the world  Dhanji R. Prasanna.md"
   - "raw/The AI paradox More automation, more humans, more work  Dan Shipper.md"
+  - "raw/Why We’ll Still Be Employed When AI Can Do Everything.md"
+  - "raw/Reflecting on a year of Claude Code.md"
+  - "raw/After Automation.md"
 tags: [ai-native-work, org-design, job-archetypes, product-engineering]
 ---
 
@@ -35,6 +38,25 @@ The source uses more provocative labels, including "slop cannon" and "hot people
 The classic product/design/engineering triangle was organized around who produced what. AI tools weaken that boundary because many people can now produce code, designs, specs, automations, copy, internal tools, and analysis. The question shifts from "what title owns this output?" to "what working style does this problem need?"
 
 This connects directly to [[concepts/AI-Native Engineering Organizations]]. Fiona Fung's Claude Code talk describes similar pressure: roles blur, non-engineering partners ship code, engineers lean into content/design/product work, and hiring weights product sense and deep systems expertise over raw throughput.
+
+## The Frame-Reset Cycle
+
+Dan Shipper's argument in the Every newsletter adds a dynamic dimension: AI progress creates more work, not less. Each time models saturate a benchmark, the frame resets. The model saturates that frame too, and the cycle repeats.
+
+The concrete progression one writer experienced:
+
+| Phase | Human Role | What AI Absorbed |
+|---|---|---|
+| 1 | Prompt writer | Models got better at generating prompts |
+| 2 | Context supplier | Models got better at gathering context |
+| 3 | Agent orchestrator | Models are learning orchestration |
+| 4 | Evaluator and goal-setter | Next: defining evals, running experiments |
+
+Each time AI absorbs a piece of the job, the frame expands to more abstract, higher-level work. The archetypes don't disappear — they shift upward. The product-minded builder becomes an evaluator. The stabilizer becomes a governance architect. The adult becomes a strategic framer.
+
+The counterargument (from MT in the same newsletter) is that this progression won't last forever: AI will eventually outpace humans at framing too, but compute costs will keep humans employed anyway. See [[concepts/The Compute Cost Tradeoff]].
+
+Source: `raw/Why We’ll Still Be Employed When AI Can Do Everything.md`.
 
 ## Balance Is the Point
 
@@ -65,6 +87,25 @@ Shipper observes that when everyone can do everything — engineers design, PMs 
 
 The generalist advantage is especially powerful in smaller companies. A PM with product sense, user understanding, and light technical literacy can implement directly without coordinating a large team. A designer with taste and interaction quality can build their own designs instead of handing off to engineers. Both become "dangerous" in the sense that they ship faster than specialists who wait for coordination.
 
+## Roles Merging at Anthropic (First-Party Evidence)
+
+Boris Cherny (Head of Claude Code) and Cat Wu (Head of Product, Claude Code) provide the strongest first-party evidence for roles merging. At Anthropic:
+
+- **Product team** all writes code.
+- **DevRel team** all writes code.
+- **Design team** all writes code. Megan the designer started putting up PRs. Boris: "I was horrified at the beginning. And then she was like, yeah, I'm just fixing the button. And I was like, okay, the code looks good."
+- **PMs** make changes directly in the app.
+- **Finance team** runs Claude Code for projections.
+- **Data science** — "everyone just has Claude Code up on their screens."
+
+Cat: "It's the engineers adopt Claude Code first and then the eng-adjacent roles look over their shoulder and they're like, whoa, this thing is very powerful. Let me try it out."
+
+Boris: "Everyone's going to be both [product and engineering]. I feel pretty strongly that these roles are merging. Our product team all writes code. Our engineers ship products end to end — they have an idea, they build it, they work with legal and marketing."
+
+This is not a theory — it is the daily observed reality at the company that builds the tool. The archetypes still exist (builders, stabilizers, adults, interface people), but they increasingly coexist within single individuals rather than mapping to separate job titles.
+
+Source: `raw/Reflecting on a year of Claude Code.md`.
+
 ## Two Agents Are Better Than One
 
 The full transcript identifies a non-obvious pattern: when a user's work agent (Codex/Co-work) interacts with another agent (a SaaS product's agent or server), the agent-to-agent conversation carries much more context about the user than the user could type directly. Codex knows what the user has been working on, their preferences, their project history, and can share all of that during onboarding to a new tool. This creates a speed-up effect when the software experience assumes the user always has an agent in the loop.
@@ -82,6 +123,10 @@ It also changes debugging: when something goes wrong, the user tells their agent
 - [[concepts/Enterprise AI Adoption Flywheel]] - Explains how these archetypes show up in company-wide adoption.
 - [[sources/The AI paradox More automation, more humans, more work  Dan Shipper]] - Every case evidence for PMs, designers, and forward deployed engineers.
 - [[concepts/Ride the Models]] - The career strategy that enables generalists to thrive.
+- [[concepts/The Compute Cost Tradeoff]] - The economic ceiling that keeps humans employed even when AI can outperform them.
+- [[sources/Why We'll Still Be Employed When AI Can Do Everything]] - The frame-reset cycle and compute cost counterpoint.
+- [[sources/Reflecting on a year of Claude Code]] — First-party Anthropic evidence for roles merging: designers, PMs, finance, and data science all coding.
+- [[sources/After Automation]] — Dan Shipper's Agent Mode essay: same thesis as the podcast, packaged as an interactive agent-readable article.
 
 ## Open Questions
 

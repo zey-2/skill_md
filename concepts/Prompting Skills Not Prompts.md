@@ -5,6 +5,8 @@ updated: 2026-06-06
 status: active
 sources:
   - "raw/How Anthropic Engineers ACTUALLY Prompt Claude Code.md"
+  - "raw/Why We’ll Still Be Employed When AI Can Do Everything.md"
+  - "raw/Lessons from building Claude Code How we use skills.md"
 tags: [skills, prompting, mental-model, workflow, anthropic]
 ---
 
@@ -16,7 +18,7 @@ The central mental model shift for effective AI-agent use: stop writing ad-hoc p
 
 The idea has three parts: (1) the mental shift from per-task prompts to reusable procedures, (2) the three-layer architecture of a well-built skill (description, instructions, tools), and (3) the composability principle — small focused skills that chain together beat monolithic ones.
 
-Source: Austin Marchese's analysis of Anthropic engineering practices, `raw/How Anthropic Engineers ACTUALLY Prompt Claude Code.md`.
+Source: Austin Marchese's analysis of Anthropic engineering practices, `raw/How Anthropic Engineers ACTUALLY Prompt Claude Code.md`. Confirmed by Anthropic's own engineering blog, `raw/Lessons from building Claude Code How we use skills.md`.
 
 ## The Mental Model Shift
 
@@ -76,6 +78,7 @@ Most users skip step 4. They run the skill, get output, and move on. Anthropic e
 - **Save scripts inside skills.** When Claude writes the same code repeatedly, save it as a tool. Deterministic code is cheaper, faster, and more repeatable than AI inference. "If you can use code instead of AI, you should."
 - **Invocation control.** Two flags shape who can use a skill: `user_invocable: false` (agent-only, for internal tools) and `disable_model_invocation` (human-only, for high-risk actions like deployments).
 - **Start with failure modes.** The best skills address recurring agent failures, not just recurring tasks.
+- **Ask your agent what it needs.** Naveen Naidu's workflow (from `raw/Why We’ll Still Be Employed When AI Can Do Everything.md`) shows a practical discovery method: "What tools can I give you so you can work more quickly?" The agent identifies its own inefficiencies, then you build the focused skill it describes. His rule of thumb: "Don't download any skills. Start interacting with the agent, see where it is inefficient, and then ask it to create skills."
 
 ## Connections
 
@@ -86,6 +89,7 @@ Most users skip step 4. They run the skill, get output, and move on. Anthropic e
 - [[concepts/Meta-Skills and Skillification]] — Composable skills are the prerequisite for skillification — skills that create skills.
 - [[concepts/Harness Engineering Principles]] — Skills are harness components; invocation control flags are guardrails.
 - [[concepts/Comprehension-Driven Development]] — The shift from ad-hoc prompts to skills parallels the shift from code generation to comprehension.
+- [[concepts/The Compute Cost Tradeoff]] — "If you can use code instead of AI, you should" is the skill-design expression of the compute cost tradeoff.
 
 ## Contradictions or Tensions
 

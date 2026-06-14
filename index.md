@@ -1,7 +1,7 @@
 ---
 type: index
 created: 2026-04-26
-updated: 2026-06-06
+updated: 2026-06-14
 status: active
 sources:
   - "raw/skill.md for AI Agents.md"
@@ -98,6 +98,15 @@ sources:
   - "raw/How the engineer behind Claude Cowork actually uses Claude  Felix Rieseberg (Anthropic).md"
   - "raw/The AI Skill I Rely On Daily — Priscila Andre de Oliveira, Sentry.md"
   - "raw/Why this Claude Code engineer uses HTML files as AI specs  Thariq Shihipar (Anthropic).md"
+  - "raw/Why We’ll Still Be Employed When AI Can Do Everything.md"
+  - "raw/Geoffrey Huntley - Software Development Now Costs Less Than Minimum Wage.md"
+  - "raw/How 7 Kilo Code Engineers Run Up to 20 Parallel Agents and Still Ship Clean Code.md"
+  - "raw/Lessons from building Claude Code How we use skills.md"
+  - "raw/The Ideation Process from Problems to Practical Solutions.md"
+  - "raw/You NEED to try these open-source AI projects RIGHT NOW.md"
+  - "raw/After Automation.md"
+  - "raw/Reflecting on a year of Claude Code.md"
+  - "raw/Superpowers How Jesse Built the 1 AI Claude Code  Codex Plugin — and Stopped Writing Code.md"
 tags: [index, agent-skills, llm-providers]
 ---
 
@@ -106,6 +115,7 @@ tags: [index, agent-skills, llm-providers]
 ## Concept Articles
 
 - [[concepts/AI Coding Plans|AI Coding Plans]] - Compares model-provider coding plans (Alibaba 百炼, BytePlus ModelArk, Kimi Code, Zhipu GLM, MiniMax, Infini) and coding-tool subscriptions (Copilot, Cursor, Claude Code, Kilo Code).
+- [[concepts/AI-Enhanced Ideation|AI-Enhanced Ideation]] — How AI enhances ideation through Socratic brainstorming, diverge-then-converge pipelines, and research acceleration — while taste and discernment remain irreducibly human.
 - [[concepts/Agent Skills|Agent Skills]] - Defines skills as reusable agent operating procedures, including task helpers, workflow guides, and guardrails.
 - [[concepts/SKILL.md Package Anatomy|SKILL.md Package Anatomy]] - Explains the core `SKILL.md` file and supporting folders such as `scripts/`, `references/`, and `assets/`.
 - [[concepts/Portable Skill Core|Portable Skill Core]] - Describes the small cross-platform metadata core centered on `name` and `description`, and why precise wording matters.
@@ -139,10 +149,12 @@ tags: [index, agent-skills, llm-providers]
 - [[concepts/The AI-Native Engineer and the Rising Ceiling|The AI-Native Engineer and the Rising Ceiling]] — The 10x engineer is outdated. Shallow vs deep AI use, setup investment, and why hiring should change.
 - [[concepts/Understanding as the Human Bottleneck|Understanding as the Human Bottleneck]] — "You can outsource your thinking, but you can't outsource your understanding." Syntax can be forgotten; concepts must remain sharp.
 - [[concepts/Harness Engineering Principles|Harness Engineering Principles]] — When code is free, the scarce resources shift to human time and context windows. Engineers become staff-level architects designing environments, guardrails, and feedback loops for agents.
+- [[concepts/Anti-To-Do List and Abstraction Layering|Anti-To-Do List and Abstraction Layering]] — Workflow pattern: when a task is tedious, go one abstraction layer up. First "Can Claude do this?" then "How do I never do this again?" Eliminate task categories, not tasks.
 - [[concepts/Agent Legibility|Agent Legibility]] — Making the repository, application, and observability stack directly accessible and reasoning-friendly for agents. AGENTS.md as table of contents, not encyclopedia.
 - [[concepts/AI Slop and Garbage Collection|AI Slop and Garbage Collection]] — Full agent autonomy causes pattern drift and slop accumulation. Golden principles and continuous background refactoring function as garbage collection.
 - [[concepts/Symphony Orchestration|Symphony Orchestration]] — Open-source spec that turns issue trackers into always-on agent control planes. Every open task gets a dedicated agent, achieving 500% PR increases.
 - [[concepts/Spec-Driven Development|Spec-Driven Development]] — Specifications become the primary programming surface. Code is a disposable build artifact compiled from specs by LLMs as "fuzzy compilers."
+- [[concepts/HTML as AI Spec Format|HTML as AI Spec Format]] — HTML as the preferred format for AI-generated specs, plans, and PRDs because visual, scrollable, interactive artifacts keep humans in the loop. "HTML is the new Markdown."
 - [[concepts/Collaborative AI Engineering|Collaborative AI Engineering]] — Alignment must happen before agents start working, not after. Individual productivity without team coordination creates wasted work and coordination debt. Quality, not speed, is the new differentiator.
 - [[concepts/Comprehension-Driven Development|Comprehension-Driven Development]] — 67% of AI-assisted work is comprehension, not generation. Empirical data from Priscila's 116-session analysis at Sentry and Thariq Shihipar's 99% planning token allocation.
 - [[concepts/Replacing Code with Skills|Replacing Code with Skills]] — Cursor replaced ~15K lines of application code with a ~200-line skill, trading hard-coded guardrails for prompt-based instructions backed by evals and RL training.
@@ -164,6 +176,8 @@ tags: [index, agent-skills, llm-providers]
 - [[concepts/Software Economics|Software Economics]] — The shift from scarcity-driven to abundance-driven software development. When code is free, bottlenecks move to attention, governance, and judgment.
 - [[concepts/The New Meta - Measurement, Ideation, Iteration|The New Meta: Measurement, Ideation, Iteration]] — When building is cheap, value creation shifts to measuring what matters, choosing the right ideas, and iterating fast.
 - [[concepts/AI agency|AI Agency]] — Spectrum of AI agency: autonomy levels, agency dimensions, instrumental vs terminal goals, the responsibility gap, and how AI erodes human agency.
+- [[concepts/The Compute Cost Tradeoff|The Compute Cost Tradeoff]] — AI capability ≠ AI adoption. Intelligence costs energy; humans evolved efficient heuristics over millions of years. The question shifts from "Can AI do this?" to "Is it worth the compute?"
+- [[concepts/Parallel Agent Management|Parallel Agent Management]] — Foreground (2–4, actively managed) vs. background (0–20+, fire-and-forget) agents. Task sizing by reviewability, planning with thinking models + fast execution, and cross-agent verification loops.
 
 ## Lesson Plans
 
@@ -264,6 +278,14 @@ tags: [index, agent-skills, llm-providers]
 - `raw/How the engineer behind Claude Cowork actually uses Claude  Felix Rieseberg (Anthropic).md` - Felix Rieseberg on model selection heuristics, anti-to-do list pattern, email as personal inventory, hardware Claude buddy, and the imagination gap.
 - `raw/The AI Skill I Rely On Daily — Priscila Andre de Oliveira, Sentry.md` - Priscila's analysis of 116 Claude sessions: 67% comprehension, 2% generation. "Catch Me Up" skill with six exploration modes.
 - `raw/Why this Claude Code engineer uses HTML files as AI specs  Thariq Shihipar (Anthropic).md` - Thariq Shihipar on HTML as spec format, compute allocation, 99% tokens on planning, and living design systems.
+- `raw/Why We’ll Still Be Employed When AI Can Do Everything.md` - Every newsletter: Microsoft/OpenClaw enterprise roadmap case study, Naveen Naidu's custom skill workflow, Dan Shipper vs MT debate on AI creating more work vs compute cost keeping humans employed.
+- `raw/Geoffrey Huntley - Software Development Now Costs Less Than Minimum Wage.md` - PyCon Lithuania talk: $10.42/hour software development, knowledge scarcity→abundance, model-first companies, middle management collapse, identity erasure, $800K token spend.
+- `raw/How 7 Kilo Code Engineers Run Up to 20 Parallel Agents and Still Ship Clean Code.md` - Kilo Code blog: foreground (2–4) vs background (20+) agents, 60% context quality drop, plan-with-thinking/execute-with-fast pattern, cross-agent verification loops, software as gardening.
+- `raw/Lessons from building Claude Code How we use skills.md` - Anthropic engineering blog: nine skill categories, skills as folders, gotchas as highest-signal content, progressive disclosure via file system, config.json setup, on-demand hooks, repo vs marketplace distribution.
+- `raw/The Ideation Process from Problems to Practical Solutions.md` - Structured guide to the ideation process: Understand → Explore → Generate → Combine → Evaluate → Prototype → Learn, with methods including SCAMPER, Crazy 8s, and impact-effort prioritisation.
+- `raw/You NEED to try these open-source AI projects RIGHT NOW.md` - Matthew Berman video: four open-source projects including Last30Days (skill-based trending search), Open Notebook (local NotebookLM), Agent Skills (seven-stage engineering workflow), and Headroom (47–92% context compression).
+- `raw/After Automation.md` - Dan Shipper's Agent Mode essay: AI creates more work, not less. Ships with companion GitHub repo, interactive prompts, and objections-and-responses for agent-readable engagement.
+- `raw/Reflecting on a year of Claude Code.md` - Boris Cherny and Cat Wu on Claude Code's first year: every mistake becomes a skill, verification beyond unit tests, auto mode replacing plan mode, routines as killer app, roles merging at Anthropic, context minimalism, hundreds of agents via Remote Control.
 
 ## Source Summaries
 
@@ -290,6 +312,14 @@ tags: [index, agent-skills, llm-providers]
 - [[sources/How the engineer behind Claude Cowork actually uses Claude  Felix Rieseberg (Anthropic)|How the engineer behind Claude Cowork actually uses Claude — Felix Rieseberg]] — Felix Rieseberg on model selection heuristics, anti-to-do list, email as personal inventory, hardware Claude buddy, and the imagination gap.
 - [[sources/The AI Skill I Rely On Daily — Priscila Andre de Oliveira, Sentry|The AI Skill I Rely On Daily — Priscila Andre de Oliveira, Sentry]] — Priscila's 116-session analysis: 67% comprehension, 2% generation. "Catch Me Up" skill with six exploration modes.
 - [[sources/Why this Claude Code engineer uses HTML files as AI specs  Thariq Shihipar (Anthropic)|Why this Claude Code engineer uses HTML files as AI specs — Thariq Shihipar]] — Thariq Shihipar on HTML as spec format, compute allocation, 99% tokens on planning, and living design systems.
+- [[sources/Why We'll Still Be Employed When AI Can Do Everything|Why We'll Still Be Employed When AI Can Do Everything]] — Every newsletter: Microsoft/OpenClaw enterprise roadmap case study, Naveen Naidu's custom skill workflow, the frame-reset cycle, and the compute cost tradeoff argument.
+- [[sources/Geoffrey Huntley - Software Development Now Costs Less Than Minimum Wage|Geoffrey Huntley — Software Development Now Costs Less Than Minimum Wage]] — PyCon Lithuania: $10.42/hour unit economics, model-first companies, identity erasure, K-shaped economy, middle management collapse, "build your damn agent."
+- [[sources/How 7 Kilo Code Engineers Run Up to 20 Parallel Agents and Still Ship Clean Code|How 7 Kilo Code Engineers Run Up to 20 Parallel Agents]] — Foreground vs. background agents, 60% context quality drop, plan-then-execute pattern, verification loops, software as gardening.
+- [[sources/Lessons from building Claude Code How we use skills|Lessons from building Claude Code: How we use skills]] — Anthropic internal: nine skill categories, skills as folders, gotchas as highest-signal content, progressive disclosure, config.json, on-demand hooks, marketplace governance.
+- [[sources/The Ideation Process from Problems to Practical Solutions]] — Structured ideation pipeline (Understand → Explore → Generate → Combine → Evaluate → Prototype → Learn) applied to problem-solving and skill design.
+- [[sources/You NEED to try these open-source AI projects RIGHT NOW]] — Matthew Berman: Last30Days (skill-based search), Open Notebook (local NotebookLM), Agent Skills (engineering workflow), Headroom (47–92% context compression with learn loop).
+- [[sources/After Automation]] — Dan Shipper's Agent Mode essay: same AI-creates-more-work thesis as the podcast, packaged as an interactive agent-readable article with companion repo.
+- [[sources/Reflecting on a year of Claude Code]] — Boris Cherny and Cat Wu on Claude Code's first year: every mistake becomes a skill, auto mode, routines, roles merging, context minimalism, hundreds of agents via Remote Control.
 
 - [[sources/2026-04-26 Agent orchestration frameworks source|2026-04-26 Agent orchestration frameworks source]] - Initial source-summary backfill: LangGraph, Microsoft Agent Framework, and CrewAI evidence for graph workflows, durable execution, state, human-in-the-loop, observability, and multi-agent orchestration.
 - [[sources/2026-04-26 Agent Skills specification evaluation and description optimization|2026-04-26 Agent Skills specification evaluation and description optimization]] - Initial source-summary backfill: AgentSkills.io evidence for `SKILL.md` validation, trigger evals, output evals, assertions, baselines, and iteration.
@@ -374,3 +404,4 @@ tags: [index, agent-skills, llm-providers]
 
 - `courses/presentation-agency.html` — Presentation on AI agency for a general audience.
 - `courses/presentation-the-human-bottleneck.html` — Presentation on understanding as the human bottleneck.
+- [comic-ai-leverage-not-magic-prompt](courses/comic-ai-leverage-not-magic-prompt.md) — Image generation prompt for an educational comic strip: "AI Is Leverage, Not Magic."

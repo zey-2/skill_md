@@ -1,7 +1,7 @@
 ---
 type: log
 created: 2026-04-26
-updated: 2026-06-06
+updated: 2026-06-14
 status: active
 sources:
   - "raw/skill.md for AI Agents.md"
@@ -19,6 +19,7 @@ sources:
   - "raw/Snyk Finds Prompt Injection in 36%, 1467 Malicious Payloads in a ToxicSkills Study of Agent Skills Supply Chain Compromise.md"
   - "raw/Meta-Meta-Prompting The Secret to Making AI Agents Work.md"
   - "raw/How Anthropic Engineers ACTUALLY Prompt Claude Code.md"
+  - "raw/Lessons from building Claude Code How we use skills.md"
 tags: [log, agent-skills, agentic-engineering]
 ---
 
@@ -1343,3 +1344,166 @@ Follow-ups:
 - The `[[concepts/Ride the Models]]` and `[[concepts/Anti-To-Do List and Abstraction Layering]]` links in existing source summaries point to non-existent concept pages — consider creating them or redirecting to the course article.
 - The `[[concepts/HTML as AI Spec Format]]` link in the Thariq source summary points to a non-existent concept page.
 - The `[[concepts/Ride the Models]]` link in the new source summary also points to a non-existent concept page (exists only as a course article).
+
+## [2026-06-07] ingest | Why We'll Still Be Employed When AI Can Do Everything
+
+Ingested Every newsletter (Laura Entis, 2026-06-05). Also noted that `raw/How Anthropic Engineers ACTUALLY Prompt Claude Code.md` had a line-ending-only change — no content re-ingestion needed.
+
+Files created or updated:
+
+- `sources/Why We'll Still Be Employed When AI Can Do Everything.md` — New source summary covering enterprise AI roadmap difficulty (Microsoft/OpenClaw), Naveen Naidu's custom skill workflow, the frame-reset cycle (Dan Shipper), and the compute cost tradeoff counterpoint (MT).
+- `concepts/The Compute Cost Tradeoff.md` — New concept: AI capability ≠ AI adoption because intelligence costs energy. The question shifts from "Can AI do this?" to "Is it worth the compute?" Uses Waymo as empirical evidence.
+- `concepts/Software Economics.md` — Added "The Compute Cost Ceiling" section with Waymo evidence and the "jagged free lunch" framing.
+- `concepts/AI-Native Work Archetypes.md` — Added "The Frame-Reset Cycle" section showing how AI creates more work (prompts → context → orchestration → evals).
+- `concepts/Enterprise AI Adoption Flywheel.md` — Added "The Speed Mismatch Problem" section with Microsoft/OpenClaw timeline (Nov 2025 viral → Jun 2026 Scout launch, already behind the news cycle).
+- `concepts/Prompting Skills Not Prompts.md` — Added Naveen's "ask your agent what it needs" workflow to Practical Implications.
+- `index.md` — Added new concept page, source summary, and raw source entry.
+
+Important decisions:
+
+- Created "The Compute Cost Tradeoff" as a standalone concept rather than folding into Software Economics, because it represents a distinct constraint (energy/compute) that applies beyond software development.
+- Did not create a concept page for the "frame-reset cycle" — it fits naturally as a section in AI-Native Work Archetypes rather than standing alone.
+- Did not create concept pages for the OpenClaw timeline or model linguistic quirks — these are evidence/color rather than reusable concepts.
+
+Follow-ups:
+
+- The compute cost argument assumes energy costs stay high. If inference costs continue declining at historical rates, the concept may need revision.
+- The Dan Shipper vs MT debate is a direct contradiction published in the same newsletter — worth tracking as a source of tension in the wiki.
+- Naveen's "don't download skills" advice could be its own short concept if the skill marketplace pattern becomes more prominent.
+
+## [2026-06-07] ingest | Geoffrey Huntley (PyCon Lithuania) + Kilo Code parallel agents
+
+Ingested two new raw sources. Also confirmed that `raw/How Anthropic Engineers ACTUALLY Prompt Claude Code.md` has only a line-ending change — no content re-ingestion needed. `raw/Why We’ll Still Be Employed When AI Can Do Everything.md` was already ingested in the prior entry.
+
+Files created or updated:
+
+- `sources/Geoffrey Huntley - Software Development Now Costs Less Than Minimum Wage.md` — New source summary: PyCon Lithuania talk on $10.42/hour software development, knowledge scarcity→abundance, model-first companies, middle management collapse, identity erasure, $800K in tokens, "build your damn agent."
+- `sources/How 7 Kilo Code Engineers Run Up to 20 Parallel Agents and Still Ship Clean Code.md` — New source summary: foreground (2–4) vs. background (20+) agents, 60% context quality drop, plan-with-thinking/execute-with-fast pattern, cross-agent verification loops, software as gardening.
+- `concepts/Parallel Agent Management.md` — New concept: the foreground/background split, context window Goldilocks zone, plan-then-execute pattern, verification loops, and software-as-gardening metaphor.
+- `concepts/Software Economics.md` — Added "Concrete Unit Economics" ($10.42/hour) and "Model-First Companies" sections.
+- `concepts/AI-Native Engineering Organizations.md` — Added "Model-First Companies" section (5–20 people, middle management collapse, compressed timelines) and "Parallel Agent Workflows" section.
+- `concepts/Tokenmaxxing.md` — Added "Hyper-Engineer Communities" section ($20K/month gated community, $800K personal spend).
+- `concepts/Context Rot.md` — Added Kilo Code evidence: quality drops at 60% context fill, well before 95% compaction.
+- `concepts/The AI-Native Engineer and the Rising Ceiling.md` — Added "Consumer vs. Builder" section (cursor user vs. agent builder as the new hiring line).
+- `concepts/Self-Improving Skills.md` — Added Geoffrey Huntley source for recursive self-improvement pattern.
+- `index.md` — Added 2 raw sources, 2 source summaries, 1 concept page.
+- `log.md` — This entry.
+
+Important decisions:
+
+- Created "Parallel Agent Management" as a standalone concept because it captures a distinct practical workflow (foreground/background, task sizing, verification loops) not reducible to existing concepts.
+- Did not create a separate concept for "model-first companies" — it fits as a section in both Software Economics and AI-Native Engineering Organizations.
+- Did not create a concept for "identity erasure" — it's a symptom of Software 3.0 and the rising ceiling, not a standalone idea.
+- The Geoffrey Huntley source directly contradicts the [[concepts/The Compute Cost Tradeoff|compute cost tradeoff]] — Huntley says compute is already cheap enough to disrupt; the Every newsletter argues it's the ceiling. Recorded as tension in both source summaries.
+
+Follow-ups:
+
+- The "agile is waste" claim from Huntley is strong. Consider whether it warrants a concept page or fits as evidence in existing process-related concepts.
+- The consumer-vs-builder hiring line could become its own concept if more sources adopt this framing.
+- The 60% context quality drop from Kilo Code is a concrete number that should be cross-referenced with any future benchmark data on context rot.
+
+## [2026-06-08] ingest | Lessons from building Claude Code: How we use skills
+
+Ingested Anthropic's engineering blog by Thariq Shihipar on internal skill practices at Anthropic. This was the one remaining uningested raw source from the 2026-06-07 batch.
+
+Raw source processed:
+
+- `raw/Lessons from building Claude Code How we use skills.md` — Anthropic engineering blog: nine skill categories from internal catalog, skills as folders (not just SKILL.md), gotchas as highest-signal content, progressive disclosure via file system, config.json for setup, descriptions for models not humans, memory via log files, scripts inside skills, on-demand hooks, repo vs marketplace distribution, skill composition, usage measurement via PreToolUse hooks.
+
+Files created:
+
+- `sources/Lessons from building Claude Code How we use skills.md` — Source summary with nine-category taxonomy, gotchas pattern, progressive disclosure, config.json, on-demand hooks, marketplace governance, and skill composition.
+
+Files updated:
+
+- `concepts/Skill Authoring Workflow.md` — Added nine skill categories as a gap-analysis framework, gotchas as highest-signal content, config.json setup pattern, and on-demand hooks.
+- `concepts/Skill Distribution and Installation.md` — Added repo check-in vs plugin marketplace (Anthropic internal), organic marketplace governance, and skill composition.
+- `concepts/Skill Governance and Metrics.md` — Added PreToolUse hook for measuring skill usage and organic marketplace governance.
+- `concepts/Self-Improving Skills.md` — Added iterative gotcha accumulation as a manual self-improvement pattern.
+- `index.md` — Added new raw source to frontmatter and Raw Sources; added source summary to Source Summaries.
+- `log.md` — This entry.
+
+Important decisions:
+
+- Did not create a new concept page for the nine skill categories — they fit as a section in Skill Authoring Workflow as a gap-analysis framework.
+- Did not create a concept page for "skills are folders" — it reinforces the existing SKILL.md Package Anatomy concept rather than standing alone.
+- Recorded the "descriptions for the model, not humans" claim as a stronger version of the cross-project research's "describe triggering conditions" — Anthropic's version says the description is literally what Claude scans to decide.
+- The "don't state the obvious" advice tensions with other sources recommending thoroughness. Recorded as a model-capability-dependent tradeoff.
+
+Follow-ups:
+
+- The nine-category taxonomy could become the wiki's standard categorization if other sources adopt it.
+- The PreToolUse hook for usage measurement has example code linked in the article — consider adding a practical governance section if this becomes a recurring pattern.
+- The "skills are folders" framing could warrant updating SKILL.md Package Anatomy if the misconception persists in other sources.
+
+## [2026-06-14] ingest | Ideation process + open-source AI projects (Matthew Berman)
+
+Ingested two new raw sources: a structured ideation methodology and a video showcasing four open-source projects including context compression tooling.
+
+Raw sources processed:
+
+- `raw/The Ideation Process from Problems to Practical Solutions.md` — ChatGPT-generated guide: seven-stage pipeline (Understand → Explore → Generate → Combine → Evaluate → Prototype → Learn), methods (SCAMPER, Crazy 8s, brainwriting, analogy thinking), impact-effort prioritisation, and iteration loop.
+- `raw/You NEED to try these open-source AI projects RIGHT NOW.md` — Matthew Berman video: Last30Days (skill-based trending search from Reddit/HN/Poly Market/X/YouTube/TikTok), Open Notebook (local NotebookLM clone with podcast generation), Agent Skills (seven-stage engineering workflow with `/interview-me`), and Headroom (context compression wrapper with 47–92% token savings and `headroom learn` self-improvement).
+
+Files created:
+
+- `sources/The Ideation Process from Problems to Practical Solutions.md` — Source summary with seven-stage pipeline, iteration loop, and connections to skill authoring.
+- `sources/You NEED to try these open-source AI projects RIGHT NOW.md` — Source summary covering all four projects with concrete token savings evidence for Headroom.
+
+Files updated:
+
+- `concepts/Skill Authoring Workflow.md` — Added "Ideation Pipeline for Skill Design" section mapping the seven-stage ideation process to skill authoring. Added source to frontmatter.
+- `concepts/Tokenmaxxing.md` — Added "Context Compression as Tokenmaxxing" section with Headroom's concrete token savings table (47–92%) and `headroom learn` self-improvement loop. Added source to frontmatter.
+- `concepts/Context Rot.md` — Added Headroom as context compression evidence: tools that compress context before it reaches the model mitigate context rot by keeping effective context below the 60% quality-drop threshold. Added source to frontmatter.
+- `index.md` — Added 2 raw sources to frontmatter and Raw Sources; added 2 source summaries to Source Summaries.
+- `log.md` — This entry.
+
+Important decisions:
+
+- Did not create new concept pages for either source. The ideation methodology maps naturally to the existing Skill Authoring Workflow. The Berman video projects reinforce existing concepts (Tokenmaxxing, Context Rot, Progressive Disclosure) rather than introducing new ones.
+- Did not create a standalone concept for "context compression" — it fits as a section in Tokenmaxxing (it's a tokenmaxxing tool) and evidence in Context Rot (it mitigates the problem).
+- Did not create a concept for Last30Days as "skills as search interfaces" — interesting pattern but not enough evidence for a standalone page yet.
+- Recorded Headroom's default telemetry and bundled "serena" installation as a supply-chain concern in the source summary, linking to existing Skill Security concept.
+
+Follow-ups:
+
+- Headroom's `headroom learn` pattern (mining failed sessions → writing corrections to CLAUDE.md/AGENTS.md) is a concrete self-improvement tool worth cross-referencing with Self-Improving Skills if more tools adopt this pattern.
+- Last30Days's "skill as search interface" pattern could become a concept if more skills emerge that function as information retrieval interfaces rather than task workflows.
+- Open Notebook's local-first architecture connects to Personal AI Agents and Memory Systems — worth revisiting if that concept page expands.
+
+## [2026-06-14] ingest | After Automation + Reflecting on a Year of Claude Code
+
+Ingested two new raw sources: Dan Shipper's Agent Mode interactive essay and Boris Cherny & Cat Wu's Claude Code first-year retrospective.
+
+Raw sources processed:
+
+- `raw/After Automation.md` — Dan Shipper's Every essay repackaged as an Agent Mode interactive article with companion GitHub repo (`EveryInc/after-automation-agent-mode`), setup prompts for Codex/Claude Code/OpenClaw, claims.md, objections-and-responses.md, and starter prompts.
+- `raw/Reflecting on a year of Claude Code.md` — Boris Cherny (Head of Claude Code) and Cat Wu (Head of Product) on: every mistake becomes a skill, verification beyond unit tests (agent tests itself in bash, computer use), auto mode replacing plan mode (4.6/4.7 don't need planning), routines as the first programmatic application (bug-fix routines, proactive issue resolution), roles merging at Anthropic (designers/PMs/finance/data science all coding), context minimalism (minimal prompt, let model figure it out), hundreds of agents via agent view + Remote Control + voice mode, and loop as the next leap.
+
+Files created:
+
+- `sources/After Automation.md` — Source summary covering Agent Mode as a publishing format, core claim, and interactive engagement pattern.
+- `sources/Reflecting on a year of Claude Code.md` — Source summary with 10 key points covering verification, auto mode, routines, roles merging, context minimalism, hundreds of agents, and the PC parallel.
+
+Files updated:
+
+- `concepts/AI-Native Work Archetypes.md` — Added "Roles Merging at Anthropic" section: designers, PMs, finance, and data science all coding. Strongest first-party evidence for the archetypes thesis. Added sources to frontmatter.
+- `concepts/Self-Improving Skills.md` — Added "Every Mistake Becomes a Skill" section: Boris's human-triggered skill creation from failures as the most practical self-improvement pattern. Added source to frontmatter.
+- `concepts/Parallel Agent Management.md` — Added three new sections: "Routines" (event-driven background agents), "Hundreds of Agents" (agent view, Remote Control, voice mode), and "Auto Mode" (permission model evolution). Added source to frontmatter.
+- `concepts/Context Development Lifecycle.md` — Added "Context Minimalism: A Counterpoint" section: Boris and Cat advocate minimal prompts, tension with Debois's systematic context engineering. Resolution: engineering applies to retrieval, not instructions. Added source to frontmatter.
+- `index.md` — Added 2 raw sources to frontmatter and Raw Sources; added 2 source summaries to Source Summaries.
+- `log.md` — This entry.
+
+Important decisions:
+
+- Did not create new concept pages. Both sources reinforce existing concepts with stronger evidence rather than introducing new ideas.
+- The "After Automation" essay is a different format (interactive Agent Mode) from the Lenny's Podcast source but covers the same thesis. Captured the format novelty (agent-readable publishing) without duplicating the argument.
+- Recorded context minimalism as a tension with Context Development Lifecycle rather than a contradiction. The resolution (engineering for retrieval, minimalism for instructions) preserves both frameworks.
+- Boris's "hundreds of agents" contradicts the Kilo Code "2–4 foreground" finding. Recorded as tooling-dependent: agent view + Remote Control + routines raise the practical limit.
+- Boris's "auto mode replaces plan mode" tensions with the plan-then-execute pattern. Recorded as model-dependent: 4.6/4.7 plan implicitly.
+
+Follow-ups:
+
+- Boris's "every mistake becomes a skill" could become its own short concept if more sources adopt this framing. Currently it fits well as a section in Self-Improving Skills.
+- The Agent Mode publishing format (companion repo + interactive prompts) could become a concept about agent-readable content if the pattern spreads.
+- Context minimalism vs. context engineering is a live debate worth tracking as models improve and retrieval tooling matures.

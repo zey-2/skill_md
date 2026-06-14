@@ -8,6 +8,7 @@ sources:
   - "raw/How Block is becoming the most AI-native enterprise in the world  Dhanji R. Prasanna.md"
   - "raw/Running an AI-native engineering org.md"
   - "raw/The AI paradox More automation, more humans, more work  Dan Shipper.md"
+  - "raw/Why We’ll Still Be Employed When AI Can Do Everything.md"
 tags: [ai-adoption, ai-native-orgs, enterprise-ai, internal-agents, org-design]
 ---
 
@@ -27,6 +28,23 @@ Enterprise AI adoption compounds when the organization treats AI as an operating
 | Public sharing | Wins become visible and contagious | Slack channels, office hours, all-hands spotlights, hackathons, leaderboards | Companywide hack week, top IC gatherings, open-source sharing, executive dogfooding |
 | Platform absorption | Repeated patterns become shared infrastructure | Central platform team builds connectors, plumbing, enablement, and skill distribution | Functional org design, common platforms, MCP wrappers, Goose extensibility |
 | Raised bar | Hiring, performance, and team expectations adjust | AI proficiency ladder and mandatory expectations | Learning mindset, AI openness in interviews, critical thinking plus tool fluency |
+
+## The Speed Mismatch Problem
+
+The Microsoft-OpenClaw timeline illustrates a fundamental challenge for enterprise AI roadmaps. Microsoft moved at what would normally be considered blinding speed for a 100,000-engineer company:
+
+| Date | Event |
+|---|---|
+| Nov 2025 | OpenClaw launches |
+| Feb 2026 | Nadella calls it a "virus"-like security risk |
+| May 2026 | "Project Lobster" internally testing "ClawPilot" |
+| Jun 2026 | Scout launched at Microsoft Build |
+
+But OpenClaw search traffic peaked in January 2026 and declined sharply, helped by Anthropic ending subsidized Max plan usage in April. By the time Scout launched, the developer community had already moved on to other agents (Hermes, Gemini Spark, agentic features in Claude and Codex).
+
+The lesson: the viral moment passes faster than organizational response times. Enterprise product teams can execute perfectly and still be behind the news cycle by launch day. This suggests the flywheel needs to spin faster than quarterly planning cycles — or companies need to accept that first-mover advantage in AI tooling is measured in weeks, not months.
+
+Source: `raw/Why We’ll Still Be Employed When AI Can Do Everything.md`.
 
 ## Durable Claims
 
@@ -68,6 +86,8 @@ An enterprise adoption system needs several layers:
 - [[concepts/Meta-Skills and Skillification]] - Ramp's Dojo shows how reusable workflows become shared skills.
 - [[concepts/Tokenmaxxing]] - Ramp's "infinite learning budget" argument reframes token spend as leverage rather than cost center.
 - [[concepts/Understanding as the Human Bottleneck]] - Both sources keep human judgment, deep understanding, and accountability in the loop.
+- [[concepts/The Compute Cost Tradeoff]] - The economic ceiling on AI adoption that keeps humans in the loop even when AI capability is sufficient.
+- [[sources/Why We'll Still Be Employed When AI Can Do Everything]] - Microsoft/OpenClaw timeline evidence for the speed mismatch problem.
 
 ## Contradictions or Tensions
 
