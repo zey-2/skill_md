@@ -129,8 +129,9 @@ When the user asks to ingest a source:
 7. Record contradictions, confirmations, and changes in confidence.
 8. Update `index.md`.
 9. Append a `log.md` entry with files changed and follow-ups.
+10. Git commit all changes from this ingest round before moving to the next source or ending the session.
 
-Prefer ingesting one source at a time when the user is actively reviewing. For batch ingests, keep summaries more mechanical and log the batch boundaries clearly.
+Prefer ingesting one source at a time when the user is actively reviewing. For batch ingests, keep summaries more mechanical and log the batch boundaries clearly. Always commit after each source ingest so work is not lost.
 
 ## Query Workflow
 
@@ -207,6 +208,7 @@ For ingest or maintenance work, finish with:
 - `index.md` updated.
 - `log.md` appended.
 - Contradictions or open questions recorded.
+- **Git committed** all changes from this round.
 - A concise summary to the user naming the changed files.
 
 For query-only work, finish with:
