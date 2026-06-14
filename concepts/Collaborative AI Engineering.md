@@ -1,11 +1,12 @@
 ---
 type: concept
 created: 2026-05-03
-updated: 2026-05-11
+updated: 2026-06-14
 status: active
 sources:
   - "raw/Collaborative AI Engineering One Dev, Two Dozen Agents, Zero Alignment — Maggie Appleton, GitHub.md"
   - "raw/Running an AI-native engineering org.md"
+  - "raw/after-automation.pdf"
 tags: [collaboration, alignment, multiplayer, agent-collaboration, github-next, ace]
 ---
 
@@ -59,6 +60,16 @@ Each session is both a multiplayer chat (like Slack) and a sandboxed micro VM in
 
 Instead of humans checking what's happening, agents summarize what teammates have been working on, prompt you to pick up unfinished work, and notify you when someone is about to extend a feature you originally built. When all conversations around code are available to agents, they gain access to a **social information fabric** that helps keep the team oriented.
 
+## The Human Sandwich
+
+Dan Shipper describes the core collaboration pattern at Every: "You're responsible for managing the agents at the start and end of each one of their tasks, making sure it's done well, and finding the next piece of work to do. Kieran calls this the human 'sandwich' — we're the bread on either end of the AI's work."
+
+The engineers at Every spend all day going back and forth with agents: planning features, reviewing work, tuning the system. This extends beyond coding — Shipper composes writing in Proof inside Codex (with subagents for drafts, research, copy editing) and does email in Cora inside Codex's in-app browser.
+
+The human sandwich is a concrete operationalization of the alignment problem: the human sets the frame at the start and evaluates the result at the end. The agent executes in between.
+
+Source: `raw/after-automation.pdf`.
+
 ## The Philosophical Shift
 
 ### Reclaim Time for Craftsmanship
@@ -86,6 +97,7 @@ Source: `raw/Running an AI-native engineering org.md`.
 - [[concepts/Symphony Orchestration]] — Symphony coordinates agents via issue trackers; collaborative engineering coordinates humans *and* agents via shared workspaces.
 - [[concepts/Agent Legibility]] — Making codebases legible to agents is one side; making team context legible to both humans and agents is the other.
 - [[concepts/Agentic Engineering vs Vibe Coding]] — Agentic engineering at team scale requires alignment infrastructure, not just individual discipline.
+- [[sources/After Automation]] — The "human sandwich" pattern as a concrete collaboration model.
 - [[concepts/Replacing Code with Skills]] — The best-of command is a form of collaborative comparison: humans evaluate multiple model outputs on the same task and compose the best pieces together.
 
 ## Source

@@ -108,6 +108,7 @@ sources:
   - "raw/Reflecting on a year of Claude Code.md"
   - "raw/Superpowers How Jesse Built the 1 AI Claude Code  Codex Plugin — and Stopped Writing Code.md"
   - "raw/Making AI Work Leadership, Lab, and Crowd.md"
+  - "raw/after-automation.pdf"
 tags: [index, agent-skills, llm-providers]
 ---
 
@@ -179,6 +180,7 @@ tags: [index, agent-skills, llm-providers]
 - [[concepts/AI agency|AI Agency]] — Spectrum of AI agency: autonomy levels, agency dimensions, instrumental vs terminal goals, the responsibility gap, and how AI erodes human agency.
 - [[concepts/The Compute Cost Tradeoff|The Compute Cost Tradeoff]] — AI capability ≠ AI adoption. Intelligence costs energy; humans evolved efficient heuristics over millions of years. The question shifts from "Can AI do this?" to "Is it worth the compute?"
 - [[concepts/Parallel Agent Management|Parallel Agent Management]] — Foreground (2–4, actively managed) vs. background (0–20+, fire-and-forget) agents. Task sizing by reviewability, planning with thinking models + fast execution, and cross-agent verification loops.
+- [[concepts/Zeno's Paradox of AI|Zeno's Paradox of AI]] — AI commoditizes explicit competence; this creates demand for what's different; demand for difference is demand for human experts. The cycle repeats at every capability level. Frame vs. framer: benchmarks measure frames, humans are framers.
 
 ## Lesson Plans
 
@@ -285,7 +287,8 @@ tags: [index, agent-skills, llm-providers]
 - `raw/Lessons from building Claude Code How we use skills.md` - Anthropic engineering blog: nine skill categories, skills as folders, gotchas as highest-signal content, progressive disclosure via file system, config.json setup, on-demand hooks, repo vs marketplace distribution.
 - `raw/The Ideation Process from Problems to Practical Solutions.md` - Structured guide to the ideation process: Understand → Explore → Generate → Combine → Evaluate → Prototype → Learn, with methods including SCAMPER, Crazy 8s, and impact-effort prioritisation.
 - `raw/You NEED to try these open-source AI projects RIGHT NOW.md` - Matthew Berman video: four open-source projects including Last30Days (skill-based trending search), Open Notebook (local NotebookLM), Agent Skills (seven-stage engineering workflow), and Headroom (47–92% context compression).
-- `raw/After Automation.md` - Dan Shipper's Agent Mode essay: AI creates more work, not less. Ships with companion GitHub repo, interactive prompts, and objections-and-responses for agent-readable engagement.
+- `raw/After Automation.md` - Dan Shipper's Agent Mode setup page: prompts and instructions for using the companion GitHub repo with Codex, Claude Code, or OpenClaw.
+- `raw/after-automation.pdf` - Shipper's full essay (PDF print): two modes of working with agents, named agents at Every (Claudie, Andy, Viktor, Fin), the human sandwich, cheap competence cycle, Zeno's Paradox of AI, frame vs. framer, agents without agency, Senior Engineer benchmark (GPT-5.5 = 62/100).
 - `raw/Reflecting on a year of Claude Code.md` - Boris Cherny and Cat Wu on Claude Code's first year: every mistake becomes a skill, verification beyond unit tests, auto mode replacing plan mode, routines as killer app, roles merging at Anthropic, context minimalism, hundreds of agents via Remote Control.
 - `raw/Making AI Work Leadership, Lab, and Crowd.md` - Ethan Mollick on why individual AI gains don't translate to organizational performance. Four facts (AI boosts work, 40% adoption, more gains available, companies not capturing them), the Leadership/Lab/Crowd framework, Secret Cyborgs (20% official vs 40% actual adoption), and org-specific benchmarking.
 
@@ -320,7 +323,7 @@ tags: [index, agent-skills, llm-providers]
 - [[sources/Lessons from building Claude Code How we use skills|Lessons from building Claude Code: How we use skills]] — Anthropic internal: nine skill categories, skills as folders, gotchas as highest-signal content, progressive disclosure, config.json, on-demand hooks, marketplace governance.
 - [[sources/The Ideation Process from Problems to Practical Solutions]] — Structured ideation pipeline (Understand → Explore → Generate → Combine → Evaluate → Prototype → Learn) applied to problem-solving and skill design.
 - [[sources/You NEED to try these open-source AI projects RIGHT NOW]] — Matthew Berman: Last30Days (skill-based search), Open Notebook (local NotebookLM), Agent Skills (engineering workflow), Headroom (47–92% context compression with learn loop).
-- [[sources/After Automation]] — Dan Shipper's Agent Mode essay: same AI-creates-more-work thesis as the podcast, packaged as an interactive agent-readable article with companion repo.
+- [[sources/After Automation]] — Shipper's full essay: two modes of working with agents (employees vs. collaboration), named agents at Every (Claudie, Andy, Viktor, Fin), the human sandwich, Zeno's Paradox of AI (cheap competence → sameness → demand for experts), frame vs. framer, agents without agency (toddler thought experiment).
 - [[sources/Reflecting on a year of Claude Code]] — Boris Cherny and Cat Wu on Claude Code's first year: every mistake becomes a skill, auto mode, routines, roles merging, context minimalism, hundreds of agents via Remote Control.
 - [[sources/Making AI Work Leadership, Lab, and Crowd]] — Mollick's Leadership/Lab/Crowd framework for closing the individual-to-organizational AI gap. Empirical adoption data, Secret Cyborgs dynamic, org-specific benchmarking.
 

@@ -1,7 +1,7 @@
 ---
 type: concept
 created: 2026-05-03
-updated: 2026-05-20
+updated: 2026-06-14
 status: active
 sources:
   - "raw/Harness engineering leveraging Codex in an agent-first world.md"
@@ -11,6 +11,7 @@ sources:
   - "raw/new_economics_of_software.md"
   - "raw/Superpowers How Jesse Built the 1 AI Claude Code  Codex Plugin — and Stopped Writing Code.md"
   - "raw/How the engineer behind Claude Cowork actually uses Claude  Felix Rieseberg (Anthropic).md"
+  - "raw/after-automation.pdf"
 tags: [harness-engineering, agent-first, code-is-free, scarcity, software-economics, openai]
 ---
 
@@ -105,6 +106,16 @@ Rieseberg observes that the biggest barrier to AI adoption is not model capabili
 
 The practical advice is simple: "Whenever you do something that you find annoying and you're not enjoying and it doesn't feel creative — that is a good time to pause for a second and wonder, is there a way I can use AI to do this?" This is the [[concepts/Anti-To-Do List and Abstraction Layering]] pattern in practice.
 
+## Harnesses as the Expert Response to Cheap Competence
+
+Shipper's "After Automation" provides the mechanism: when AI floods the system with cheap competence, human experts move in two directions. Some use AI to do bigger work; others "build systems that absorb and leverage the flood of new work: review queues, evals, harnesses, repo rules, Claude and Codex instruction files, continuous integration (CI), permissions, and workflows that turn first attempts into great work."
+
+This is exactly what harness engineering describes. The harness is the expert response to the slop cycle: when everyone can generate code, the scarce work becomes defining what good looks like and building systems that enforce it.
+
+Concrete cost evidence: Every's PowerPoint automation = 24 skills + 18 scripts + $62 in tokens per deck. The maintenance burden of agent systems is itself a harness engineering challenge.
+
+Source: `raw/after-automation.pdf`.
+
 ## Economic Framing: Scarcity to Abundance
 
 Max Buckley's "New Economics of Software" frames harness engineering's "code is free" insight as a broader economic shift. The collapse of development costs means SaaS moats built on code alone erode — competitive advantage moves to brand, data, ML models, and integration. Bottlenecks shift from implementation to attention and governance: any idea can be built quickly, so the scarce resource becomes discernment (which ideas matter) and validation (can humans evaluate agent output fast enough). This economic lens reinforces why harness design is the critical skill — it is the infrastructure that makes abundance usable rather than overwhelming.
@@ -125,6 +136,8 @@ Max Buckley's "New Economics of Software" frames harness engineering's "code is 
 - [[concepts/Neuro-Symbolic AI Architecture]] — Deterministic guardrails (lints, tests, CI gates) are the symbolic layer around the LLM's neural generation.
 - [[concepts/Tool Assembly as a Skill]] — Assembling harness tools (AGENTS.md, reviewer agents, custom lints) is itself a form of tool assembly.
 - [[concepts/Anti-To-Do List and Abstraction Layering]] — The behavioral discipline of eliminating tedious tasks by going up abstraction layers.
+- [[concepts/Zeno's Paradox of AI]] — Harnesses are the expert response to the cheap competence cycle: review queues, evals, CI, and workflows that turn first attempts into great work.
+- [[sources/After Automation]] — Shipper's "expert systems to absorb the flood" description matches harness engineering exactly.
 - [[sources/Superpowers How Jesse Built the 1 AI Claude Code Codex Plugin]] — Superpowers as a personal harness for spec-first coding, review-agent loops, TDD, and runtime proof.
 
 ## Source

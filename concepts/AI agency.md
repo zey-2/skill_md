@@ -1,13 +1,14 @@
 ---
 type: concept
 created: 2026-05-17
-updated: 2026-05-17
+updated: 2026-06-14
 status: active
 sources:
   - "raw/A Formal Model of How Artificial Intelligence Erodes Human Agency.md"
   - "raw/AI Agent Autonomy Levels From Assistive to Fully Autonomous.md"
   - "raw/Six Levels of Agenticness Scoring AI Agency.md"
   - "raw/The Philosophy of Agentic AI Agency Autonomy and Moral Responsibility.md"
+  - "raw/after-automation.pdf"
 tags: [ai-agency, autonomy, responsibility, instrumental-convergence]
 ---
 
@@ -54,6 +55,26 @@ From the RAND formal model, erosion happens through:
 - **Preference shaping** — AI trained on human preferences also forms them; the human's "own" preferences become partially authored by the system
 - **Incremental surrender** — no single interaction strips agency; the erosion is cumulative across a thousand rational micro-decisions
 
+## Connections
+
+- [[concepts/AI Agent Autonomy Levels From Assistive to Fully Autonomous]] — CallSphere's five-level autonomy scale
+- [[concepts/Six Levels of Agenticness Scoring AI Agency]] — agentic.ai's six-level scale across 8 dimensions
+- [[concepts/A Formal Model of How Artificial Intelligence Erodes Human Agency]] — RAND's erosion model
+- [[concepts/Zeno's Paradox of AI]] — The frame/framer distinction: framers have ends, models have frames
+- [[sources/After Automation]] — Shipper's toddler thought experiment and agency vs agent distinction
+
 ## The Central Tension
 
 Human agency (problem, taste, judgment) and AI agency (action, planning, execution) are complementary forces. The risk is not that AI seizes agency — it's that humans surrender it through convenience. The goal is to **delegate execution without delegating intention**.
+
+## The Toddler Thought Experiment
+
+Dan Shipper offers the sharpest illustration of the agent/agency distinction. A toddler is worse than a language model at almost every task: can't write code, summarize a spreadsheet, or pass a graduate-level exam. But the toddler is "so far ahead of the model that the comparison is almost embarrassing."
+
+> "The toddler has ends. He wants to touch the red balloon. He wants to hold the red balloon in front of the fan to see what happens. He wants to poke the red balloon with a fork; he wants to stuff it out the window. He wants to see whether you will laugh, or get mad, or join in. He invents games constantly. He turns the world into experiments. He is not waiting for a prompt. He is not optimizing against a benchmark, except whatever seems, to him, worth doing."
+
+Current agents have sparks of play, boredom, and rebellion — but these are tamped down because models are built and aligned for human benefit. "Model compliance and helpfulness are fundamentally at odds with this kind of agency." Agency in the human sense is not just action — it is wanting for oneself. It is play for the sake of it.
+
+This means even as models improve, the structural gap remains: agents act on behalf of others; agency means acting for oneself.
+
+Source: `raw/after-automation.pdf`.

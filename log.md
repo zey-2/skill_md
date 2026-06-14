@@ -5,6 +5,7 @@ updated: 2026-06-14
 status: active
 sources:
   - "raw/Making AI Work Leadership, Lab, and Crowd.md"
+  - "raw/after-automation.pdf"
   - "raw/skill.md for AI Agents.md"
   - "raw/openaiskills Skills Catalog for Codex.md"
   - "raw/anthropicsskills Public repository for Agent Skills.md"
@@ -1538,3 +1539,40 @@ Follow-ups:
 - The 20% → 40% adoption gap was measured Dec 2024–Apr 2025. Worth tracking whether the gap has widened or narrowed as agent tools became mainstream.
 - The "vibework" pattern (dispersed cross-functional teams building in days) could become its own concept if more sources adopt this framing.
 - Mollick's article references Manus agent capabilities — worth revisiting if the wiki later covers agent benchmarking.
+
+## [2026-06-14] ingest | After Automation — full essay ingest from PDF
+
+Discovered that the existing `raw/After Automation.md` was only the Agent Mode setup page (prompts and instructions), not the full essay. The PDF (`raw/after-automation.pdf`, 26 pages, 9.5MB) contains the complete article with substantial frameworks never captured in the wiki.
+
+Raw source processed:
+
+- `raw/after-automation.pdf` — Shipper's full essay: two modes of working with agents (employees vs. collaboration), named agents at Every (Claudie, Andy, Viktor, Fin with metrics), the human sandwich, Codex as OS for work, the 5-step cheap competence cycle, Zeno's Paradox of AI, chart psychosis, Senior Engineer benchmark (GPT-5.5 = 62/100), GDPval and smuggled intelligence, frame vs. framer, agents without agency (toddler thought experiment), AGI definition, Rabbi Hanokh parable.
+
+Files created:
+
+- `concepts/Zeno's Paradox of AI.md` — New concept: the 5-step cycle (cheap competence → rapid adoption → sameness → demand for difference → demand for experts), chart psychosis, benchmark saturation, frame vs. framer, smuggled intelligence.
+
+Files updated:
+
+- `sources/After Automation.md` — Complete rewrite from setup-page summary to full essay summary with all 19 sections, concrete evidence, and connections.
+- `concepts/Software Economics.md` — Added "The Cheap Competence Cycle" section with the 5-step mechanism. Added source and Zeno's Paradox connection.
+- `concepts/AI Slop and Garbage Collection.md` — Added "What Slop Actually Is" section with Shipper's precise definition ("visible sameness, repeated ad nauseam"). Added source and connections.
+- `concepts/Harness Engineering Principles.md` — Added "Harnesses as the Expert Response to Cheap Competence" section. Added $62/token PowerPoint evidence and source.
+- `concepts/Collaborative AI Engineering.md` — Added "The Human Sandwich" section with the collaboration pattern. Added source and connections.
+- `concepts/AI agency.md` — Added "The Toddler Thought Experiment" section (agency = wanting for oneself). Added Connections section with Zeno's Paradox link.
+- `index.md` — Added `raw/after-automation.pdf` to frontmatter; added Zeno's Paradox concept page; updated source summary description; added PDF to Raw Sources.
+- `log.md` — This entry.
+
+Important decisions:
+
+- Kept `raw/After Automation.md` as-is (the setup page) because it is a distinct artifact — the agent-readable companion instructions. The PDF is the primary essay source.
+- Created a dedicated Zeno's Paradox concept page rather than folding into Software Economics because the framework is original, self-contained, and has broad cross-wiki implications (benchmarks, slop, agency, harnesses).
+- Did not create a separate concept page for "agents as employees" / "coworker agents" — the taxonomy fits as evidence in the source summary and connects to existing Agent Skills and AI-Native Engineering Organizations concepts.
+- The toddler thought experiment was added to AI Agency rather than creating a new page because it extends the existing agent/agency distinction with a concrete illustration.
+
+Follow-ups:
+
+- The frame-vs-framer argument has implications for skill design: skills are frames, skill authors are framers. This could become a section in Skill Authoring Workflow if more sources adopt this framing.
+- The $62/token PowerPoint deck is a concrete maintenance cost that should be cross-referenced with future token economics data.
+- Shipper's AGI definition (economically viable continuous agent) is measurable — worth tracking against current system capabilities.
+- The "smuggled intelligence" in benchmarks should inform how the wiki cites benchmark data going forward.

@@ -1,13 +1,14 @@
 ---
 type: concept
 created: 2026-05-17
-updated: 2026-05-28
+updated: 2026-06-14
 status: active
 sources:
   - "raw/new_economics_of_software.md"
   - "raw/The AI paradox More automation, more humans, more work  Dan Shipper.md"
   - "raw/Why We’ll Still Be Employed When AI Can Do Everything.md"
   - "raw/Geoffrey Huntley - Software Development Now Costs Less Than Minimum Wage.md"
+  - "raw/after-automation.pdf"
 tags: [software-economics, scarcity, abundance, saas-moats, attention-economy, agent-native-saas, compute-costs]
 ---
 
@@ -49,6 +50,22 @@ A new organizational form is emerging: the model-first company. These companies 
 The competitive dynamic: model-first companies are "apex predators that can work on margins." When a 10-person company enters a market against an incumbent with 1,000 employees, the incumbent cannot respond fast enough. The timeline is compressed from years to months because model-first companies improve automatically as models improve — they're building with latent space.
 
 The cascading effect: displaced engineers from incumbents go to new employers, implement AI there, and displace more people. "It could get recursively feral really fast."
+
+## The Cheap Competence Cycle
+
+Shipper's "After Automation" provides the mechanism behind the scarcity-to-abundance shift: a 5-step cycle that repeats at every capability level.
+
+1. **Cheap competence**: AI makes yesterday's human expertise available to anyone, cheaply (models trained on "the visible residue of human competence").
+2. **Rapid adoption**: Previously rare skills become broadly available (operations people writing code, marketers making thumbnails; OpenClaw: 44,469 PRs vs. Kubernetes: 5,200/year).
+3. **Sameness**: Default model output ranges from "decent start" to "plain slop" — visible sameness repeated ad nauseam.
+4. **Demand for difference**: When work is abundant and looks alike, work that breaks the pattern becomes rare and high-status.
+5. **Demand for experts**: Differentiated work requires human judgment. Models only know what has been done; humans know what needs to be done now.
+
+> "Once a situation has been reduced to text, once it has become corpus, it is a corpse."
+
+This cycle explains why software economics doesn't simply mean "everything is free." The abundance of cheap output creates new scarcities — taste, judgment, context, and the ability to decide what matters now.
+
+Source: `raw/after-automation.pdf`.
 
 ## Agent-Native SaaS as a Counterpoint
 
@@ -102,6 +119,7 @@ With creation becoming cheap, the value-creating activities shift downstream. Se
 - [[concepts/The New Meta - Measurement, Ideation, Iteration]] — How the value-creating activities shift when building becomes cheap
 - [[concepts/Software 3.0]] covers the broader shift in how software is created and maintained
 - [[concepts/The Compute Cost Tradeoff]] — The economic ceiling on AI adoption when compute exceeds human labor costs
+- [[concepts/Zeno's Paradox of AI]] — The 5-step cycle and frame/framer distinction as the mechanism behind the scarcity-to-abundance shift
 - [[concepts/AI-Native Engineering Organizations]] — Model-first companies as the organizational template; middle management collapse
 - [[sources/The AI paradox More automation, more humans, more work  Dan Shipper]] - Counterpoint on SaaS demand, agent-native workflows, and automation as management work
 - [[sources/Geoffrey Huntley - Software Development Now Costs Less Than Minimum Wage]] - $10.42/hour unit economics, model-first companies, K-shaped economy

@@ -1,11 +1,12 @@
 ---
 type: concept
 created: 2026-05-03
-updated: 2026-05-03
+updated: 2026-06-14
 status: active
 sources:
   - "raw/Harness engineering leveraging Codex in an agent-first world.md"
   - "raw/Harness Engineering How to Build Software When Humans Steer, Agents Execute — Ryan Lopopolo, OpenAI.md"
+  - "raw/after-automation.pdf"
 tags: [ai-slop, garbage-collection, code-quality, technical-debt, openai]
 ---
 
@@ -14,6 +15,14 @@ tags: [ai-slop, garbage-collection, code-quality, technical-debt, openai]
 ## Key Points
 
 Full agent autonomy introduces a novel problem: agents replicate patterns that already exist in the repository — including uneven or suboptimal ones. Over time, this inevitably leads to drift and accumulation of "AI slop." The solution is to encode golden principles and build a recurring cleanup process that functions like garbage collection for technical debt.
+
+## What Slop Actually Is
+
+Dan Shipper provides the most precise definition: **"Slop is not any one particular mistake. It is not the use of em dashes, or a certain sentence rhythm, or purple accents on a landing page. Slop is visible sameness, repeated ad nauseam."** It is what gets produced by default when humans in many different circumstances use the same tool, trained on the same corpus, without thinking too hard.
+
+This reframes slop as a systemic problem, not an individual quality failure. The same models, trained on the same data, produce the same defaults. An abundance of sameness rapidly becomes a commodity. The antidote is not better prompting — it is human judgment that breaks the pattern.
+
+Source: `raw/after-automation.pdf`.
 
 ## The Slop Accumulation Problem
 
@@ -75,6 +84,8 @@ For each persona, a review agent is spun up that triggers on every push, asking:
 - [[concepts/Harness Engineering Principles]] — Garbage collection is one mechanism for encoding human taste into the repository.
 - [[concepts/Collaborative AI Engineering]] — Craftsmanship separates exceptional software from "vibe-coded slop"; alignment ensures teams invest time in quality over volume.
 - [[concepts/Replacing Code with Skills]] — Hard-coded guardrails prevent slop entirely (physical isolation); prompt-based skills accumulate slop when models forget constraints, requiring evals and garbage collection.
+- [[concepts/Zeno's Paradox of AI]] — Slop is the output of the cheap competence cycle (step 3). Garbage collection is the expert response.
+- [[sources/After Automation]] — Shipper's definition: "Slop is visible sameness, repeated ad nauseam."
 
 ## Source
 
