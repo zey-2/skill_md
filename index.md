@@ -107,6 +107,7 @@ sources:
   - "raw/After Automation.md"
   - "raw/Reflecting on a year of Claude Code.md"
   - "raw/Superpowers How Jesse Built the 1 AI Claude Code  Codex Plugin — and Stopped Writing Code.md"
+  - "raw/Making AI Work Leadership, Lab, and Crowd.md"
 tags: [index, agent-skills, llm-providers]
 ---
 
@@ -286,6 +287,7 @@ tags: [index, agent-skills, llm-providers]
 - `raw/You NEED to try these open-source AI projects RIGHT NOW.md` - Matthew Berman video: four open-source projects including Last30Days (skill-based trending search), Open Notebook (local NotebookLM), Agent Skills (seven-stage engineering workflow), and Headroom (47–92% context compression).
 - `raw/After Automation.md` - Dan Shipper's Agent Mode essay: AI creates more work, not less. Ships with companion GitHub repo, interactive prompts, and objections-and-responses for agent-readable engagement.
 - `raw/Reflecting on a year of Claude Code.md` - Boris Cherny and Cat Wu on Claude Code's first year: every mistake becomes a skill, verification beyond unit tests, auto mode replacing plan mode, routines as killer app, roles merging at Anthropic, context minimalism, hundreds of agents via Remote Control.
+- `raw/Making AI Work Leadership, Lab, and Crowd.md` - Ethan Mollick on why individual AI gains don't translate to organizational performance. Four facts (AI boosts work, 40% adoption, more gains available, companies not capturing them), the Leadership/Lab/Crowd framework, Secret Cyborgs (20% official vs 40% actual adoption), and org-specific benchmarking.
 
 ## Source Summaries
 
@@ -320,6 +322,7 @@ tags: [index, agent-skills, llm-providers]
 - [[sources/You NEED to try these open-source AI projects RIGHT NOW]] — Matthew Berman: Last30Days (skill-based search), Open Notebook (local NotebookLM), Agent Skills (engineering workflow), Headroom (47–92% context compression with learn loop).
 - [[sources/After Automation]] — Dan Shipper's Agent Mode essay: same AI-creates-more-work thesis as the podcast, packaged as an interactive agent-readable article with companion repo.
 - [[sources/Reflecting on a year of Claude Code]] — Boris Cherny and Cat Wu on Claude Code's first year: every mistake becomes a skill, auto mode, routines, roles merging, context minimalism, hundreds of agents via Remote Control.
+- [[sources/Making AI Work Leadership, Lab, and Crowd]] — Mollick's Leadership/Lab/Crowd framework for closing the individual-to-organizational AI gap. Empirical adoption data, Secret Cyborgs dynamic, org-specific benchmarking.
 
 - [[sources/2026-04-26 Agent orchestration frameworks source|2026-04-26 Agent orchestration frameworks source]] - Initial source-summary backfill: LangGraph, Microsoft Agent Framework, and CrewAI evidence for graph workflows, durable execution, state, human-in-the-loop, observability, and multi-agent orchestration.
 - [[sources/2026-04-26 Agent Skills specification evaluation and description optimization|2026-04-26 Agent Skills specification evaluation and description optimization]] - Initial source-summary backfill: AgentSkills.io evidence for `SKILL.md` validation, trigger evals, output evals, assertions, baselines, and iteration.

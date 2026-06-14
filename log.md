@@ -4,6 +4,7 @@ created: 2026-04-26
 updated: 2026-06-14
 status: active
 sources:
+  - "raw/Making AI Work Leadership, Lab, and Crowd.md"
   - "raw/skill.md for AI Agents.md"
   - "raw/openaiskills Skills Catalog for Codex.md"
   - "raw/anthropicsskills Public repository for Agent Skills.md"
@@ -1507,3 +1508,33 @@ Follow-ups:
 - Boris's "every mistake becomes a skill" could become its own short concept if more sources adopt this framing. Currently it fits well as a section in Self-Improving Skills.
 - The Agent Mode publishing format (companion repo + interactive prompts) could become a concept about agent-readable content if the pattern spreads.
 - Context minimalism vs. context engineering is a live debate worth tracking as models improve and retrieval tooling matures.
+
+## [2026-06-14] ingest | Making AI Work: Leadership, Lab, and Crowd (Ethan Mollick)
+
+Ingested Ethan Mollick's One Useful Thing article on why individual AI productivity gains don't translate to organizational performance, and the Leadership/Lab/Crowd framework for closing the gap.
+
+Raw source processed:
+
+- `raw/Making AI Work Leadership, Lab, and Crowd.md` — Mollick's four facts (AI boosts work, 40% adoption, more gains available, companies not capturing them), the Leadership/Lab/Crowd framework, Secret Cyborgs (20% official vs 40% actual adoption), cross-functional "vibework" teams, org-specific benchmarking, and the organizational innovation gap thesis.
+
+Files created:
+
+- `sources/Making AI Work Leadership, Lab, and Crowd.md` — Source summary with four facts, three-lever framework, empirical evidence, and connections.
+
+Files updated:
+
+- `concepts/Enterprise AI Adoption Flywheel.md` — Added Leadership/Lab/Crowd framework as a more detailed model mapping to the flywheel stages. Added source to frontmatter.
+- `concepts/AI-Native Engineering Organizations.md` — Added "The Organizational Innovation Gap" section with empirical adoption data and the Secret Cyborgs dynamic. Added source to frontmatter.
+- `index.md` — Added new raw source to frontmatter, Raw Sources, and Source Summaries.
+
+Important decisions:
+
+- Did not create a new concept page for the Leadership/Lab/Crowd framework — it maps naturally to the existing Enterprise AI Adoption Flywheel concept as a more detailed model.
+- Did not create a separate concept for "Secret Cyborgs" — it fits as evidence in both the flywheel and AI-native org pages.
+- The Mollick article (May 2025) predates the agent era but aged well: the "build things that don't work yet" Lab advice predicted the rapid improvement cycle that made agents viable within months.
+
+Follow-ups:
+
+- The 20% → 40% adoption gap was measured Dec 2024–Apr 2025. Worth tracking whether the gap has widened or narrowed as agent tools became mainstream.
+- The "vibework" pattern (dispersed cross-functional teams building in days) could become its own concept if more sources adopt this framing.
+- Mollick's article references Manus agent capabilities — worth revisiting if the wiki later covers agent benchmarking.

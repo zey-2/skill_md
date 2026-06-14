@@ -1,7 +1,7 @@
 ---
 type: concept
 created: 2026-05-18
-updated: 2026-06-01
+updated: 2026-06-14
 status: active
 sources:
   - "raw/How to get your company AI pilled - geoffintech.md"
@@ -9,6 +9,7 @@ sources:
   - "raw/Running an AI-native engineering org.md"
   - "raw/The AI paradox More automation, more humans, more work  Dan Shipper.md"
   - "raw/Why We’ll Still Be Employed When AI Can Do Everything.md"
+  - "raw/Making AI Work Leadership, Lab, and Crowd.md"
 tags: [ai-adoption, ai-native-orgs, enterprise-ai, internal-agents, org-design]
 ---
 
@@ -45,6 +46,20 @@ But OpenClaw search traffic peaked in January 2026 and declined sharply, helped 
 The lesson: the viral moment passes faster than organizational response times. Enterprise product teams can execute perfectly and still be behind the news cycle by launch day. This suggests the flywheel needs to spin faster than quarterly planning cycles — or companies need to accept that first-mover advantage in AI tooling is measured in weeks, not months.
 
 Source: `raw/Why We’ll Still Be Employed When AI Can Do Everything.md`.
+
+## Leadership / Lab / Crowd Framework
+
+Mollick's framework identifies three interdependent levers for closing the individual-to-organizational AI gap:
+
+| Lever | Role | Flywheel Stage |
+|---|---|---|
+| **Leadership** | Paint a vivid picture of the AI-powered future (not just urgency). Anticipate task-level changes. Remove fear of punishment for AI use. Model usage. | Leadership signal |
+| **The Crowd** | Experienced workers discover AI workflows through trial and error. They are the primary innovation source but may hide their use ("Secret Cyborgs") if incentives are misaligned. | Early wins, public sharing |
+| **The Lab** | Ambidextrous team (exploration + exploitation) of subject matter experts from the Crowd. Builds: distributed prompts/solutions, org-specific benchmarks, "things that don't work yet" prototypes, and provocations. | Platform absorption |
+
+Key empirical finding: official AI chatbot adoption maxes out at ~20% of workers, yet 40%+ report using AI at work with large gains. The gap is hidden adoption — workers hide AI use because they fear punishment, expect more work, or see no reward for revealing it. The flywheel stalls at the "public sharing" stage if this gap is not addressed.
+
+Source: `raw/Making AI Work Leadership, Lab, and Crowd.md`.
 
 ## Durable Claims
 
@@ -88,6 +103,7 @@ An enterprise adoption system needs several layers:
 - [[concepts/Understanding as the Human Bottleneck]] - Both sources keep human judgment, deep understanding, and accountability in the loop.
 - [[concepts/The Compute Cost Tradeoff]] - The economic ceiling on AI adoption that keeps humans in the loop even when AI capability is sufficient.
 - [[sources/Why We'll Still Be Employed When AI Can Do Everything]] - Microsoft/OpenClaw timeline evidence for the speed mismatch problem.
+- [[sources/Making AI Work Leadership, Lab, and Crowd]] — Mollick's framework: Leadership/Lab/Crowd as the three levers for closing the individual-to-organizational AI gap. Empirical adoption data (20% official vs 40% actual) and the Secret Cyborgs dynamic.
 
 ## Contradictions or Tensions
 

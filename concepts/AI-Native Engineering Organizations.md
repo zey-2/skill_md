@@ -1,7 +1,7 @@
 ---
 type: concept
 created: 2026-05-11
-updated: 2026-05-28
+updated: 2026-06-14
 status: active
 sources:
   - "raw/Running an AI-native engineering org.md"
@@ -11,6 +11,7 @@ sources:
   - "raw/The AI paradox More automation, more humans, more work  Dan Shipper.md"
   - "raw/Geoffrey Huntley - Software Development Now Costs Less Than Minimum Wage.md"
   - "raw/How 7 Kilo Code Engineers Run Up to 20 Parallel Agents and Still Ship Clean Code.md"
+  - "raw/Making AI Work Leadership, Lab, and Crowd.md"
 tags: [ai-native-orgs, engineering-management, verification, review, org-design, model-first]
 ---
 
@@ -131,6 +132,16 @@ Dan Shipper's "AI paradox" source adds a useful caution: more automation does no
 
 This reframes the job of AI-native organizations. They are not just trying to remove people from loops; they are deciding which loops deserve automation, which loops need human approval, and which loops create new work because the volume of PRs, bug reports, analyses, and experiments has increased. The durable role is closer to model manager or forward deployed engineer than to passive automation owner.
 
+## The Organizational Innovation Gap
+
+Mollick's empirical data highlights a core tension: individual AI productivity gains do not automatically translate to organizational performance. Controlled experiments confirm 41–90% time savings across coding, consulting, sales, law, and call centers. Yet companies report only small to moderate organizational gains, and there is no major impact on wages or hours worked as of end of 2024.
+
+The explanation is that companies have atrophied the "muscles for organizational innovation." Decades of outsourcing change to consultants and enterprise software vendors left them unprepared for a transformation where nobody has a playbook. The gap can only be closed by rethinking incentives, processes, and the nature of work — not by deploying better models.
+
+A concrete symptom: official AI chatbot adoption maxes out at ~20% of workers, yet 40%+ report using AI at work. The gap is "Secret Cyborgs" — workers hiding their AI use because they fear punishment, expect more work, or see no reward for revealing it. The engineering-org parallel: developers using personal Copilot/Cursor accounts outside company-approved tools, keeping their workflows invisible to the organization.
+
+Source: `raw/Making AI Work Leadership, Lab, and Crowd.md`.
+
 ## Connections
 
 - [[sources/Running an AI-native engineering org]] - Source summary.
@@ -149,6 +160,7 @@ This reframes the job of AI-native organizations. They are not just trying to re
 - [[concepts/Software Economics]] — Model-first companies and the $10.42/hour unit economics.
 - [[sources/Geoffrey Huntley - Software Development Now Costs Less Than Minimum Wage]] — Model-first companies, middle management collapse, K-shaped economy.
 - [[sources/How 7 Kilo Code Engineers Run Up to 20 Parallel Agents and Still Ship Clean Code]] — Parallel agent workflows and verification loops.
+- [[sources/Making AI Work Leadership, Lab, and Crowd]] — Empirical adoption data (20% official vs 40% actual), the organizational innovation gap, and the Secret Cyborgs dynamic.
 
 ## Open Questions
 
