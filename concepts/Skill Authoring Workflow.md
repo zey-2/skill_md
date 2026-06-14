@@ -1,7 +1,7 @@
 ---
 type: concept
 created: 2026-04-26
-updated: 2026-06-06
+updated: 2026-06-14
 status: active
 sources:
   - "raw/skill.md for AI Agents.md"
@@ -14,7 +14,9 @@ sources:
   - "raw/Superpowers How Jesse Built the 1 AI Claude Code  Codex Plugin — and Stopped Writing Code.md"
   - "raw/The AI Skill I Rely On Daily — Priscila Andre de Oliveira, Sentry.md"
   - "raw/How Anthropic Engineers ACTUALLY Prompt Claude Code.md"
-tags: [agent-skills, authoring, workflow, context, skillification, comprehension]
+  - "raw/Lessons from building Claude Code How we use skills.md"
+  - "raw/The Ideation Process from Problems to Practical Solutions.md"
+tags: [agent-skills, authoring, workflow, context, skillification, comprehension, ideation]
 ---
 
 # Skill Authoring Workflow
@@ -161,6 +163,39 @@ Two flags control who can invoke a skill:
 
 These flags are governance tools at the skill level. They sit below plugin-level permissions and MCP approval policies but above raw prompt instructions. Source: `raw/How Anthropic Engineers ACTUALLY Prompt Claude Code.md`.
 
+### Nine Skill Categories (Anthropic Internal Taxonomy)
+
+After cataloging all internal skills at Anthropic, the team found they cluster into nine categories. This taxonomy is useful for identifying gaps in your own skills library:
+
+1. **Library and API reference** — correct usage, edge cases, gotchas for libraries/CLIs/SDKs
+2. **Product verification** — test or verify code works; paired with Playwright, tmux, etc. *Highest measurable impact on output quality.*
+3. **Data fetching and analysis** — connect to data/monitoring stacks
+4. **Business process and team automation** — automate repetitive workflows into one command
+5. **Code scaffolding and templates** — generate framework boilerplate with natural-language requirements
+6. **Code quality and review** — enforce code quality; can run as hooks or GitHub Actions
+7. **CI/CD and deployment** — fetch, push, deploy code
+8. **Runbooks** — take a symptom, walk through investigation, produce structured report
+9. **Infrastructure operations** — routine maintenance with guardrails for destructive actions
+
+The best skills fit cleanly into one category. Skills that try to do too much straddle several and confuse the agent. Source: `raw/Lessons from building Claude Code How we use skills.md`.
+
+### Gotchas as Highest-Signal Content
+
+The highest-signal content in any skill is the Gotchas section — common failure points that Claude runs into when using the skill. Gotchas should be built up over time from real usage, not written upfront. Example patterns: field name mismatches across services, append-only tables where you need the highest-version row, staging returning 200 even when webhooks didn't process. Source: `raw/Lessons from building Claude Code How we use skills.md`.
+
+### Config.json for Setup
+
+Some skills need context from the user (e.g., which Slack channel to post to). A good pattern: store setup information in a `config.json` in the skill directory. If the config is not set up, the agent asks the user. For structured multiple-choice questions, instruct Claude to use the AskUserQuestion tool. Source: `raw/Lessons from building Claude Code How we use skills.md`.
+
+### On-Demand Hooks
+
+Skills can include hooks that are only activated when the skill is called and last only for the session duration. Use for opinionated hooks you don't want running all the time:
+
+- `/careful` — blocks `rm -rf`, `DROP TABLE`, force-push, `kubectl delete` via PreToolUse matcher on Bash
+- `/freeze` — blocks any Edit/Write outside a specific directory
+
+These are governance tools that sit between always-on project config and one-off prompt instructions. Source: `raw/Lessons from building Claude Code How we use skills.md`.
+
 ### Voice and Tone Guidelines
 
 Gstack's explicit voice guidelines are notable:
@@ -168,6 +203,22 @@ Gstack's explicit voice guidelines are notable:
 - Name the file, function, command, and user-visible impact.
 - No em dashes. No AI vocabulary (delve, crucial, robust, comprehensive, nuanced).
 - Short paragraphs. End with what to do.
+
+### Ideation Pipeline for Skill Design
+
+A structured ideation process applies directly to skill authoring. The pipeline is: **Understand → Explore → Generate → Combine → Evaluate → Prototype → Learn**. The key transfers to skill design:
+
+1. **Define the triggering problem** — What recurring agent failure or repeated task motivates this skill? A vague problem ("make the agent better") produces vague skills. A clear problem ("agents keep overcomplicating database migrations with unnecessary abstractions") produces focused skills.
+2. **Gather insights from agent behavior** — Analyze sessions, logs, and PR feedback. The skill authoring equivalent of user interviews is watching the agent fail. Priscila's 116-session analysis at Sentry is the gold standard: 67% comprehension work revealed the "Catch Me Up" skill opportunity.
+3. **Reframe with "How might we" questions** — "How might we prevent the agent from adding unnecessary abstractions?" directs attention differently than "How might we simplify migrations?" Each reframing reveals different skill designs.
+4. **Generate candidate skill structures** — Diverge before converging. Write multiple versions of the skill's core instructions, different constraint sets, different gotcha lists. Quantity before quality at this stage.
+5. **Group and combine** — The strongest skill is often a combination: gotchas from one draft, constraints from another, a script from a third.
+6. **Evaluate by the impact-effort matrix** — Which skill structure gives the most agent behavior improvement for the least authoring effort?
+7. **Prototype and test** — Run the task without the skill, document the agent's rationalizations, write the skill, re-run. This is the TDD-for-skills methodology from Superpowers, now placed within a broader ideation framework.
+
+The iteration loop mirrors self-improvement: **Problem → Skill draft → Test → Evidence → Better understanding → Better skill**. Stopping early is valid — if testing reveals the skill adds context without changing behavior, it should be abandoned or radically simplified.
+
+Source: `raw/The Ideation Process from Problems to Practical Solutions.md`.
 
 ## Connections
 
@@ -184,6 +235,8 @@ Gstack's explicit voice guidelines are notable:
 - [[sources/The AI Skill I Rely On Daily — Priscila Andre de Oliveira, Sentry]] — data-driven skill authoring: analyze 116 sessions, find repeated patterns, create "Catch Me Up" skill.
 - [[Prompting Skills Not Prompts]] — the mental model shift from ad-hoc prompts to reusable skills.
 - [[sources/How Anthropic Engineers ACTUALLY Prompt Claude Code]] — source for scripts-inside-skills and invocation control patterns.
+- [[sources/Lessons from building Claude Code How we use skills]] — Anthropic internal: nine skill categories, gotchas as highest-signal content, progressive disclosure via file system, config.json setup, on-demand hooks.
+- [[sources/The Ideation Process from Problems to Practical Solutions]] — Structured ideation pipeline (Understand → Explore → Generate → Combine → Evaluate → Prototype → Learn) applied to skill design.
 
 ## Open Questions
 

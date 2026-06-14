@@ -1,12 +1,15 @@
 ---
 type: concept
 created: 2026-05-11
-updated: 2026-06-06
+updated: 2026-06-14
 status: active
 sources:
   - "raw/Build Self-Improving Claude Code Skills. The Results Are Crazy.md"
   - "raw/karpathyautoresearch AI agents running research on single-GPU nanochat training automatically.md"
   - "raw/How Anthropic Engineers ACTUALLY Prompt Claude Code.md"
+  - "raw/Geoffrey Huntley - Software Development Now Costs Less Than Minimum Wage.md"
+  - "raw/Lessons from building Claude Code How we use skills.md"
+  - "raw/Reflecting on a year of Claude Code.md"
 tags: [agent-skills, self-improvement, evaluation, autonomous-loops]
 ---
 
@@ -17,6 +20,24 @@ tags: [agent-skills, self-improvement, evaluation, autonomous-loops]
 Self-improving skills are agent skills that autonomously test, score, and refine themselves through iterative loops. Inspired by Karpathy's autoresearch pattern, the agent reads its own skill definition, makes a change, runs an evaluation, keeps the change if the score improves, and reverts if it gets worse — looping indefinitely until interrupted or a perfect score is reached.
 
 Sources: Simon Scrapes' "Build Self-Improving Claude Code Skills" video and Karpathy's autoresearch project.
+
+### Manual Self-Improvement: Iterative Gotcha Accumulation
+
+Anthropic's internal practice shows a manual version of the self-improvement loop: skills get better over time because engineers keep adding gotchas as Claude hits new edge cases. "Most of our best skills began as a few lines and a single gotcha, then got better because people kept adding to them as Claude hit new edge cases." The gotchas section is the highest-signal content in any skill, built from common failure points rather than written upfront. This is the human-in-the-loop version of the autonomous binary assertion loop — same principle (iterate from real failures), different mechanism (manual vs. automated). Source: `raw/Lessons from building Claude Code How we use skills.md`.
+
+The four rules from Anthropic engineers confirm this: "Every time you use a skill and the output isn't exactly what you want, ask yourself one question. Is this a one-time fix or should this be in the skill forever? If it's forever, update the skill." Source: `raw/How Anthropic Engineers ACTUALLY Prompt Claude Code.md`.
+
+### Every Mistake Becomes a Skill (Boris Cherny)
+
+Boris Cherny (Head of Claude Code) describes the most practical form of self-improvement: "Every single time Claude makes a mistake, I don't tell Claude to do it differently, I tell it to write it to the CLAUDE.md, or to make a skill or something to do it differently. And if you can do this, then Claude can just run forever."
+
+This is not an autonomous loop — it is a human-triggered habit. The human observes a failure, decides it's a recurring pattern, and encodes the fix as a skill or CLAUDE.md update. The key insight is the decision rule: if the mistake will recur, encode it; if it's one-time, just fix it. Over time, the agent's environment accumulates enough encoded knowledge that it can "run forever" on similar tasks.
+
+Cat Wu describes the same pattern from the product side: when debugging desktop app issues, she has Claude read Slack to check if staging is down, debug the issue, and then **update the desktop development skill** with what it learned. The skill gets better every time it's used.
+
+This bridges the gap between fully autonomous self-improvement (Karpathy's autoresearch) and purely manual gotcha accumulation (Anthropic's internal practice). The human decides what to encode; the agent does the encoding and benefits from it next time.
+
+Source: `raw/Reflecting on a year of Claude Code.md`.
 
 ## Key Ideas and Evidence
 
@@ -133,6 +154,7 @@ The manual approach trades automation for human judgment. The engineer decides w
 - [[Context Development Lifecycle]] — self-improving skills operationalize the Observe and Evaluate stages into a continuous loop.
 - [[Prompting Skills Not Prompts]] — Rule 4 (skills get smarter every session) is the manual version of this concept.
 - [[sources/How Anthropic Engineers ACTUALLY Prompt Claude Code]] — source for the manual self-improvement practice at Anthropic.
+- [[sources/Reflecting on a year of Claude Code]] — Boris Cherny's "every mistake becomes a skill" as the most practical self-improvement pattern: human-triggered, agent-encoded, compounding.
 
 ## Open Questions
 

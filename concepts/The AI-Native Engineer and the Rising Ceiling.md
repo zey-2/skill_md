@@ -8,6 +8,7 @@ sources:
   - "raw/Tokenmaxxing How Top Builders Use AI To Do The Work Of 400 Engineers.md"
   - "raw/Running an AI-native engineering org.md"
   - "raw/There will only be four jobs.md"
+  - "raw/Geoffrey Huntley - Software Development Now Costs Less Than Minimum Wage.md"
 tags: [ai-native-engineers, tool-investment, hiring, karpathy]
 ---
 
@@ -69,6 +70,23 @@ The "four jobs" source pushes the rising-ceiling idea beyond engineering titles.
 
 Source: `raw/There will only be four jobs.md`.
 
+## Consumer vs. Builder
+
+Geoffrey Huntley draws a sharp line between two categories of AI users:
+
+| Consumer | Builder |
+|---|---|
+| Uses Cursor, Copilot, Claude Code daily | Built their own agent from scratch |
+| Switches between tools chasing features | Understands the inner mechanics — state machines, API sequences, memory management |
+| Doesn't know what a temperature parameter does | Knows the right temperature for the right scenario |
+| Fashion-chasing | Developed intuition through deliberate practice |
+
+"I don't hire on the left side of the line anymore." The consumer can be replaced by cheaper labor (AI as "Actually India" — outsourcing returns). The builder automates their job function and compounds.
+
+The implication: the rising ceiling is not about using more AI tools. It's about understanding enough to build with them. "The only reason you'll understand how an engine works is if you disassemble one, you assemble one." Huntley's recommendation: build your own agent (ghuntley.com/agent, 300 lines of code), then use the agent to self-improve itself recursively.
+
+Source: `raw/Geoffrey Huntley - Software Development Now Costs Less Than Minimum Wage.md`.
+
 ## Context for This Wiki
 
 The rising ceiling has implications for [[concepts/Skill Authoring Workflow]] — skills designed for deep users can encode sophisticated workflows (TDD, review cycles, security checks) that shallow users would never compose. It also connects to [[concepts/Tools Supporting Agent Skills]] because the tools listed there are the surfaces where deep investment yields the highest returns.
@@ -83,6 +101,8 @@ The rising ceiling has implications for [[concepts/Skill Authoring Workflow]] �
 - [[concepts/Skill Authoring Workflow]] — Skills encode the workflows that deep users compose to amplify their output.
 - [[concepts/OpenAI AGI Progression Framework]] — As agents progress from Level 2 (reasoners) to Level 3 (agents), the multiplier effect on skilled engineers increases.
 - [[concepts/Replacing Code with Skills]] — The worktree skill exemplifies this: deep engineers invest setup time in a ~200-line skill that replaces 15K lines of app code, compounding leverage across all users.
+- [[concepts/Software Economics]] — Model-first companies and the consumer-vs-builder hiring line.
+- [[sources/Geoffrey Huntley - Software Development Now Costs Less Than Minimum Wage]] — Consumer vs. builder distinction, identity erasure, deliberate practice.
 
 ## Source
 

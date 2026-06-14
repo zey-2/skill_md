@@ -9,6 +9,7 @@ sources:
   - "raw/obrasuperpowers An agentic skills framework & software development methodology that works.md"
   - "raw/VoltAgentawesome-agent-skills A curated collection of 1000+ agent skills from official dev teams and the community, compatible with Claude Code, Codex, Gemini CLI, Cursor, and more.md"
   - "raw/The tokenmaxxing math nobody wants to admit.md"
+  - "raw/Lessons from building Claude Code How we use skills.md"
 tags: [agent-skills, governance, metrics]
 ---
 
@@ -53,6 +54,10 @@ These details sharpen the meaning of governance. It is not only about "Is this o
 
 The Agentmail tokenmaxxing source adds a metric-governance caution: token footprint is useful only beside outcome measures. If token count becomes the target, teams may optimize for activity rather than work. For skill repositories and agent programs, token metrics should be interpreted as cost, adoption, or diagnostic signals, then paired with task success, output quality, downstream value, and [[concepts/Context Rot]] checks.
 
+### Measuring Skill Usage (Anthropic Internal)
+
+Anthropic uses a PreToolUse hook to log skill usage within the company. This reveals which skills are popular and which are under-triggering compared to expectations. This is a lightweight governance mechanism: instead of mandating which skills to use, measure what people actually use and let organic adoption guide marketplace curation. Source: `raw/Lessons from building Claude Code How we use skills.md`.
+
 ## Where Sources Agree
 
 The sources agree that skills are operational artifacts, not decorative documentation. That makes ownership and quality checks necessary.
@@ -78,6 +83,7 @@ There is also a tension between curation and audit. A curated list can improve d
 - [[Context Development Lifecycle]] frames governance as the organizational loop that scales individual skill authoring to team-level context management.
 - [[Context Observability and Feedback]] covers the security scanning, AI SBOM, and context filter patterns that governance must enforce for third-party skills.
 - [[concepts/Tokenmaxxing]] and [[sources/The tokenmaxxing math nobody wants to admit]] explain why token spend should not become the scoreboard.
+- [[sources/Lessons from building Claude Code How we use skills]] — Anthropic internal: PreToolUse hook for usage measurement, organic marketplace governance.
 
 ## Open Questions
 

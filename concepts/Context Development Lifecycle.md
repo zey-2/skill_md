@@ -1,11 +1,12 @@
 ---
 type: concept
 created: 2026-05-04
-updated: 2026-05-04
+updated: 2026-06-14
 status: active
 sources:
   - "raw/Context Is the New Code — Patrick Debois, Tessl.md"
-tags: [context, agent-skills, devops, lifecycle]
+  - "raw/Reflecting on a year of Claude Code.md"
+tags: [context, agent-skills, devops, lifecycle, context-minimalism]
 ---
 
 # Context Development Lifecycle
@@ -61,6 +62,18 @@ Better context → better agent output → better observations → better contex
 
 Debois's framing: LLMs and coding agents are just the engine. Context is the fuel. If you give the engine the wrong fuel, it will not perform. Most engineers cannot change the LLM itself, but they can optimize their context. The practical implication is that engineering rigor applied to context — systematic generation, testing, distribution, and observation — matters more than tweaking prompts ad hoc.
 
+## Context Minimalism: A Counterpoint
+
+Boris Cherny (Head of Claude Code) and Cat Wu (Head of Product, Claude Code) advocate for **context minimalism**: "With the models of today, you don't do any of this [context engineering]. You give it the minimal possible system prompt, the minimal possible tools, and then you let the model figure it out. You just have to give the model some way to pull in the context."
+
+Cat: "I'm a context minimalist. Tell the model only what it needs to know and let it figure out the rest. When you give the model too much context, it's kind of like you're micromanaging it."
+
+This tensions with Debois's systematic context engineering. The resolution: context engineering applies to the **retrieval and tools layer** (how the agent pulls in context on demand), not to **verbose instructions** (telling the agent everything upfront). The shift is from "more context" to "better retrieval" — progressive disclosure via the file system, skills that point to references, and tools that fetch context when needed.
+
+This is consistent with [[concepts/Progressive Disclosure]]: the skill's description field activates the skill, the instructions guide behavior, and the tools/references provide detail on demand. The context minimalist puts less in the system prompt and more in the skill's file structure.
+
+Source: `raw/Reflecting on a year of Claude Code.md`.
+
 ## Connections
 
 - [[Skill Authoring Workflow]] covers the Generate stage in detail.
@@ -69,6 +82,8 @@ Debois's framing: LLMs and coding agents are just the engine. Context is the fue
 - [[Context Observability and Feedback]] covers the Observe stage, including agent logs, production monitoring, and context filters.
 - [[Harness Engineering Principles]] connects to the broader observability and feedback patterns.
 - [[Skill Governance and Metrics]] connects to organizational-loop concerns about quality and trust at scale.
+- [[sources/Reflecting on a year of Claude Code]] — Boris Cherny and Cat Wu on context minimalism: minimal system prompt, minimal tools, let the model figure it out.
+- [[Progressive Disclosure]] — Context minimalism is consistent with progressive disclosure: less in the prompt, more in the file structure.
 
 ## Open Questions
 

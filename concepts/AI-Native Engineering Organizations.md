@@ -9,7 +9,9 @@ sources:
   - "raw/How to get your company AI pilled - geoffintech.md"
   - "raw/How Block is becoming the most AI-native enterprise in the world  Dhanji R. Prasanna.md"
   - "raw/The AI paradox More automation, more humans, more work  Dan Shipper.md"
-tags: [ai-native-orgs, engineering-management, verification, review, org-design]
+  - "raw/Geoffrey Huntley - Software Development Now Costs Less Than Minimum Wage.md"
+  - "raw/How 7 Kilo Code Engineers Run Up to 20 Parallel Agents and Still Ship Clean Code.md"
+tags: [ai-native-orgs, engineering-management, verification, review, org-design, model-first]
 ---
 
 # AI-Native Engineering Organizations
@@ -101,6 +103,28 @@ This changes what SaaS products need to build:
 
 This paradigm also enables a faster closed loop: when a user encounters a bug, their agent sends a bug report with exact reproduction steps, suspected code locations, and context — which becomes a GitHub issue that the company's agent can fix. This is fundamentally different from human support tickets.
 
+## Model-First Companies
+
+Geoffrey Huntley identifies a new organizational form: the model-first company. These companies work "with the grain of the wood" — using languages and tools frontier labs dogfood (Rust, Python) rather than fighting the grain with languages where models are weaker (Java, .NET). They have 5–20 people, focus on automating their job functions rather than writing code, and produce parabolic revenue growth.
+
+The model-first company inverts the traditional org chart: instead of builders plus a management/coordination layer, you have "just builders" — a designer, a product manager, an engineer — each focused on automating their own job function through agentic loops. "Instead of programming the code, you're programming the agentic loops that automate your job function."
+
+The competitive dynamic is compressed timelines. Traditional startups take years to reach market; model-first companies improve automatically as models improve, creating "slope on slope acceleration." A 10-person model-first company competing against a 1,000-person incumbent forces the incumbent into inevitable layoffs — not because the incumbent wants to cut, but because lean competitors attack their moats.
+
+The middle management coordination layer is especially vulnerable. If your value is summarizing, coordinating, and disseminating information, AI does that well. Ratios are moving to 50:1 engineer-to-manager. "Get back on the tools."
+
+Source: `raw/Geoffrey Huntley - Software Development Now Costs Less Than Minimum Wage.md`.
+
+## Parallel Agent Workflows
+
+Kilo Code engineers report that the practical parallel agent workflow is 2–4 foreground agents (actively managed) plus a variable number of background "fire-and-forget" agents (review results after completion). The social media narrative of 50–100 productive parallel agents is misleading — the human attention bottleneck limits foreground agents to a handful.
+
+The verification bottleneck has shifted from writing code to checking it. The most effective pattern is cross-agent verification loops: separate reviewer agents check implementation agents, producing 2–3x quality improvement. "The person who wrote the code is the worst person to review it."
+
+See [[concepts/Parallel Agent Management]] for the full treatment.
+
+Source: `raw/How 7 Kilo Code Engineers Run Up to 20 Parallel Agents and Still Ship Clean Code.md`.
+
 ## Automation Creates Management Work
 
 Dan Shipper's "AI paradox" source adds a useful caution: more automation does not automatically mean less human work. At Every, broad AI use coincided with the company growing from roughly 15 to almost 30 people. Shipper's explanation is that every serious automation needs someone to monitor quality, repair failures, improve the workflow, and decide when the task itself has been framed wrongly.
@@ -121,6 +145,10 @@ This reframes the job of AI-native organizations. They are not just trying to re
 - [[sources/How Block is becoming the most AI-native enterprise in the world]] - Block case study on Goose, MCP, functional org design, and executive dogfooding.
 - [[sources/The AI paradox More automation, more humans, more work  Dan Shipper]] - Every case study on automation as management work, agent-native SaaS, forward deployed engineers, super-agent architecture, and human-agent co-usage.
 - [[concepts/Ride the Models]] - Career survival strategy that parallels org-level model dogfooding.
+- [[concepts/Parallel Agent Management]] — Foreground/background split and verification loops as the practical workflow for AI-native teams.
+- [[concepts/Software Economics]] — Model-first companies and the $10.42/hour unit economics.
+- [[sources/Geoffrey Huntley - Software Development Now Costs Less Than Minimum Wage]] — Model-first companies, middle management collapse, K-shaped economy.
+- [[sources/How 7 Kilo Code Engineers Run Up to 20 Parallel Agents and Still Ship Clean Code]] — Parallel agent workflows and verification loops.
 
 ## Open Questions
 

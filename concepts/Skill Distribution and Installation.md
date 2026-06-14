@@ -22,6 +22,7 @@ sources:
   - "raw/2026-04-26 OpenAI Codex Plugins docs.md"
   - "raw/2026-04-26 Claude Code Plugins docs.md"
   - "raw/Context Is the New Code — Patrick Debois, Tessl.md"
+  - "raw/Lessons from building Claude Code How we use skills.md"
 tags: [agent-skills, distribution, installation, context]
 ---
 
@@ -75,6 +76,17 @@ The "Open Claw" incident made the community aware that downloaded skills execute
 
 Debois also proposes **context filters** as a separate security layer — a web-application-firewall-like mechanism that filters malicious patterns from incoming context before the agent processes it. This is distinct from sandboxing because sandboxes cannot prevent the initial loading of `agent.md` and `skill.md` files. See [[Context Observability and Feedback]] for details.
 
+### Repo Check-in vs. Plugin Marketplace (Anthropic Internal)
+
+Anthropic uses two distribution methods internally:
+
+1. **Check into repo** (`.claude/skills`) — works well for small teams working across relatively few repos. But every checked-in skill adds to model context.
+2. **Plugin marketplace** — as you scale, an internal marketplace lets team members choose which skills to install, with a setup flow.
+
+Marketplace governance is organic: no centralized team decides. Skills are shared by uploading to a sandbox folder in GitHub and pointing people to it in Slack. Once a skill gets traction, the owner can PR it into the marketplace.
+
+Skills can also compose: one skill can reference another by name, and the model will invoke it if installed. Dependency management is not natively built into marketplaces yet. Source: `raw/Lessons from building Claude Code How we use skills.md`.
+
 ## Where Sources Agree
 
 The sources agree that installation is a separate concern from authoring. A well-structured `SKILL.md` package still needs a delivery path.
@@ -100,6 +112,7 @@ There is also no sign yet of a single universal registry or signing system acros
 - [[concepts/Replacing Code with Skills]] — Server-controlled prompts iterate without client updates: an alternative distribution model that trades user control for team-level prompt versioning.
 - [[Context Development Lifecycle]] frames distribution as the Distribute stage within the broader Generate → Evaluate → Distribute → Observe loop, including dependency management and AI SBOM.
 - [[Context Observability and Feedback]] covers the security scanning and context filter layers needed after distribution.
+- [[sources/Lessons from building Claude Code How we use skills]] — Anthropic internal: repo check-in vs marketplace, organic marketplace governance, skill composition.
 
 ## Open Questions
 
