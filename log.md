@@ -1607,3 +1607,33 @@ Follow-ups:
 - Track whether Coinbase's LLM gateway approach becomes a pattern adopted by other large engineering orgs.
 - The 5% → 60% cache hit rate improvement is a concrete metric worth citing in future caching/optimization discussions.
 - If more sources emerge on model routing as infrastructure, consider a dedicated concept page on prompt routing and model selection automation.
+
+## [2026-07-01] ingest | Claude Sonnet 5 launch
+
+Processed Anthropic's Claude Sonnet 5 launch announcement.
+
+Raw source note processed:
+
+- `raw/Introducing Claude Sonnet 5.md` - Anthropic's Sonnet 5: performance close to Opus 4.8 at lower prices, updated tokenizer, safety improvements over Sonnet 4.6, poorer cybersecurity than Opus 4.8, now default for Free/Pro plans.
+
+Generated pages created:
+
+- `sources/Introducing Claude Sonnet 5.md` — Source summary with pricing, benchmarks, safety, and the "narrowing gap" pattern analysis.
+
+Generated pages updated:
+
+- `concepts/The Compute Cost Tradeoff.md` — Added "The Narrowing Gap Pattern" section documenting the recurring pattern where mid-tier models absorb frontier capabilities within months at 40–60% of the price. Sonnet 5 as concrete evidence. Added to sources, connections, and contradictions.
+- `index.md` — Added raw source to frontmatter and Raw Sources; added source summary to Source Summaries.
+- `log.md`
+
+Important decisions:
+
+- Did not create a new concept page for "model tier convergence" — the pattern is documented within The Compute Cost Tradeoff as the "narrowing gap" section. If more sources accumulate on this pattern, it could become its own concept.
+- Positioned Sonnet 5 as evidence for the recurring pattern (user's observation: "This keeps happening") rather than as a standalone model review.
+- The updated tokenizer (1.0–1.35× more tokens per input) is notable for cost calculations — flagged in the source summary open questions.
+
+Follow-ups:
+
+- Track whether the narrowing gap pattern continues with future Sonnet/Opus releases and competing model families (GPT, Gemini).
+- If the tokenizer change significantly affects real-world costs for coding workflows, update the AI Coding Plans concept page.
+- The cybersecurity capability gap between Sonnet and Opus is a concrete example of where frontier models retain durable advantage — worth tracking if this pattern holds.

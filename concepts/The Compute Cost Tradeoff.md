@@ -5,6 +5,7 @@ updated: 2026-06-07
 status: active
 sources:
   - "raw/Why We’ll Still Be Employed When AI Can Do Everything.md"
+  - "raw/Introducing Claude Sonnet 5.md"
 tags: [compute-costs, software-economics, ai-adoption, energy, tradeoffs]
 ---
 
@@ -44,6 +45,22 @@ The "jagged free lunch" is the period when AI capability dramatically exceeds it
 
 The tradeoff argument says this period is temporary. As AI absorbs more tasks, the remaining tasks require more compute (deeper reasoning, more context, more verification). The cost curve bends upward while the capability curve flattens. Eventually, the marginal cost of AI competence on subjective tasks exceeds the marginal cost of human labor.
 
+## The Narrowing Gap Pattern
+
+A recurring pattern in the LLM ecosystem keeps extending the "jagged free lunch": mid-tier models absorb frontier capabilities within months of a frontier launch, at 40–60% of the price. This has played out across Claude Sonnet 3.5 → 3.6 → 3.7 → 4.6 → 5, GPT-4 → GPT-4o → GPT-4.1, and Gemini Pro → Flash.
+
+Claude Sonnet 5 is a concrete example: its performance is close to Opus 4.8 on reasoning, tool use, coding, and knowledge work, but at $3/$15 per MTok vs. Opus's $5/$25 (introductory pricing: $2/$10). The frontier model retains an edge on the hardest tasks and specialized capabilities (cybersecurity, deepest reasoning), but the mid-tier becomes the new default for most users.
+
+This pattern has a compounding effect on the compute cost tradeoff. The "jagged free lunch" doesn't just persist — it extends, because the cost of frontier-class capability drops faster than the frontier itself advances. Each generation's frontier becomes next generation's mid-tier default.
+
+Source: `raw/Introducing Claude Sonnet 5.md`.
+
+Implications for the tradeoff:
+
+- **The economic ceiling rises more slowly than expected.** If mid-tier models keep absorbing frontier capabilities, the cost of "good enough" AI keeps dropping, making the human-cost comparison harder for AI to lose.
+- **Frontier models become specialized tools.** As mid-tier models cover more general tasks, frontier models are justified only for the hardest reasoning, specialized capabilities, or tasks where the marginal quality gain exceeds the marginal cost.
+- **Organizations should track the frontier-mid-tier gap, not just absolute capability.** The gap determines when it's worth paying frontier prices.
+
 ## Implications for Skill Design
 
 The compute cost tradeoff has direct implications for how skills should be designed:
@@ -63,10 +80,12 @@ The compute cost tradeoff has direct implications for how skills should be desig
 - [[concepts/Ride the Models]] — The career strategy for humans who remain competitive by leveraging the compute cost tradeoff: focus on tasks where human judgment is cheaper than AI inference.
 - [[concepts/AI-Native Work Archetypes]] — The frame-reset cycle creates new human roles precisely because the compute cost of automating the previous frame exceeds hiring a human.
 - [[sources/Why We'll Still Be Employed When AI Can Do Everything]] — Source summary.
+- [[sources/Introducing Claude Sonnet 5]] — Concrete evidence for the narrowing gap pattern: Sonnet 5 approaches Opus 4.8 at 40–60% of the price.
 
 ## Contradictions or Tensions
 
 - The argument assumes energy costs stay high. Historical trends show inference costs dropping rapidly (100x per year in some estimates). If this continues, the compute barrier weakens significantly.
+- The "narrowing gap" pattern (Sonnet 5 approaching Opus 4.8 at 40–60% of the price) is the most concrete evidence against the cost ceiling argument. Each generation's frontier becomes next generation's mid-tier default, extending the "jagged free lunch" rather than ending it.
 - Dan Shipper's position in the same newsletter directly contradicts this: he argues the frame resets forever, meaning humans always have new work. MT argues AI will eventually outpace framing too, but compute costs keep humans employed anyway. These are different mechanisms for the same conclusion.
 - The Waymo case could be read differently: Waymo is already cheaper than Uber for riders, and the taxi workforce grew because of induced demand, not because compute costs are too high. The argument may prove less durable than it appears.
 

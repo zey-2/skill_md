@@ -110,6 +110,7 @@ sources:
   - "raw/Making AI Work Leadership, Lab, and Crowd.md"
   - "raw/after-automation.pdf"
   - "raw/How to keep AI spend flat while token usage grows - Brian Armstrong.md"
+  - "raw/Introducing Claude Sonnet 5.md"
 tags: [index, agent-skills, llm-providers]
 ---
 
@@ -293,6 +294,7 @@ tags: [index, agent-skills, llm-providers]
 - `raw/Reflecting on a year of Claude Code.md` - Boris Cherny and Cat Wu on Claude Code's first year: every mistake becomes a skill, verification beyond unit tests, auto mode replacing plan mode, routines as killer app, roles merging at Anthropic, context minimalism, hundreds of agents via Remote Control.
 - `raw/Making AI Work Leadership, Lab, and Crowd.md` - Ethan Mollick on why individual AI gains don't translate to organizational performance. Four facts (AI boosts work, 40% adoption, more gains available, companies not capturing them), the Leadership/Lab/Crowd framework, Secret Cyborgs (20% official vs 40% actual adoption), and org-specific benchmarking.
 - `raw/How to keep AI spend flat while token usage grows - Brian Armstrong.md` - Coinbase CEO on cutting AI spend nearly in half while token usage grows: cheaper model defaults, prompt routing, cache awareness (5% → 60% hit rate), context hygiene, and visibility over friction.
+- `raw/Introducing Claude Sonnet 5.md` - Anthropic's Sonnet 5 launch: performance close to Opus 4.8 at lower prices ($3/$15 vs $5/$25 per MTok). Introductory pricing $2/$10 through August 2026. Updated tokenizer (1.0–1.35× more tokens per input). Lower misaligned behavior than Sonnet 4.6, poorer cybersecurity than Opus 4.8.
 
 ## Source Summaries
 
@@ -329,6 +331,7 @@ tags: [index, agent-skills, llm-providers]
 - [[sources/Reflecting on a year of Claude Code]] — Boris Cherny and Cat Wu on Claude Code's first year: every mistake becomes a skill, auto mode, routines, roles merging, context minimalism, hundreds of agents via Remote Control.
 - [[sources/Making AI Work Leadership, Lab, and Crowd]] — Mollick's Leadership/Lab/Crowd framework for closing the individual-to-organizational AI gap. Empirical adoption data, Secret Cyborgs dynamic, org-specific benchmarking.
 - [[sources/How to keep AI spend flat while token usage grows - Brian Armstrong]] — Coinbase playbook: cheaper defaults, prompt routing, cache awareness (5% → 60%), context hygiene, and visibility as cost-management infrastructure.
+- [[sources/Introducing Claude Sonnet 5]] — Anthropic's Sonnet 5: mid-tier model approaching frontier (Opus 4.8) at 40–60% of the price. The recurring "narrowing gap" pattern that keeps extending the jagged free lunch.
 
 - [[sources/2026-04-26 Agent orchestration frameworks source|2026-04-26 Agent orchestration frameworks source]] - Initial source-summary backfill: LangGraph, Microsoft Agent Framework, and CrewAI evidence for graph workflows, durable execution, state, human-in-the-loop, observability, and multi-agent orchestration.
 - [[sources/2026-04-26 Agent Skills specification evaluation and description optimization|2026-04-26 Agent Skills specification evaluation and description optimization]] - Initial source-summary backfill: AgentSkills.io evidence for `SKILL.md` validation, trigger evals, output evals, assertions, baselines, and iteration.
