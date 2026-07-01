@@ -189,6 +189,7 @@ tags: [index, agent-skills, llm-providers]
 - [[concepts/LLM Context Compression|LLM Context Compression]] — Token-level pruning (LLMLingua-2: 2–5× compression, 0.4s overhead), learned soft prompts (Gist Tokens: 26×), provider caching (90% discount), and when compression hurts (retrieval, multi-hop reasoning, exact facts).
 - [[concepts/LLM Model Routing|LLM Model Routing]] — Sending queries to the right model based on complexity, cost, and cache. Provider gateways (OpenRouter, LiteLLM, Portkey), learned routers (RouteLLM: 85% cost savings at 95% quality, FrugalGPT: 98% savings), and Coinbase's production playbook.
 - [[concepts/LLM Tokenizer Changes|LLM Tokenizer Changes]] — How tokenizer updates affect cost and context window. Claude's new tokenizer produces ~30% more tokens per input. OpenAI's 4-generation evolution. Migration guidance and content-type efficiency differences.
+- [[concepts/Token-Efficient LLM Use|Token-Efficient LLM Use]] — Synthesis of 7 strategies to keep AI spend flat while usage grows: model routing, effort tuning, prompt caching, context compression, context rot avoidance, code-over-inference, and tokenmaxxing. Includes Coinbase case study and cross-provider evidence.
 
 ## Lesson Plans
 
@@ -423,4 +424,5 @@ tags: [index, agent-skills, llm-providers]
 
 - `courses/presentation-agency.html` — Presentation on AI agency for a general audience.
 - `courses/presentation-the-human-bottleneck.html` — Presentation on understanding as the human bottleneck.
+- `courses/presentation-token-efficient-llm-use.html` — Interactive presentation on keeping AI spend flat while token usage grows. 14 slides covering 7 stacking strategies with data visualizations and the Coinbase case study.
 - [comic-ai-leverage-not-magic-prompt](courses/comic-ai-leverage-not-magic-prompt.md) — Image generation prompt for an educational comic strip: "AI Is Leverage, Not Magic."

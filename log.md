@@ -1775,3 +1775,23 @@ Follow-ups:
 - The tokenizer cost impact is underappreciated — most users compare per-token prices without accounting for token count changes.
 - Compression interaction with prompt caching is unknown — do compressed prompts cache differently?
 - Neither Anthropic nor OpenAI publishes exact effort-level token multipliers — community benchmarks needed.
+
+## [2026-07-01] synthesis | Token-Efficient LLM Use — article and presentation
+
+Created a comprehensive synthesis article and interactive HTML presentation covering the 7-strategy framework for keeping AI spend flat while token usage grows.
+
+Files created:
+
+- `concepts/Token-Efficient LLM Use.md` — Synthesis article covering all 7 strategies (model routing, effort tuning, prompt caching, context compression, context rot, code-over-inference, tokenmaxxing) with evidence from Coinbase, RouteLLM, FrugalGPT, LLMLingua-2, and the Kilo Code engineers. Includes the strategy stack diagram, Coinbase case study, tokenizer cost impact section, and connections to 16 related wiki pages.
+- `courses/presentation-token-efficient-llm-use.html` — 14-slide interactive presentation (Neon Studio preset). Slides: title, problem statement, 7-strategy overview, 7 deep-dive slides (each with "N of 7" badge), Coinbase case study mapped to strategy numbers, strategy stack flow diagram, cheat sheet table, and closing. CSS-based visuals, zero external dependencies.
+
+Files updated:
+
+- `index.md` — Added synthesis article entry and presentation entry.
+
+Key design decisions:
+
+- Structured the presentation so all 7 strategies are visible on the overview slide, with each deep-dive slide carrying a consistent "N of 7" badge. Previous version had only 6 cards and orphaned Tokenmaxxing.
+- Coinbase case study cards now map back to strategy numbers (01+02, 03, 04+05, 06, 07) so the connection is explicit.
+- Added a "strategy stack" flow diagram slide showing the decision chain from routing through measurement.
+- The synthesis article cross-links to 16 existing wiki pages, making it the most connected page in the knowledge base.
