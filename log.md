@@ -4,6 +4,7 @@ created: 2026-04-26
 updated: 2026-07-01
 status: active
 sources:
+  - "raw/research-context-window-degradation.md"
   - "raw/Making AI Work Leadership, Lab, and Crowd.md"
   - "raw/after-automation.pdf"
   - "raw/skill.md for AI Agents.md"
@@ -1705,3 +1706,34 @@ Follow-ups:
 - Neither provider publishes exact token multipliers between effort levels. If community benchmarks emerge with precise measurements, update the scaling table.
 - Track how effort interacts with prompt caching efficiency across both providers.
 - Monitor whether effort levels converge to a standard or continue to diverge across providers.
+
+## [2026-07-01] research | LLM Context Window Degradation
+
+Researched context window degradation and context rot across academic benchmarks and provider documentation.
+
+Files created:
+- `raw/research-context-window-degradation.md` -- Comprehensive research compilation with RULER benchmark data, Lost in the Middle findings, attention sink mechanism, model-by-model comparison, provider best practices, and academic citations.
+
+Files updated:
+- `concepts/Context Rot.md` -- Major expansion: added RULER benchmark table (5 models with 4K/128K scores), Lost in the Middle findings, mechanism section (attention dilution, positional encoding limits, training distribution bias, attention sink disruption, retrieval vs. reasoning), practical thresholds, academic citations, and provider-reported performance data.
+- `index.md` -- Added raw source to frontmatter and Raw Sources section; updated Context Rot description.
+
+Key findings:
+
+- **No universal "60% drop" threshold exists.** The 60% figure from Kilo Code is a practical observation for coding agents, not a benchmark-derived constant. Actual degradation depends on model capability, task type, and information position.
+- **RULER benchmark (46 models):** Top models (Gemini-1.5-pro, Jamba-1.5-large) lose only 1-2 points across 4K-128K. GPT-4 loses 15 points. Many open models lose 30-95+ points. Effective context is typically 25-50% of claimed context for weaker models.
+- **Lost in the Middle:** U-shaped performance curve -- information at beginning and end is retrieved more reliably than in the middle.
+- **Mechanisms:** Attention dilution (n-squared scaling), positional encoding interpolation limits, training distribution bias, and attention sink disruption.
+- **Provider strategies:** Anthropic recommends compaction, sub-agents, and structured note-taking. OpenAI recommends prompt caching and RAG. Google recommends placement at end of prompt and context caching.
+
+Important decisions:
+
+- Treated the "60% quality drop" claim from Kilo Code as a practical observation rather than a universal benchmark, because RULER data shows highly variable degradation across models.
+- Did not create separate concept pages for individual benchmarks (RULER, LongBench, Lost in the Middle) -- the data is synthesized into the Context Rot concept page and the raw research file.
+- Academic citations are included in both the raw research file and the Context Rot concept page for traceability.
+
+Follow-ups:
+
+- Track RULER benchmark results for newer models (Claude Sonnet 5, GPT-4.1, Gemini 2.0) as they become available.
+- Investigate whether attention sink patterns can be deliberately exploited for better context utilization.
+- Monitor if any provider publishes explicit degradation curves for their production models.

@@ -111,6 +111,7 @@ sources:
   - "raw/after-automation.pdf"
   - "raw/How to keep AI spend flat while token usage grows - Brian Armstrong.md"
   - "raw/Introducing Claude Sonnet 5.md"
+  - "raw/research-context-window-degradation.md"
 tags: [index, agent-skills, llm-providers]
 ---
 
@@ -169,7 +170,7 @@ tags: [index, agent-skills, llm-providers]
 - [[concepts/Autonomous Research Agents|Autonomous Research Agents]] — Karpathy's autoresearch: agents given a real experimental setup, fixed time budgets, and indefinite autonomy to iterate on their own code.
 - [[concepts/Meta-Skills and Skillification|Meta-Skills and Skillification]] — Skills that create skills (skillify), fat skills/thin harness architecture, skill composition, and Garry Tan's compounding personal AI infrastructure.
 - [[concepts/Tokenmaxxing|Tokenmaxxing]] — Spending more model time, context, agents, and verification when extra machine work improves quality, while measuring value as outputs over tokens.
-- [[concepts/Context Rot|Context Rot]] - Degradation in model or agent behavior as context grows too large, noisy, or contradictory.
+- [[concepts/Context Rot|Context Rot]] - Degradation in model or agent behavior as context grows too large, noisy, or contradictory. Includes RULER benchmark data, Lost in the Middle findings, attention dilution mechanisms, and model-by-model degradation curves.
 - [[concepts/AI-Native Engineering Organizations|AI-Native Engineering Organizations]] — Org-level operating model for teams where coding throughput is no longer the main bottleneck.
 - [[concepts/AI-Native Work Archetypes|AI-Native Work Archetypes]] — Working-style taxonomy for AI-native companies: acceleration, stabilization, governance, and interface.
 - [[concepts/Enterprise AI Adoption Flywheel|Enterprise AI Adoption Flywheel]] — Company-wide adoption loop: leadership usage, integrated agents, visible wins, shared platforms, and governance.
@@ -297,6 +298,7 @@ tags: [index, agent-skills, llm-providers]
 - `raw/Making AI Work Leadership, Lab, and Crowd.md` - Ethan Mollick on why individual AI gains don't translate to organizational performance. Four facts (AI boosts work, 40% adoption, more gains available, companies not capturing them), the Leadership/Lab/Crowd framework, Secret Cyborgs (20% official vs 40% actual adoption), and org-specific benchmarking.
 - `raw/How to keep AI spend flat while token usage grows - Brian Armstrong.md` - Coinbase CEO on cutting AI spend nearly in half while token usage grows: cheaper model defaults, prompt routing, cache awareness (5% → 60% hit rate), context hygiene, and visibility over friction.
 - `raw/Introducing Claude Sonnet 5.md` - Anthropic's Sonnet 5 launch: performance close to Opus 4.8 at lower prices ($3/$15 vs $5/$25 per MTok). Introductory pricing $2/$10 through August 2026. Updated tokenizer (1.0–1.35× more tokens per input). Lower misaligned behavior than Sonnet 4.6, poorer cybersecurity than Opus 4.8.
+- `raw/research-context-window-degradation.md` - Research compilation on LLM context window degradation: RULER benchmark data (46 models, 4K-128K), Lost in the Middle findings, attention sink mechanism, model-by-model comparison (Claude/GPT-4/Gemini), provider best practices, and academic citations.
 
 ## Source Summaries
 
