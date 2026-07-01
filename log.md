@@ -1737,3 +1737,41 @@ Follow-ups:
 - Track RULER benchmark results for newer models (Claude Sonnet 5, GPT-4.1, Gemini 2.0) as they become available.
 - Investigate whether attention sink patterns can be deliberately exploited for better context utilization.
 - Monitor if any provider publishes explicit degradation curves for their production models.
+
+## [2026-07-01] research | Token-efficiency gap analysis — compression, routing, tokenizer, code vs inference
+
+Ran parallel research (7 agents, 284 tool calls, 600K tokens) to fill evidence gaps in the token-efficiency presentation outline. Covered context compression, model routing, tokenizer changes, code vs. inference economics, and updated existing pages with pricing data.
+
+Generated pages created:
+
+- `concepts/LLM Context Compression.md` — LLMLingua-2 (ACL 2024, 2–5× compression, 0.4s overhead), Gist Tokens (NeurIPS 2023, 26× compression), AutoCompressor (EMNLP 2023), provider caching (90% discount), and failure mode taxonomy. When compression hurts: retrieval (-44%), multi-hop reasoning, exact facts. When it helps: classification (-0.9%), code (improves), few-shot.
+- `concepts/LLM Model Routing.md` — Provider gateways (OpenRouter, LiteLLM, Portkey), learned routers (RouteLLM: 85% cost savings at 95% GPT-4 quality; FrugalGPT: 98% savings; AutoMix: ~10× savings), classifier-based routing (RoBERTa backbone, 9K–15K training queries), and Coinbase's production playbook.
+- `concepts/LLM Tokenizer Changes.md` — Claude's new tokenizer (~30% more tokens per input), OpenAI's 4-generation evolution (r50k → o200k), content-type efficiency differences, and migration guidance (6 steps from Anthropic).
+
+Generated pages updated:
+
+- `concepts/The Compute Cost Tradeoff.md` — Added Opus 67% price drop ($15/$75 → $5/$25), Huntley $10.42/hour data, Claude Code 98.4% deterministic finding, Anthropic "Building Effective Agents" guidance. Added connections to compression, routing, and tokenizer pages.
+- `concepts/Context Rot.md` — Added cross-reference to new LLM Context Compression page.
+- `concepts/Tokenmaxxing.md` — Added cross-references to LLM Context Compression and LLM Model Routing.
+- `index.md` — Added 3 new concept article entries.
+- `log.md`
+
+Key findings:
+
+- **LLM Context Compression:** The earlier wiki cited "Headroom" as a compression tool — research found no active, independently reviewed product by that name. LLMLingua-2 is the evidence-backed alternative with published ACL 2024 benchmarks.
+- **LLM Model Routing:** RouteLLM (LMSys) achieves 85% cost reduction at 95% GPT-4 quality using preference data from Chatbot Arena. FrugalGPT achieves 98% cost reduction with LLM cascade. This is the largest gap that was filled.
+- **LLM Tokenizer Changes:** Claude's new tokenizer produces ~30% more tokens, which partially offsets Sonnet 5's lower per-token price. A $100/month Sonnet 4.6 workload becomes ~$130/month on Sonnet 5 at the same per-token rate.
+- **Code vs. Inference:** Opus 67% price drop in one generation is the strongest evidence for the narrowing gap. Claude Code being 98.4% deterministic is the strongest evidence for the "code over inference" principle.
+
+Important decisions:
+
+- Created 3 new concept pages rather than folding into existing pages because each topic has enough depth for standalone treatment.
+- Did not create raw source notes for web-fetched documentation (LLMLingua-2 paper, RouteLLM repo, Anthropic/OpenAI docs) because they are living sources; the concept pages capture the durable patterns.
+- Updated the "Headroom" reference in Tokenmaxxing to note the tool is unverifiable, pointing to LLMLingua-2 as the evidence-backed alternative.
+
+Follow-ups:
+
+- RouteLLM and FrugalGPT are research systems — track whether they become production-ready tools.
+- The tokenizer cost impact is underappreciated — most users compare per-token prices without accounting for token count changes.
+- Compression interaction with prompt caching is unknown — do compressed prompts cache differently?
+- Neither Anthropic nor OpenAI publishes exact effort-level token multipliers — community benchmarks needed.

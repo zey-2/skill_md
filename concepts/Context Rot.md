@@ -85,6 +85,7 @@ Context rot is the degradation of model or agent performance as the context wind
 - [[concepts/LLM Fundamentals]] -- Attention mechanism and positional encoding are the architectural roots of context rot.
 - [[sources/How 7 Kilo Code Engineers Run Up to 20 Parallel Agents and Still Ship Clean Code]] -- 60% quality drop threshold as practical evidence.
 - [[sources/You NEED to try these open-source AI projects RIGHT NOW]] -- Headroom context compression as a mitigation tool (47-92% savings, accuracy preserved).
+- [[concepts/LLM Context Compression]] — Dedicated page on compression tools (LLMLingua-2, Gist Tokens, AutoCompressor), when compression hurts, and provider caching as alternative.
 
 ## Open Questions
 

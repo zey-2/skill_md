@@ -186,6 +186,9 @@ tags: [index, agent-skills, llm-providers]
 - [[concepts/Zeno's Paradox of AI|Zeno's Paradox of AI]] — AI commoditizes explicit competence; this creates demand for what's different; demand for difference is demand for human experts. The cycle repeats at every capability level. Frame vs. framer: benchmarks measure frames, humans are framers.
 - [[concepts/LLM Prompt Caching|LLM Prompt Caching]] — How Anthropic, OpenAI, and Bedrock cache KV representations for repeated prompt prefixes. 90% input cost discount, explicit vs automatic breakpoints, TTL options, reasoning token interaction, and production benchmarks (Coinbase 5% to 60% hit rate).
 - [[concepts/LLM Effort Levels and Reasoning Budget Controls|LLM Effort Levels and Reasoning Budget Controls]] — How Anthropic's `effort` and OpenAI's `reasoning_effort` parameters trade off quality vs. cost. Level definitions, token scaling, task-type recommendations, and cross-provider comparison.
+- [[concepts/LLM Context Compression|LLM Context Compression]] — Token-level pruning (LLMLingua-2: 2–5× compression, 0.4s overhead), learned soft prompts (Gist Tokens: 26×), provider caching (90% discount), and when compression hurts (retrieval, multi-hop reasoning, exact facts).
+- [[concepts/LLM Model Routing|LLM Model Routing]] — Sending queries to the right model based on complexity, cost, and cache. Provider gateways (OpenRouter, LiteLLM, Portkey), learned routers (RouteLLM: 85% cost savings at 95% quality, FrugalGPT: 98% savings), and Coinbase's production playbook.
+- [[concepts/LLM Tokenizer Changes|LLM Tokenizer Changes]] — How tokenizer updates affect cost and context window. Claude's new tokenizer produces ~30% more tokens per input. OpenAI's 4-generation evolution. Migration guidance and content-type efficiency differences.
 
 ## Lesson Plans
 

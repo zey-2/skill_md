@@ -97,6 +97,8 @@ It also adds a useful economic lens to [[concepts/Context Development Lifecycle]
 - [[concepts/Meta-Skills and Skillification]] - Repeated tokenmaxxing workflows become reusable skills.
 - [[sources/You NEED to try these open-source AI projects RIGHT NOW]] — Headroom as a concrete context-compression tokenmaxxing tool with 47–92% savings and a self-improvement learn loop.
 - [[sources/How to keep AI spend flat while token usage grows - Brian Armstrong]] — Coinbase's organizational playbook: cheaper defaults, prompt routing, cache awareness, and visibility as infrastructure for sustainable tokenmaxxing at scale.
+- [[concepts/LLM Context Compression]] — Dedicated page on compression tools and when they help vs. hurt.
+- [[concepts/LLM Model Routing]] — Dynamic model selection as a mechanism for making high token usage cost-sustainable.
 
 ## Open Questions
 

@@ -51,6 +51,8 @@ A recurring pattern in the LLM ecosystem keeps extending the "jagged free lunch"
 
 Claude Sonnet 5 is a concrete example: its performance is close to Opus 4.8 on reasoning, tool use, coding, and knowledge work, but at $3/$15 per MTok vs. Opus's $5/$25 (introductory pricing: $2/$10). The frontier model retains an edge on the hardest tasks and specialized capabilities (cybersecurity, deepest reasoning), but the mid-tier becomes the new default for most users.
 
+The magnitude of the price decline is striking. Opus-tier pricing dropped 67% in one generation: $15/$75 (Opus 4.1) → $5/$25 (Opus 4.8). Geoffrey Huntley calculated that running frontier models in a loop for autonomous software development costs ~$10.42/hour at Sonnet 4.5 pricing — less than minimum wage in most developed countries. With current Sonnet 5 pricing ($2/$10 introductory), the cost is even lower.
+
 This pattern has a compounding effect on the compute cost tradeoff. The "jagged free lunch" doesn't just persist — it extends, because the cost of frontier-class capability drops faster than the frontier itself advances. Each generation's frontier becomes next generation's mid-tier default.
 
 Source: `raw/Introducing Claude Sonnet 5.md`.
@@ -65,7 +67,7 @@ Implications for the tradeoff:
 
 The compute cost tradeoff has direct implications for how skills should be designed:
 
-- **Prefer deterministic code over AI inference when possible.** This is the "save scripts inside skills" pattern from [[concepts/Prompting Skills Not Prompts]]. Trading AI tokens for code compute is cheaper, faster, and repeatable.
+- **Prefer deterministic code over AI inference when possible.** This is the "save scripts inside skills" pattern from [[concepts/Prompting Skills Not Prompts]]. Trading AI tokens for code compute is cheaper, faster, and repeatable. Claude Code itself is 98.4% deterministic infrastructure and only 1.6% AI (VILA-Lab arXiv analysis of ~512K lines) — even the most advanced AI coding agent is overwhelmingly traditional code. Anthropic's "Building Effective Agents" guidance: "finding the simplest solution possible, and only increasing complexity when needed. This might mean not building agentic systems at all."
 - **Design skills to minimize thinking tokens.** Well-structured instructions, clear examples, and pre-computed reference data reduce the inference cost of each skill invocation.
 - **Reserve expensive model calls for high-value judgments.** Use cheaper models or code for routine steps; escalate to frontier models only when the task requires genuine reasoning.
 - **Measure value as outputs over tokens.** The [[concepts/Tokenmaxxing|tokenmaxxing]] philosophy of spending more model time applies only when the extra tokens produce proportionally better outcomes.
@@ -81,6 +83,9 @@ The compute cost tradeoff has direct implications for how skills should be desig
 - [[concepts/AI-Native Work Archetypes]] — The frame-reset cycle creates new human roles precisely because the compute cost of automating the previous frame exceeds hiring a human.
 - [[sources/Why We'll Still Be Employed When AI Can Do Everything]] — Source summary.
 - [[sources/Introducing Claude Sonnet 5]] — Concrete evidence for the narrowing gap pattern: Sonnet 5 approaches Opus 4.8 at 40–60% of the price.
+- [[concepts/LLM Context Compression]] — Compression tools reduce the cost side of the tradeoff by making each token more efficient.
+- [[concepts/LLM Model Routing]] — Routing is the operational mechanism for navigating the cost-performance frontier dynamically.
+- [[concepts/LLM Tokenizer Changes]] — Tokenizer changes affect the real cost per query, independent of per-token pricing.
 
 ## Contradictions or Tensions
 
