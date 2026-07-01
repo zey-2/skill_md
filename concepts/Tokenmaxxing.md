@@ -9,6 +9,7 @@ sources:
   - "raw/Why this Claude Code engineer uses HTML files as AI specs  Thariq Shihipar (Anthropic).md"
   - "raw/Geoffrey Huntley - Software Development Now Costs Less Than Minimum Wage.md"
   - "raw/You NEED to try these open-source AI projects RIGHT NOW.md"
+  - "raw/How to keep AI spend flat while token usage grows - Brian Armstrong.md"
 tags: [tokenmaxxing, ai-native-engineering, context, personal-ai, validation, planning, context-compression]
 ---
 
@@ -81,6 +82,7 @@ It also adds a useful economic lens to [[concepts/Context Development Lifecycle]
 - It raises governance questions for teams: who decides when a task deserves aggressive token spend, and how is the outcome measured?
 - The two tokenmaxxing sources emphasize different sides of the same phenomenon. The Y Combinator/Garry Tan source emphasizes token spend as leverage for scarce human attention. The Agentmail source emphasizes token spend as a cost that can become a vanity metric when it is detached from output quality.
 - Token tracking can be a useful adoption dashboard, but it becomes fragile when employees optimize for token volume rather than real work.
+- Coinbase resolves this tension at the organizational level: let engineers spend freely, but build infrastructure (cheaper defaults, prompt routing, cache awareness, context hygiene) that makes exponential token growth cost-sustainable. Armstrong reports cutting AI spend nearly in half while token usage continued to grow.
 
 ## Connections
 
@@ -94,6 +96,7 @@ It also adds a useful economic lens to [[concepts/Context Development Lifecycle]
 - [[concepts/Validation and Evaluation]] - More model work needs stronger checks, not weaker ones.
 - [[concepts/Meta-Skills and Skillification]] - Repeated tokenmaxxing workflows become reusable skills.
 - [[sources/You NEED to try these open-source AI projects RIGHT NOW]] — Headroom as a concrete context-compression tokenmaxxing tool with 47–92% savings and a self-improvement learn loop.
+- [[sources/How to keep AI spend flat while token usage grows - Brian Armstrong]] — Coinbase's organizational playbook: cheaper defaults, prompt routing, cache awareness, and visibility as infrastructure for sustainable tokenmaxxing at scale.
 
 ## Open Questions
 

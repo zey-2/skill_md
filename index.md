@@ -1,7 +1,7 @@
 ---
 type: index
 created: 2026-04-26
-updated: 2026-06-14
+updated: 2026-06-27
 status: active
 sources:
   - "raw/skill.md for AI Agents.md"
@@ -109,6 +109,7 @@ sources:
   - "raw/Superpowers How Jesse Built the 1 AI Claude Code  Codex Plugin — and Stopped Writing Code.md"
   - "raw/Making AI Work Leadership, Lab, and Crowd.md"
   - "raw/after-automation.pdf"
+  - "raw/How to keep AI spend flat while token usage grows - Brian Armstrong.md"
 tags: [index, agent-skills, llm-providers]
 ---
 
@@ -291,6 +292,7 @@ tags: [index, agent-skills, llm-providers]
 - `raw/after-automation.pdf` - Shipper's full essay (PDF print): two modes of working with agents, named agents at Every (Claudie, Andy, Viktor, Fin), the human sandwich, cheap competence cycle, Zeno's Paradox of AI, frame vs. framer, agents without agency, Senior Engineer benchmark (GPT-5.5 = 62/100).
 - `raw/Reflecting on a year of Claude Code.md` - Boris Cherny and Cat Wu on Claude Code's first year: every mistake becomes a skill, verification beyond unit tests, auto mode replacing plan mode, routines as killer app, roles merging at Anthropic, context minimalism, hundreds of agents via Remote Control.
 - `raw/Making AI Work Leadership, Lab, and Crowd.md` - Ethan Mollick on why individual AI gains don't translate to organizational performance. Four facts (AI boosts work, 40% adoption, more gains available, companies not capturing them), the Leadership/Lab/Crowd framework, Secret Cyborgs (20% official vs 40% actual adoption), and org-specific benchmarking.
+- `raw/How to keep AI spend flat while token usage grows - Brian Armstrong.md` - Coinbase CEO on cutting AI spend nearly in half while token usage grows: cheaper model defaults, prompt routing, cache awareness (5% → 60% hit rate), context hygiene, and visibility over friction.
 
 ## Source Summaries
 
@@ -326,6 +328,7 @@ tags: [index, agent-skills, llm-providers]
 - [[sources/After Automation]] — Shipper's full essay: two modes of working with agents (employees vs. collaboration), named agents at Every (Claudie, Andy, Viktor, Fin), the human sandwich, Zeno's Paradox of AI (cheap competence → sameness → demand for experts), frame vs. framer, agents without agency (toddler thought experiment).
 - [[sources/Reflecting on a year of Claude Code]] — Boris Cherny and Cat Wu on Claude Code's first year: every mistake becomes a skill, auto mode, routines, roles merging, context minimalism, hundreds of agents via Remote Control.
 - [[sources/Making AI Work Leadership, Lab, and Crowd]] — Mollick's Leadership/Lab/Crowd framework for closing the individual-to-organizational AI gap. Empirical adoption data, Secret Cyborgs dynamic, org-specific benchmarking.
+- [[sources/How to keep AI spend flat while token usage grows - Brian Armstrong]] — Coinbase playbook: cheaper defaults, prompt routing, cache awareness (5% → 60%), context hygiene, and visibility as cost-management infrastructure.
 
 - [[sources/2026-04-26 Agent orchestration frameworks source|2026-04-26 Agent orchestration frameworks source]] - Initial source-summary backfill: LangGraph, Microsoft Agent Framework, and CrewAI evidence for graph workflows, durable execution, state, human-in-the-loop, observability, and multi-agent orchestration.
 - [[sources/2026-04-26 Agent Skills specification evaluation and description optimization|2026-04-26 Agent Skills specification evaluation and description optimization]] - Initial source-summary backfill: AgentSkills.io evidence for `SKILL.md` validation, trigger evals, output evals, assertions, baselines, and iteration.

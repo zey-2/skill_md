@@ -12,6 +12,7 @@ sources:
   - "raw/Geoffrey Huntley - Software Development Now Costs Less Than Minimum Wage.md"
   - "raw/How 7 Kilo Code Engineers Run Up to 20 Parallel Agents and Still Ship Clean Code.md"
   - "raw/Making AI Work Leadership, Lab, and Crowd.md"
+  - "raw/How to keep AI spend flat while token usage grows - Brian Armstrong.md"
 tags: [ai-native-orgs, engineering-management, verification, review, org-design, model-first]
 ---
 
@@ -64,6 +65,20 @@ Useful directional metrics include:
 - quality, reliability, and product delight rather than raw commit count.
 
 The source warns against treating AI-generated code percentage as the real goal. The product outcome still matters more than the throughput statistic.
+
+## AI Cost Management as Infrastructure
+
+Coinbase's approach to AI spend reframes cost management as an infrastructure problem, not a policy problem. Armstrong reports cutting AI spend nearly in half while token usage continued to grow. The playbook:
+
+- **Cheaper defaults, not caps**: Default to open-weight models (GLM 5.2, Kimi 2.7) through an LLM gateway; let engineers override freely.
+- **Prompt routing**: Preprocess prompts and route to the best model considering cache hits and pricing. Frontier for planning, cheaper for execution.
+- **Cache awareness**: All requests are cache-aware. Coinbase improved cache hit rate from 5% → 60% in LibreChat.
+- **Context hygiene**: Fresh sessions on task switch, narrow file scope, disconnected unused tools. "Don't just compact."
+- **Visibility over friction**: Engineers use unlimited tokens from any model, but usage is visible. More spend implies more expected impact.
+
+This extends the enterprise adoption pattern: the org doesn't restrict AI use, it builds infrastructure that makes exponential growth sustainable.
+
+Source: `raw/How to keep AI spend flat while token usage grows - Brian Armstrong.md`.
 
 ## Work Archetypes
 
@@ -161,6 +176,7 @@ Source: `raw/Making AI Work Leadership, Lab, and Crowd.md`.
 - [[sources/Geoffrey Huntley - Software Development Now Costs Less Than Minimum Wage]] — Model-first companies, middle management collapse, K-shaped economy.
 - [[sources/How 7 Kilo Code Engineers Run Up to 20 Parallel Agents and Still Ship Clean Code]] — Parallel agent workflows and verification loops.
 - [[sources/Making AI Work Leadership, Lab, and Crowd]] — Empirical adoption data (20% official vs 40% actual), the organizational innovation gap, and the Secret Cyborgs dynamic.
+- [[sources/How to keep AI spend flat while token usage grows - Brian Armstrong]] — Coinbase playbook: cheaper defaults, prompt routing, cache awareness, context hygiene, and visibility as cost-management infrastructure.
 
 ## Open Questions
 

@@ -1576,3 +1576,34 @@ Follow-ups:
 - The $62/token PowerPoint deck is a concrete maintenance cost that should be cross-referenced with future token economics data.
 - Shipper's AGI definition (economically viable continuous agent) is measurable — worth tracking against current system capabilities.
 - The "smuggled intelligence" in benchmarks should inform how the wiki cites benchmark data going forward.
+
+## [2026-06-27] ingest | How to keep AI spend flat — Brian Armstrong (Coinbase)
+
+Processed a tweet by Coinbase CEO Brian Armstrong on keeping AI spend flat while token usage grows exponentially.
+
+Raw source note processed:
+
+- `raw/How to keep AI spend flat while token usage grows - Brian Armstrong.md` - Coinbase playbook: cheaper defaults (GLM 5.2, Kimi 2.7 via LLM gateway), prompt routing, cache awareness (5% → 60% hit rate), context hygiene, and visibility over friction. Claims nearly halved AI spend while token usage continued to grow.
+
+Generated pages created:
+
+- `sources/How to keep AI spend flat while token usage grows - Brian Armstrong.md` — Source summary with five-part playbook, metrics, and cross-links.
+
+Generated pages updated:
+
+- `concepts/Tokenmaxxing.md` — Added Armstrong's approach as the organizational counterweight to individual tokenmaxxing: enable high usage, manage cost through infrastructure. Added to Contradictions and Connections.
+- `concepts/AI-Native Engineering Organizations.md` — Added "AI Cost Management as Infrastructure" section covering Coinbase's five-part playbook. Added to Connections.
+- `index.md` — Added raw source to frontmatter and Raw Sources; added source summary to Source Summaries.
+- `log.md`
+
+Important decisions:
+
+- Did not create a new concept page — the material fits naturally into Tokenmaxxing (cost vs. usage tension) and AI-Native Engineering Organizations (org-level operating model).
+- Positioned "visibility over friction" as the key insight: engineers self-regulate when usage is visible, making caps unnecessary.
+- The "humans shouldn't choose models" claim is notable and connects to the LLM Provider Selection concept but was not added there as it's a Coinbase-specific operational claim rather than general guidance.
+
+Follow-ups:
+
+- Track whether Coinbase's LLM gateway approach becomes a pattern adopted by other large engineering orgs.
+- The 5% → 60% cache hit rate improvement is a concrete metric worth citing in future caching/optimization discussions.
+- If more sources emerge on model routing as infrastructure, consider a dedicated concept page on prompt routing and model selection automation.
