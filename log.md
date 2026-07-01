@@ -1672,3 +1672,36 @@ Follow-ups:
 - Track whether Anthropic's 1-hour TTL or OpenAI's 24-hour extended retention becomes the dominant pattern for agent workflows.
 - If Google Gemini or other providers add prompt caching, expand the cross-provider comparison table.
 - The Coinbase cache hit rate improvement (5% to 60%) is from a single data point; more production benchmarks would strengthen the guidance.
+
+## [2026-07-01] query | LLM Effort Levels and Reasoning Budget Controls
+
+Files created:
+- `concepts/LLM Effort Levels and Reasoning Budget Controls.md`
+
+Files updated:
+- `index.md` (added concept entry)
+
+Summary:
+
+Researched Anthropic's `effort` parameter and OpenAI's `reasoning_effort` parameter from official documentation. Created a cross-provider concept page covering:
+
+- Anthropic effort levels: `low`, `medium`, `high`, `xhigh`, `max` with model-specific guidance for Sonnet 5, Sonnet 4.6, Opus 4.7/4.8, and Fable 5.
+- OpenAI reasoning effort levels: `none`, `minimal`, `low`, `medium`, `high`, `xhigh` with per-level use case guidance.
+- Key difference: Anthropic's effort affects all tokens (text + tools + thinking); OpenAI's primarily controls reasoning chain depth.
+- Both parameters are behavioral signals, not strict token budgets -- models adaptively allocate regardless of setting.
+- Approximate token scaling: `low` ~1/5th of `high`, `medium` ~1/3rd of `high`, `xhigh` 1.5-3x of `high`, `max` 2-5x+ of `high`.
+- On easy tasks (MMLU-level), effort level has minimal quality impact; on hard tasks (SWE-bench-level), higher effort matters significantly.
+- Both providers bill reasoning/thinking tokens as output tokens.
+
+Important decisions:
+
+- Created a single cross-provider concept page rather than separate pages per provider, following the same pattern as the LLM Prompt Caching page.
+- Included the full effort level definition tables from both providers' official docs.
+- Did not create raw source notes for web-fetched documentation pages because they are living documentation; the concept page captures the durable patterns.
+- Token scaling ratios are approximate (documented behavior, not published exact multipliers).
+
+Follow-ups:
+
+- Neither provider publishes exact token multipliers between effort levels. If community benchmarks emerge with precise measurements, update the scaling table.
+- Track how effort interacts with prompt caching efficiency across both providers.
+- Monitor whether effort levels converge to a standard or continue to diverge across providers.
