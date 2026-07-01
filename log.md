@@ -1,7 +1,7 @@
 ---
 type: log
 created: 2026-04-26
-updated: 2026-06-14
+updated: 2026-07-01
 status: active
 sources:
   - "raw/Making AI Work Leadership, Lab, and Crowd.md"
@@ -1637,3 +1637,38 @@ Follow-ups:
 - Track whether the narrowing gap pattern continues with future Sonnet/Opus releases and competing model families (GPT, Gemini).
 - If the tokenizer change significantly affects real-world costs for coding workflows, update the AI Coding Plans concept page.
 - The cybersecurity capability gap between Sonnet and Opus is a concrete example of where frontier models retain durable advantage — worth tracking if this pattern holds.
+
+## [2026-07-01] research | LLM Prompt Caching
+
+Researched prompt caching across Anthropic, OpenAI, and AWS Bedrock. Fetched current documentation from all three providers and synthesized into a cross-provider concept page.
+
+Generated pages created:
+
+- `concepts/LLM Prompt Caching.md` — Cross-provider synthesis covering mechanism, pricing, TTL, prompt structuring guidelines, production benchmarks, and reasoning token interaction.
+
+Generated pages updated:
+
+- `index.md` — Added new concept article entry.
+
+Sources consulted (web fetches, not raw files):
+
+- Anthropic prompt caching documentation (platform.claude.com/docs)
+- OpenAI prompt caching documentation (developers.openai.com)
+- OpenAI API pricing page (developers.openai.com/api/docs/pricing)
+- Anthropic prompt caching blog post (claude.com/blog/prompt-caching)
+- Anthropic extended thinking documentation
+- OpenAI reasoning models documentation
+- AWS Bedrock prompt caching documentation
+
+Important decisions:
+
+- Created a single cross-provider concept page rather than separate pages per provider because the core mechanism (KV cache reuse for identical prefixes) is the same, and the comparison table is more useful than isolated pages.
+- Included Coinbase production data (5% to 60% cache hit rate) from the already-ingested Armstrong source as real-world benchmark evidence.
+- Positioned reasoning token interaction as a distinct section because it is a common source of confusion (reasoning tokens are output, not input, so they do not benefit from caching).
+- Did not create raw source notes for the web-fetched documentation pages because they are living documentation that changes frequently; the concept page captures the durable patterns.
+
+Follow-ups:
+
+- Track whether Anthropic's 1-hour TTL or OpenAI's 24-hour extended retention becomes the dominant pattern for agent workflows.
+- If Google Gemini or other providers add prompt caching, expand the cross-provider comparison table.
+- The Coinbase cache hit rate improvement (5% to 60%) is from a single data point; more production benchmarks would strengthen the guidance.

@@ -1,7 +1,7 @@
 ---
 type: index
 created: 2026-04-26
-updated: 2026-06-27
+updated: 2026-07-01
 status: active
 sources:
   - "raw/skill.md for AI Agents.md"
@@ -183,6 +183,7 @@ tags: [index, agent-skills, llm-providers]
 - [[concepts/The Compute Cost Tradeoff|The Compute Cost Tradeoff]] — AI capability ≠ AI adoption. Intelligence costs energy; humans evolved efficient heuristics over millions of years. The question shifts from "Can AI do this?" to "Is it worth the compute?"
 - [[concepts/Parallel Agent Management|Parallel Agent Management]] — Foreground (2–4, actively managed) vs. background (0–20+, fire-and-forget) agents. Task sizing by reviewability, planning with thinking models + fast execution, and cross-agent verification loops.
 - [[concepts/Zeno's Paradox of AI|Zeno's Paradox of AI]] — AI commoditizes explicit competence; this creates demand for what's different; demand for difference is demand for human experts. The cycle repeats at every capability level. Frame vs. framer: benchmarks measure frames, humans are framers.
+- [[concepts/LLM Prompt Caching|LLM Prompt Caching]] — How Anthropic, OpenAI, and Bedrock cache KV representations for repeated prompt prefixes. 90% input cost discount, explicit vs automatic breakpoints, TTL options, reasoning token interaction, and production benchmarks (Coinbase 5% to 60% hit rate).
 
 ## Lesson Plans
 
