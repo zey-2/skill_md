@@ -1,7 +1,7 @@
 ---
 type: index
 created: 2026-04-26
-updated: 2026-07-01
+updated: 2026-07-02
 status: active
 sources:
   - "raw/skill.md for AI Agents.md"
@@ -190,6 +190,7 @@ tags: [index, agent-skills, llm-providers]
 - [[concepts/LLM Model Routing|LLM Model Routing]] — Sending queries to the right model based on complexity, cost, and cache. Provider gateways (OpenRouter, LiteLLM, Portkey), learned routers (RouteLLM: 85% cost savings at 95% quality, FrugalGPT: 98% savings), and Coinbase's production playbook.
 - [[concepts/LLM Tokenizer Changes|LLM Tokenizer Changes]] — How tokenizer updates affect cost and context window. Claude's new tokenizer produces ~30% more tokens per input. OpenAI's 4-generation evolution. Migration guidance and content-type efficiency differences.
 - [[concepts/Token-Efficient LLM Use|Token-Efficient LLM Use]] — Synthesis of 7 strategies to keep AI spend flat while usage grows: model routing, effort tuning, prompt caching, context compression, context rot avoidance, code-over-inference, and tokenmaxxing. Includes Coinbase case study and cross-provider evidence.
+- [[concepts/LLM Model Pricing Comparison|LLM Model Pricing Comparison]] — Side-by-side per-token pricing for Claude Fable 5, Opus 4.8, Sonnet 5, GPT-5.5, and GLM 5.2. Includes cached input rates, cost observations, and data residency notes.
 
 ## Lesson Plans
 

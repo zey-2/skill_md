@@ -1795,3 +1795,22 @@ Key design decisions:
 - Coinbase case study cards now map back to strategy numbers (01+02, 03, 04+05, 06, 07) so the connection is explicit.
 - Added a "strategy stack" flow diagram slide showing the decision chain from routing through measurement.
 - The synthesis article cross-links to 16 existing wiki pages, making it the most connected page in the knowledge base.
+
+## [2026-07-02] ingest | LLM Model Pricing Comparison
+
+Created a cross-provider pricing comparison page covering Anthropic, OpenAI, and Zhipu AI flagship models.
+
+Files created:
+
+- `concepts/LLM Model Pricing Comparison.md` — Pricing table for Claude Fable 5 ($10/$1/$50), Opus 4.8 ($5/$0.50/$25), Sonnet 5 ($3/$0.30/$15), GPT-5.5 Data Zone ($5.50/$0.55/$33), and GLM 5.2 Data Zone ($1.54/$0.154/$4.84). Includes cached input rates, cost-per-output-token visual, key observations, and open questions.
+
+Files updated:
+
+- `index.md` — Added pricing comparison entry.
+
+Key decisions:
+
+- Used Sonnet 5 standard pricing ($3/$15), not introductory ($2/$10), since introductory expires Aug 31 2026.
+- GLM 5.2 pricing sourced from Fireworks AI serverless Standard tier + 10% Data Zone uplift, matching the user's confirmed GLM 5.1 Data Zone pricing pattern.
+- GPT-5.5 Data Zone pricing confirmed as standard OpenAI pricing + 10% uplift ($5.00→$5.50, $0.50→$0.55, $30→$33).
+- Showed one cached price column (cache hit / cached input) for simplicity.
