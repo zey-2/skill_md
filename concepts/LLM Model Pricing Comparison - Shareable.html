@@ -1,0 +1,379 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>LLM Model Pricing Comparison</title>
+  <style>
+    @page {
+      size: A4;
+      margin: 15mm 14mm 16mm;
+    }
+
+    :root {
+      --ink: #17212b;
+      --muted: #5f6b76;
+      --line: #d8e0e8;
+      --panel: #f5f7fa;
+      --panel-strong: #eaf1f8;
+      --accent: #0b6b8f;
+      --accent-dark: #084e68;
+      --green: #1f7a56;
+      --amber: #9b6500;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: #ffffff;
+      font: 10.4pt/1.45 Arial, Helvetica, sans-serif;
+      letter-spacing: 0;
+    }
+
+    .page {
+      max-width: 760px;
+      margin: 0 auto;
+    }
+
+    header {
+      padding: 0 0 15px;
+      border-bottom: 2px solid var(--accent);
+      margin-bottom: 16px;
+    }
+
+    h1 {
+      margin: 0 0 5px;
+      font-size: 26pt;
+      line-height: 1.08;
+      font-weight: 800;
+      color: #101820;
+    }
+
+    .subtitle {
+      margin: 0;
+      color: var(--muted);
+      font-size: 10.8pt;
+    }
+
+    .pricing-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 12px 0 18px;
+      table-layout: fixed;
+      border: 1px solid var(--line);
+    }
+
+    .pricing-table th {
+      background: var(--accent-dark);
+      color: #ffffff;
+      text-align: left;
+      font-size: 8.8pt;
+      letter-spacing: .03em;
+      text-transform: uppercase;
+      padding: 8px 9px;
+      border-right: 1px solid rgba(255, 255, 255, .22);
+    }
+
+    .pricing-table td {
+      padding: 8px 9px;
+      border-top: 1px solid var(--line);
+      border-right: 1px solid var(--line);
+      vertical-align: top;
+      font-size: 9.4pt;
+    }
+
+    .pricing-table tr:nth-child(even) td {
+      background: #fbfcfd;
+    }
+
+    .pricing-table th:last-child,
+    .pricing-table td:last-child {
+      border-right: 0;
+    }
+
+    .pricing-table .model {
+      width: 34%;
+      font-weight: 700;
+    }
+
+    .pricing-table .provider {
+      width: 19%;
+    }
+
+    .pricing-table .num {
+      width: 15.5%;
+      text-align: right;
+      white-space: nowrap;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .tag {
+      display: block;
+      margin-top: 2px;
+      font-weight: 400;
+      color: var(--muted);
+      font-size: 8.3pt;
+    }
+
+    section {
+      margin: 17px 0 0;
+      break-inside: avoid;
+    }
+
+    h2 {
+      margin: 0 0 8px;
+      padding-bottom: 4px;
+      border-bottom: 1px solid var(--line);
+      font-size: 14pt;
+      line-height: 1.2;
+      color: #102f3e;
+    }
+
+    p {
+      margin: 0 0 8px;
+    }
+
+    .takeaways {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 9px;
+      margin-top: 9px;
+    }
+
+    .card {
+      border: 1px solid var(--line);
+      border-left: 4px solid var(--accent);
+      background: var(--panel);
+      padding: 9px 10px;
+      break-inside: avoid;
+    }
+
+    .card h3 {
+      margin: 0 0 4px;
+      font-size: 10.6pt;
+      line-height: 1.25;
+      color: #102f3e;
+    }
+
+    .card p {
+      margin-bottom: 0;
+      color: #2c3945;
+      font-size: 9.3pt;
+    }
+
+    .card.value {
+      border-left-color: var(--green);
+    }
+
+    .card.warning {
+      border-left-color: var(--amber);
+    }
+
+    ul {
+      margin: 6px 0 8px 18px;
+      padding: 0;
+    }
+
+    li {
+      margin: 0 0 5px;
+    }
+
+    .note {
+      background: var(--panel-strong);
+      border: 1px solid #cbdceb;
+      padding: 10px 12px;
+      margin: 9px 0;
+    }
+
+    .choice-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 9px 0 11px;
+      border: 1px solid var(--line);
+      table-layout: fixed;
+    }
+
+    .choice-table th {
+      text-align: left;
+      background: #edf3f7;
+      color: #19394a;
+      padding: 7px 9px;
+      border-bottom: 1px solid var(--line);
+      font-size: 9.3pt;
+    }
+
+    .choice-table td {
+      padding: 8px 9px;
+      border-top: 1px solid var(--line);
+      vertical-align: top;
+      font-size: 9.3pt;
+    }
+
+    .choice-table td:last-child {
+      font-weight: 700;
+      color: var(--accent-dark);
+      width: 34%;
+    }
+
+    strong {
+      font-weight: 750;
+    }
+
+    .footer {
+      margin-top: 18px;
+      padding-top: 8px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 8.7pt;
+    }
+
+    @media print {
+      body {
+        print-color-adjust: exact;
+        -webkit-print-color-adjust: exact;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header>
+      <h1>LLM Model Pricing Comparison</h1>
+      <p class="subtitle">July 2026 - prices per million tokens (MTok), USD</p>
+    </header>
+
+    <table class="pricing-table" aria-label="LLM model pricing comparison">
+      <thead>
+        <tr>
+          <th class="model">Model</th>
+          <th class="provider">Provider</th>
+          <th class="num">Input</th>
+          <th class="num">Cached Input</th>
+          <th class="num">Output</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="model">Claude Fable 5</td>
+          <td class="provider">Anthropic</td>
+          <td class="num">$10.00</td>
+          <td class="num">$1.00</td>
+          <td class="num">$50.00</td>
+        </tr>
+        <tr>
+          <td class="model">Claude Opus 4.8</td>
+          <td class="provider">Anthropic</td>
+          <td class="num">$5.00</td>
+          <td class="num">$0.50</td>
+          <td class="num">$25.00</td>
+        </tr>
+        <tr>
+          <td class="model">Claude Sonnet 5</td>
+          <td class="provider">Anthropic</td>
+          <td class="num">$3.00</td>
+          <td class="num">$0.30</td>
+          <td class="num">$15.00</td>
+        </tr>
+        <tr>
+          <td class="model">Claude Sonnet 5<span class="tag">Intro pricing until Aug 31, 2026</span></td>
+          <td class="provider">Anthropic</td>
+          <td class="num">$2.00</td>
+          <td class="num">$0.20</td>
+          <td class="num">$10.00</td>
+        </tr>
+        <tr>
+          <td class="model">GPT-5.5</td>
+          <td class="provider">OpenAI</td>
+          <td class="num">$5.50</td>
+          <td class="num">$0.55</td>
+          <td class="num">$33.00</td>
+        </tr>
+        <tr>
+          <td class="model">GLM 5.2</td>
+          <td class="provider">Zhipu AI</td>
+          <td class="num">$1.54</td>
+          <td class="num">$0.154</td>
+          <td class="num">$4.84</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <section>
+      <h2>Key Takeaways</h2>
+      <div class="takeaways">
+        <article class="card">
+          <h3>Input volume usually drives the bill, but output is where you save.</h3>
+          <p>Output is priced 5-6x higher per token and is directly controllable. Shorter responses, structured extraction, and tool use over prose can cut cost significantly.</p>
+        </article>
+        <article class="card value">
+          <h3>GLM 5.2 is dramatically cheaper.</h3>
+          <p>At $4.84/MTok output, GLM 5.2 costs roughly one-third of Sonnet 5 and one-fifth of GPT-5.5, while claiming Opus-level coding capability.</p>
+        </article>
+        <article class="card warning">
+          <h3>Fable 5 is the frontier premium.</h3>
+          <p>At $50/MTok output, Fable 5 is 2x Opus 4.8 and 10x Sonnet 5. Use it only when the quality gap justifies the cost.</p>
+        </article>
+        <article class="card">
+          <h3>Sonnet 5 introductory pricing expires August 31, 2026.</h3>
+          <p>Until then, Sonnet 5 at $2/$10 is roughly cost-neutral with Sonnet 4.6 despite the new tokenizer producing about 30% more tokens for the same text.</p>
+        </article>
+      </div>
+    </section>
+
+    <section>
+      <h2>Why Anthropic's New Tokenizer Matters</h2>
+      <p>Starting with Opus 4.7, Anthropic introduced a new tokenizer used by all subsequent models: Opus 4.8, Fable 5, and Sonnet 5. It produces <strong>about 30% more tokens for the same text</strong> compared to earlier models like Sonnet 4.6 and Opus 4.6.</p>
+      <div class="note">
+        <p><strong>How we know:</strong> Opus 4.6 fits about 750K words per 1M tokens. Opus 4.7+ fits about 555K words per 1M tokens. That is 35% fewer words per token, or equivalently, about 30% more tokens for the same input.</p>
+      </div>
+      <p><strong>What it means in practice:</strong></p>
+      <ul>
+        <li>A workload that cost $100/month on Sonnet 4.6 becomes about $130/month on Sonnet 5 at the same per-token rate, even though the per-token price did not change.</li>
+        <li>Anthropic's introductory pricing ($2/$10 vs. standard $3/$15) is designed to offset this: the lower per-token price roughly cancels out the higher token count.</li>
+        <li>The old Sonnet 4.6 and Opus 4.6 still use the previous tokenizer, so they remain cheaper per word for identical content.</li>
+      </ul>
+      <p>The same problem exists across providers. OpenAI and Zhipu use their own tokenizers, which also differ from each other and from Anthropic. Per-token prices do <strong>not</strong> reflect actual cost for identical workloads, so benchmark on your own data.</p>
+      <p><strong>When comparing Anthropic models to each other,</strong> compare by cost-per-word, not cost-per-token. <strong>When comparing across providers,</strong> the tokenizer gap makes price-per-token even less reliable.</p>
+    </section>
+
+    <section>
+      <h2>How to Choose</h2>
+      <p><strong>Choose the model based on task complexity, not per-token price.</strong> A cheap model that fails on a hard task wastes more tokens and time than an expensive model that succeeds in one pass.</p>
+      <table class="choice-table" aria-label="Model selection by use case">
+        <thead>
+          <tr>
+            <th>Use case</th>
+            <th>Recommended model</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Routine tasks, bulk extraction, simple Q&amp;A</td>
+            <td>Sonnet 5 or GLM 5.2</td>
+          </tr>
+          <tr>
+            <td>Hard reasoning, agentic coding, complex workflows</td>
+            <td>Opus 4.8</td>
+          </tr>
+          <tr>
+            <td>Frontier quality at any cost</td>
+            <td>Fable 5</td>
+          </tr>
+        </tbody>
+      </table>
+      <p><strong>The cheapest token is the one you never send.</strong> Before calling the model, ask: can a script do this? Can a template replace this prompt? Can cached results be reused? Can the output be shorter? Every token saved is a token you do not pay for, at any price tier.</p>
+    </section>
+
+    <p class="footer">Sources: Anthropic pricing page (July 2026), OpenAI API pricing (July 2026), Fireworks AI serverless pricing (July 2026). All prices shown include 10% Data Zone uplift where applicable.</p>
+  </main>
+</body>
+</html>
