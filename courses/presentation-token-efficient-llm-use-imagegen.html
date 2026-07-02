@@ -1,0 +1,1577 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Token-Efficient LLM Use - Image-Gen Edition</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Nunito+Sans:wght@400;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --bg-primary: #080908;
+  --bg-secondary: #101211;
+  --bg-tertiary: #171a18;
+  --bg-glass: rgba(255,255,255,0.055);
+  --text-primary: #f4f1ea;
+  --text-secondary: #b7b0a4;
+  --text-dim: #7e776b;
+  --accent-cyan: #4cf4ef;
+  --accent-pink: #ff6d5f;
+  --accent-amber: #f7b84a;
+  --accent-glow-cyan: rgba(76,244,239,0.16);
+  --accent-glow-pink: rgba(255,109,95,0.14);
+  --accent-glow-amber: rgba(247,184,74,0.14);
+  --rule: rgba(244,241,234,0.07);
+  --surface: rgba(244,241,234,0.055);
+  --border-glass: rgba(244,241,234,0.12);
+  --hero-image: url('token-efficient-llm-use-imagegen-hero.png');
+  --font-display: 'Space Grotesk', sans-serif;
+  --font-body: 'Nunito Sans', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --title-size: clamp(2.2rem, 6vw, 5rem);
+  --subtitle-size: clamp(1rem, 2.5vw, 1.5rem);
+  --body-size: clamp(0.875rem, 1.5vw, 1.15rem);
+  --label-size: clamp(0.625rem, 1vw, 0.85rem);
+  --stat-size: clamp(2.5rem, 7vw, 6rem);
+  --slide-padding: clamp(1.5rem, 5vw, 5rem);
+  --content-gap: clamp(1rem, 2.5vw, 2.5rem);
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --duration-normal: 0.6s;
+  --duration-slow: 1s;
+}
+
+html {
+  scroll-snap-type: y mandatory;
+  overflow-y: scroll;
+  scroll-behavior: smooth;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  background:
+    radial-gradient(1200px 900px at 85% 15%, rgba(76,244,239,0.08), transparent 55%),
+    linear-gradient(135deg, #080908 0%, #101211 52%, #181511 100%);
+}
+
+.slide {
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
+  overflow: hidden;
+  scroll-snap-align: start;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--slide-padding);
+  isolation: isolate;
+  background:
+    linear-gradient(135deg, rgba(8,9,8,0.96), rgba(16,18,17,0.98) 55%, rgba(24,21,17,0.96));
+}
+
+.slide::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 34%;
+  background: linear-gradient(0deg, rgba(247,184,74,0.055), transparent);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.bg-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(244,241,234,0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(244,241,234,0.025) 1px, transparent 1px);
+  background-size: 56px 56px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.progress-bar-track {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: var(--rule);
+  z-index: 1000;
+}
+.progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent-cyan), var(--accent-amber), var(--accent-pink));
+  width: 0%;
+  transition: width 0.3s ease;
+  box-shadow: 0 0 10px var(--accent-glow-cyan);
+}
+
+.nav-dots {
+  position: fixed;
+  right: clamp(0.75rem, 2vw, 2rem);
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  z-index: 1000;
+}
+.nav-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: none;
+  background: var(--text-secondary);
+  opacity: 0.3;
+  cursor: pointer;
+  transition: opacity 0.3s, transform 0.3s, background 0.3s;
+  padding: 0;
+}
+.nav-dot.active {
+  opacity: 1;
+  transform: scale(1.4);
+  background: var(--accent-cyan);
+  box-shadow: 0 0 8px var(--accent-glow-cyan);
+}
+
+.slide-content {
+  position: relative;
+  z-index: 1;
+  max-width: 1200px;
+  width: 100%;
+}
+
+.label {
+  font-family: var(--font-mono);
+  font-size: var(--label-size);
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--accent-cyan);
+  margin-bottom: clamp(0.5rem, 1.5vw, 1rem);
+  font-weight: 500;
+}
+.label-pink { color: var(--accent-pink); }
+.label-amber { color: var(--accent-amber); }
+
+h1 {
+  font-family: var(--font-display);
+  font-size: var(--title-size);
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  margin-bottom: clamp(0.75rem, 2vw, 1.5rem);
+}
+h2 {
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 4vw, 3rem);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.015em;
+  margin-bottom: clamp(0.5rem, 1.5vw, 1.25rem);
+}
+h3 {
+  font-family: var(--font-display);
+  font-size: clamp(1.1rem, 2vw, 1.5rem);
+  font-weight: 600;
+  line-height: 1.2;
+  margin-bottom: 0.5rem;
+}
+
+.subtitle {
+  font-size: var(--subtitle-size);
+  color: var(--text-secondary);
+  line-height: 1.5;
+  max-width: 700px;
+}
+.body-text {
+  font-size: var(--body-size);
+  color: var(--text-secondary);
+  line-height: 1.7;
+  max-width: 650px;
+}
+
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(2rem, 4vw, 4rem);
+  align-items: center;
+}
+
+.glass-card {
+  background: var(--bg-glass);
+  border: 1px solid var(--border-glass);
+  border-radius: 8px;
+  padding: clamp(1rem, 2vw, 1.75rem);
+  backdrop-filter: blur(12px);
+  transition: border-color 0.3s, box-shadow 0.3s;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.04), 0 18px 50px rgba(0,0,0,0.25);
+}
+.glass-card:hover {
+  border-color: rgba(0,255,204,0.2);
+  box-shadow: 0 0 30px var(--accent-glow-cyan);
+}
+
+.strategy-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: clamp(0.75rem, 1.5vw, 1.25rem);
+}
+.strategy-grid-7 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(0.5rem, 1vw, 0.85rem);
+}
+.strategy-card {
+  background:
+    linear-gradient(135deg, rgba(244,241,234,0.07), rgba(244,241,234,0.025)),
+    var(--bg-glass);
+  border: 1px solid var(--border-glass);
+  border-radius: 8px;
+  padding: clamp(0.75rem, 1.5vw, 1.25rem);
+  backdrop-filter: blur(12px);
+  transition: border-color 0.3s, transform 0.3s var(--ease-spring);
+  position: relative;
+  overflow: hidden;
+}
+.strategy-card::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent-cyan), transparent 72%);
+  opacity: 0.7;
+}
+.strategy-card:hover {
+  border-color: rgba(0,255,204,0.25);
+  transform: translateY(-2px);
+}
+.strategy-card .card-number {
+  font-family: var(--font-mono);
+  font-size: var(--label-size);
+  color: var(--accent-cyan);
+  letter-spacing: 0.1em;
+  margin-bottom: 0.4rem;
+  display: block;
+}
+.strategy-card h3 {
+  font-size: clamp(0.85rem, 1.2vw, 1.1rem);
+  margin-bottom: 0.3rem;
+}
+.strategy-card p {
+  font-size: clamp(0.7rem, 0.9vw, 0.85rem);
+  color: var(--text-secondary);
+  line-height: 1.4;
+}
+
+.stats-row {
+  display: flex;
+  gap: clamp(1.5rem, 3vw, 3rem);
+  flex-wrap: wrap;
+}
+.stat {
+  display: flex;
+  flex-direction: column;
+}
+.stat-number {
+  font-family: var(--font-display);
+  font-size: var(--stat-size);
+  font-weight: 700;
+  line-height: 1;
+  color: var(--accent-cyan);
+}
+.stat-number.pink { color: var(--accent-pink); }
+.stat-number.amber { color: var(--accent-amber); }
+.stat-unit {
+  font-family: var(--font-mono);
+  font-size: clamp(1rem, 2vw, 1.5rem);
+  color: var(--accent-cyan);
+  margin-left: 2px;
+}
+.stat-label {
+  font-size: var(--label-size);
+  color: var(--text-secondary);
+  margin-top: 0.25rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.compare-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: clamp(0.75rem, 1.1vw, 0.95rem);
+}
+.compare-table th {
+  font-family: var(--font-mono);
+  font-size: var(--label-size);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--accent-cyan);
+  text-align: left;
+  padding: 0.5rem 0.75rem;
+  border-bottom: 1px solid var(--border-glass);
+}
+.compare-table td {
+  padding: 0.5rem 0.75rem;
+  border-bottom: 1px solid var(--rule);
+  color: var(--text-secondary);
+}
+.compare-table tr:hover td {
+  color: var(--text-primary);
+  background: var(--bg-glass);
+}
+.compare-table .highlight {
+  color: var(--accent-cyan);
+  font-weight: 600;
+}
+
+.code-block {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-glass);
+  border-radius: 8px;
+  padding: clamp(0.75rem, 1.5vw, 1.25rem);
+  font-family: var(--font-mono);
+  font-size: clamp(0.7rem, 1vw, 0.9rem);
+  line-height: 1.6;
+  color: var(--text-secondary);
+  overflow-x: auto;
+  white-space: pre;
+}
+.code-block .kw { color: var(--accent-pink); }
+.code-block .str { color: var(--accent-amber); }
+.code-block .cm { color: var(--text-dim); }
+.code-block .fn { color: var(--accent-cyan); }
+
+.token-meter {
+  display: flex;
+  gap: clamp(1rem, 2vw, 2rem);
+  align-items: stretch;
+  margin-top: clamp(1rem, 2vw, 2rem);
+}
+.meter-side {
+  flex: 1;
+  border-radius: 8px;
+  padding: clamp(1rem, 2vw, 1.5rem);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.meter-waste {
+  background: rgba(255,107,157,0.08);
+  border: 1px solid rgba(255,107,157,0.2);
+}
+.meter-save {
+  background: rgba(0,255,204,0.08);
+  border: 1px solid rgba(0,255,204,0.2);
+}
+.meter-label {
+  font-family: var(--font-mono);
+  font-size: var(--label-size);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  margin-bottom: 0.5rem;
+}
+.meter-waste .meter-label { color: var(--accent-pink); }
+.meter-save .meter-label { color: var(--accent-cyan); }
+.meter-value {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 700;
+  line-height: 1;
+}
+.meter-waste .meter-value { color: var(--accent-pink); }
+.meter-save .meter-value { color: var(--accent-cyan); }
+.meter-sub {
+  font-size: clamp(0.7rem, 1vw, 0.85rem);
+  color: var(--text-dim);
+  margin-top: 0.25rem;
+}
+.meter-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 3px;
+  width: 0%;
+  transition: width 1.5s var(--ease-out-expo);
+}
+.meter-waste .meter-bar { background: var(--accent-pink); }
+.meter-save .meter-bar { background: var(--accent-cyan); }
+.slide.visible .meter-bar { width: 100%; }
+
+.flow-row {
+  display: flex;
+  align-items: center;
+  gap: clamp(0.5rem, 1vw, 1rem);
+  flex-wrap: wrap;
+  margin-top: clamp(0.5rem, 1vw, 0.75rem);
+}
+.flow-step {
+  background: var(--bg-glass);
+  border: 1px solid var(--border-glass);
+  border-radius: 8px;
+  padding: 0.4rem 0.8rem;
+  font-family: var(--font-mono);
+  font-size: clamp(0.65rem, 0.9vw, 0.8rem);
+  color: var(--text-secondary);
+  white-space: nowrap;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.04);
+}
+.flow-step.active {
+  border-color: var(--accent-cyan);
+  color: var(--accent-cyan);
+  box-shadow: 0 0 15px var(--accent-glow-cyan);
+}
+.flow-arrow {
+  font-size: clamp(0.7rem, 1vw, 0.9rem);
+  color: var(--text-dim);
+}
+
+blockquote {
+  font-family: var(--font-display);
+  font-size: clamp(1.1rem, 2vw, 1.6rem);
+  font-weight: 500;
+  line-height: 1.4;
+  color: var(--text-primary);
+  max-width: 700px;
+  position: relative;
+  padding-left: clamp(1rem, 2vw, 2rem);
+  border-left: 3px solid var(--accent-cyan);
+}
+blockquote cite {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: var(--label-size);
+  color: var(--text-dim);
+  margin-top: 0.75rem;
+  font-style: normal;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.slide-footer {
+  position: absolute;
+  bottom: clamp(1rem, 2vw, 1.5rem);
+  right: var(--slide-padding);
+  font-family: var(--font-mono);
+  font-size: var(--label-size);
+  color: var(--text-dim);
+  z-index: 2;
+}
+
+.title-slide .slide-content {
+  text-align: left;
+  max-width: 1200px;
+}
+.title-slide h1 {
+  max-width: 760px;
+  text-shadow: 0 16px 60px rgba(0,0,0,0.75);
+  color: var(--text-primary);
+}
+.title-slide {
+  align-items: flex-end;
+  justify-content: flex-start;
+}
+.title-slide::before,
+.closing-slide::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(90deg, rgba(8,9,8,0.98) 0%, rgba(8,9,8,0.86) 32%, rgba(8,9,8,0.22) 62%, rgba(8,9,8,0.12) 100%),
+    linear-gradient(0deg, rgba(8,9,8,0.88), transparent 42%),
+    var(--hero-image);
+  background-size: cover;
+  background-position: center;
+  z-index: 0;
+}
+.title-slide::after,
+.closing-slide::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(8,9,8,0.28), rgba(8,9,8,0.82)),
+    radial-gradient(900px 520px at 75% 50%, rgba(76,244,239,0.12), transparent 62%);
+  pointer-events: none;
+  z-index: 0;
+}
+.title-slide .bg-grid,
+.closing-slide .bg-grid {
+  opacity: 0.42;
+}
+.title-copy {
+  max-width: 690px;
+  padding-bottom: clamp(1rem, 5vh, 3rem);
+}
+.edition-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.38rem 0.65rem;
+  border: 1px solid rgba(76,244,239,0.28);
+  border-radius: 999px;
+  background: rgba(8,9,8,0.46);
+  color: var(--accent-cyan);
+  font-family: var(--font-mono);
+  font-size: var(--label-size);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  width: fit-content;
+  margin-bottom: clamp(0.8rem, 1.6vw, 1.2rem);
+}
+.edition-chip::before {
+  content: "";
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background: var(--accent-amber);
+  box-shadow: 0 0 14px var(--accent-glow-amber);
+}
+.hero-kpis {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1px;
+  max-width: 640px;
+  margin-top: clamp(1.3rem, 3vw, 2.4rem);
+  border: 1px solid rgba(244,241,234,0.12);
+  border-radius: 8px;
+  overflow: hidden;
+  background: rgba(244,241,234,0.08);
+  box-shadow: 0 24px 70px rgba(0,0,0,0.35);
+}
+.hero-kpi {
+  padding: clamp(0.8rem, 1.6vw, 1.2rem);
+  background: rgba(8,9,8,0.58);
+  backdrop-filter: blur(12px);
+}
+.hero-kpi strong {
+  display: block;
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 3vw, 2.7rem);
+  line-height: 1;
+  color: var(--text-primary);
+}
+.hero-kpi span {
+  display: block;
+  margin-top: 0.35rem;
+  font-family: var(--font-mono);
+  font-size: var(--label-size);
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.closing-slide {
+  background: var(--bg-secondary);
+}
+.closing-slide .slide-content {
+  text-align: center;
+}
+.closing-slide h1 {
+  color: var(--text-primary);
+}
+
+.tier-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+  font-family: var(--font-mono);
+  font-size: var(--label-size);
+  font-weight: 600;
+  letter-spacing: 0.05em;
+}
+.tier-cheap {
+  background: rgba(0,255,204,0.1);
+  border: 1px solid rgba(0,255,204,0.3);
+  color: var(--accent-cyan);
+}
+.tier-mid {
+  background: rgba(251,191,36,0.1);
+  border: 1px solid rgba(251,191,36,0.3);
+  color: var(--accent-amber);
+}
+.tier-frontier {
+  background: rgba(255,107,157,0.1);
+  border: 1px solid rgba(255,107,157,0.3);
+  color: var(--accent-pink);
+}
+
+/* Strategy number badge for deep-dive slides */
+.strat-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: clamp(0.5rem, 1vw, 0.75rem);
+}
+.strat-num {
+  font-family: var(--font-mono);
+  font-size: clamp(0.7rem, 1vw, 0.85rem);
+  font-weight: 700;
+  color: var(--bg-primary);
+  background: var(--accent-cyan);
+  width: clamp(1.5rem, 2.5vw, 2rem);
+  height: clamp(1.5rem, 2.5vw, 2rem);
+  border-radius: 6px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.strat-of {
+  font-family: var(--font-mono);
+  font-size: var(--label-size);
+  color: var(--text-dim);
+  letter-spacing: 0.05em;
+}
+
+.glow-blob {
+  display: none;
+}
+.glow-cyan {
+  background: var(--accent-glow-cyan);
+  animation: float-glow 8s ease-in-out infinite alternate;
+}
+.glow-pink {
+  background: var(--accent-glow-pink);
+  animation: float-glow 10s ease-in-out infinite alternate-reverse;
+}
+@keyframes float-glow {
+  0% { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(30px, -20px) scale(1.15); }
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity var(--duration-normal) var(--ease-out-expo),
+              transform var(--duration-normal) var(--ease-out-expo);
+}
+.slide.visible .reveal {
+  opacity: 1;
+  transform: translateY(0);
+}
+.reveal:nth-child(1) { transition-delay: 0.1s; }
+.reveal:nth-child(2) { transition-delay: 0.2s; }
+.reveal:nth-child(3) { transition-delay: 0.3s; }
+.reveal:nth-child(4) { transition-delay: 0.4s; }
+.reveal:nth-child(5) { transition-delay: 0.5s; }
+.reveal:nth-child(6) { transition-delay: 0.6s; }
+.reveal:nth-child(7) { transition-delay: 0.7s; }
+
+.reveal-scale {
+  opacity: 0;
+  transform: scale(0.9);
+  transition: opacity var(--duration-normal), transform var(--duration-normal) var(--ease-spring);
+}
+.slide.visible .reveal-scale { opacity: 1; transform: scale(1); }
+
+.reveal-left {
+  opacity: 0;
+  transform: translateX(-50px);
+  transition: opacity var(--duration-normal), transform var(--duration-normal) var(--ease-out-expo);
+}
+.slide.visible .reveal-left { opacity: 1; transform: translateX(0); }
+
+.reveal-right {
+  opacity: 0;
+  transform: translateX(50px);
+  transition: opacity var(--duration-normal), transform var(--duration-normal) var(--ease-out-expo);
+}
+.slide.visible .reveal-right { opacity: 1; transform: translateX(0); }
+
+.reveal-word span {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.4s var(--ease-out-expo), transform 0.4s var(--ease-out-expo);
+}
+.slide.visible .reveal-word span { opacity: 1; transform: translateY(0); }
+
+.signal-field {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.5;
+  background:
+    linear-gradient(110deg, transparent 0 40%, rgba(76,244,239,0.08) 40.2%, transparent 40.6%),
+    linear-gradient(112deg, transparent 0 57%, rgba(247,184,74,0.07) 57.2%, transparent 57.6%),
+    linear-gradient(108deg, transparent 0 73%, rgba(255,109,95,0.065) 73.2%, transparent 73.6%);
+}
+.slide:nth-of-type(odd) .signal-field {
+  transform: scaleX(-1);
+}
+.section-visual {
+  position: absolute;
+  right: -8vw;
+  top: 50%;
+  width: min(46vw, 620px);
+  aspect-ratio: 1.4;
+  transform: translateY(-50%);
+  background-image: var(--hero-image);
+  background-size: cover;
+  background-position: 78% center;
+  opacity: 0.16;
+  filter: saturate(0.9) contrast(1.04);
+  mask-image: linear-gradient(90deg, transparent, black 30%, black 72%, transparent);
+  pointer-events: none;
+  z-index: 0;
+}
+.stack-band {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 1px;
+  margin-top: clamp(1rem, 2vw, 1.6rem);
+  border: 1px solid var(--border-glass);
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--border-glass);
+}
+.stack-cell {
+  min-height: 86px;
+  padding: 0.75rem;
+  background: rgba(244,241,234,0.045);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.stack-cell strong {
+  color: var(--accent-cyan);
+  font-family: var(--font-mono);
+  font-size: var(--label-size);
+}
+.stack-cell span {
+  color: var(--text-secondary);
+  font-family: var(--font-display);
+  font-size: clamp(0.8rem, 1vw, 1rem);
+  font-weight: 600;
+}
+.cost-curve {
+  margin-top: clamp(1rem, 2vw, 1.5rem);
+  max-width: 760px;
+  height: 170px;
+  border: 1px solid var(--border-glass);
+  border-radius: 8px;
+  position: relative;
+  overflow: hidden;
+  background:
+    linear-gradient(rgba(244,241,234,0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(244,241,234,0.045) 1px, transparent 1px),
+    rgba(244,241,234,0.035);
+  background-size: 44px 44px;
+}
+.cost-curve::before,
+.cost-curve::after {
+  content: "";
+  position: absolute;
+  left: 6%;
+  right: 6%;
+  height: 3px;
+  border-radius: 999px;
+  transform-origin: left center;
+}
+.cost-curve::before {
+  bottom: 22%;
+  background: linear-gradient(90deg, var(--accent-cyan), var(--accent-amber));
+  box-shadow: 0 0 18px var(--accent-glow-cyan);
+}
+.cost-curve::after {
+  bottom: 20%;
+  background: linear-gradient(90deg, transparent 0 26%, var(--accent-pink));
+  transform: rotate(-21deg);
+  box-shadow: 0 0 18px var(--accent-glow-pink);
+}
+.curve-label {
+  position: absolute;
+  font-family: var(--font-mono);
+  font-size: var(--label-size);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.curve-flat {
+  left: 8%;
+  bottom: 30%;
+  color: var(--accent-cyan);
+}
+.curve-exp {
+  right: 8%;
+  top: 18%;
+  color: var(--accent-pink);
+}
+
+@media (max-width: 900px) {
+  .two-col { grid-template-columns: 1fr; gap: clamp(1rem, 3vw, 2rem); }
+  .strategy-grid-7 { grid-template-columns: repeat(2, 1fr); }
+  .hero-kpis { grid-template-columns: 1fr; max-width: 360px; }
+  .stack-band { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .section-visual { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+@media (max-height: 600px) {
+  .slide-footer, .nav-dots { display: none; }
+}
+@media (max-height: 500px) {
+  .subtitle { display: none; }
+}
+</style>
+</head>
+<body>
+
+<div class="progress-bar-track"><div class="progress-bar" id="progressBar"></div></div>
+<div class="nav-dots" id="navDots"></div>
+
+<!-- ===================== SLIDE 1: TITLE ===================== -->
+<section class="slide title-slide">
+  <div class="bg-grid"></div>
+  <div class="slide-content">
+    <div class="title-copy">
+      <div class="reveal edition-chip">Image-gen keynote edition</div>
+      <p class="reveal label">STRATEGY GUIDE</p>
+      <h1 class="reveal reveal-word">Token-Efficient LLM Use</h1>
+      <p class="reveal subtitle">Keep AI spend flat while token usage grows exponentially: route better, cache harder, compress earlier, and spend only where tokens buy outcomes.</p>
+      <div class="reveal hero-kpis">
+        <div class="hero-kpi">
+          <strong>7</strong>
+          <span>stacking levers</span>
+        </div>
+        <div class="hero-kpi">
+          <strong>90%</strong>
+          <span>cache read discount</span>
+        </div>
+        <div class="hero-kpi">
+          <strong>98%</strong>
+          <span>routing upside</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== SLIDE 2: THE PROBLEM ===================== -->
+<section class="slide">
+  <div class="bg-grid"></div>
+  <div class="signal-field"></div>
+  <div class="slide-content">
+    <p class="reveal label label-pink">THE PROBLEM</p>
+    <h2 class="reveal">Token usage is exponential.<br>Budgets shouldn't be.</h2>
+    <p class="reveal body-text">Every team hitting the same wall: AI adoption accelerates, token consumption surges, and the bill follows. The instinct is to cap usage — but caps create friction, and friction kills adoption.</p>
+    <div class="reveal cost-curve">
+      <span class="curve-label curve-flat">Spend held flat</span>
+      <span class="curve-label curve-exp">Usage growth</span>
+    </div>
+    <div class="reveal stats-row" style="margin-top: clamp(1.5rem, 3vw, 2.5rem);">
+      <div class="stat">
+        <span class="stat-number pink" data-target="67">0</span>
+        <span class="stat-unit">%</span>
+        <span class="stat-label">Opus price drop in one generation</span>
+      </div>
+      <div class="stat">
+        <span class="stat-number" data-target="90">0</span>
+        <span class="stat-unit">%</span>
+        <span class="stat-label">Cache read discount</span>
+      </div>
+      <div class="stat">
+        <span class="stat-number amber" data-target="98">0</span>
+        <span class="stat-unit">%</span>
+        <span class="stat-label">Cost reduction via routing</span>
+      </div>
+    </div>
+    <p class="reveal" style="margin-top:clamp(1rem,2vw,1.5rem);font-family:var(--font-mono);font-size:var(--label-size);color:var(--accent-amber);letter-spacing:0.05em;">THE ANSWER: 7 STRATEGIES THAT STACK. EACH INDEPENDENT. COMBINED, THEY COMPOUND.</p>
+  </div>
+  <div class="slide-footer"><span>02 / 14</span></div>
+</section>
+
+<!-- ===================== SLIDE 3: THE 7 STRATEGIES ===================== -->
+<section class="slide">
+  <div class="bg-grid"></div>
+  <div class="section-visual"></div>
+  <div class="slide-content">
+    <p class="reveal label">THE PLAYBOOK</p>
+    <h2 class="reveal">7 levers that stack</h2>
+    <p class="reveal body-text" style="margin-bottom: clamp(0.75rem, 1.5vw, 1.25rem);">Each strategy is independent. Combined, they compound. Coinbase cut spend nearly in half while usage kept growing.</p>
+    <div class="reveal stack-band">
+      <div class="stack-cell"><strong>01</strong><span>Route</span></div>
+      <div class="stack-cell"><strong>02</strong><span>Tune</span></div>
+      <div class="stack-cell"><strong>03</strong><span>Cache</span></div>
+      <div class="stack-cell"><strong>04</strong><span>Compress</span></div>
+      <div class="stack-cell"><strong>05</strong><span>Size</span></div>
+      <div class="stack-cell"><strong>06</strong><span>Code</span></div>
+      <div class="stack-cell"><strong>07</strong><span>Measure</span></div>
+    </div>
+    <div class="reveal strategy-grid-7">
+      <div class="strategy-card">
+        <span class="card-number">01</span>
+        <h3>Model Routing</h3>
+        <p>Cheapest adequate model per query. 50–98% savings.</p>
+      </div>
+      <div class="strategy-card">
+        <span class="card-number">02</span>
+        <h3>Effort Tuning</h3>
+        <p>Match reasoning depth to task complexity. Up to 5x range.</p>
+      </div>
+      <div class="strategy-card">
+        <span class="card-number">03</span>
+        <h3>Prompt Caching</h3>
+        <p>Reuse KV prefixes. 90% input cost reduction on hits.</p>
+      </div>
+      <div class="strategy-card">
+        <span class="card-number">04</span>
+        <h3>Context Compression</h3>
+        <p>Strip noise before it reaches the model. 2–5x savings.</p>
+      </div>
+      <div class="strategy-card">
+        <span class="card-number">05</span>
+        <h3>Context Rot</h3>
+        <p>Quality drops at 60% fill. Size tasks to finish before the cliff.</p>
+      </div>
+      <div class="strategy-card">
+        <span class="card-number">06</span>
+        <h3>Code Over Inference</h3>
+        <p>Deterministic code beats AI for routine work. Zero tokens.</p>
+      </div>
+      <div class="strategy-card">
+        <span class="card-number">07</span>
+        <h3>Tokenmaxxing</h3>
+        <p>Spend deliberately when tokens buy real output. Measure outputs/tokens.</p>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer"><span>03 / 14</span></div>
+</section>
+
+<!-- ===================== SLIDE 4: MODEL ROUTING ===================== -->
+<section class="slide">
+  <div class="bg-grid"></div>
+  <div class="section-visual"></div>
+  <div class="slide-content">
+    <div class="two-col">
+      <div>
+        <div class="reveal strat-badge"><span class="strat-num">1</span><span class="strat-of">of 7 strategies</span></div>
+        <h2 class="reveal">Model Routing</h2>
+        <p class="reveal body-text">Most queries don't need the most expensive model. Route by task complexity, not habit. Frontier for planning, mid-tier for execution, cheap tier for formatting.</p>
+        <div class="reveal" style="margin-top: clamp(0.75rem, 1.5vw, 1.25rem);">
+          <div class="flow-row">
+            <div class="flow-step">Simple task</div>
+            <span class="flow-arrow">→</span>
+            <div class="flow-step active"><span class="tier-cheap tier-badge">Haiku / nano</span></div>
+          </div>
+          <div class="flow-row">
+            <div class="flow-step">Standard work</div>
+            <span class="flow-arrow">→</span>
+            <div class="flow-step active"><span class="tier-mid tier-badge">Sonnet / mini</span></div>
+          </div>
+          <div class="flow-row">
+            <div class="flow-step">Complex reasoning</div>
+            <span class="flow-arrow">→</span>
+            <div class="flow-step active"><span class="tier-frontier tier-badge">Opus / large</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="reveal-right">
+        <div class="glass-card">
+          <table class="compare-table">
+            <tr><th>System</th><th>Savings</th><th>Quality</th></tr>
+            <tr><td>RouteLLM</td><td class="highlight">85%</td><td>95% of GPT-4</td></tr>
+            <tr><td>FrugalGPT</td><td class="highlight">98%</td><td>Best individual LLM</td></tr>
+            <tr><td>AutoMix</td><td class="highlight">~10x</td><td>Varies by depth</td></tr>
+          </table>
+          <p style="font-size:var(--label-size);color:var(--text-dim);margin-top:0.75rem;">RouteLLM trained on 55K+ pairwise comparisons from Chatbot Arena</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer"><span>04 / 14</span></div>
+</section>
+
+<!-- ===================== SLIDE 5: EFFORT TUNING ===================== -->
+<section class="slide">
+  <div class="bg-grid"></div>
+  <div class="signal-field"></div>
+  <div class="slide-content">
+    <div class="two-col">
+      <div>
+        <div class="reveal strat-badge"><span class="strat-num">2</span><span class="strat-of">of 7 strategies</span></div>
+        <h2 class="reveal">Effort Tuning</h2>
+        <p class="reveal body-text">The <code style="color:var(--accent-cyan);font-family:var(--font-mono);">effort</code> parameter controls how many tokens the model spends reasoning. Most tasks don't need maximum depth. Start at <code style="color:var(--accent-amber);font-family:var(--font-mono);">medium</code> — the Pareto-optimal default.</p>
+        <div class="reveal" style="margin-top: clamp(0.75rem, 1.5vw, 1.25rem);">
+          <div class="flow-row">
+            <span class="tier-cheap tier-badge">low</span>
+            <span style="color:var(--text-dim);font-size:var(--label-size);">~1/5 tokens — subagents, bulk work</span>
+          </div>
+          <div class="flow-row">
+            <span class="tier-mid tier-badge">medium</span>
+            <span style="color:var(--text-dim);font-size:var(--label-size);">~1/3 tokens — most tasks, default</span>
+          </div>
+          <div class="flow-row">
+            <span class="tier-frontier tier-badge">xhigh / max</span>
+            <span style="color:var(--text-dim);font-size:var(--label-size);">1.5–5x tokens — hard reasoning only</span>
+          </div>
+        </div>
+      </div>
+      <div class="reveal-right">
+        <div class="glass-card" style="text-align:center;">
+          <p style="font-family:var(--font-mono);font-size:var(--label-size);color:var(--text-dim);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:1rem;">Relative Token Usage</p>
+          <div style="display:flex;align-items:flex-end;justify-content:center;gap:clamp(0.5rem,1.5vw,1.5rem);height:180px;">
+            <div style="display:flex;flex-direction:column;align-items:center;gap:0.25rem;">
+              <span style="font-family:var(--font-mono);font-size:var(--label-size);color:var(--accent-cyan);">1x</span>
+              <div style="width:clamp(2rem,4vw,3.5rem);height:36px;background:var(--accent-cyan);border-radius:4px 4px 0 0;opacity:0.8;"></div>
+              <span style="font-family:var(--font-mono);font-size:var(--label-size);color:var(--text-dim);">low</span>
+            </div>
+            <div style="display:flex;flex-direction:column;align-items:center;gap:0.25rem;">
+              <span style="font-family:var(--font-mono);font-size:var(--label-size);color:var(--accent-amber);">3x</span>
+              <div style="width:clamp(2rem,4vw,3.5rem);height:108px;background:var(--accent-amber);border-radius:4px 4px 0 0;opacity:0.8;"></div>
+              <span style="font-family:var(--font-mono);font-size:var(--label-size);color:var(--text-dim);">medium</span>
+            </div>
+            <div style="display:flex;flex-direction:column;align-items:center;gap:0.25rem;">
+              <span style="font-family:var(--font-mono);font-size:var(--label-size);color:var(--text-secondary);">5x</span>
+              <div style="width:clamp(2rem,4vw,3.5rem);height:160px;background:var(--text-secondary);border-radius:4px 4px 0 0;opacity:0.4;"></div>
+              <span style="font-family:var(--font-mono);font-size:var(--label-size);color:var(--text-dim);">high</span>
+            </div>
+            <div style="display:flex;flex-direction:column;align-items:center;gap:0.25rem;">
+              <span style="font-family:var(--font-mono);font-size:var(--label-size);color:var(--accent-pink);">15x</span>
+              <div style="width:clamp(2rem,4vw,3.5rem);height:180px;background:var(--accent-pink);border-radius:4px 4px 0 0;opacity:0.6;"></div>
+              <span style="font-family:var(--font-mono);font-size:var(--label-size);color:var(--text-dim);">max</span>
+            </div>
+          </div>
+          <p style="font-size:var(--label-size);color:var(--text-dim);margin-top:0.75rem;">On easy tasks, low effort ≈ high effort quality</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer"><span>05 / 14</span></div>
+</section>
+
+<!-- ===================== SLIDE 6: PROMPT CACHING ===================== -->
+<section class="slide">
+  <div class="bg-grid"></div>
+  <div class="section-visual"></div>
+  <div class="slide-content">
+    <div class="two-col">
+      <div>
+        <div class="reveal strat-badge"><span class="strat-num">3</span><span class="strat-of">of 7 strategies</span></div>
+        <h2 class="reveal">Prompt Caching</h2>
+        <p class="reveal body-text">Store KV representations of processed prefixes. Subsequent requests with identical beginnings skip recomputation. The catch: exact prefix matching — any change invalidates everything downstream.</p>
+        <div class="reveal" style="margin-top: clamp(0.75rem, 1.5vw, 1.25rem);">
+          <p style="font-family:var(--font-mono);font-size:var(--label-size);color:var(--text-dim);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:0.4rem;">For high hit rates</p>
+          <div style="display:flex;flex-direction:column;gap:0.3rem;">
+            <div style="display:flex;align-items:center;gap:0.5rem;">
+              <span style="color:var(--accent-cyan);font-family:var(--font-mono);font-size:var(--label-size);">1</span>
+              <span style="font-size:var(--body-size);color:var(--text-secondary);">Static content first, dynamic last</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:0.5rem;">
+              <span style="color:var(--accent-cyan);font-family:var(--font-mono);font-size:var(--label-size);">2</span>
+              <span style="font-size:var(--body-size);color:var(--text-secondary);">Identical prefixes across requests</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:0.5rem;">
+              <span style="color:var(--accent-cyan);font-family:var(--font-mono);font-size:var(--label-size);">3</span>
+              <span style="font-size:var(--body-size);color:var(--text-secondary);">Pre-warm caches at startup</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:0.5rem;">
+              <span style="color:var(--accent-cyan);font-family:var(--font-mono);font-size:var(--label-size);">4</span>
+              <span style="font-size:var(--body-size);color:var(--text-secondary);">Use 1-hour TTL for agent sessions</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="reveal-right">
+        <div class="glass-card" style="text-align:center;">
+          <p style="font-family:var(--font-mono);font-size:var(--label-size);color:var(--text-dim);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:1rem;">Production Benchmarks</p>
+          <div class="stats-row" style="justify-content:center;">
+            <div class="stat">
+              <span class="stat-number" data-target="79" style="font-size:clamp(2rem,4vw,3rem);">0</span>
+              <span class="stat-unit" style="font-size:clamp(0.8rem,1.5vw,1.2rem);">%</span>
+              <span class="stat-label">Latency reduction</span>
+            </div>
+            <div class="stat">
+              <span class="stat-number" data-target="90" style="font-size:clamp(2rem,4vw,3rem);">0</span>
+              <span class="stat-unit" style="font-size:clamp(0.8rem,1.5vw,1.2rem);">%</span>
+              <span class="stat-label">Cost savings on reads</span>
+            </div>
+          </div>
+          <div style="margin-top:1.25rem;padding-top:1rem;border-top:1px solid var(--rule);">
+            <p style="font-size:var(--label-size);color:var(--text-dim);">Coinbase: cache hit rate 5% → 60%</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer"><span>06 / 14</span></div>
+</section>
+
+<!-- ===================== SLIDE 7: CONTEXT COMPRESSION ===================== -->
+<section class="slide">
+  <div class="bg-grid"></div>
+  <div class="signal-field"></div>
+  <div class="slide-content">
+    <div class="two-col">
+      <div>
+        <div class="reveal strat-badge"><span class="strat-num">4</span><span class="strat-of">of 7 strategies</span></div>
+        <h2 class="reveal">Context Compression</h2>
+        <p class="reveal body-text">Strip noise before tokens reach the model. LLMLingua-2 achieves 2–5x compression while preserving 89% accuracy. On code, compression can actually improve output — removing noise that confused the model.</p>
+        <div class="reveal" style="margin-top:clamp(0.75rem,1.5vw,1.25rem);">
+          <div class="glass-card" style="padding:clamp(0.6rem,1.2vw,1rem);">
+            <p style="font-family:var(--font-mono);font-size:var(--label-size);color:var(--accent-cyan);margin-bottom:0.4rem;">HEADROOM TOOL</p>
+            <div style="display:flex;flex-direction:column;gap:0.25rem;">
+              <div style="display:flex;justify-content:space-between;"><span style="color:var(--text-secondary);font-size:var(--body-size);">Code search</span><span style="color:var(--accent-cyan);font-family:var(--font-mono);font-size:var(--body-size);">92%</span></div>
+              <div style="display:flex;justify-content:space-between;"><span style="color:var(--text-secondary);font-size:var(--body-size);">Incident debugging</span><span style="color:var(--accent-cyan);font-family:var(--font-mono);font-size:var(--body-size);">92%</span></div>
+              <div style="display:flex;justify-content:space-between;"><span style="color:var(--text-secondary);font-size:var(--body-size);">Issue tracking</span><span style="color:var(--accent-cyan);font-family:var(--font-mono);font-size:var(--body-size);">73%</span></div>
+              <div style="display:flex;justify-content:space-between;"><span style="color:var(--text-secondary);font-size:var(--body-size);">Codebase exploration</span><span style="color:var(--accent-cyan);font-family:var(--font-mono);font-size:var(--body-size);">47%</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="reveal-right">
+        <div class="glass-card">
+          <p style="font-family:var(--font-mono);font-size:var(--label-size);color:var(--accent-cyan);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:0.5rem;">Works well</p>
+          <div style="display:flex;flex-direction:column;gap:0.4rem;margin-bottom:0.75rem;">
+            <div style="display:flex;align-items:center;gap:0.5rem;">
+              <span style="color:var(--accent-cyan);font-size:1rem;">✓</span>
+              <span style="color:var(--text-secondary);font-size:var(--body-size);">Classification, sentiment</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:0.5rem;">
+              <span style="color:var(--accent-cyan);font-size:1rem;">✓</span>
+              <span style="color:var(--text-secondary);font-size:var(--body-size);">Few-shot pattern matching</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:0.5rem;">
+              <span style="color:var(--accent-cyan);font-size:1rem;">✓</span>
+              <span style="color:var(--text-secondary);font-size:var(--body-size);">Code generation (noise removal)</span>
+            </div>
+          </div>
+          <p style="font-family:var(--font-mono);font-size:var(--label-size);color:var(--accent-pink);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:0.5rem;">Hurts</p>
+          <div style="display:flex;flex-direction:column;gap:0.4rem;">
+            <div style="display:flex;align-items:center;gap:0.5rem;">
+              <span style="color:var(--accent-pink);font-size:1rem;">✗</span>
+              <span style="color:var(--text-secondary);font-size:var(--body-size);">Needle-in-haystack retrieval</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:0.5rem;">
+              <span style="color:var(--accent-pink);font-size:1rem;">✗</span>
+              <span style="color:var(--text-secondary);font-size:var(--body-size);">Multi-hop reasoning chains</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:0.5rem;">
+              <span style="color:var(--accent-pink);font-size:1rem;">✗</span>
+              <span style="color:var(--text-secondary);font-size:var(--body-size);">Exact numbers, names, dates</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer"><span>07 / 14</span></div>
+</section>
+
+<!-- ===================== SLIDE 8: CONTEXT ROT ===================== -->
+<section class="slide">
+  <div class="bg-grid"></div>
+  <div class="signal-field"></div>
+  <div class="slide-content">
+    <div class="reveal strat-badge"><span class="strat-num">5</span><span class="strat-of">of 7 strategies</span></div>
+    <h2 class="reveal">Context Rot</h2>
+    <p class="reveal body-text" style="max-width:700px;">More context isn't always better. Quality degrades well before the window fills. The effective context for most models is 25–50% of the claimed limit.</p>
+    <div class="reveal" style="margin-top:clamp(1rem,2vw,1.5rem);">
+      <div class="glass-card" style="max-width:700px;">
+        <div style="display:flex;align-items:center;gap:1rem;margin-bottom:0.75rem;">
+          <div style="flex:1;height:12px;background:var(--bg-secondary);border-radius:6px;overflow:hidden;position:relative;">
+            <div style="position:absolute;left:0;top:0;height:100%;width:60%;background:linear-gradient(90deg,var(--accent-cyan),var(--accent-pink));border-radius:6px;opacity:0.7;"></div>
+            <div style="position:absolute;left:60%;top:-4px;width:2px;height:20px;background:var(--accent-pink);"></div>
+          </div>
+        </div>
+        <div style="display:flex;justify-content:space-between;font-family:var(--font-mono);font-size:var(--label-size);">
+          <span style="color:var(--accent-cyan);">Safe zone</span>
+          <span style="color:var(--accent-pink);">60% — quality cliff</span>
+          <span style="color:var(--text-dim);">Compaction</span>
+        </div>
+        <div style="margin-top:0.75rem;padding-top:0.6rem;border-top:1px solid var(--rule);">
+          <div style="display:flex;flex-direction:column;gap:0.25rem;">
+            <div style="display:flex;justify-content:space-between;"><span style="color:var(--text-secondary);font-size:var(--body-size);">Kilo Code engineers</span><span style="color:var(--accent-pink);font-family:var(--font-mono);font-size:var(--body-size);">Degrades at 60% fill</span></div>
+            <div style="display:flex;justify-content:space-between;"><span style="color:var(--text-secondary);font-size:var(--body-size);">Weaker models (RULER)</span><span style="color:var(--accent-pink);font-family:var(--font-mono);font-size:var(--body-size);">Lose 60–95 points</span></div>
+            <div style="display:flex;justify-content:space-between;"><span style="color:var(--text-secondary);font-size:var(--body-size);">Lost in the Middle</span><span style="color:var(--accent-pink);font-family:var(--font-mono);font-size:var(--body-size);">Mid-context retrieval drops</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p class="reveal" style="margin-top:clamp(0.5rem,1vw,0.75rem);font-family:var(--font-mono);font-size:var(--label-size);color:var(--accent-amber);letter-spacing:0.05em;">RULE OF THUMB: Size tasks so agents finish before 60% context fill.</p>
+  </div>
+  <div class="slide-footer"><span>08 / 14</span></div>
+</section>
+
+<!-- ===================== SLIDE 9: CODE OVER INFERENCE ===================== -->
+<section class="slide">
+  <div class="bg-grid"></div>
+  <div class="section-visual"></div>
+  <div class="slide-content">
+    <div class="two-col">
+      <div>
+        <div class="reveal strat-badge"><span class="strat-num">6</span><span class="strat-of">of 7 strategies</span></div>
+        <h2 class="reveal">Code Over Inference</h2>
+        <p class="reveal body-text">The most efficient token is the one never sent. Prefer deterministic code over AI inference for routine work. Cheaper, faster, repeatable.</p>
+        <div class="reveal" style="margin-top:clamp(0.75rem,1.5vw,1.25rem);">
+          <div class="glass-card" style="padding:clamp(0.6rem,1.2vw,1rem);">
+            <p style="font-family:var(--font-mono);font-size:var(--label-size);color:var(--accent-amber);margin-bottom:0.4rem;">CLAUDE CODE ITSELF</p>
+            <div style="display:flex;align-items:baseline;gap:0.5rem;">
+              <span style="font-family:var(--font-display);font-size:clamp(1.5rem,3vw,2.5rem);font-weight:700;color:var(--accent-cyan);">98.4%</span>
+              <span style="color:var(--text-secondary);font-size:var(--body-size);">deterministic infrastructure</span>
+            </div>
+            <div style="display:flex;align-items:baseline;gap:0.5rem;margin-top:0.15rem;">
+              <span style="font-family:var(--font-display);font-size:clamp(1.5rem,3vw,2.5rem);font-weight:700;color:var(--accent-pink);">1.6%</span>
+              <span style="color:var(--text-secondary);font-size:var(--body-size);">actual AI inference</span>
+            </div>
+            <p style="font-size:var(--label-size);color:var(--text-dim);margin-top:0.4rem;">VILA-Lab analysis of ~512K lines of source code</p>
+          </div>
+        </div>
+      </div>
+      <div class="reveal-right">
+        <div class="code-block"><span class="cm">// Save scripts inside skills</span>
+<span class="cm">// Trade AI tokens for code compute</span>
+
+<span class="kw">function</span> <span class="fn">formatOutput</span>(data) {
+  <span class="cm">// Deterministic — zero tokens</span>
+  <span class="kw">return</span> data
+    .<span class="fn">filter</span>(d => d.score > 0.5)
+    .<span class="fn">map</span>(d => <span class="str">`<span class="kw">${</span>d.name<span class="kw">}</span>: <span class="kw">${</span>d.value<span class="kw">}</span>`</span>)
+    .<span class="fn">join</span>(<span class="str">'\n'</span>);
+}
+
+<span class="cm">// vs. asking the LLM to format</span>
+<span class="cm">// = wasted tokens every call</span></div>
+        <div class="glass-card" style="margin-top:clamp(0.5rem,1vw,0.75rem);">
+          <p style="font-family:var(--font-mono);font-size:var(--label-size);color:var(--text-dim);margin-bottom:0.4rem;">EXPERTS ALLOCATE TOKENS TO THINKING, NOT OUTPUT</p>
+          <div style="display:flex;flex-direction:column;gap:0.25rem;">
+            <div style="display:flex;justify-content:space-between;"><span style="color:var(--text-secondary);font-size:var(--body-size);">Priscila (116 sessions)</span><span style="color:var(--accent-cyan);font-family:var(--font-mono);font-size:var(--body-size);">67% comprehension</span></div>
+            <div style="display:flex;justify-content:space-between;"><span style="color:var(--text-secondary);font-size:var(--body-size);">Thariq Shihipar</span><span style="color:var(--accent-cyan);font-family:var(--font-mono);font-size:var(--body-size);">99% planning</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer"><span>09 / 14</span></div>
+</section>
+
+<!-- ===================== SLIDE 10: TOKENMAXXING ===================== -->
+<section class="slide">
+  <div class="bg-grid"></div>
+  <div class="signal-field"></div>
+  <div class="slide-content">
+    <div class="two-col">
+      <div>
+        <div class="reveal strat-badge"><span class="strat-num">7</span><span class="strat-of">of 7 strategies</span></div>
+        <h2 class="reveal">Tokenmaxxing</h2>
+        <p class="reveal body-text">The meta-strategy: spend tokens deliberately when they buy real output. The goal isn't fewer tokens — it's better outputs per token. More calls, more context, more verification — when each token earns its keep.</p>
+        <div class="reveal" style="margin-top:clamp(0.75rem,1.5vw,1.25rem);">
+          <blockquote style="font-size:clamp(0.9rem,1.3vw,1.1rem);">
+            <p>"The useful ratio is outputs over tokens. When token volume becomes a target, people game the metric."</p>
+            <cite>Agentmail critique</cite>
+          </blockquote>
+        </div>
+      </div>
+      <div class="reveal-right">
+        <div class="glass-card">
+          <p style="font-family:var(--font-mono);font-size:var(--label-size);color:var(--accent-cyan);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:0.6rem;">When to spend more</p>
+          <table class="compare-table">
+            <tr><th>Bottleneck</th><th>Move</th></tr>
+            <tr><td>Thin research</td><td>Retrieve more sources</td></tr>
+            <tr><td>Weak plans</td><td>Role-specific review</td></tr>
+            <tr><td>Low coverage</td><td>Generate more tests</td></tr>
+            <tr><td>Manual QA</td><td>Automate browser flows</td></tr>
+            <tr><td>Blind spots</td><td>Cross-check models</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer"><span>10 / 14</span></div>
+</section>
+
+<!-- ===================== SLIDE 11: COINBASE CASE STUDY ===================== -->
+<section class="slide">
+  <div class="bg-grid"></div>
+  <div class="section-visual"></div>
+  <div class="slide-content">
+    <p class="reveal label label-amber">ALL 7 IN ACTION</p>
+    <h2 class="reveal">The Coinbase Playbook</h2>
+    <p class="reveal body-text" style="max-width:700px;">Brian Armstrong's directive: let engineers spend freely, but build infrastructure that makes exponential token growth cost-sustainable. Result: spend cut nearly in half while usage kept growing.</p>
+    <div class="reveal" style="margin-top:clamp(1rem,2vw,1.5rem);">
+      <div class="strategy-grid" style="grid-template-columns:repeat(auto-fit,minmax(200px,1fr));">
+        <div class="strategy-card">
+          <span class="card-number">01 + 02</span>
+          <h3>Cheaper Defaults</h3>
+          <p>Open-weight models as default. Frontier for planning, cheaper for execution.</p>
+        </div>
+        <div class="strategy-card">
+          <span class="card-number">01</span>
+          <h3>Prompt Routing</h3>
+          <p>Custom LLM gateway routes based on cache hits and pricing.</p>
+        </div>
+        <div class="strategy-card">
+          <span class="card-number">03</span>
+          <h3>Cache Awareness</h3>
+          <p>Hit rate from 5% to 60% in LibreChat.</p>
+        </div>
+        <div class="strategy-card">
+          <span class="card-number">04 + 05</span>
+          <h3>Context Hygiene</h3>
+          <p>Compression and rot avoidance for sustained quality.</p>
+        </div>
+        <div class="strategy-card">
+          <span class="card-number">06</span>
+          <h3>Deterministic Infra</h3>
+          <p>Scripts and gateway logic over inference where possible.</p>
+        </div>
+        <div class="strategy-card">
+          <span class="card-number">07</span>
+          <h3>Measure Outputs</h3>
+          <p>Visibility into what tokens produce, not just how many.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer"><span>11 / 14</span></div>
+</section>
+
+<!-- ===================== SLIDE 12: THE STACK ===================== -->
+<section class="slide">
+  <div class="bg-grid"></div>
+  <div class="signal-field"></div>
+  <div class="slide-content" style="text-align:center;">
+    <p class="reveal label">HOW THEY CONNECT</p>
+    <h2 class="reveal">The strategies stack</h2>
+    <p class="reveal body-text" style="margin:0 auto clamp(1rem,2vw,1.5rem);max-width:600px;text-align:center;">Each lever is independent. Together they compound. Here's the decision flow.</p>
+    <div class="reveal" style="display:flex;flex-direction:column;gap:clamp(0.4rem,0.8vw,0.6rem);align-items:center;">
+      <div style="display:flex;align-items:center;gap:clamp(0.5rem,1vw,1rem);flex-wrap:wrap;justify-content:center;">
+        <div class="flow-step" style="min-width:160px;text-align:center;"><span style="color:var(--accent-cyan);font-weight:600;">01</span> Route to cheapest model</div>
+        <span class="flow-arrow">→</span>
+        <div class="flow-step" style="min-width:160px;text-align:center;"><span style="color:var(--accent-cyan);font-weight:600;">02</span> Set effort level</div>
+        <span class="flow-arrow">→</span>
+        <div class="flow-step" style="min-width:160px;text-align:center;"><span style="color:var(--accent-cyan);font-weight:600;">03</span> Check cache</div>
+      </div>
+      <div style="color:var(--text-dim);font-size:clamp(1rem,1.5vw,1.2rem);">↓</div>
+      <div style="display:flex;align-items:center;gap:clamp(0.5rem,1vw,1rem);flex-wrap:wrap;justify-content:center;">
+        <div class="flow-step" style="min-width:160px;text-align:center;"><span style="color:var(--accent-cyan);font-weight:600;">04</span> Compress context</div>
+        <span class="flow-arrow">→</span>
+        <div class="flow-step" style="min-width:160px;text-align:center;"><span style="color:var(--accent-cyan);font-weight:600;">05</span> Stay under 60% fill</div>
+        <span class="flow-arrow">→</span>
+        <div class="flow-step" style="min-width:160px;text-align:center;"><span style="color:var(--accent-cyan);font-weight:600;">06</span> Code if deterministic</div>
+      </div>
+      <div style="color:var(--text-dim);font-size:clamp(1rem,1.5vw,1.2rem);">↓</div>
+      <div class="flow-step active" style="min-width:220px;text-align:center;padding:0.6rem 1.2rem;">
+        <span style="color:var(--accent-amber);font-weight:600;">07</span> Measure outputs/tokens — iterate
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer"><span>12 / 14</span></div>
+</section>
+
+<!-- ===================== SLIDE 13: QUICK REFERENCE ===================== -->
+<section class="slide">
+  <div class="bg-grid"></div>
+  <div class="section-visual"></div>
+  <div class="slide-content">
+    <p class="reveal label">CHEAT SHEET</p>
+    <h2 class="reveal">7 strategies at a glance</h2>
+    <div class="reveal" style="margin-top:clamp(0.75rem,1.5vw,1.25rem);">
+      <table class="compare-table" style="font-size:clamp(0.75rem,1.1vw,0.95rem);">
+        <tr><th style="width:2.5rem;">#</th><th>Strategy</th><th>Mechanism</th><th>Potential Savings</th></tr>
+        <tr><td style="color:var(--accent-cyan);font-weight:700;">01</td><td>Model Routing</td><td>Send query to cheapest adequate model</td><td class="highlight">50–98%</td></tr>
+        <tr><td style="color:var(--accent-cyan);font-weight:700;">02</td><td>Effort Tuning</td><td>Dial reasoning depth to match task</td><td class="highlight">Up to 5x</td></tr>
+        <tr><td style="color:var(--accent-cyan);font-weight:700;">03</td><td>Prompt Caching</td><td>Reuse KV prefixes across requests</td><td class="highlight">90% on reads</td></tr>
+        <tr><td style="color:var(--accent-cyan);font-weight:700;">04</td><td>Context Compression</td><td>Strip noise before it reaches model</td><td class="highlight">2–5x</td></tr>
+        <tr><td style="color:var(--accent-cyan);font-weight:700;">05</td><td>Context Rot</td><td>Size tasks to finish before 60% fill</td><td class="highlight">Quality preservation</td></tr>
+        <tr><td style="color:var(--accent-cyan);font-weight:700;">06</td><td>Code Over Inference</td><td>Deterministic code for routine work</td><td class="highlight">Zero tokens</td></tr>
+        <tr><td style="color:var(--accent-cyan);font-weight:700;">07</td><td>Tokenmaxxing</td><td>Spend when tokens buy real output</td><td class="highlight">Outputs/tokens ↑</td></tr>
+      </table>
+    </div>
+    <p class="reveal" style="margin-top:clamp(0.75rem,1.5vw,1.25rem);font-family:var(--font-mono);font-size:var(--label-size);color:var(--text-dim);">Source: Coinbase case study, RouteLLM, FrugalGPT, LLMLingua-2, Anthropic &amp; OpenAI docs</p>
+  </div>
+  <div class="slide-footer"><span>13 / 14</span></div>
+</section>
+
+<!-- ===================== SLIDE 14: CLOSING ===================== -->
+<section class="slide closing-slide">
+  <div class="bg-grid"></div>
+  <div class="slide-content" style="text-align:center;">
+    <p class="reveal label">THE GOAL</p>
+    <h1 class="reveal" style="max-width:800px;margin:0 auto clamp(0.75rem,2vw,1.5rem);">Fewer tokens wasted,<br> not fewer tokens used.</h1>
+    <p class="reveal subtitle" style="margin:0 auto;max-width:600px;">Route smarter. Cache aggressively. Compress ruthlessly. Code what you can. Spend tokens that earn their keep.</p>
+    <div class="reveal" style="margin-top:clamp(2rem,4vw,3rem);display:flex;justify-content:center;gap:clamp(1.5rem,3vw,3rem);flex-wrap:wrap;">
+      <div style="text-align:center;">
+        <span style="font-family:var(--font-display);font-size:clamp(1.5rem,3vw,2.5rem);font-weight:700;color:var(--accent-cyan);">7</span>
+        <p style="font-family:var(--font-mono);font-size:var(--label-size);color:var(--text-dim);text-transform:uppercase;letter-spacing:0.1em;">Strategies</p>
+      </div>
+      <div style="text-align:center;">
+        <span style="font-family:var(--font-display);font-size:clamp(1.5rem,3vw,2.5rem);font-weight:700;color:var(--accent-cyan);">~50%</span>
+        <p style="font-family:var(--font-mono);font-size:var(--label-size);color:var(--text-dim);text-transform:uppercase;letter-spacing:0.1em;">Spend reduction</p>
+      </div>
+      <div style="text-align:center;">
+        <span style="font-family:var(--font-display);font-size:clamp(1.5rem,3vw,2.5rem);font-weight:700;color:var(--accent-cyan);">∞</span>
+        <p style="font-family:var(--font-mono);font-size:var(--label-size);color:var(--text-dim);text-transform:uppercase;letter-spacing:0.1em;">Usage growth</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+class SlidePresentation {
+  constructor() {
+    this.slides = document.querySelectorAll('.slide');
+    this.currentSlide = 0;
+    this.isTransitioning = false;
+    this.setupIntersectionObserver();
+    this.setupKeyboardNav();
+    this.setupTouchNav();
+    this.setupWheelNav();
+    this.setupProgressBar();
+    this.setupNavDots();
+    this.setupFullscreen();
+    splitWords();
+    animateCounters();
+  }
+
+  setupIntersectionObserver() {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          this.currentSlide = [...this.slides].indexOf(entry.target);
+          this.updateProgressBar();
+          this.updateNavDots();
+        }
+      });
+    }, { threshold: 0.5 });
+    this.slides.forEach(slide => observer.observe(slide));
+  }
+
+  setupKeyboardNav() {
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowDown' || e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') {
+        e.preventDefault();
+        this.goToSlide(this.currentSlide + 1);
+      } else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft' || e.key === 'PageUp') {
+        e.preventDefault();
+        this.goToSlide(this.currentSlide - 1);
+      } else if (e.key === 'Home') {
+        e.preventDefault();
+        this.goToSlide(0);
+      } else if (e.key === 'End') {
+        e.preventDefault();
+        this.goToSlide(this.slides.length - 1);
+      } else if (e.key === 'f' || e.key === 'F') {
+        this.toggleFullscreen();
+      }
+    });
+  }
+
+  setupTouchNav() {
+    let startY = 0;
+    document.addEventListener('touchstart', (e) => { startY = e.touches[0].clientY; });
+    document.addEventListener('touchend', (e) => {
+      const diff = startY - e.changedTouches[0].clientY;
+      if (Math.abs(diff) > 50) {
+        this.goToSlide(this.currentSlide + (diff > 0 ? 1 : -1));
+      }
+    });
+  }
+
+  setupWheelNav() {
+    let lastWheel = 0;
+    document.addEventListener('wheel', (e) => {
+      const now = Date.now();
+      if (now - lastWheel < 800) return;
+      lastWheel = now;
+      if (e.deltaY > 0) this.goToSlide(this.currentSlide + 1);
+      else if (e.deltaY < 0) this.goToSlide(this.currentSlide - 1);
+    }, { passive: true });
+  }
+
+  setupProgressBar() {
+    const bar = document.querySelector('.progress-bar');
+    if (bar) this.progressBar = bar;
+  }
+
+  updateProgressBar() {
+    if (this.progressBar) {
+      const pct = ((this.currentSlide + 1) / this.slides.length) * 100;
+      this.progressBar.style.width = pct + '%';
+    }
+  }
+
+  setupNavDots() {
+    const nav = document.querySelector('.nav-dots');
+    if (!nav) return;
+    this.slides.forEach((_, i) => {
+      const dot = document.createElement('button');
+      dot.className = 'nav-dot' + (i === 0 ? ' active' : '');
+      dot.setAttribute('aria-label', `Go to slide ${i + 1}`);
+      dot.addEventListener('click', () => this.goToSlide(i));
+      nav.appendChild(dot);
+    });
+    this.navDots = nav.querySelectorAll('.nav-dot');
+  }
+
+  updateNavDots() {
+    if (!this.navDots) return;
+    this.navDots.forEach((dot, i) => {
+      dot.classList.toggle('active', i === this.currentSlide);
+    });
+  }
+
+  setupFullscreen() {}
+  toggleFullscreen() {
+    if (!document.fullscreenElement) document.documentElement.requestFullscreen();
+    else document.exitFullscreen();
+  }
+
+  goToSlide(index) {
+    if (index < 0 || index >= this.slides.length) return;
+    this.slides[index].scrollIntoView({ behavior: 'smooth' });
+  }
+}
+
+function splitWords() {
+  document.querySelectorAll('.reveal-word').forEach(el => {
+    const words = el.textContent.trim().split(/\s+/);
+    el.innerHTML = words.map((word, i) =>
+      `<span style="transition-delay: ${i * 60}ms">${word}</span>`
+    ).join(' ');
+  });
+}
+
+function animateCounters() {
+  document.querySelectorAll('.stat-number[data-target]').forEach(el => {
+    const observer = new IntersectionObserver(entries => {
+      if (entries[0].isIntersecting) {
+        const target = parseInt(el.dataset.target);
+        const duration = 1500;
+        const start = performance.now();
+        function tick(now) {
+          const elapsed = now - start;
+          const progress = Math.min(elapsed / duration, 1);
+          const eased = 1 - Math.pow(1 - progress, 3);
+          el.textContent = Math.round(target * eased);
+          if (progress < 1) requestAnimationFrame(tick);
+        }
+        requestAnimationFrame(tick);
+        observer.disconnect();
+      }
+    }, { threshold: 0.5 });
+    observer.observe(el);
+  });
+}
+
+document.addEventListener('DOMContentLoaded', () => new SlidePresentation());
+</script>
+</body>
+</html>
